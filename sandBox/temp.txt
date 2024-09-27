@@ -1,0 +1,43 @@
+
+
+pawn.pawnPromotion()
+    IF pos = 8 AND isBalck
+        board.updatePositon() // TODO: swap pawn for new queen
+
+    ELSE IF pos = 0 AND !isBalck
+        board.updatePositon() // swap pawn for new queen
+        
+
+pawn.en-passant()
+    ELSE IF pos = 4 AND isBalck AND board.col[+-1] = !isBlack 
+        possible.append()
+        // TODO: capture pawn and sent new pos
+
+    ELSE IF pos = 5 AND !isBalck AND board.col[+-1] = isBlack // NOTE: change to index not col
+        possible.append()
+        // TODO: capture pawn and sent new pos
+    
+
+king.castleing()
+    IF !isBlack
+        // Queens castle
+        if board.isPosition[1] = " " AND board.isPosition[2] = "" AND board.isPosition[3] = " " // NOTE: fix empty to piece type
+            board.swap(pos[5], posp[2]) // king // NOTE: define swap
+            board.swap(pos[0], posp[3])
+
+        // king castle
+        ELSE IF board.isPosition[1] = " " AND board.isPosition[2] = "" AND board.isPosition[3] = " " // NOTE: fix empty to piece type
+            board.swap(pos[5], posp[7]) // king
+            board.swap(pos[8], posp[6])
+
+
+    ELSE IF isBlack
+        // Queens castle
+        if board.isPosition[1] = " " AND board.isPosition[2] = "" AND board.isPosition[3] = " " // NOTE: fix empty to piece type
+            board.swap(pos[61], posp[59]) // king
+            board.swap(pos[57], posp[60])
+
+        // king castle
+        ELSE IF board.isPosition[1] = " " AND board.isPosition[2] = "" AND board.isPosition[3] = " " // NOTE: fix empty to piece type
+            board.swap(pos[61], posp[63]) // king
+            board.swap(pos[64], posp[62])
