@@ -1,0 +1,123 @@
+
+
+
+piece.move()
+    
+    ...
+    
+    IF (possiblePrevious.find(positionTo) != possiblePrevious.end())
+        // En-Passant
+        IF ((24 >= indexFrom <= 31) or (32 >= indexFrom <= 39)) AND board[positionTo].getType() = PAWN
+            board[positionTo] <- board[positionFrom];
+            board[positionFrom] <- Empty(); // constructor
+            board[positionFrom] <- Empty(); NOTE: finish this pawn eraseal
+            RETURN true;
+
+        // Castling
+        ELSE IF (isCastling)
+            board[positionFrom] <- Empty(); // constructor
+            board[positionFrom] <- Empty(); NOTE: finish this castle eraseal
+
+        // Default Move
+        ELSE
+            board[positionTo] <- board[positionFrom];
+            board[positionFrom] <- EMPTY(); // constructor
+            RETURN true;
+
+    // Promotion 
+    IF Board[positionTo].getPieceType() = PAWN
+        // White
+        IF 56 >= board[postionTo].getIndex() <= 63 AND !board[postionTo].getIsBlack()
+            board[positionTo] <- Queen(!isBlack)
+    
+        // black
+        ELSE IF 0 >= board[postionTo].getIndex() <= 7 AND board[postionTo].getIsBlack()
+            board[positionTo] <- Queen(isBlack)
+
+
+pawn.getPossibleMoves(board, posFrom)
+    
+    .....
+
+    index = pos.getIndex()
+    piece = board.getPieceAt[index]    
+
+    // En-Passant
+    // White attacking
+    IF 32 >= indexFrom <= 39 AND pieceFrom.getIsBlack() // piece is on row 5 and is White
+        IF board.isPieceAt(indexFrom++) AND                                     // right piece exist 
+                !board.getPieceAt(indexFrom++).getIsBlack() AND                 // right piece is black
+                board.isPieceAt(indexFrom).getPieceAt(index +9) = EMPTY         // is destination empty
+            possible.insert(index +9)
+
+        IF board.isPieceAt(indexFrom--) AND                                     // left piece exist
+                !board.getPieceAt(indexFrom--).getIsBlack() AND                 // left piece is black
+                board.isPieceAt(indexFrom).getPieceAt(index +7) = EMPTY         // is destination empty
+            possible.insert(index +7)
+
+    // black attacking
+    ELSE IF 24 >= indexFrom <= 31 AND pieceFrom.getIsBlack() // piece is on row 4 and is black
+        IF board.isPieceAt(indexFrom++) AND                                     // right piece exist 
+                !board.getPieceAt(indexFrom++).getIsBlack() AND                 // right piece is white
+                board.isPieceAt(indexFrom).getPieceAt(index -7) = EMPTY         // is destination empty
+            possible.insert(index -7)
+
+        IF board.isPieceAt(indexFrom--) AND                                     // left piece exist
+                !board.getPieceAt(indexFrom--).getIsBlack() AND                 // left piece is white
+                board.isPieceAt(indexFrom).getPieceAt(index -9) = EMPTY         // is destination empty
+            possible.insert(index -9)
+
+
+king.getPosibleMoves(board, positionFrom)  NOTE: change index and piece -> indexfrom piceFrom
+
+    // cattleing
+    indexFrom = positionFrom.getIndex()
+    pieceFrom = board.getPieceAt[indexFrom]
+
+    IF !piece.getIsBlack()
+        // Queens castle
+        if board.getPieceAt[1].getType() = EMPTY AND 
+                board.getPieceAt[2].getType() = EMPTY AND 
+                board.getPieceAt[3].getType() = EMPTY AND
+                board.getPieceAt[4].getIsFirstMove() AND
+                board.getPieceAt[0].getIsFirstMove()
+
+            possible.insert(2)
+
+        // king castle
+        ELSE IF board.getPieceAt[1].getType() = EMPTY AND 
+                board.getPieceAt[2].getType() = EMPTY ND 
+                board.getPieceAt[3].getType() = EMPTY
+                board.getPieceAt[4].getIsFirstMove() AND
+                board.getPieceAt[7].getIsFirstMove()
+
+            possible.insert(2)
+            board.swapPiece(pos[4], posp[6]) // king
+            board.swapPiece(pos[7], posp[5])
+
+    ELSE IF piece.getIsBlack()
+        // Queens castle
+        if board.getPieceAt[1].getType() = EMPTY AND
+                board.getPieceAt[2].getType() = EMPTY ND 
+                board.getPieceAt[3].getType() = EMPTY
+                board.getPieceAt[60].getIsFirstMove() AND
+                board.getPieceAt[56].getIsFirstMove()
+
+            possible.insert(58)
+            board.swapPiece(pos[60], pos[58]) // king
+            board.swapPiece(pos[56], pos[59])
+
+        // king castle
+        ELSE IF board.getPieceAt[1].getType() = EMPTY AND 
+                board.getPieceAt[2].getType() = EMPTY ND 
+                board.getPieceAt[3].getType() = EMPTY
+                board.getPieceAt[60].getIsFirstMove() AND
+                board.getPieceAt[63].getIsFirstMove()
+
+            possible.insert(62)
+            board.swapPiece(pos[60], posp[62]) // king
+            board.swapPiece(pos[63], posp[61])
+
+
+
+
