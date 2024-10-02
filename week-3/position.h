@@ -49,8 +49,9 @@ public:
    //               Allowing for comparisions, copying, etc.
    Position(const Position & rhs) {              }
    Position() : colRow(0x99)      {              }
-   bool isInvalid() const         { return true; }
-   bool isValid()   const         { return true; }
+   bool isInvalid() const         { return !isValid();                         }
+   bool isValid()   const         { return ((int)((colRow & 0xf0) >> 4) <= 7 &&
+                                            (int)((colRow & 0x0f) >> 0) <= 7); }
    void setValid()                {              }
    void setInvalid()              {              }
    bool operator <  (const Position & rhs) const { return true; }
@@ -61,17 +62,31 @@ public:
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
    Position(int location) : colRow(0x99) { }
-   int getLocation() const               { return 9; }
+   int getLocation() const               { return (getRow()*8) + (getCol()); }
    void setLocation(int location)        {           }
 
    
    // Row/Col : The position class can work with row/column,
    //           which are 0..7 and 0...7
    Position(int c, int r) : colRow(0x99)  {           }
-   virtual int getCol() const                     { return 9; }
-   virtual int getRow() const                     { return 9; }
-   void setRow(int r)                     {           }
-   void setCol(int c)                     {           }
+   virtual int getCol() const             { return isValid() ? (int)((colRow & 0xf0) >> 4) : -1; }
+   virtual int getRow() const             { return isValid() ? (int)((colRow & 0x0f) >> 0) : -1; }
+   //TODO
+   void setRow(int r)
+   {
+      if (r >= 0 && r <= 255)
+      {
+         colRow = r;
+      }
+   }
+   //TODO
+   void setCol(int c)
+   { 
+      if (c >= 0 && c <= 255 && getRow() != 0)
+      {
+         colRow = c * 10;
+      }
+   }
    void set(int c, int r)                 {           }
 
    // Text:    The Position class can work with textual coordinates,

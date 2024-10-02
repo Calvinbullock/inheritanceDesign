@@ -542,6 +542,7 @@ void PositionTest::set_col()
 
    // EXERCISE
    pos.setCol(5);
+   cout << unsigned(pos.colRow);
 
    // VERIFY
    assertUnit(pos.colRow == 0x50);
