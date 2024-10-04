@@ -51,18 +51,18 @@ public:
       getCol_colInvalid();
       isValid_colInvalid();
       isInvalid_colInvalid();
-      //set_col();
-      //set_row();
-      //set_both();
-      //set_copy();
-      //equal_not();
-      //equal_equals();
-      //lessthan_lessthan();
-      //lessthan_equals();
-      //lessthan_greaterthan();
+      set_col();
+      set_row();
+      set_both();
+      set_copy();
+      equal_not();
+      equal_equals();
+      lessthan_lessthan();
+      lessthan_equals();
+      lessthan_greaterthan();
 
       //// Ticket 2: Position Text
-      set_text();
+      //set_text();
       //set_string();
       // 
       //// Ticket 3: Position Movement

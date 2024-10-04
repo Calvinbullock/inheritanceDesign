@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <cstdint>
 using std::string;
@@ -54,10 +55,14 @@ public:
                                             (int)((colRow & 0x0f) >> 0) <= 7); }
    void setValid()                {              }
    void setInvalid()              {              }
-   bool operator <  (const Position & rhs) const { return true; }
-   bool operator == (const Position & rhs) const { return true; }
-   bool operator != (const Position & rhs) const { return true; }
-   const Position & operator =  (const Position & rhs) { return *this; }
+   bool operator <  (const Position & rhs) const { return colRow < rhs.colRow; }
+   bool operator == (const Position & rhs) const { return colRow == rhs.colRow; }
+   bool operator != (const Position & rhs) const { return !(colRow == rhs.colRow); }
+   const Position & operator =  (const Position & rhs) 
+   {
+      this->colRow = rhs.colRow;
+      return *this;
+   }
    
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
@@ -71,23 +76,19 @@ public:
    Position(int c, int r) : colRow(0x99)  {           }
    virtual int getCol() const             { return isValid() ? (int)((colRow & 0xf0) >> 4) : -1; }
    virtual int getRow() const             { return isValid() ? (int)((colRow & 0x0f) >> 0) : -1; }
-   //TODO
    void setRow(int r)
    {
-      if (r >= 0 && r <= 255)
-      {
-         colRow = r;
-      }
+      this->colRow = (colRow & 0xF0) | (r << 0); 
    }
-   //TODO
    void setCol(int c)
    { 
-      if (c >= 0 && c <= 255 && getRow() != 0)
-      {
-         colRow = c * 10;
-      }
+      this->colRow = (colRow & 0x0F) | (c << 4); 
    }
-   void set(int c, int r)                 {           }
+   void set(int c, int r) 
+   {
+      setRow(r);
+      setCol(c);
+   }
 
    // Text:    The Position class can work with textual coordinates,
    //          such as "d4"

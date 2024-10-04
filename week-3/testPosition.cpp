@@ -11,6 +11,7 @@
 #include "testPosition.h" // for POSITION_TEST
 #include "position.h"     // for POSITION
 #include <cassert>        // for ASSERT
+#include <ostream>
 
 
 /***********************************************
@@ -542,7 +543,6 @@ void PositionTest::set_col()
 
    // EXERCISE
    pos.setCol(5);
-   cout << unsigned(pos.colRow);
 
    // VERIFY
    assertUnit(pos.colRow == 0x50);
