@@ -40,6 +40,7 @@ const Position & Position::operator =  (const char     * rhs)
    setRow(row);
    return *this; 
 }
+
 const Position & Position::operator =  (const string   & rhs) 
 {
    string::const_iterator it = rhs.cbegin();
@@ -54,3 +55,16 @@ const Position & Position::operator =  (const string   & rhs)
    setRow(row);
    return *this; 
 }
+
+const Position & Position::operator += (const Delta & rhs) 
+{ 
+   adjustRow(rhs.dRow);
+   adjustCol(rhs.dCol);
+   if (!isValid()) 
+   {
+      colRow = 255;
+      return *this;
+   }
+   return *this; 
+}
+

@@ -114,17 +114,7 @@ public:
    Position(const Position & rhs, const Delta & delta) : colRow(-1) {  }
    void adjustRow(int dRow)   { setRow(getRow() + dRow); }
    void adjustCol(int dCol)   { setCol(getCol() + dCol); }
-   const Position & operator += (const Delta & rhs) 
-   { 
-      adjustRow(rhs.dRow);
-      adjustCol(rhs.dCol);
-      if (!isValid()) 
-      {
-         colRow = 255;
-         return *this;
-      }
-      return *this; 
-   }
+   const Position & operator += (const Delta & rhs);
    Position operator + (const Delta & rhs) const { return *this; }
 
 private:
