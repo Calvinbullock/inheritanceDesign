@@ -8,7 +8,6 @@
  ************************************************************************/
 
 #include "position.h"
-#include <iostream>
 
 /******************************************
  * POSITION INSERTION OPERATOR
@@ -27,3 +26,31 @@ istream & operator >> (istream & in,  Position & rhs)
    return in;   
 }
 
+const Position & Position::operator =  (const char     * rhs) 
+{
+   const char * it = rhs;
+
+   // get the source
+   int col = *it - 'a';
+   it++;
+   int row = *it - '1';
+   it++;
+
+   setCol(col);
+   setRow(row);
+   return *this; 
+}
+const Position & Position::operator =  (const string   & rhs) 
+{
+   string::const_iterator it = rhs.cbegin();
+
+   // get the source
+   int col = *it - 'a';
+   it++;
+   int row = *it - '1';
+   it++;
+
+   setCol(col);
+   setRow(row);
+   return *this; 
+}

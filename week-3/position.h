@@ -94,8 +94,8 @@ public:
    //          such as "d4"
    
    Position(const char * s) : colRow(0x99) {   }
-   const Position & operator =  (const char     * rhs) { return *this; }
-   const Position & operator =  (const string   & rhs) { return *this; }
+   const Position & operator =  (const char     * rhs);
+   const Position & operator =  (const string   & rhs);
 
    
    // Pixels:    The Position class can work with screen coordinates,
