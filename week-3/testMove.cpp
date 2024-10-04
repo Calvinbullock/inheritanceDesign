@@ -10,6 +10,8 @@
 
 #include "testMove.h"
 #include "move.h"
+#include "pieceType.h"
+#include "unitTest.h"
 #include <cassert>
 
  /*************************************
@@ -20,7 +22,12 @@
   **************************************/
 void TestMove::constructor_default() 
 {
+   // SETUP
+   // EXERCISE
+   Move move;
+   // VERIFY
    assertUnit(NOT_YET_IMPLEMENTED);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -32,7 +39,14 @@ void TestMove::constructor_default()
   **************************************/
 void TestMove::constructString_simple()
 {
+   // SETUP
+   Move move;
+   PieceType pt = SPACE;
+   // EXERCISE
+   move.letterFromPieceType(pt);
+   // VERIFY
    assertUnit(NOT_YET_IMPLEMENTED);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -226,7 +240,14 @@ void TestMove::getText_castleQueen()
   **************************************/
 void TestMove::letterFromPieceType_space()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = SPACE;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, ' ');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -236,7 +257,14 @@ void TestMove::letterFromPieceType_space()
   **************************************/
 void TestMove::letterFromPieceType_pawn()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = PAWN;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'p');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -246,7 +274,14 @@ void TestMove::letterFromPieceType_pawn()
   **************************************/
 void TestMove::letterFromPieceType_bishop()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = BISHOP;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'b');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -256,7 +291,14 @@ void TestMove::letterFromPieceType_bishop()
   **************************************/
 void TestMove::letterFromPieceType_knight()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = KNIGHT;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'n');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -266,7 +308,14 @@ void TestMove::letterFromPieceType_knight()
   **************************************/
 void TestMove::letterFromPieceType_rook()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = ROOK;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'r');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -276,7 +325,14 @@ void TestMove::letterFromPieceType_rook()
   **************************************/
 void TestMove::letterFromPieceType_queen()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = QUEEN;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'q');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -286,7 +342,14 @@ void TestMove::letterFromPieceType_queen()
   **************************************/
 void TestMove::letterFromPieceType_king()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   PieceType pt = KING;
+   // EXERCISE
+   char c = move.letterFromPieceType(pt);
+   // VERIFY
+   assertEquals(c, 'k');
+   // TEAR DOWN
 }
 
  /*************************************
@@ -296,7 +359,14 @@ void TestMove::letterFromPieceType_king()
   **************************************/
 void TestMove::pieceTypeFromLetter_pawn()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'p';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, PAWN);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -306,7 +376,14 @@ void TestMove::pieceTypeFromLetter_pawn()
   **************************************/
 void TestMove::pieceTypeFromLetter_bishop()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'b';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, BISHOP);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -316,7 +393,14 @@ void TestMove::pieceTypeFromLetter_bishop()
   **************************************/
 void TestMove::pieceTypeFromLetter_knight()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'n';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, KNIGHT);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -326,7 +410,14 @@ void TestMove::pieceTypeFromLetter_knight()
   **************************************/
 void TestMove::pieceTypeFromLetter_rook()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'r';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, ROOK);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -336,7 +427,14 @@ void TestMove::pieceTypeFromLetter_rook()
   **************************************/
 void TestMove::pieceTypeFromLetter_queen()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'q';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, QUEEN);
+   // TEAR DOWN
 }
 
  /*************************************
@@ -346,7 +444,14 @@ void TestMove::pieceTypeFromLetter_queen()
   **************************************/
 void TestMove::pieceTypeFromLetter_king() 
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Move move;
+   char letter = 'k';
+   // EXERCISE
+   PieceType pt = move.pieceTypeFromLetter(letter);
+   // VERIFY
+   assertEquals(pt, KING);
+   // TEAR DOWN
 }
 
 

@@ -32,10 +32,13 @@ public:
    // constructor
    Move();
 
+   /*bool operator <  (const Move & rhs) const { return }*/
+   /*bool operator == (const Move & rhs) const {}*/
+   /*bool operator != (const Move & rhs) const {}*/
 
 private:
-   char letterFromPieceType(PieceType pt)     const { return 'z';   }
-   PieceType pieceTypeFromLetter(char letter) const { return SPACE; }
+   char letterFromPieceType(PieceType pt)     const;
+   PieceType pieceTypeFromLetter(char letter) const;
 
 
 
