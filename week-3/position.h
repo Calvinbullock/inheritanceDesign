@@ -96,7 +96,6 @@ public:
    Position(const char * s) : colRow(0x99) {   }
    const Position & operator =  (const char     * rhs);
    const Position & operator =  (const string   & rhs);
-
    
    // Pixels:    The Position class can work with screen coordinates,
    //            a.k.a. Pixels, these are X and Y coordinates. Note that
@@ -113,9 +112,19 @@ public:
    //           offsets from a given location. This helps pieces move
    //           on the chess board.
    Position(const Position & rhs, const Delta & delta) : colRow(-1) {  }
-   void adjustRow(int dRow)   { }
-   void adjustCol(int dCol)   { }
-   const Position & operator += (const Delta & rhs) { return *this; }
+   void adjustRow(int dRow)   { setRow(getRow() + dRow); }
+   void adjustCol(int dCol)   { setCol(getCol() + dCol); }
+   const Position & operator += (const Delta & rhs) 
+   { 
+      adjustRow(rhs.dRow);
+      adjustCol(rhs.dCol);
+      if (!isValid()) 
+      {
+         colRow = 255;
+         return *this;
+      }
+      return *this; 
+   }
    Position operator + (const Delta & rhs) const { return *this; }
 
 private:
