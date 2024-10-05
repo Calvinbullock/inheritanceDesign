@@ -24,6 +24,7 @@ void TestBoard::construct_dummyBoard()
 {  // SETUP
    // EXERCISE
    BoardDummy board;
+
    // VERIFY
    assertUnit(0 == board.numMoves);
    assertUnit(nullptr == board.board[0][0]);
