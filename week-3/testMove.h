@@ -21,7 +21,7 @@ public:
    void run() 
    {
       // Ticket 4: Move Core
-      //constructor_default();
+      constructor_default();
       letterFromPieceType_space();
       letterFromPieceType_pawn();
       letterFromPieceType_bishop();

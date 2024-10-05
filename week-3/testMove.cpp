@@ -26,7 +26,10 @@ void TestMove::constructor_default()
    // EXERCISE
    Move move;
    // VERIFY
-   assertUnit(NOT_YET_IMPLEMENTED);
+   assertUnit(move.source.getCol() == -1); // -1 is position INVALID state
+   assertUnit(move.source.getRow() == -1);
+   assertUnit(move.dest.getCol() == -1);
+   assertUnit(move.dest.getRow() == -1);
    // TEAR DOWN
 }
 
