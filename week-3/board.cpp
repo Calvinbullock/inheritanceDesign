@@ -14,9 +14,6 @@
 using namespace std;
 
 
-// we really REALLY need to delete this.
-Space space;
-
 /***********************************************
 * BOARD : GET
 *         Get a piece from a given position.
@@ -39,7 +36,6 @@ Piece& Board::operator [] (const Position& pos)
  *********************************************/
 BoardEmpty::BoardEmpty() : BoardDummy(), pSpace(nullptr)
 {
-   //pSpace = new Space;
    numMoves = 0;
    for (int col = 0; col < 8; col++)
    {
