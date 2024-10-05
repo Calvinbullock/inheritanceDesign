@@ -32,9 +32,20 @@ public:
    // constructor
    Move();
 
-   /*bool operator <  (const Move & rhs) const { return }*/
-   /*bool operator == (const Move & rhs) const {}*/
-   /*bool operator != (const Move & rhs) const {}*/
+   Move(string moveText) : source(), dest(), promote(INVALID),
+      capture(INVALID), moveType(MOVE_ERROR), isWhite(true), text()
+   {
+      read(moveText);
+      text = getText();
+   };
+
+   void read(string srcDest);
+   //void assign(string moveText) { read(moveText); }; ??????
+   string getText();
+
+   bool operator <  (const Move & rhs) const { return text < text;         }
+   bool operator == (const Move & rhs) const { return text == rhs.text;    }
+   bool operator != (const Move& rhs) const  { return !(text == rhs.text); }
 
 private:
    char letterFromPieceType(PieceType pt)     const;
