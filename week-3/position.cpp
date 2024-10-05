@@ -56,6 +56,17 @@ const Position & Position::operator =  (const string   & rhs)
    return *this; 
 }
 
+string Position::getColRowText()
+{
+   string text;
+   char letters[] = "abcdefgh";
+
+   text.push_back(letters[getCol()]);
+   text.push_back(getRow() + '1');   // +1 [ascii] for base 1 board.
+
+   return text;
+}
+
 const Position & Position::operator += (const Delta & rhs) 
 { 
    adjustRow(rhs.dRow);

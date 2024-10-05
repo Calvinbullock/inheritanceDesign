@@ -35,11 +35,11 @@ public:
       pieceTypeFromLetter_rook();
       pieceTypeFromLetter_king();
       pieceTypeFromLetter_queen();
-      //equal_not();
-      /*equal_equals();*/
-      /*lessthan_lessthan();*/
-      /*lessthan_equals();*/
-      /*lessthan_greaterthan();*/
+      equal_not();
+      equal_equals();
+      lessthan_lessthan();
+      lessthan_equals();
+      lessthan_greaterthan();
 
       // Ticket 5: Move Text
       read_simple();

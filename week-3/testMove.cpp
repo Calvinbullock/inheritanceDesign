@@ -332,8 +332,6 @@ void TestMove::getText_castleQueen()
 
    // EXERCISE
    moveText = move.getText();
-   std::cout << moveText << std::endl;
-
 
    // VERIFY
    assertUnit(moveText == "e1c1C");
@@ -568,8 +566,15 @@ void TestMove::pieceTypeFromLetter_king()
   **************************************/
 void TestMove::equal_not()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   Move m1("b2b4");
+   Move m2("b2b5");
+
+   // EXERCISE
+
+   // VERIFY
+   assertUnit(m1 != m2);
+}  // TEAR DOWN
 
  /*************************************
   * EQUAL - EQUALS
@@ -578,8 +583,15 @@ void TestMove::equal_not()
   **************************************/
 void TestMove::equal_equals()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   Move m1("b2b4");
+   Move m2("b2b4");
+
+   // EXERCISE
+
+   // VERIFY
+   assertUnit(m1 == m2);
+}  // TEAR DOWN
 
  /*************************************
   * LESS THAN - LESS THAN
@@ -588,8 +600,16 @@ void TestMove::equal_equals()
   **************************************/
 void TestMove::lessthan_lessthan()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   Move m1("b2b2");
+   Move m2("b2b4");
+
+   // EXERCISE
+   bool response = m1 < m2;
+
+   // VERIFY
+   assertUnit(!response);
+}  // TEAR DOWN
 
  /*************************************
   * LESS THAN - EQUALS
@@ -598,8 +618,16 @@ void TestMove::lessthan_lessthan()
   **************************************/
 void TestMove::lessthan_equals()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   Move m1("b2b4");
+   Move m2("b2b4");
+
+   // EXERCISE
+   bool response = m1 < m2;
+
+   // VERIFY
+   assertUnit(!response);
+}  // TEAR DOWN
 
  /*************************************
   * LESS THAN - GREATAER THAN
@@ -608,5 +636,13 @@ void TestMove::lessthan_equals()
   **************************************/
 void TestMove::lessthan_greaterthan()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP
+   Move m1("b2b4");
+   Move m2("b2b4");
+
+   // EXERCISE
+   bool response = m1 < m2;
+
+   // VERIFY
+   assertUnit(!response);
+}  // TEAR DOWN
