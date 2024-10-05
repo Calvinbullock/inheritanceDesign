@@ -2,7 +2,7 @@
  * Header File:
  *    POSITION
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The position of a piece, the cursor, or a possible move on a chess board
  ************************************************************************/
@@ -48,16 +48,22 @@ public:
 
    // Position :    The Position class can work with other positions,
    //               Allowing for comparisions, copying, etc.
-   Position(const Position & rhs) {              }
-   Position() : colRow(0x99)      {              }
-   bool isInvalid() const         { return !isValid();                         }
-   bool isValid()   const         { return ((int)((colRow & 0xf0) >> 4) <= 7 &&
-                                            (int)((colRow & 0x0f) >> 0) <= 7); }
-   void setValid()                {              }
-   void setInvalid()              {              }
+   Position(const Position & rhs)               {                              }
+   Position() : colRow(0x99)                    {                              }
+   bool isInvalid() const                       { return !isValid();           }
+   bool isValid()   const                        
+   { 
+      return ((int)((colRow & 0xf0) >> 4) <= 7 && 
+               (int)((colRow & 0x0f) >> 0) <= 7);
+   }
+   void setValid()                               {                             }
+   void setInvalid()                             {                             }
    bool operator <  (const Position & rhs) const { return colRow < rhs.colRow; }
-   bool operator == (const Position & rhs) const { return colRow == rhs.colRow; }
-   bool operator != (const Position & rhs) const { return !(colRow == rhs.colRow); }
+   bool operator == (const Position & rhs) const { return colRow == rhs.colRow;}
+   bool operator != (const Position & rhs) const 
+   { 
+      return !(colRow == rhs.colRow); 
+   }
    const Position & operator =  (const Position & rhs) 
    {
       this->colRow = rhs.colRow;
@@ -66,16 +72,22 @@ public:
    
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
-   Position(int location) : colRow(0x99) { }
+   Position(int location) : colRow(0x99) {                                   }
    int getLocation() const               { return (getRow()*8) + (getCol()); }
-   void setLocation(int location)        {           }
+   void setLocation(int location)        {                                   }
 
    
    // Row/Col : The position class can work with row/column,
    //           which are 0..7 and 0...7
    Position(int c, int r) : colRow(0x99)  {           }
-   virtual int getCol() const             { return isValid() ? (int)((colRow & 0xf0) >> 4) : -1; }
-   virtual int getRow() const             { return isValid() ? (int)((colRow & 0x0f) >> 0) : -1; }
+   virtual int getCol() const             
+   { 
+      return isValid() ? (int)((colRow & 0xf0) >> 4) : -1; 
+   }
+   virtual int getRow() const             
+   { 
+      return isValid() ? (int)((colRow & 0x0f) >> 0) : -1; 
+   }
    void setRow(int r)
    {
       this->colRow = (colRow & 0xF0) | (r << 0); 

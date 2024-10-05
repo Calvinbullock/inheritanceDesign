@@ -2,7 +2,7 @@
  * Source File:
  *    MOVE 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -24,6 +24,9 @@ Move::Move() : source(), dest(), promote(INVALID),
    
 }
 
+/***************************************************
+ * MOVE : LETTER FROM PIECE TYPE
+ ***************************************************/
 char Move::letterFromPieceType(PieceType pt)     const 
 { 
    switch (pt) 
@@ -57,6 +60,9 @@ char Move::letterFromPieceType(PieceType pt)     const
    }
 }
 
+/***************************************************
+ * MOVE : PIECE TYPE FROM LETTER 
+ ***************************************************/
 PieceType Move::pieceTypeFromLetter(char letter) const
 { 
    switch (letter) 
@@ -90,13 +96,17 @@ PieceType Move::pieceTypeFromLetter(char letter) const
    }
 }
 
+/***************************************************
+ * MOVE : READ
+ * reads smith notation to a move
+ ***************************************************/
 void Move::read(string moveText)
 {
+   text = moveText;
    source = moveText.substr(0, 2);
    dest = moveText.substr(2, 5);
    moveType = MOVE; // default move
 
-   // TODO
    if (moveText.length() == 5)
    {  
       switch (moveText[4])
@@ -130,6 +140,10 @@ void Move::read(string moveText)
    }
 }
 
+/***************************************************
+ * MOVE : GET TEXT
+ * gets smith notation from a move
+ ***************************************************/
 string Move::getText()
 {
    string moveText;

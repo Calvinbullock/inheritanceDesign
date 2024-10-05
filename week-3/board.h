@@ -2,7 +2,7 @@
  * Header File:
  *    BOARD 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    A collection of pieces and the state of the board
  ************************************************************************/
@@ -45,11 +45,11 @@ public:
    virtual int  getCurrentMove() const { return numMoves;      }
    virtual bool whiteTurn()      const { return (numMoves == 0) || (numMoves % 2 == 0); }
    virtual void display(const Position& posHover, const Position& posSelect) const {}
-   virtual const Piece& operator [] (const Position& pos) const;
 
    // setters
-   virtual void move(const Move & move) { }
-   virtual Piece& operator [] (const Position& pos);
+   virtual void move                (const Move & move) { }
+   virtual const Piece& operator [] (const Position& pos) const;
+   virtual Piece& operator []       (const Position& pos);
 
 protected:
    int numMoves;
@@ -76,13 +76,13 @@ public:
          }
       }
    }
-   ~BoardDummy()                                          {                }
+   ~BoardDummy()                                 {                }
 
    void display(const Position& posHover,
-                const Position& posSelect) const          { assert(false); }
-   void move       (const Move& move)                     { assert(false); }
-   int  getCurrentMove() const                            { assert(false); return 0; }
-   bool whiteTurn()      const                            { assert(false); return false; }
+                const Position& posSelect) const { assert(false); }
+   void move       (const Move& move)            { assert(false); }
+   int  getCurrentMove() const                   { assert(false); return 0; }
+   bool whiteTurn()      const                   { assert(false); return false; }
    Piece& operator [] (const Position& pos)
    { 
       assert(false); 

@@ -2,7 +2,7 @@
  * Header File:
  *    MOVE 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -39,13 +39,15 @@ public:
       text = getText();
    };
 
-   void read(string srcDest);
-   //void assign(string moveText) { read(moveText); }; ??????
+   void read(string moveText);
    string getText();
 
    bool operator <  (const Move & rhs) const { return text < text;         }
    bool operator == (const Move & rhs) const { return text == rhs.text;    }
-   bool operator != (const Move& rhs) const  { return !(text == rhs.text); }
+   bool operator != (const Move& rhs)  const { return !(text == rhs.text); }
+
+   const Move & operator =  (const char     * rhs) { read(rhs); return *this; }
+   const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
 
 private:
    char letterFromPieceType(PieceType pt)     const;

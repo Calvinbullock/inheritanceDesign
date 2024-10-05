@@ -2,7 +2,7 @@
  * Header File:
  *    TEST MOVE 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    test the Move class
  ************************************************************************/
@@ -185,7 +185,16 @@ void TestMove::read_castleQueen()
   **************************************/
 void TestMove::assign_simple()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   // EXERCISE
+   Move move = (string)"e5e6";
+
+   // VERIFY
+   assertEquals(move.source.getCol(), 4);
+   assertEquals(move.source.getRow(), 4);
+   assertEquals(move.dest.getCol(), 4);
+   assertEquals(move.dest.getRow(), 5);
+   assertEquals(move.moveType, move.MOVE);
 }
 
  /*************************************
@@ -198,7 +207,19 @@ void TestMove::assign_simple()
   **************************************/
 void TestMove::assign_capture()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   PieceType pt = ROOK;
+
+   // EXERCISE
+   Move move = (string)"e5e6r";
+
+   // VERIFY
+   assertEquals(move.source.getCol(), 4);
+   assertEquals(move.source.getRow(), 4);
+   assertEquals(move.dest.getCol(), 4);
+   assertEquals(move.dest.getRow(), 5);
+   assertEquals(move.moveType, move.MOVE);
+   assertEquals(move.capture, pt);
 }
 
  /*************************************
@@ -210,7 +231,16 @@ void TestMove::assign_capture()
   **************************************/
 void TestMove::assign_enpassant()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   // EXERCISE
+   Move move = (string)"e5f6E";
+
+   // VERIFY
+   assertEquals(move.source.getCol(), 4);
+   assertEquals(move.source.getRow(), 4);
+   assertEquals(move.dest.getCol(), 5);
+   assertEquals(move.dest.getRow(), 5);
+   assertEquals(move.moveType, move.ENPASSANT);
 }
 
  /*************************************
@@ -222,7 +252,16 @@ void TestMove::assign_enpassant()
   **************************************/
 void TestMove::assign_castleKing()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   // EXERCISE
+   Move move = (string)"e1g1c";
+
+   // VERIFY
+   assertEquals(move.source.getCol(), 4);
+   assertEquals(move.source.getRow(), 0);
+   assertEquals(move.dest.getCol(), 6);
+   assertEquals(move.dest.getRow(), 0);
+   assertEquals(move.moveType, move.CASTLE_KING);
 }
 
  /*************************************
@@ -234,7 +273,16 @@ void TestMove::assign_castleKing()
   **************************************/
 void TestMove::assign_castleQueen()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   // EXERCISE
+   Move move = (string)"e1c1C";
+
+   // VERIFY
+   assertEquals(move.source.getCol(), 4);
+   assertEquals(move.source.getRow(), 0);
+   assertEquals(move.dest.getCol(), 2);
+   assertEquals(move.dest.getRow(), 0);
+   assertEquals(move.moveType, move.CASTLE_QUEEN);
 }
 
  /*************************************

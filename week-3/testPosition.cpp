@@ -2,7 +2,7 @@
  * Source File:
  *    TEST POSITION
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for Position
  ************************************************************************/

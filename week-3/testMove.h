@@ -2,7 +2,7 @@
  * Header File:
  *    TEST MOVE 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary
  *    test the Move class
  ************************************************************************/
@@ -48,13 +48,11 @@ public:
       read_castleKing();
       read_castleQueen();
       constructString_simple();
-      //TODO ------------
-      //assign_simple();
-      //assign_capture();
-      //assign_enpassant();
-      //assign_castleKing();
-      //assign_castleQueen();
-      // ----------------
+      assign_simple();
+      assign_capture();
+      assign_enpassant();
+      assign_castleKing();
+      assign_castleQueen();
       getText_simple();
       getText_capture();
       getText_enpassant();
