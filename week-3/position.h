@@ -96,6 +96,8 @@ public:
    Position(const char * s) : colRow(0x99) {   }
    const Position & operator =  (const char     * rhs);
    const Position & operator =  (const string   & rhs);
+   string getColRowText();
+   
    
    // Pixels:    The Position class can work with screen coordinates,
    //            a.k.a. Pixels, these are X and Y coordinates. Note that
