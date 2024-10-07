@@ -1,8 +1,8 @@
 /***********************************************************************
  * Header File:
- *    MOVE
+ *    MOVE 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    Everything we need to know about a single chess move
  ************************************************************************/
@@ -31,16 +31,27 @@ public:
 
    // constructor
    Move();
-   Move(const string & rhs) {}
-   bool operator<(const Move & rhs) const { return true; }
-   bool operator==(const Move& rhs) const { return true; }
-   void read(const string & rhs) {}
-   string getText() const { return std::string(""); }
 
+   Move(string moveText) : source(), dest(), promote(INVALID),
+      capture(INVALID), moveType(MOVE_ERROR), isWhite(true), text()
+   {
+      read(moveText);
+      text = getText();
+   };
+
+   void read(string moveText);
+   string getText();
+
+   bool operator <  (const Move & rhs) const { return text < text;         }
+   bool operator == (const Move & rhs) const { return text == rhs.text;    }
+   bool operator != (const Move& rhs)  const { return !(text == rhs.text); }
+
+   const Move & operator =  (const char     * rhs) { read(rhs); return *this; }
+   const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
 
 private:
-   char letterFromPieceType(PieceType pt)     const { return 'z'; }
-   PieceType pieceTypeFromLetter(char letter) const { return SPACE; }
+   char letterFromPieceType(PieceType pt)     const;
+   PieceType pieceTypeFromLetter(char letter) const;
 
 
 
