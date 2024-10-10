@@ -1,0 +1,16 @@
+﻿  board.cpp
+  chess.cpp
+  move.cpp
+  piece.cpp
+  pieceKnight.cpp
+  position.cpp
+  test.cpp
+  testBoard.cpp
+  testKnight.cpp
+  testMove.cpp
+  testPiece.cpp
+  testPosition.cpp
+  uiDraw.cpp
+  uiInteract.cpp
+  Generating Code...
+  Lab04.vcxproj -> C:\Users\Naniel\Documents\School\Fall2024\CSE231\Repo\week-4\x64\Debug\Lab04.exe
