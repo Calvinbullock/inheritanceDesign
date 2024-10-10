@@ -65,6 +65,8 @@ private:
       // EXERCISE
       Space space(col, row);
 
+      Position p("h8");
+
       // VERIFY
       assertUnit(space.position == Position("h8"));
 

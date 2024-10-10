@@ -300,7 +300,7 @@ void TestMove::getText_simple()
    string output = "e5e6";
 
    // EXERCISE
-   moveText = move.getText();
+   moveText = move.text;
 
    // VERIFY
    assertUnit(moveText == output);
@@ -321,7 +321,7 @@ void TestMove::getText_capture()
    string moveText;
 
    // EXERCISE
-   moveText = move.getText();
+   moveText = move.text;
 
    // VERIFY
    assertUnit(moveText == "e5e6r");
@@ -342,7 +342,7 @@ void TestMove::getText_enpassant()
    string moveText;
  
    // EXERCISE
-   moveText = move.getText();
+   moveText = move.text;
 
    // VERIFY
    assertUnit(moveText == "e5f6E");
@@ -362,7 +362,7 @@ void TestMove::getText_castleKing()
    string moveText;
 
    // EXERCISE
-   moveText = move.getText();
+   moveText = move.text;
 
    // VERIFY
    assertUnit(moveText == "e1g1c");
@@ -382,7 +382,7 @@ void TestMove::getText_castleQueen()
    string moveText;
 
    // EXERCISE
-   moveText = move.getText();
+   moveText = move.text;
 
    // VERIFY
    assertUnit(moveText == "e1c1C");

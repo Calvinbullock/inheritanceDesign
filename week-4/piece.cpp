@@ -23,6 +23,10 @@ using namespace std;
  ***********************************************/
 const Piece & Piece::operator = (const Piece & rhs)
 {
+   this->fWhite = rhs.fWhite;
+   this->nMoves = rhs.nMoves;
+   this->lastMove = rhs.lastMove;
+   this->position = rhs.position;
 
    return *this;
 }
@@ -33,5 +37,6 @@ const Piece & Piece::operator = (const Piece & rhs)
  ***********************************************/
 void Piece::getMoves(set <Move> & movesSet, const Board & board) const
 {
+   //assert false?? do we use this??
 }
 

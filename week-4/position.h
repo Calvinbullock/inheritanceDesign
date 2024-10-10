@@ -49,7 +49,7 @@ public:
    // Position :    The Position class can work with other positions,
    //               Allowing for comparisions, copying, etc.
    Position(const Position & rhs)               {                              }
-   Position() : colRow(0x99)                    {                              }
+   Position() : colRow(0xff)                    {                              }
    bool isInvalid() const                       { return !isValid();           }
    bool isValid()   const                        
    { 
@@ -72,14 +72,14 @@ public:
    
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
-   Position(int location) : colRow(0x99) {                                   }
+   Position(int location) : colRow(0xff) {                                   }
    int getLocation() const               { return (getRow()*8) + (getCol()); }
    void setLocation(int location)        {                                   }
 
    
    // Row/Col : The position class can work with row/column,
    //           which are 0..7 and 0...7
-   Position(int c, int r) : colRow(0x99)  {           }
+   Position(int c, int r) : colRow(0xff) { setCol(c); setRow(r); }
    virtual int getCol() const             
    { 
       return isValid() ? (int)((colRow & 0xf0) >> 4) : -1; 
@@ -105,7 +105,7 @@ public:
    // Text:    The Position class can work with textual coordinates,
    //          such as "d4"
    
-   Position(const char * s) : colRow(0x99) {   }
+   Position(const char* s) : colRow(0xff) { *this = s; }
    const Position & operator =  (const char     * rhs);
    const Position & operator =  (const string   & rhs);
    string getColRowText();

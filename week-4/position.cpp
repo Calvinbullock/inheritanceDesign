@@ -31,17 +31,11 @@ istream & operator >> (istream & in,  Position & rhs)
  **************************************/
 const Position & Position::operator =  (const char     * rhs) 
 {
-   const char * it = rhs;
+   // convert char to string
+   string rhsStr;
+   rhsStr = (string)rhs;
 
-   // get the source
-   int col = *it - 'a';
-   it++;
-   int row = *it - '1';
-   it++;
-
-   setCol(col);
-   setRow(row);
-   return *this; 
+   return *this = rhsStr; 
 }
 
 /*************************************
