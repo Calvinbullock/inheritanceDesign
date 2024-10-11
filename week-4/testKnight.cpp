@@ -10,6 +10,7 @@
 #include "testKnight.h"
 #include "pieceKnight.h"     
 #include "board.h"
+#include "pieceType.h"
 #include "uiDraw.h"
 #include <cassert>      
 
@@ -121,5 +122,14 @@ void TestKnight::getMoves_free()
  **************************************/
 void TestKnight::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+      // SETUP  
+      const Knight knight(7, 7);
+      PieceType pt = KNIGHT;
+
+      // EXERCISE
+      pt = knight.getType();
+
+      // VERIFY
+      assertUnit(pt == KNIGHT);
 }  // TEARDOWN
+

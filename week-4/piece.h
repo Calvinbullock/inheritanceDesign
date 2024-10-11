@@ -51,7 +51,7 @@ public:
    friend TestBoard;
    
    // constructors and stuff
-   Piece(const Position & pos, bool isWhite = true)   {}
+   Piece(const Position & pos, bool isWhite = true)   { position = pos; fWhite = isWhite; }
    Piece(int c, int r, bool isWhite = true) { position.setCol(c); position.setRow(r); }
    Piece(const Piece & piece)                         {}
    virtual ~Piece()                                   {}
