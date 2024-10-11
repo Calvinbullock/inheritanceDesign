@@ -50,8 +50,10 @@ Space space(0,0);
 ***********************************************/
 const Piece& Board::operator [] (const Position& pos) const
 {
-   /*if (board[pos.getCol()][pos.getRow()] == nullptr) {
-      //return Space();
+  
+  //TODO:
+  /* if (board[pos.getCol()][pos.getRow()] == nullptr) {
+      return Piece();
    } else {
       return *board[pos.getCol()][pos.getRow()];
    }*/

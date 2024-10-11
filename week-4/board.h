@@ -64,6 +64,8 @@ protected:
    int numMoves;
 
    ogstream* pgout;
+
+
 };
 
 
