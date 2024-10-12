@@ -48,8 +48,8 @@ public:
 
    // Position :    The Position class can work with other positions,
    //               Allowing for comparisions, copying, etc.
-   Position(const Position & rhs)               {                              }
-   Position() : colRow(0xff)                    {                              }
+   Position(const Position & rhs)               { squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
+   Position() : colRow(0xff)                    { squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
    bool isInvalid() const                       { return !isValid();           }
    bool isValid()   const                        
    { 
@@ -72,7 +72,7 @@ public:
    
    // Location : The Position class can work with locations, which
    //            are 0...63 where we start in row 0, then row 1, etc.
-   Position(int location) : colRow(0xff) {                                   }
+   Position(int location) : colRow(0xff) { squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
    int getLocation() const               { return (getRow()*8) + (getCol()); }
    void setLocation(int location)        {                                   }
 
@@ -105,7 +105,7 @@ public:
    // Text:    The Position class can work with textual coordinates,
    //          such as "d4"
    
-   Position(const char* s) : colRow(0xff) { *this = s; }
+   Position(const char* s) : colRow(0xff) { *this = s; squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
    const Position & operator =  (const char     * rhs);
    const Position & operator =  (const string   & rhs);
    string getColRowText();
@@ -117,10 +117,10 @@ public:
    int getX()   const { return 99; }
    int getY()   const { return 99; }
    void setXY(double x, double y) { }
-   double getSquareWidth()  const { return 99; }
-   double getSquareHeight() const { return 99; }
-   void setSquareWidth (double width )  {  }
-   void setSquareHeight(double height)  {  }
+   double getSquareWidth()  const { return squareWidth; }
+   double getSquareHeight() const { return squareHeight; }
+   void setSquareWidth (double width )  { squareWidth = width; }
+   void setSquareHeight(double height)  { squareHeight = height; }
 
    // Delta:    The Position class can work with deltas, which are
    //           offsets from a given location. This helps pieces move

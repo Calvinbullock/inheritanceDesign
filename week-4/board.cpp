@@ -51,7 +51,7 @@ Space space(0,0);
 const Piece& Board::operator [] (const Position& pos) const
 {
   
-  //TODO:
+  // TODO: nullptr needs to return space piece
   /* if (board[pos.getCol()][pos.getRow()] == nullptr) {
       return Piece();
    } else {
@@ -70,7 +70,11 @@ Piece& Board::operator [] (const Position& pos)
  ***********************************************/
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
-   
+   pgout->drawBoard();
+
+   /*for each piece on board {*/
+   /*   piece.dispaly();*/
+   /*}*/
 }
 
 
@@ -80,6 +84,10 @@ void Board::display(const Position & posHover, const Position & posSelect) const
  ************************************************/
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
 {
+//Knight knight(7, 7, false /*white*/);
+//knight.fWhite = true;
+//knight.position.set(3, 4);
+//board.board[3][4] = &knight;
 
 }
 
@@ -113,7 +121,7 @@ void Board::assertBoard()
  *********************************************/
 void Board::move(const Move & move)
 {  
-
+   
 }
 
 
@@ -126,7 +134,8 @@ void Board::move(const Move & move)
  *********************************************/
 BoardEmpty::BoardEmpty() : BoardDummy(), pSpace(nullptr), moveNumber(0)
 {
-   //pSpace = new Space(0, 0);
+   pSpace = new Space(0, 0);
+
    numMoves = 0;
    for (int col = 0; col < 8; col++)
    {
