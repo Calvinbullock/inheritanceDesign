@@ -42,6 +42,10 @@ public:
       set_h8();
       set_a8();
 
+      // move
+      move_knightMove();
+      move_knightAttack();
+
       report("Board");
    }
 private:
@@ -65,5 +69,8 @@ private:
    void set_a1();
    void set_h8();
    void set_a8();
+
+   void move_knightMove();
+   void move_knightAttack();
 };
 
