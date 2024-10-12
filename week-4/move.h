@@ -41,6 +41,7 @@ public:
 
    void read(string moveText);
    string getText();
+   string getText() const;
 
    bool operator <  (const Move & rhs) const { return text < text;         }
    bool operator == (const Move & rhs) const { return text == rhs.text;    }
@@ -49,8 +50,8 @@ public:
    const Move & operator =  (const char     * rhs) { read(rhs); return *this; }
    const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
 
-private:
    char letterFromPieceType(PieceType pt)     const;
+private:
    PieceType pieceTypeFromLetter(char letter) const;
 
 

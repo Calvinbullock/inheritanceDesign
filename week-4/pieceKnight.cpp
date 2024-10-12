@@ -2,7 +2,7 @@
  * Source File:
  *    KNIGHT
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The knight class
  ************************************************************************/
@@ -23,27 +23,11 @@ void Knight::display(ogstream* pgout) const
    pgout->drawKnight(position, fWhite);
 }
 
-
-struct CR {
-   int c;
-   int r;
-};
-
 /**********************************************
  * KNIGHT : GET POSITIONS
  *********************************************/
 void Knight::getMoves(set <Move>& moves, const Board& board) const
 {
-   /*int r;                   // the row we are checking*/
-   /*int c;                   // the column we are checking*/
-   /**/
-/*Position possibleMoves[8] = {*/
-/*            Position(-1,  2), Position(1,  2),*/
-/*     Position(-2,  1),                 Position(2,  1),*/
-/*     Position(-2, -1),                 Position(2, -1),*/
-/*            Position(-1, -2), Position(1, -2)*/
-/*};*/
-
    CR posMoves[8] = 
    {
                {-1,  2}, { 1,  2},
@@ -52,32 +36,39 @@ void Knight::getMoves(set <Move>& moves, const Board& board) const
                {-1, -2}, { 1, -2}
    };
 
+   PieceType pt;
+   Position newPos;
+   
    for (int i = 0; i < 8; i++)
    {
-      Move m;
-      Position pos;
-      pos.setCol(this->position.getCol() + posMoves[i].c);
-      pos.setRow(this->position.getRow() + posMoves[i].r);
-      m = pos.getColRowText();
-      //std::cout << pos.getColRowText() << std::endl;
-      moves.insert(m); //insert a possible move.
-      
-      //r = this->position.getRow() + possibleMoves[i].getRow();
-      //c = this->position.getCol() + possibleMoves[i].getCol();
+      // TODO: change to adjusts
+      newPos.setCol(this->position.getCol() + posMoves[i].c);
+      newPos.setRow(this->position.getRow() + posMoves[i].r);
 
-      /*if (possibleMoves[i].isValid())*/
-      /*{*/
-      /*   // check if potential move is opposite color or a space.*/
-      /*   if (this->fWhite != board[possibleMoves[i]].isWhite() || board[possibleMoves[i]].getType() == SPACE)*/
-      /*   {*/
-      /*std::cout << possibleMoves[i].getColRowText() << std::endl;*/
+      if (newPos.isValid())
+      {
+         Move m;
+         pt = board[newPos].getType();
+         string smithText = position.getColRowText() 
+                  + newPos.getColRowText() 
+                  + m.letterFromPieceType(pt);
+         m = smithText;
+         /*std::cout << "L61 " << m.getText() << std::endl;*/
+         /*std::cout << "smith " << smith << std::endl;;*/
 
-      /*   }*/
-      /*}*/
-
-      //if (amBlack && isNotBlack(board, c, r))
-      //   possible.insert(r * 8 + c);
-      //if (!amBlack && isNotWhite(board, c, r))
-      //   possible.insert(r * 8 + c);
+         // check if potential move is a space.
+         if (board[newPos].getType() == SPACE)
+         {
+            moves.insert(m); //insert a possible move.
+         } 
+         else 
+         {
+            // check if color is opposite
+            if (this->fWhite != board[newPos].isWhite()) 
+            {
+               moves.insert(m); //insert a possible move.
+            }
+         }
+      }
    }
 }

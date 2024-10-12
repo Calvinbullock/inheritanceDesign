@@ -2,7 +2,7 @@
  * Source File:
  *    TEST KNIGHT
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the knight
  ************************************************************************/
@@ -13,8 +13,6 @@
 #include "pieceType.h"
 #include "uiDraw.h"
 #include <cassert>      
-#include <iostream>
-#include <iterator>
 
  /*************************************
   * +---a-b-c-d-e-f-g-h---+
@@ -46,12 +44,6 @@ void TestKnight::getMoves_end()
 
    // EXERCISE
    knight.getMoves(moves, board);
-
-   /*std::cout << "here" << std::endl;*/
-   //std::cout << moves.size() << std::endl;
-   /*for (auto move: moves) {*/
-   /*   std::cout << move.getText() << std::endl;*/
-   /*}     */
 
    // VERIFY
    assertUnit(moves.size() == 2);  // many possible moves
@@ -174,7 +166,7 @@ void TestKnight::getMoves_capture()
    knight.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 0);  // No possible moves
+   assertUnit(moves.size() == 8);  // all captures open
 
    assertUnit(moves.find(Move("d5c3p")) != moves.end());
    assertUnit(moves.find(Move("d5e3p")) != moves.end());
@@ -229,7 +221,7 @@ void TestKnight::getMoves_free()
    knight.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 0);  // No possible moves
+   assertUnit(moves.size() == 8); // all moves open
 
    assertUnit(moves.find(Move("d5c3")) != moves.end());
    assertUnit(moves.find(Move("d5e3")) != moves.end());

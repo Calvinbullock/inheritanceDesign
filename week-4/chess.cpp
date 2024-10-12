@@ -2,7 +2,7 @@
 * Source File:
 *    Lab 04: Chess
 * Author:
-*    <your name here>
+ *    Calvin Bullock, Daniel Malasky
 * Summary:
 *    Play the game of chess
 ************************************************************************/

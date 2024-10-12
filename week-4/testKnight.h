@@ -2,7 +2,7 @@
  * Header File:
  *    TEST KNIGHT
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for Knight
  ************************************************************************/
@@ -22,9 +22,9 @@ public:
 
    void run()
    {
-      //getMoves_blocked();
-      //getMoves_capture();
-      //getMoves_free();
+      getMoves_blocked();
+      getMoves_capture();
+      getMoves_free();
       getMoves_end();
 
       getType();

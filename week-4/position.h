@@ -109,6 +109,7 @@ public:
    const Position & operator =  (const char     * rhs);
    const Position & operator =  (const string   & rhs);
    string getColRowText();
+   string getColRowText() const;
    
    
    // Pixels:    The Position class can work with screen coordinates,

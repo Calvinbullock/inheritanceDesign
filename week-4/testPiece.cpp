@@ -2,7 +2,7 @@
  * Source File:
  *    TEST PIECE
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for a piece base class
  ************************************************************************/

@@ -2,7 +2,7 @@
  * Header File:
  *    TEST SPACE
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the space
  ************************************************************************/

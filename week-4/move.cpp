@@ -11,7 +11,6 @@
 #include "pieceType.h"
 #include <cassert>
 #include <iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -136,7 +135,6 @@ string Move::getText()
    moveText.append(source.getColRowText());
    moveText.append(dest.getColRowText());
 
-
    if (capture != INVALID)
    {
       switch (capture)
@@ -170,4 +168,43 @@ string Move::getText()
    return moveText;
 }
 
+string Move::getText() const
+{
+   string moveText;
+
+   moveText.append(source.getColRowText());
+   moveText.append(dest.getColRowText());
+
+   if (capture != INVALID)
+   {
+      switch (capture)
+      {
+      case PAWN:     // capture a pawn
+      case KNIGHT:   // capture a knight
+      case BISHOP:   // capture a bishop
+      case ROOK:     // capture a rook
+      case QUEEN:    // capture a queen
+         //case KING:   // !! you can't capture a king you silly!
+         moveText.push_back(letterFromPieceType(capture));
+         break;
+      }
+   }
+
+   if (moveType != MOVE_ERROR || moveType != MOVE)
+   {
+      switch (moveType)
+      {
+      case ENPASSANT:
+         moveText.push_back('E');
+         break;
+      case CASTLE_QUEEN:
+         moveText.push_back('C');
+         break;
+      case CASTLE_KING:
+         moveText.push_back('c');
+         break;
+      }
+   }
+   return moveText;
+}
 

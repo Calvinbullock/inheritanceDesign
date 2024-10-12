@@ -2,7 +2,7 @@
  * Header File:
  *    KNIGHT
  * Author:
-*    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The KNIGHT class
  ************************************************************************/

@@ -2,7 +2,7 @@
  * Header File:
  *    SPACE
  * Author:
- *    <your name here> 
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The space
  ************************************************************************/

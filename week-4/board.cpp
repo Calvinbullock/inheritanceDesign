@@ -2,7 +2,7 @@
  * Source File:
  *    BOARD 
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    A collection of pieces and a small amount of game state
  ************************************************************************/
@@ -71,10 +71,11 @@ Piece& Board::operator [] (const Position& pos)
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
    pgout->drawBoard();
-
-   /*for each piece on board {*/
-   /*   piece.dispaly();*/
-   /*}*/
+   
+   // Draw each piece on board
+   /*for each piece on board {
+      piece.dispaly();
+   }*/
 }
 
 
@@ -82,13 +83,11 @@ void Board::display(const Position & posHover, const Position & posSelect) const
  * BOARD : CONSTRUCT
  *         Free up all the allocated memory
  ************************************************/
-Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0)
+Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
 {
-//Knight knight(7, 7, false /*white*/);
-//knight.fWhite = true;
-//knight.position.set(3, 4);
-//board.board[3][4] = &knight;
-
+   // -- place the knight piece
+   //Knight knight(3, 4, true /*white*/);
+   //board[3][4] = &knight;
 }
 
 

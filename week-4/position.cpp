@@ -85,3 +85,15 @@ string Position::getColRowText()
 
    return text;
 }
+
+
+string Position::getColRowText() const
+{
+   string text;
+   char letters[] = "abcdefgh";
+
+   text.push_back(letters[getCol()]);
+   text.push_back(getRow() + '1');   // +1 [ascii] for base 1 board.
+
+   return text;
+}

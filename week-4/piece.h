@@ -2,7 +2,7 @@
  * Header File:
  *    PIECE 
  * Author:
-*    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The Piece base class and all the derived classes:
  *       SPACE, KING, QUEEN, ROOK, KNIGHT, BISHOP, PAWN
@@ -85,6 +85,12 @@ protected:
    bool fWhite;                    // which team are you on?
    Position position;              // current position of this piece
    int  lastMove;                  // last time this piece moved
+   
+   
+   struct CR {
+      int c;
+      int r;
+   };
 };
 
 
