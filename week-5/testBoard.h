@@ -24,8 +24,21 @@ public:
    {
       // construct
       construct_default();
+      construct_dummyBoard();
+      construct_emptyBoard();
+      getCurrentMove_initial();
+      getCurrentMove_second();
+      getCurrentMove_middleWhite();
+      getCurrentMove_middleBlack();
+      whiteTurn_initial();
+      whiteTurn_second();
+      whiteTurn_middleWhite();
+      whiteTurn_middleBlack();
 
       // move
+      move_knightMove();
+      move_knightAttack();
+
       move_pawnSimple();
       move_pawnCapture();
       move_pawnDouble();
@@ -70,6 +83,8 @@ private:
    
    void createDummyBoard(Board & board);
    void construct_default();
+   void construct_dummyBoard();
+   void construct_emptyBoard();
    void getCurrentMove_initial();
    void getCurrentMove_second();
    void getCurrentMove_middleWhite();
@@ -104,6 +119,5 @@ private:
    void set_a1();
    void set_h8();
    void set_a8();
-
 };
 
