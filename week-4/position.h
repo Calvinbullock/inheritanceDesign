@@ -48,7 +48,10 @@ public:
 
    // Position :    The Position class can work with other positions,
    //               Allowing for comparisions, copying, etc.
-   Position(const Position & rhs)               { squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
+   Position(const Position & rhs)               
+   { 
+      *this = rhs; 
+   }
    Position() : colRow(0xff)                    { squareWidth = SIZE_SQUARE; squareHeight = SIZE_SQUARE; }
    bool isInvalid() const                       { return !isValid();           }
    bool isValid()   const                        
