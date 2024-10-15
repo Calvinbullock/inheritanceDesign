@@ -7,3 +7,8 @@ week-2-cb/Week-2-SDD.pdf
 */runMe
 */makefile
 */*.o
+
+
+*/.idea/
+*/CMakeLists.txt
+*/cmake-build-debug
