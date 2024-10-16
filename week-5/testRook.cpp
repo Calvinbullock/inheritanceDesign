@@ -13,6 +13,7 @@
 #include "uiDraw.h"
 #include <cassert>      
 
+// TODO: reverse all rows and columns.
 
 /*************************************
  * +---a-b-c-d-e-f-g-h---+
@@ -30,7 +31,38 @@
  **************************************/
 void TestRook::getMoves_blocked()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(7, 7, false /*white*/);
+   rook.fWhite = true;
+   rook.position.set(1, 2);
+   board.board[1][2] = &rook;
+
+   White white1(PAWN);
+   board.board[0][2] = &white1; // bottom
+   White white2(PAWN);
+   board.board[1][3] = &white2; // right
+   White white3(PAWN);
+   board.board[2][2] = &white3; // top
+   White white4(PAWN);
+   board.board[1][1] = &white4; // left
+
+   set <Move> moves;
+
+   // EXERCISE
+   rook.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 0);  // No possible moves
+
+   // TEARDOWN
+   board.board[3][4] = nullptr; // white knight
+
+   board.board[0][2] = nullptr;
+   board.board[1][3] = nullptr;
+   board.board[2][2] = nullptr;
+   board.board[1][1] = nullptr;
+
 }
 
 
@@ -50,7 +82,41 @@ void TestRook::getMoves_blocked()
  **************************************/
 void TestRook::getMoves_slideToEnd()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(7, 7, false /*white*/);
+   rook.fWhite = true;
+   rook.position.set(1, 2);
+   board.board[1][2] = &rook;
+
+   set <Move> moves;
+
+   // EXERCISE
+   rook.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 14);  // TODO: How many?
+
+   assertUnit(moves.find(Move("c2c1")) != moves.end()); // move down
+
+   assertUnit(moves.find(Move("c2d2")) != moves.end()); // move right
+   assertUnit(moves.find(Move("c2e2")) != moves.end());
+   assertUnit(moves.find(Move("c2f2")) != moves.end());
+   assertUnit(moves.find(Move("c2g2")) != moves.end());
+   assertUnit(moves.find(Move("c2h2")) != moves.end());
+
+   assertUnit(moves.find(Move("c2c3")) != moves.end()); // move up
+   assertUnit(moves.find(Move("c2c4")) != moves.end());
+   assertUnit(moves.find(Move("c2c5")) != moves.end());
+   assertUnit(moves.find(Move("c2c6")) != moves.end());
+   assertUnit(moves.find(Move("c2c7")) != moves.end());
+   assertUnit(moves.find(Move("c2c8")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b2")) != moves.end()); // move left
+   assertUnit(moves.find(Move("c2a2")) != moves.end());
+
+   // TEARDOWN
+   board.board[3][4] = nullptr; // white knight
 }
 
 
@@ -70,7 +136,50 @@ void TestRook::getMoves_slideToEnd()
  **************************************/
 void TestRook::getMoves_slideToBlock()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(7, 7, false /*white*/);
+   rook.fWhite = true;
+   rook.position.set(1, 2);
+   board.board[1][2] = &rook;
+
+   White white1(PAWN);
+   board.board[0][2] = &white1; // bottom
+   White white2(PAWN);
+   board.board[1][7] = &white2; // right
+   White white3(PAWN);
+   board.board[7][2] = &white3; // top
+   White white4(PAWN);
+   board.board[1][0] = &white4; // left
+
+   set <Move> moves;
+
+   // EXERCISE
+   rook.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 10);  // TODO: How many?
+
+   assertUnit(moves.find(Move("c2d2")) != moves.end()); // move right
+   assertUnit(moves.find(Move("c2e2")) != moves.end());
+   assertUnit(moves.find(Move("c2f2")) != moves.end());
+   assertUnit(moves.find(Move("c2g2")) != moves.end());
+
+   assertUnit(moves.find(Move("c2c3")) != moves.end()); // move up
+   assertUnit(moves.find(Move("c2c4")) != moves.end());
+   assertUnit(moves.find(Move("c2c5")) != moves.end());
+   assertUnit(moves.find(Move("c2c6")) != moves.end());
+   assertUnit(moves.find(Move("c2c7")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b2")) != moves.end()); // move left
+
+   // TEARDOWN
+   board.board[3][4] = nullptr; // white knight
+
+   board.board[0][2] = nullptr;
+   board.board[1][7] = nullptr;
+   board.board[7][2] = nullptr;
+   board.board[1][0] = nullptr;
 }
 
 /*************************************
@@ -89,7 +198,55 @@ void TestRook::getMoves_slideToBlock()
  **************************************/
 void TestRook::getMoves_slideToCapture()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Rook rook(7, 7, false /*white*/);
+   rook.fWhite = true;
+   rook.position.set(1, 2);
+   board.board[1][2] = &rook;
+
+   Black black1(PAWN);
+   board.board[0][2] = &black1; // bottom
+   Black black2(PAWN);
+   board.board[1][7] = &black2; // right
+   Black black3(PAWN);
+   board.board[7][2] = &black3; // top
+   Black black4(PAWN);
+   board.board[1][0] = &black4; // left
+
+   set <Move> moves;
+
+   // EXERCISE
+   rook.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 14);  // TODO: How many?
+
+   assertUnit(moves.find(Move("c2c1p")) != moves.end()); // move down
+
+   assertUnit(moves.find(Move("c2d2")) != moves.end()); // move right
+   assertUnit(moves.find(Move("c2e2")) != moves.end());
+   assertUnit(moves.find(Move("c2f2")) != moves.end());
+   assertUnit(moves.find(Move("c2g2")) != moves.end());
+   assertUnit(moves.find(Move("c2h2p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2c3")) != moves.end()); // move up
+   assertUnit(moves.find(Move("c2c4")) != moves.end());
+   assertUnit(moves.find(Move("c2c5")) != moves.end());
+   assertUnit(moves.find(Move("c2c6")) != moves.end());
+   assertUnit(moves.find(Move("c2c7")) != moves.end());
+   assertUnit(moves.find(Move("c2c8p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b2")) != moves.end()); // move left
+   assertUnit(moves.find(Move("c2a2p")) != moves.end());
+
+   // TEARDOWN
+   board.board[3][4] = nullptr; // white knight
+
+   board.board[0][2] = nullptr;
+   board.board[1][7] = nullptr;
+   board.board[7][2] = nullptr;
+   board.board[1][0] = nullptr;
 }
 
 
@@ -100,5 +257,13 @@ void TestRook::getMoves_slideToCapture()
  **************************************/
 void TestRook::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP  
+   const Rook rook(7, 7);
+   PieceType pt = ROOK;
+
+   // EXERCISE
+   pt = rook.getType();
+
+   // VERIFY
+   assertUnit(pt == KNIGHT);
+}  // TEARDOWN

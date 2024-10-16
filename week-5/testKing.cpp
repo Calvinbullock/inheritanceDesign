@@ -14,6 +14,7 @@
 #include "uiDraw.h"
 #include <cassert>      
 
+// TODO: Reverse all rows and columns
 
 /*************************************
  * +---a-b-c-d-e-f-g-h---+
@@ -70,7 +71,33 @@ void TestKing::getMoves_capture()
  **************************************/
 void TestKing::getMoves_free()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(7, 7, false /*white*/);
+   king.fWhite = true;
+   king.position.set(4, 3);
+   board.board[4][3] = &king;
+
+   set <Move> moves;
+
+   // EXERCISE
+   king.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 8); // all moves open
+
+   assertUnit(moves.find(Move("d5c3")) != moves.end());
+   assertUnit(moves.find(Move("d5e3")) != moves.end());
+   assertUnit(moves.find(Move("d5f4")) != moves.end());
+   assertUnit(moves.find(Move("d5f6")) != moves.end());
+
+   assertUnit(moves.find(Move("d5e7")) != moves.end());
+   assertUnit(moves.find(Move("d5c7")) != moves.end());
+   assertUnit(moves.find(Move("d5b6")) != moves.end());
+   assertUnit(moves.find(Move("d5b4")) != moves.end());
+
+   // TEARDOWN
+   board.board[3][4] = nullptr; // white knight
 }
 
 
@@ -180,7 +207,15 @@ void TestKing::getMoves_whiteCastleRookMoved()
  **************************************/
 void TestKing::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
-}
+   // SETUP  
+   const King king(7, 7);
+   PieceType pt = KING;
+
+   // EXERCISE
+   pt = king.getType();
+
+   // VERIFY
+   assertUnit(pt == KING);
+}  // TEARDOWN
 
 
