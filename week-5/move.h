@@ -38,17 +38,38 @@ public:
       read(moveText);
       text = getText();
    };
+   
+   Move(const Move &rhs)   { *this = rhs;}
 
-   void read(string moveText);
+   // getters
    string getText();
    string getText() const;
-
-   bool operator <  (const Move & rhs) const { return text < text;         }
-   bool operator == (const Move & rhs) const { return text == rhs.text;    }
+   const Position& getDest()     const { return dest;     }
+   const Position& getSource()   const { return source;   }
+   PieceType getPromotion()      const { return promote;  }
+   PieceType getCapture()        const { return capture;  }
+   Move::MoveType getMoveType()  const { return moveType; }
+   // TODO: moveType getters 
+   
+   bool operator == (const Move& rhs) const;
+   bool operator == (const string& rhs) const { return getText() == rhs; }
+   bool operator != (const string& rhs) const { return getText() != rhs; }
    bool operator != (const Move& rhs)  const { return !(text == rhs.text); }
+   bool operator <  (const Move& rhs) const
+   {
+      return dest.getLocation() < rhs.dest.getLocation();
+   } // only look at dest.
 
-   const Move & operator =  (const char     * rhs) { read(rhs); return *this; }
+   // setters
+   void read(string moveText);
+
+   void setSource(const Position& src) { source = src; }
+   void setDest (const Position& des) { dest = des; }
+
+   const Move & operator =  (const char     * rhs) { read((string)rhs); return *this; }
    const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
+   const Move & operator =  (const Move& rhs);
+
 
    char letterFromPieceType(PieceType pt)     const;
 private:
@@ -65,4 +86,11 @@ private:
    string    text;      // what is the textual version of the move?
 };
 
+//ostream& operator << (ostream& out, const Move& move) 
+//{
+//   out << move.getSource()
+//      << move.getDest();
+//      /*<< move.letterFromPieceType(move.getCapture());*/
+//   return out;
+//};
 
