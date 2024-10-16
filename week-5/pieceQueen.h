@@ -1,10 +1,10 @@
 /***********************************************************************
  * Header File:
- *    KNIGHT
+ *    QUEEN
  * Author:
  *    Calvin Bullock, Daniel Malasky
  * Summary:
- *    The KNIGHT class
+ *    The QUEEN class
  ************************************************************************/
 
 #pragma once
@@ -12,16 +12,15 @@
 #include "piece.h"
 
  /***************************************************
-  * KNIGHT
-  * The knight, aka the "Horse"
+  * QUEEN
   ***************************************************/
-class Knight : public Piece
+class Queen : public Piece
 {
 public:
-   Knight(const Position& pos, bool isWhite) : Piece(pos, true) { }
-   Knight(int c, int r, bool isWhite) : Piece(c, r, true) { }
-   ~Knight() {                }
-   PieceType getType()            const { return KNIGHT; }
+   Queen(const Position& pos, bool isWhite) : Piece(pos, true) { }
+   Queen(int c, int r, bool isWhite) : Piece(c, r, true) { }
+   ~Queen() {                }
+   PieceType getType()            const { return QUEEN; }
    void getMoves(set <Move>& moves, const Board& board) const;
    void display(ogstream* pgout)  const;
 };
