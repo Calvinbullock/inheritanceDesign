@@ -51,6 +51,36 @@ int WINAPI WinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
+ /*  set<Position> s;
+   Position pos;
+   pos.setLocation(42);
+   s.insert(pos);
+   pos.setLocation(55);
+   s.insert(pos);
+
+   int x;
+
+   for (const Position& p : s)
+   
+      x = p.getLocation();
+   return 0;*/
+
+
+   //set<Move> m;
+   //Move move;
+   //move = "a1b1";
+   //m.insert(move);
+   //move = "a2b2p";
+   //m.insert(move);
+
+   //Position x;
+   //Position y;
+
+   //for (const Move& mov : m)
+
+   //   x = move.getSource();
+   //   y = move.getDest();
+   //return 0;
 
    // run all the unit tests
    testRunner();

@@ -17,7 +17,7 @@
 using namespace std;
 
 
-/***********************************************
+/***********************************************board
  * BOARD : RESET
  *         Just fill the board with the known pieces
  *   +---a-b-c-d-e-f-g-h---+
@@ -71,11 +71,13 @@ Piece& Board::operator [] (const Position& pos)
 void Board::display(const Position & posHover, const Position & posSelect) const
 {
    pgout->drawBoard();
-   
-   // Draw each piece on board
-   /*for each piece on board {
-      piece.dispaly();
-   }*/
+
+   for (int i = 0; i < 8; i++) {
+      for (const Piece *p : board[i]) {
+         if (p != nullptr)
+            p->display(pgout);
+      }
+   }
 }
 
 
@@ -85,11 +87,16 @@ void Board::display(const Position & posHover, const Position & posSelect) const
  ************************************************/
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
 {
-   // -- place the knight piece
-   //Knight knight(3, 4, true /*white*/);
-   //board[3][4] = &knight;
-}
+   Knight* knightW1 = new Knight(1, 0, true /*white*/);
+   board[1][0] = knightW1;
+   Knight* knightW2 = new Knight(6, 0, true /*white*/);
+   board[6][0] = knightW2;
 
+   Knight* knightB1 = new Knight(1, 7, false /*Black*/);
+   board[1][7] = knightB1;
+   Knight* knightB2 = new Knight(6, 7, false /*Black*/);
+   board[6][7] = knightB2;
+}
 
 /************************************************
  * BOARD : FREE
@@ -97,7 +104,14 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
  ************************************************/
 void Board::free()
 {
-
+   // set every piece on board to be null
+   for (int i = 0; i < 8; i++) {
+      for (const Piece *p : board[i]) {
+         if (p != nullptr) {
+            // TODO: delete it...
+         }
+      }
+   }
 }
 
 

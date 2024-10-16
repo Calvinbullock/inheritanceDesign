@@ -24,6 +24,22 @@ Move::Move() : source(), dest(), promote(INVALID),
 }
 
 /***************************************************
+ * ASSIGN : Move "=" Overload
+ ***************************************************/
+const Move& Move::operator=(const Move& rhs)
+{
+   source = rhs.source;
+   dest = rhs.dest;
+   promote = rhs.promote;
+   capture = rhs.capture;
+   moveType = rhs.moveType;
+   isWhite = rhs.isWhite;
+   text = rhs.text;
+
+   return *this;
+}
+
+/***************************************************
  * MOVE : LETTER FROM PIECE TYPE
  ***************************************************/
 char Move::letterFromPieceType(PieceType pt)     const 
@@ -206,5 +222,21 @@ string Move::getText() const
       }
    }
    return moveText;
+}
+
+/***************************************************
+ * == COMPARISON OVERLOAD
+ ***************************************************/
+bool Move::operator==(const Move& rhs) const
+{
+   return(
+      source == rhs.source &&
+      dest == rhs.dest &&
+      promote == rhs.promote &&
+      capture == rhs.capture &&
+      moveType == rhs.moveType &&
+      isWhite == rhs.isWhite &&
+      text == rhs.text);
+
 }
 
