@@ -14,7 +14,14 @@
  ******************************************/
 ostream & operator << (ostream & out, const Position & rhs)
 {
-   out << "error";
+   if (rhs.isValid())
+   {
+      out << (char)(rhs.getCol() + 'a')
+         << (char)(rhs.getRow() + '1');
+   }
+
+   else
+      out << "error";
    return out;
 }
 
@@ -23,6 +30,19 @@ ostream & operator << (ostream & out, const Position & rhs)
  **************************************/
 istream & operator >> (istream & in,  Position & rhs)
 {
+   char text[3] = {};
+   in >> text[0] >> text[1];
+   if (in.fail())
+   {
+      in.clear();
+      in.ignore();
+      throw string("Error reading coordinates");
+   }
+   else
+   {
+      rhs = text;
+   }
+   
    return in;   
 }
 
