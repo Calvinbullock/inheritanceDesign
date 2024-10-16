@@ -29,7 +29,7 @@ Move::Move() : source(), dest(), promote(INVALID),
 const Move& Move::operator=(const Move& rhs)
 {
    source = rhs.source;
-   dest = rhs.source;
+   dest = rhs.dest;
    promote = rhs.promote;
    capture = rhs.capture;
    moveType = rhs.moveType;

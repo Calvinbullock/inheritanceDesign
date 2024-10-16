@@ -73,7 +73,12 @@ public:
    void setDest (const Position& des) { dest = des; }
 
    const Move & operator =  (const char     * rhs) { read((string)rhs); return *this; }
-   const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
+   const Move & operator =  (const string   & rhs) 
+   { 
+      read(rhs); 
+
+      return *this; 
+   }
    const Move & operator =  (const Move& rhs);
 
 

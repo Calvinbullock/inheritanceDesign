@@ -173,7 +173,7 @@ public:
    Position operator + (const Delta & rhs) const { return *this; }
 
 private:
-   void set(uint8_t colRowNew) { }
+   void set(uint8_t colRowNew) { colRow = colRowNew; }
    
    uint8_t colRow;
    static double squareWidth;

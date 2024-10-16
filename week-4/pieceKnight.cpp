@@ -53,7 +53,7 @@ void Knight::getMoves(set <Move>& moves, const Board& board) const
                   + newPos.getColRowText() 
                   + m.letterFromPieceType(pt);
          m = smithText;
-         /*std::cout << "L61 " << m.getText() << std::endl;*/
+         //std::cout << "L61 " << m.getText() << std::endl;
          /*std::cout << "smith " << smith << std::endl;;*/
 
          // check if potential move is a space.
