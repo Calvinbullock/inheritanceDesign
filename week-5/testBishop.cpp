@@ -11,6 +11,7 @@
 #include "testBishop.h"
 #include "pieceBishop.h"     
 #include "board.h"
+#include "pieceType.h"
 #include "uiDraw.h"
 #include <cassert>      
 
@@ -29,11 +30,42 @@
  * 2      (b)            2
  * 1     p   p           1
  * |                     |
- * +---a-b-c-d-e-f-g-h---+
+ * +---a-b-c-d-e-f-g-h---+C
  **************************************/
 void TestBishop::getMoves_blocked()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(7, 7, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+
+   // col row??
+   White black1(PAWN);
+   board.board[3][0] = &black1;
+   White black2(PAWN);
+   board.board[1][0] = &black2;
+   White black3(PAWN);
+   board.board[1][2] = &black3;
+   White black4(PAWN);
+   board.board[3][2] = &black4;
+
+   set <Move> moves;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 0);  // No possible moves
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white Bishop
+   
+   board.board[3][0] = nullptr;
+   board.board[1][0] = nullptr;
+   board.board[1][2] = nullptr;
+   board.board[3][2] = nullptr;
 }
 
 /*************************************
@@ -52,7 +84,36 @@ void TestBishop::getMoves_blocked()
  **************************************/
 void TestBishop::getMoves_slideToEnd()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(7, 7, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+
+   // col row??
+   set <Move> moves;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 9);  // No possible moves
+   
+   assertUnit(moves.find(Move("c2d1")) != moves.end());
+   assertUnit(moves.find(Move("c2b1")) != moves.end());
+   assertUnit(moves.find(Move("c2b3")) != moves.end());
+
+   assertUnit(moves.find(Move("c2a4")) != moves.end());
+   assertUnit(moves.find(Move("c2d3")) != moves.end());
+   assertUnit(moves.find(Move("c2e4")) != moves.end());
+
+   assertUnit(moves.find(Move("c2f5")) != moves.end());
+   assertUnit(moves.find(Move("c2g6")) != moves.end());
+   assertUnit(moves.find(Move("c2h7")) != moves.end());
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white bishop
 }
 
 
@@ -68,11 +129,44 @@ void TestBishop::getMoves_slideToEnd()
  * 2      (b)            2
  * 1     p   p           1
  * |                     |
- * +---a-b-c-d-e-f-g-h---+
+ * +---a-b-c-d-e-f-g-h---+C
  **************************************/
 void TestBishop::getMoves_slideToBlock()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(7, 7, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+
+   // col row??
+   White black1(PAWN);
+   board.board[3][0] = &black1;
+   White black2(PAWN);
+   board.board[1][0] = &black2;
+   White black3(PAWN);
+   board.board[0][3] = &black3;
+   White black4(PAWN);
+   board.board[7][6] = &black4;
+
+   // col row??
+   set <Move> moves;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 5);  // No possible moves
+   assertUnit(moves.find(Move("c2b3")) != moves.end());
+
+   assertUnit(moves.find(Move("c2d3")) != moves.end());
+   assertUnit(moves.find(Move("c2e4")) != moves.end());
+   assertUnit(moves.find(Move("c2f5")) != moves.end());
+   assertUnit(moves.find(Move("c2g6")) != moves.end());
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white bishop
 }
 
 
@@ -92,7 +186,45 @@ void TestBishop::getMoves_slideToBlock()
  **************************************/
 void TestBishop::getMoves_slideToCapture()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(7, 7, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+
+   // col row??
+   set <Move> moves;
+
+   Black black1(PAWN);
+   board.board[3][0] = &black1;
+   Black black2(PAWN);
+   board.board[1][0] = &black2;
+   Black black3(PAWN);
+   board.board[0][3] = &black3;
+   Black black4(PAWN);
+   board.board[7][6] = &black4;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 9);  // No possible moves
+   
+   assertUnit(moves.find(Move("c2d1p")) != moves.end());
+   assertUnit(moves.find(Move("c2b1p")) != moves.end());
+   assertUnit(moves.find(Move("c2b3")) != moves.end());
+
+   assertUnit(moves.find(Move("c2a4p")) != moves.end());
+   assertUnit(moves.find(Move("c2d3")) != moves.end());
+   assertUnit(moves.find(Move("c2e4")) != moves.end());
+
+   assertUnit(moves.find(Move("c2f5")) != moves.end());
+   assertUnit(moves.find(Move("c2g6")) != moves.end());
+   assertUnit(moves.find(Move("c2h7p")) != moves.end());
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white bishop
 }
 
 
@@ -103,5 +235,13 @@ void TestBishop::getMoves_slideToCapture()
  **************************************/
 void TestBishop::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Bishop bishop(7, 7, false /*white*/);
+
+   // EXERCISE
+
+   // VERIFY
+   assertUnit(bishop.getType() == BISHOP);  // No possible moves
+   
+   // TEARDOWN
 }
