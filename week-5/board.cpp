@@ -42,7 +42,7 @@ void Board::reset(bool fFree)
 }
 
 // we really REALLY need to delete this.
-Space space(0,0);
+//Space space(0,0);
 
 /***********************************************
 * BOARD : GET
@@ -145,17 +145,15 @@ void Board::move(const Move & move)
 
    PieceType pt = board[srcCol][srcRow]->getType();
 
-   // TODO: space or nullptr
-   if (board[srcCol][srcRow] != nullptr)
-   {
-      board[srcCol][srcRow]->getMoves(moves, *this);
-      
-   }
+  // set last move before swapping
+   board[srcCol][srcRow]->setLastMove(getCurrentMove());
 
-   if (moves.find(Move(move)) != moves.end())
-   {
-      swap(src, dest);
-   }
+   // swap the pieces
+   swap(src, dest);
+   numMoves++;       
+
+   // attacking make sure you kill the piece.
+   // Does not handle and special movetypes.
    
   
 
@@ -167,8 +165,22 @@ void Board::swap(Position& pos1, Position& pos2)
    board[pos1.getCol()][pos1.getRow()]->setPosition(pos2);
    board[pos2.getCol()][pos2.getRow()]->setPosition(pos1);
 
-   // Swap the position on the board
    std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
+
+   // DOES NOT HANDLE ATTACKING
+
+   //// no capture
+   //if (board[pos2.getCol()][pos2.getRow()]->getType() == SPACE)
+   //{
+   //   // Swap the position on the board
+   //   std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
+   //}
+   //else // capture
+   //{
+   //   //board[pos1.getCol()][pos1.getRow()] = board[pos2.getCol()][pos2.getRow()];
+   //   //board[pos2.getCol()][pos2.getRow()]->
+   //}
+
 }
 
 

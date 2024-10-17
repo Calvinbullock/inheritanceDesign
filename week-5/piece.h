@@ -80,7 +80,7 @@ public:
    // overwritten by the various pieces
    virtual PieceType getType()                                    const = 0;
    virtual void display(ogstream * pgout)                         const = 0;
-   virtual void getMoves(set <Move> & moves, const Board & board) const;
+   virtual void getMoves(set <Move> & moves, const Board & board) const = 0;
 
 protected:
 
@@ -110,6 +110,8 @@ public:
    ~PieceDerived()                                                       { }
    PieceType getType()            const     { return SPACE;                }
    void display(ogstream* pgout)  const     { assert(false);               }
+   virtual void getMoves(set <Move>& moves, const Board& board) const { assert(false); }
+   
 };
 
 
@@ -148,6 +150,8 @@ public:
    void decrementNMoves()                { assert(false);               }
    const Position & getPosition()  const { assert(false); return position; }
    bool justMoved(int currentMove) const { assert(false); return true;  }
+   virtual void getMoves(set <Move>& moves, const Board& board) const { assert(false); }
+
 
    // setter
    void setLastMove(int currentMove)     { assert(false);               }

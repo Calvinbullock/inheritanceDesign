@@ -15,9 +15,6 @@
 #include "uiDraw.h"
 #include <cassert>      
 
-
-
-
 /*************************************
  * +---a-b-c-d-e-f-g-h---+
  * |                     |

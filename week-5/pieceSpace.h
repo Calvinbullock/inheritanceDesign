@@ -25,4 +25,6 @@ public:
    ~Space()                            {               }
    PieceType getType()           const { return SPACE; }
    void display(ogstream* pgout) const {               }
+   virtual void getMoves(set <Move>& moves, const Board& board) const { }
+
 };

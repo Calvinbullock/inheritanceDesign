@@ -31,12 +31,12 @@ const Piece & Piece::operator = (const Piece & rhs)
    return *this;
 }
 
-/************************************************
- * PIECE : GET MOVES
- * Iterate through the moves decorator to allow a piece to move
- ***********************************************/
-void Piece::getMoves(set <Move> & movesSet, const Board & board) const
-{
-   //assert false?? do we use this??
-}
+///************************************************
+// * PIECE : GET MOVES
+// * Iterate through the moves decorator to allow a piece to move
+// ***********************************************/
+//void Piece::getMoves(set <Move> & movesSet, const Board & board) const
+//{
+//   //assert false?? do we use this??
+//}
 
