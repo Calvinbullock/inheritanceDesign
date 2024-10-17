@@ -2,7 +2,7 @@
  * Source File:
  *    TEST ROOK
  * Author:
- *    <your name here>
+ *    Daniel Malasky
  * Summary:
  *    The unit tests for the rook
  ************************************************************************/
@@ -35,13 +35,13 @@ void TestRook::getMoves_blocked()
    BoardEmpty board;
    Rook rook(7, 7, false /*white*/);
    rook.fWhite = true;
-   rook.position.set(1, 2);
-   board.board[1][2] = &rook;
+   rook.position.set(2, 1);
+   board.board[2][1] = &rook;
 
    White white1(PAWN);
-   board.board[0][2] = &white1; // bottom
+   board.board[2][0] = &white1; // bottom
    White white2(PAWN);
-   board.board[1][3] = &white2; // right
+   board.board[3][1] = &white2; // right
    White white3(PAWN);
    board.board[2][2] = &white3; // top
    White white4(PAWN);
@@ -56,10 +56,10 @@ void TestRook::getMoves_blocked()
    assertUnit(moves.size() == 0);  // No possible moves
 
    // TEARDOWN
-   board.board[3][4] = nullptr; // white knight
+   board.board[4][3] = nullptr; // white knight
 
-   board.board[0][2] = nullptr;
-   board.board[1][3] = nullptr;
+   board.board[2][0] = nullptr;
+   board.board[3][1] = nullptr;
    board.board[2][2] = nullptr;
    board.board[1][1] = nullptr;
 
@@ -86,8 +86,8 @@ void TestRook::getMoves_slideToEnd()
    BoardEmpty board;
    Rook rook(7, 7, false /*white*/);
    rook.fWhite = true;
-   rook.position.set(1, 2);
-   board.board[1][2] = &rook;
+   rook.position.set(2, 1);
+   board.board[2][1] = &rook;
 
    set <Move> moves;
 
@@ -116,7 +116,7 @@ void TestRook::getMoves_slideToEnd()
    assertUnit(moves.find(Move("c2a2")) != moves.end());
 
    // TEARDOWN
-   board.board[3][4] = nullptr; // white knight
+   board.board[4][3] = nullptr; // white knight
 }
 
 
@@ -141,16 +141,16 @@ void TestRook::getMoves_slideToBlock()
    Rook rook(7, 7, false /*white*/);
    rook.fWhite = true;
    rook.position.set(1, 2);
-   board.board[1][2] = &rook;
+   board.board[2][1] = &rook;
 
    White white1(PAWN);
-   board.board[0][2] = &white1; // bottom
+   board.board[2][0] = &white1; // bottom
    White white2(PAWN);
-   board.board[1][7] = &white2; // right
+   board.board[7][1] = &white2; // right
    White white3(PAWN);
-   board.board[7][2] = &white3; // top
+   board.board[2][7] = &white3; // top
    White white4(PAWN);
-   board.board[1][0] = &white4; // left
+   board.board[0][1] = &white4; // left
 
    set <Move> moves;
 
@@ -174,12 +174,12 @@ void TestRook::getMoves_slideToBlock()
    assertUnit(moves.find(Move("c2b2")) != moves.end()); // move left
 
    // TEARDOWN
-   board.board[3][4] = nullptr; // white knight
+   board.board[4][3] = nullptr; // white knight
 
-   board.board[0][2] = nullptr;
-   board.board[1][7] = nullptr;
-   board.board[7][2] = nullptr;
-   board.board[1][0] = nullptr;
+   board.board[2][0] = nullptr;
+   board.board[7][1] = nullptr;
+   board.board[2][7] = nullptr;
+   board.board[0][1] = nullptr;
 }
 
 /*************************************
@@ -202,17 +202,17 @@ void TestRook::getMoves_slideToCapture()
    BoardEmpty board;
    Rook rook(7, 7, false /*white*/);
    rook.fWhite = true;
-   rook.position.set(1, 2);
-   board.board[1][2] = &rook;
+   rook.position.set(2, 1);
+   board.board[2][1] = &rook;
 
    Black black1(PAWN);
-   board.board[0][2] = &black1; // bottom
+   board.board[2][0] = &black1; // bottom
    Black black2(PAWN);
-   board.board[1][7] = &black2; // right
+   board.board[7][1] = &black2; // right
    Black black3(PAWN);
-   board.board[7][2] = &black3; // top
+   board.board[2][7] = &black3; // top
    Black black4(PAWN);
-   board.board[1][0] = &black4; // left
+   board.board[0][1] = &black4; // left
 
    set <Move> moves;
 
@@ -241,12 +241,12 @@ void TestRook::getMoves_slideToCapture()
    assertUnit(moves.find(Move("c2a2p")) != moves.end());
 
    // TEARDOWN
-   board.board[3][4] = nullptr; // white knight
+   board.board[4][3] = nullptr; // white knight
 
-   board.board[0][2] = nullptr;
-   board.board[1][7] = nullptr;
-   board.board[7][2] = nullptr;
-   board.board[1][0] = nullptr;
+   board.board[2][0] = nullptr;
+   board.board[7][1] = nullptr;
+   board.board[2][7] = nullptr;
+   board.board[0][1] = nullptr;
 }
 
 
