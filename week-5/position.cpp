@@ -9,39 +9,59 @@
 
 #include "position.h"
 
-/******************************************
- * POSITION INSERTION OPERATOR
- ******************************************/
-ostream & operator << (ostream & out, const Position & rhs)
+ /******************************************
+  * POSITION INSERTION OPERATOR
+  ******************************************/
+ostream& operator << (ostream& out, const Position& rhs)
 {
-   out << "error";
+   if (rhs.isValid())
+   {
+      out << (char)(rhs.getCol() + 'a')
+         << (char)(rhs.getRow() + '1');
+   }
+
+   else
+      out << "error";
    return out;
 }
 
 /*************************************
  * POSITION EXTRACTION OPERATOR
  **************************************/
-istream & operator >> (istream & in,  Position & rhs)
+istream& operator >> (istream& in, Position& rhs)
 {
-   return in;   
+   char text[3] = {};
+   in >> text[0] >> text[1];
+   if (in.fail())
+   {
+      in.clear();
+      in.ignore();
+      throw string("Error reading coordinates");
+   }
+   else
+   {
+      rhs = text;
+   }
+
+   return in;
 }
 
 /*************************************
  * POSITION ASSIGNMENT OPERATOR (CHAR)
  **************************************/
-const Position & Position::operator =  (const char     * rhs) 
+const Position& Position::operator =  (const char* rhs)
 {
    // convert char to string
    string rhsStr;
    rhsStr = (string)rhs;
 
-   return *this = rhsStr; 
+   return *this = rhsStr;
 }
 
 /*************************************
  * POSITION ASSIGNMENT OPERATOR (STRING)
  **************************************/
-const Position & Position::operator =  (const string   & rhs) 
+const Position& Position::operator =  (const string& rhs)
 {
    string::const_iterator it = rhs.cbegin();
 
@@ -53,22 +73,22 @@ const Position & Position::operator =  (const string   & rhs)
 
    setCol(col);
    setRow(row);
-   return *this; 
+   return *this;
 }
 
 /*************************************
- * POSITION COMPOUND ASSIGNMENT 
+ * POSITION COMPOUND ASSIGNMENT
  **************************************/
-const Position & Position::operator += (const Delta & rhs) 
-{ 
+const Position& Position::operator += (const Delta& rhs)
+{
    adjustRow(rhs.dRow);
    adjustCol(rhs.dCol);
-   if (!isValid()) 
+   if (!isValid())
    {
       colRow = 255;
       return *this;
    }
-   return *this; 
+   return *this;
 }
 
 /*************************************

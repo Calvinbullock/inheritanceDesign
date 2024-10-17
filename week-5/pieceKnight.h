@@ -22,6 +22,7 @@ public:
    Knight(int c, int r, bool isWhite) : Piece(c, r, true) { }
    ~Knight() {                }
    PieceType getType()            const { return KNIGHT; }
-   void getMoves(set <Move>& moves, const Board& board) const;
+   void getMoves(set <Move>& moves, const Board& board) const override;
+
    void display(ogstream* pgout)  const;
 };

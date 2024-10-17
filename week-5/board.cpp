@@ -134,7 +134,41 @@ void Board::assertBoard()
  *********************************************/
 void Board::move(const Move & move)
 {  
+   // TODO: do move count (and last move?)
+   set<Move> moves;
+
+   Position src = move.getSource();
+   Position dest = move.getDest();
+
+   int srcCol = move.getSource().getCol();
+   int srcRow = move.getSource().getRow();
+
+   PieceType pt = board[srcCol][srcRow]->getType();
+
+   // TODO: space or nullptr
+   if (board[srcCol][srcRow] != nullptr)
+   {
+      board[srcCol][srcRow]->getMoves(moves, *this);
+      
+   }
+
+   if (moves.find(Move(move)) != moves.end())
+   {
+      swap(src, dest);
+   }
    
+  
+
+}
+
+void Board::swap(Position& pos1, Position& pos2)
+{
+   // Swap the pieces position
+   board[pos1.getCol()][pos1.getRow()]->setPosition(pos2);
+   board[pos2.getCol()][pos2.getRow()]->setPosition(pos1);
+
+   // Swap the position on the board
+   std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
 }
 
 

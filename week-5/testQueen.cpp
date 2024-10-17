@@ -32,6 +32,7 @@
  **************************************/
 void TestQueen::getMoves_blocked()
 {
+   // TODO: finish test cases
    assertUnit(NOT_YET_IMPLEMENTED);
 }
 
@@ -100,34 +101,72 @@ void TestQueen::getMoves_slideToCapture()
    set <Move> moves;
 
    Black black1(PAWN);
-   board.board[3][0] = &black1;
+   board.board[1][0] = &black1;
    Black black2(PAWN);
-   board.board[1][0] = &black2;
+   board.board[2][0] = &black2;
    Black black3(PAWN);
-   board.board[0][3] = &black3;
+   board.board[3][0] = &black3;
    Black black4(PAWN);
-   board.board[7][6] = &black4;
+   board.board[7][1] = &black4;
+   Black black5(PAWN);
+   board.board[7][6] = &black5;
+   Black black6(PAWN);
+   board.board[2][7] = &black6;
+   Black black7(PAWN);
+   board.board[0][3] = &black7;
+   Black black8(PAWN);
+   board.board[0][1] = &black8;
+
 
    // EXERCISE
    queen.getMoves(moves, board);
 
    // VERIFY
-   assertUnit(moves.size() == 9);  // No possible moves
+   assertUnit(moves.size() == 23);  // No possible moves
    
-   assertUnit(moves.find(Move("c2d1p")) != moves.end());
-   assertUnit(moves.find(Move("c2b1p")) != moves.end());
-   assertUnit(moves.find(Move("c2b3")) != moves.end());
+   assertUnit(moves.find(Move("c2b1p")) != moves.end()); // bottom-left
 
-   assertUnit(moves.find(Move("c2a4p")) != moves.end());
-   assertUnit(moves.find(Move("c2d3")) != moves.end());
+   assertUnit(moves.find(Move("c2c1p")) != moves.end());  // down
+
+   assertUnit(moves.find(Move("c2d1p")) != moves.end());   // bottom right
+
+   assertUnit(moves.find(Move("c2d2")) != moves.end());   // right
+   assertUnit(moves.find(Move("c2e2")) != moves.end());
+   assertUnit(moves.find(Move("c2f2")) != moves.end());
+   assertUnit(moves.find(Move("c2g2")) != moves.end());
+   assertUnit(moves.find(Move("c2h2p")) != moves.end());
+   
+   
+   assertUnit(moves.find(Move("c2d3")) != moves.end());   // top-right
    assertUnit(moves.find(Move("c2e4")) != moves.end());
-
    assertUnit(moves.find(Move("c2f5")) != moves.end());
    assertUnit(moves.find(Move("c2g6")) != moves.end());
    assertUnit(moves.find(Move("c2h7p")) != moves.end());
 
+   assertUnit(moves.find(Move("c2c3")) != moves.end());   // top 
+   assertUnit(moves.find(Move("c2c4")) != moves.end());
+   assertUnit(moves.find(Move("c2c5")) != moves.end());
+   assertUnit(moves.find(Move("c2c6")) != moves.end());
+   assertUnit(moves.find(Move("c2c7")) != moves.end());
+   assertUnit(moves.find(Move("c2c8p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b3")) != moves.end());  // top-left
+   assertUnit(moves.find(Move("c2a4p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b2")) != moves.end());  // left
+   assertUnit(moves.find(Move("c2a2p")) != moves.end());
+
    // TEARDOWN
    board.board[2][1] = nullptr; // white bishop
+
+   board.board[1][0] = nullptr;
+   board.board[2][0] = nullptr;
+   board.board[3][0] = nullptr;
+   board.board[7][1] = nullptr;
+   board.board[7][6] = nullptr;
+   board.board[2][7] = nullptr;
+   board.board[0][3] = nullptr;
+   board.board[0][1] = nullptr;
 }
 
 
@@ -144,7 +183,7 @@ void TestQueen::getType()
    // EXERCISE
 
    // VERIFY
-   assertUnit(queen.getType() == BISHOP);  // No possible moves
+   assertUnit(queen.getType() == QUEEN);  // No possible moves
    
    // TEARDOWN
 }

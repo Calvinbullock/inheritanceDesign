@@ -20,6 +20,7 @@
  ***************************************************/
 void Knight::display(ogstream* pgout) const
 {
+   // TODO: Knight is always black??
    pgout->drawKnight(position, fWhite);
 }
 
@@ -53,8 +54,6 @@ void Knight::getMoves(set <Move>& moves, const Board& board) const
                   + newPos.getColRowText() 
                   + m.letterFromPieceType(pt);
          m = smithText;
-         /*std::cout << "L61 " << m.getText() << std::endl;*/
-         /*std::cout << "smith " << smith << std::endl;;*/
 
          // check if potential move is a space.
          if (board[newPos].getType() == SPACE)

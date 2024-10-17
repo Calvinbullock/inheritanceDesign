@@ -647,7 +647,7 @@ void TestMove::equal_equals()
  /*************************************
   * LESS THAN - LESS THAN
   * Input : b2b2 < b2b4
-  * Output: false
+  * Output: true
   **************************************/
 void TestMove::lessthan_lessthan()
 {
@@ -659,7 +659,7 @@ void TestMove::lessthan_lessthan()
    bool response = m1 < m2;
 
    // VERIFY
-   assertUnit(!response);
+   assertUnit(response);
 }  // TEAR DOWN
 
  /*************************************

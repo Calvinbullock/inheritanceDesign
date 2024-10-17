@@ -54,7 +54,7 @@ void TestBishop::getMoves_blocked()
    set <Move> moves;
 
    // EXERCISE
-   //bishop.getMoves(moves, board);
+   bishop.getMoves(moves, board);
 
    // VERIFY
    assertUnit(moves.size() == 0);  // No possible moves
@@ -95,7 +95,7 @@ void TestBishop::getMoves_slideToEnd()
    set <Move> moves;
 
    // EXERCISE
-   //bishop.getMoves(moves, board);
+   bishop.getMoves(moves, board);
 
    // VERIFY
    assertUnit(moves.size() == 9);  // No possible moves
@@ -154,7 +154,7 @@ void TestBishop::getMoves_slideToBlock()
    set <Move> moves;
 
    // EXERCISE
-   //bishop.getMoves(moves, board);
+   bishop.getMoves(moves, board);
 
    // VERIFY
    assertUnit(moves.size() == 5);  // No possible moves
@@ -206,7 +206,7 @@ void TestBishop::getMoves_slideToCapture()
    board.board[7][6] = &black4;
 
    // EXERCISE
-   //bishop.getMoves(moves, board);
+   bishop.getMoves(moves, board);
 
    // VERIFY
    assertUnit(moves.size() == 9);  // No possible moves
@@ -239,6 +239,7 @@ void TestBishop::getType()
    Bishop bishop(7, 7, false /*white*/);
 
    // EXERCISE
+
 
    // VERIFY
    assertUnit(bishop.getType() == BISHOP);  // No possible moves

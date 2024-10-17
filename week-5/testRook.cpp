@@ -140,7 +140,7 @@ void TestRook::getMoves_slideToBlock()
    BoardEmpty board;
    Rook rook(7, 7, false /*white*/);
    rook.fWhite = true;
-   rook.position.set(1, 2);
+   rook.position.set(2, 1);
    board.board[2][1] = &rook;
 
    White white1(PAWN);
@@ -265,5 +265,5 @@ void TestRook::getType()
    pt = rook.getType();
 
    // VERIFY
-   assertUnit(pt == KNIGHT);
+   assertUnit(pt == ROOK);
 }  // TEARDOWN
