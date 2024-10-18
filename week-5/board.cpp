@@ -8,6 +8,10 @@
  ************************************************************************/
 
 #include "board.h"
+#include "pieceBishop.h"
+#include "pieceKing.h"
+#include "pieceQueen.h"
+#include "pieceRook.h"
 #include "uiDraw.h"
 #include "position.h"
 #include "piece.h"
@@ -87,15 +91,49 @@ void Board::display(const Position & posHover, const Position & posSelect) const
  ************************************************/
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
 {
-   Knight* knightW1 = new Knight(1, 0, true /*white*/);
-   board[1][0] = knightW1;
-   Knight* knightW2 = new Knight(6, 0, true /*white*/);
-   board[6][0] = knightW2;
+   // white
+   Rook*    rookW1      = new Rook(0, 0, true);
+   Knight*  knightW1    = new Knight(1, 0, true);
+   Bishop*  bishopeW1   = new Bishop(2, 0, true);
+   King*    kingW       = new King(3, 0, true);
+   Queen*   queenW      = new Queen(4, 0, true);
+   Bishop*  bishopW2    = new Bishop(5, 0, true);
+   Knight*  knightW2    = new Knight(6, 0, true);
+   Rook*    rookW2      = new Rook(7, 0, true);
 
-   Knight* knightB1 = new Knight(1, 7, false /*Black*/);
+   board[0][0] = rookW1;
+   board[1][0] = knightW1;
+   board[2][0] = bishopeW1;
+   board[3][0] = kingW;
+
+   board[4][0] = queenW;
+   board[5][0] = bishopW2 ;
+   board[6][0] = knightW2;
+   board[7][0] = rookW2;
+
+   //loop for pawns
+
+   // black
+   Rook*    rookB1      = new Rook(0, 7, false);
+   Knight*  knightB1    = new Knight(1, 7, false);
+   Bishop*  bishopeB1   = new Bishop(2, 7, false);
+   King*    kingB       = new King(3, 7, false);
+   Queen*   queenB      = new Queen(4, 7, false);
+   Bishop*  bishopB2    = new Bishop(5, 7, false);
+   Knight*  knightB2    = new Knight(6, 7, false);
+   Rook*    rookB2      = new Rook(7, 7, false);
+
+   board[0][7] = rookB1;
    board[1][7] = knightB1;
-   Knight* knightB2 = new Knight(6, 7, false /*Black*/);
+   board[2][7] = bishopeB1;
+   board[3][7] = kingB;
+
+   board[4][7] = queenB;
+   board[5][7] = bishopB2 ;
    board[6][7] = knightB2;
+   board[7][7] = rookB2;
+
+   //loop for pawns
 }
 
 /************************************************
