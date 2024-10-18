@@ -28,10 +28,10 @@ public:
       getMoves_capture();
       getMoves_free();
       getMoves_end();
-      getMoves_whiteCastle();
-      getMoves_blackCastle();
-      getMoves_whiteCastleKingMoved();
-      getMoves_whiteCastleRookMoved();
+      //getMoves_whiteCastle();
+      //getMoves_blackCastle();
+      //getMoves_whiteCastleKingMoved();
+      //getMoves_whiteCastleRookMoved();
 
       getType();
 
