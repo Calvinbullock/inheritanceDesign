@@ -191,8 +191,10 @@ void Board::move(const Move & move)
    int srcCol = move.getSource().getCol();
    int srcRow = move.getSource().getRow();
 
-  // set last move before swapping
-   board[srcCol][srcRow]->setLastMove(getCurrentMove());
+   // set last move before swapping
+   assert(board[srcCol][srcRow] != nullptr);
+   assert(board[dest.getCol()][dest.getRow()] != nullptr);
+   board[srcCol][srcRow]->setLastMove(getCurrentMove()); // BUG: seg fault
 
    // swap the pieces
    swap(src, dest);

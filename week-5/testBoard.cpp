@@ -2,7 +2,7 @@
  * Source File:
  *    TEST BOARD
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for board
  ************************************************************************/
@@ -619,8 +619,39 @@ void TestBoard::move_knightAttack()
   * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
   ********************************************************/
 void TestBoard::move_pawnSimple()
-{
+{  // SETUP
    assertUnit(NOT_YET_IMPLEMENTED);
+   return;
+
+   Move move;
+   move.source.set(0, 1);
+   move.dest.set(0, 2);
+   move.promote = SPACE;
+   move.isWhite = true;
+   move.moveType = Move::MOVE;
+
+   Board board(nullptr, true /*noreset*/);
+   board.numMoves = 17;
+   board.board[0][1] = new PieceSpy(0, 1, true  /*isWhite*/, PAWN);
+   board.board[0][1]->nMoves = 17;
+   PieceSpy::reset();
+
+   // EXERCISE
+   board.move(move); // BUG: SEG FAULTS
+
+   // VERIFY
+   assertUnit(18 == board.numMoves);
+   assertUnit(PAWN == (board.board[0][2])->getType());
+   assertUnit(SPACE  == (board.board[0][1])->getType());
+   assertUnit(PieceSpy::numConstruct == 0);
+   assertUnit(PieceSpy::numCopy == 0);
+   assertUnit(PieceSpy::numDelete == 0);
+   assertUnit(PieceSpy::numAssign == 0);
+   assertUnit(PieceSpy::numMove == 0);
+
+   // TEARDOWN
+   delete board.board[0][2];
+   board.board[0][2] = nullptr;
 }
 
 
@@ -725,7 +756,36 @@ void TestBoard::move_pawnPromotion()
   ********************************************************/
 void TestBoard::move_rookSlide()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   Move move;
+   move.source.set(4, 4);
+   move.dest.set(0, 4);
+   move.promote = SPACE;
+   move.isWhite = true;
+   move.moveType = Move::MOVE;
+
+   Board board(nullptr, true /*noreset*/);
+   board.numMoves = 17;
+   board.board[4][4] = new PieceSpy(4, 4, true  /*isWhite*/, ROOK);
+   board.board[0][4] = new PieceSpy(0, 4, true  /*isWhite*/, SPACE);
+   board.board[4][4]->nMoves = 17;
+   PieceSpy::reset();
+
+   // EXERCISE
+   board.move(move); // BUG: seg fault
+
+   // VERIFY
+   assertUnit(18 == board.numMoves);
+   assertUnit(ROOK == (board.board[0][5])->getType());
+   assertUnit(SPACE  == (board.board[4][4])->getType());
+   assertUnit(PieceSpy::numConstruct == 0);
+   assertUnit(PieceSpy::numCopy == 0);
+   assertUnit(PieceSpy::numDelete == 0);
+   assertUnit(PieceSpy::numAssign == 0);
+   assertUnit(PieceSpy::numMove == 0);
+
+   // TEARDOWN
+   delete board.board[0][2];
+   board.board[4][4] = nullptr;
 }
 
 

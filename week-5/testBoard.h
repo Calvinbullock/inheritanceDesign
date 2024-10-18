@@ -39,23 +39,23 @@ public:
       move_knightMove();
       move_knightAttack();
 
-      //move_pawnSimple();
-      //move_pawnCapture();
-      //move_pawnDouble();
-      //move_pawnEnpassant();
-      //move_pawnPromotion();
+      /*move_pawnSimple();*/
+      /*move_pawnCapture();*/
+      /*move_pawnDouble();*/
+      /*move_pawnEnpassant();*/
+      /*move_pawnPromotion();*/
       //move_rookSlide();
-      //move_rookAttack();
-      //move_bishopSlide();
-      //move_bishopAttack();
-      //move_knightMove();
-      //move_knightAttack();
-      //move_queenSlide();
-      //move_queenAttack();
-      //move_kingMove();
-      //move_kingAttack();
-      //move_kingShortCastle();
-      //move_kingLongCastle();
+      /*move_rookAttack();*/
+      /*move_bishopSlide();*/
+      /*move_bishopAttack();*/
+      /*move_knightMove();*/
+      /*move_knightAttack();*/
+      /*move_queenSlide();*/
+      /*move_queenAttack();*/
+      /*move_kingMove();*/
+      /*move_kingAttack();*/
+      /*move_kingShortCastle();*/
+      /*move_kingLongCastle();*/
 
       // Get Current Move
       getCurrentMove_initial();
