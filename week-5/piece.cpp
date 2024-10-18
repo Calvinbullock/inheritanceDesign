@@ -10,13 +10,30 @@
 
 #include "position.h"  // for POSITION
 #include "piece.h"     // for all the PIECE class definitions
-#include "pieceSpace.h"
-#include "pieceKnight.h"
 #include "board.h"     // for BOARD
 #include "uiDraw.h"    // for draw*()
 #include <cassert>     // because we are paranoid
 using namespace std;
 
+
+/************************************************
+ * PIECE : Constructor
+ ***********************************************/
+Piece::Piece(const Position & pos, bool isWhite)   
+{ 
+   position = pos; 
+   fWhite = isWhite; 
+}
+
+/************************************************
+ * PIECE : Constructor
+ ***********************************************/
+Piece::Piece(int c, int r, bool isWhite) 
+{ 
+   position.setCol(c); 
+   position.setRow(r); 
+   fWhite = isWhite; 
+}
 
 /************************************************
  * PIECE : ASSIGN
