@@ -2,7 +2,7 @@
  * Source File:
  *    TEST PAWN
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the pawn
  ************************************************************************/
@@ -10,6 +10,7 @@
 #include "testPawn.h"
 #include "piecePawn.h"     
 #include "board.h"
+#include "pieceType.h"
 #include "uiDraw.h"
 #include <cassert>      
 
@@ -34,7 +35,22 @@
   **************************************/
 void TestPawn::getMoves_simpleWhite()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(1, 3, true/*white*/);
+   board.board[1][3] = &pawn;
+
+   set <Move> moves;
+
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 1); // all moves open
+   assertUnit(moves.find(Move("b4b5")) != moves.end());
+
+   // TEARDOWN
+   board.board[1][3] = nullptr; // pawn
 }
 
 /*************************************
@@ -56,7 +72,22 @@ void TestPawn::getMoves_simpleWhite()
  **************************************/
 void TestPawn::getMoves_simpleBlack()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(1, 3, false/*white*/);
+   board.board[1][3] = &pawn;
+
+   set <Move> moves;
+
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 1); // all moves open
+   assertUnit(moves.find(Move("b4b3")) != moves.end());
+
+   // TEARDOWN
+   board.board[1][3] = nullptr; // pawn
 }
 
 
@@ -192,7 +223,31 @@ void TestPawn::getMoves_enpassantWhite()
  **************************************/
 void TestPawn::getMoves_enpassantBlack()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(5, 3, false/*black*/);
+   board.board[5][3] = &pawn;
+
+   set <Move> moves;
+
+   Pawn pawn1(6, 3, true/*white*/);
+   board.board[6][3] = &pawn1;
+   Pawn pawn2(4, 3, true/*white*/);
+   board.board[4][3] = &pawn2;
+
+   White white1(PAWN);
+   board.board[5][2] = &white1; // bottom
+   
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 2); // all moves open
+   assertUnit(moves.find(Move("f4g3E")) != moves.end());
+   assertUnit(moves.find(Move("f4e3E")) != moves.end());
+
+   // TEARDOWN
+   board.board[1][3] = nullptr; // pawn
 }
 
 /*************************************
@@ -248,6 +303,14 @@ void TestPawn::getMoves_promotionBlack()
  **************************************/
 void TestPawn::getType()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   Pawn pawn(7, 7, false /*white*/);
+
+   // EXERCISE
+
+   // VERIFY
+   assertUnit(pawn.getType() == PAWN);
+
+   // TEARDOWN
 }
 

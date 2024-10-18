@@ -33,7 +33,6 @@
  **************************************/
 void TestKing::getMoves_blocked()
 {
-{
    // SETUP
    BoardEmpty board;
    King king(7, 7, false /*white*/);
@@ -77,7 +76,6 @@ void TestKing::getMoves_blocked()
    board.board[2][4] = nullptr;
    board.board[2][5] = nullptr;
    board.board[3][5] = nullptr;
-}
 }
 
 /*************************************

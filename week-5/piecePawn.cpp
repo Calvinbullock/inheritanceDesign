@@ -29,6 +29,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
    };
    
    Position newPos;
+   Move m;
 
    // black pawn
    if (!this->fWhite)
@@ -40,9 +41,8 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       if (newPos.isValid())
       {
          // starting row and has not moved
-         if (this->position.getRow() == 6 && !this->isMoved())
+         if (this->position.getRow() == 6 && this->isMoved())
          {
-            Move m;
             m = this->position.getColRowText()     // src
                + newPos.getColRowText();           // dest
 
@@ -58,19 +58,42 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       // valid move
       if (newPos.isValid())
       {
-         Move m;
          m = this->position.getColRowText()     // src
             + newPos.getColRowText();           // dest
 
          // check if potential move is a space.
-         if (board[this->position].getType() == SPACE)
+         if (board[newPos].getType() == SPACE)
          {
             moves.insert(m); //insert a possible move.
          }
-         
+      }
+      
+      Position pawnRight = Position(this->position.getCol() + 1, this->position.getRow());
+      Position pawnLeft  = Position(this->position.getCol() - 1, this->position.getRow());
+      Position spaceRight = Position(this->position.getCol() + 1, this->position.getRow() - 1);
+      Position spaceLeft  = Position(this->position.getCol() - 1, this->position.getRow() - 1);
+
+      if (this->position.getRow() == 4) // en-passont
+      {
+         if (board[pawnRight].getType() == PAWN && 
+               board[pawnRight].justMoved(board.getCurrentMove()) &&
+               board[pawnLeft].isWhite())
+         {
+            m = this->position.getColRowText() // src
+               + spaceRight.getColRowText() + (string)"E";   // dest
+            moves.insert(m);
+         }
+         if (board[pawnLeft].getType() == PAWN && 
+               board[pawnLeft].justMoved(board.getCurrentMove()) && 
+               board[pawnLeft].isWhite())
+         {
+
+            m = this->position.getColRowText() // src
+               + spaceLeft.getColRowText() + (string)"E";   // dest
+            moves.insert(m);
+         }
       }
    }
-
 }
 
 void Pawn::display(ogstream* pgout) const
