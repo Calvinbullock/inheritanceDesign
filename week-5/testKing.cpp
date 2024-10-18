@@ -14,6 +14,7 @@
 #include "board.h"
 #include "uiDraw.h"
 #include <cassert>      
+#include <iostream>
 
 // TODO: Reverse all rows and columns
 
@@ -254,14 +255,13 @@ void TestKing::getMoves_whiteCastle()
    BoardEmpty board;
    King king(7, 7, false /*white*/);
    king.fWhite = true;
+   king.nMoves= 0;
    king.position.set(4, 0);
    board.board[4][0] = &king;
    Rook rook1(0, 0, true);
    board.board[0][0] = &rook1;
    Rook rook2(7, 0, true);
    board.board[7][0] = &rook2;
-
-
 
    set <Move> moves;
 
@@ -286,6 +286,8 @@ void TestKing::getMoves_whiteCastle()
 
    // TEARDOWN
    board.board[4][0] = nullptr; // king
+   board.board[0][0] = nullptr; 
+   board.board[7][0] = nullptr;
 
    board.board[3][1] = nullptr;
    board.board[4][1] = nullptr;
@@ -309,7 +311,44 @@ void TestKing::getMoves_whiteCastle()
  **************************************/
 void TestKing::getMoves_blackCastle()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(4, 7, false/*white*/);
+   board.board[4][7] = &king;
+   Rook rook1(0, 7, false);
+   board.board[0][7] = &rook1;
+   Rook rook2(7, 7, false);
+   board.board[7][7] = &rook2;
+
+   set <Move> moves;
+
+   Black pBlack1(PAWN);
+   board.board[3][6] = &pBlack1;
+   Black pBlack2(PAWN);
+   board.board[4][6] = &pBlack2;
+   Black pBalck3(PAWN);
+   board.board[5][6] = &pBalck3;
+
+   // EXERCISE
+   king.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 4); // all moves open
+
+   assertUnit(moves.find(Move("e8g8c")) != moves.end()); // castleing
+   assertUnit(moves.find(Move("e8c8C")) != moves.end());
+
+   assertUnit(moves.find(Move("e8f8")) != moves.end());
+   assertUnit(moves.find(Move("e8d8")) != moves.end());
+
+   // TEARDOWN
+   board.board[4][7] = nullptr; // king
+   board.board[0][7] = nullptr;
+   board.board[7][7] = nullptr;
+
+   board.board[3][6] = nullptr;
+   board.board[4][6] = nullptr;
+   board.board[5][6] = nullptr;
 }
 
 
@@ -329,7 +368,43 @@ void TestKing::getMoves_blackCastle()
  **************************************/
 void TestKing::getMoves_whiteCastleKingMoved()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(7, 7, true/*white*/);
+   king.nMoves = 3;
+   king.position.set(4, 0);
+   board.board[4][0] = &king;
+   Rook rook1(0, 0, true);
+   board.board[0][0] = &rook1;
+   Rook rook2(7, 0, true);
+   board.board[7][0] = &rook2;
+
+   set <Move> moves;
+
+   White pWhite1(PAWN);
+   board.board[3][1] = &pWhite1;
+   White pWhite2(PAWN);
+   board.board[4][1] = &pWhite2;
+   White pWhite3(PAWN);
+   board.board[5][1] = &pWhite3;
+
+   // EXERCISE
+   king.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 2); // all moves open
+
+   assertUnit(moves.find(Move("e1d1")) != moves.end());
+   assertUnit(moves.find(Move("e1f1")) != moves.end());
+
+   // TEARDOWN
+   board.board[4][0] = nullptr; // king
+   board.board[0][0] = nullptr; 
+   board.board[7][0] = nullptr;
+
+   board.board[3][1] = nullptr;
+   board.board[4][1] = nullptr;
+   board.board[5][1] = nullptr;
 }
 
 
@@ -349,7 +424,49 @@ void TestKing::getMoves_whiteCastleKingMoved()
  **************************************/
 void TestKing::getMoves_whiteCastleRookMoved()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(7, 7, true/*white*/);
+   king.nMoves = 3;
+   king.position.set(4, 0);
+   board.board[4][0] = &king;
+
+   Rook rook1(0, 0, true);
+   rook1.nMoves = 3;
+   board.board[0][0] = &rook1;
+   Rook rook2(7, 0, true);
+   rook2.nMoves = 3;
+   board.board[7][0] = &rook2;
+
+   set <Move> moves;
+
+   White pWhite1(PAWN);
+   board.board[3][1] = &pWhite1;
+   White pWhite2(PAWN);
+   board.board[4][1] = &pWhite2;
+   White pWhite3(PAWN);
+   board.board[5][1] = &pWhite3;
+
+   // EXERCISE
+   //std::cout << "-----" << std::endl;
+   king.getMoves(moves, board);
+
+   // VERIFY
+   //std::cout << "-----" << std::endl;
+   //std::cout << moves.size() << std::endl;
+   assertUnit(moves.size() == 2); // all moves open
+
+   assertUnit(moves.find(Move("e1d1")) != moves.end());
+   assertUnit(moves.find(Move("e1f1")) != moves.end());
+
+   // TEARDOWN
+   board.board[4][0] = nullptr; // king
+   board.board[0][0] = nullptr; 
+   board.board[7][0] = nullptr;
+
+   board.board[3][1] = nullptr;
+   board.board[4][1] = nullptr;
+   board.board[5][1] = nullptr;
 }
 
 /*************************************
