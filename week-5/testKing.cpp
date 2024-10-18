@@ -251,7 +251,40 @@ void TestKing::getMoves_end()
  **************************************/
 void TestKing::getMoves_whiteCastle()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   King king(7, 7, false /*white*/);
+   king.fWhite = true;
+   king.position.set(4, 0);
+   board.board[4][0] = &king;
+
+   set <Move> moves;
+
+   White white1(PAWN);
+   board.board[3][1] = &white1;
+   White white2(PAWN);
+   board.board[4][1] = &white2;
+   White white3(PAWN);
+   board.board[5][1] = &white3;
+
+   // EXERCISE
+   king.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 4); // all moves open
+
+   assertUnit(moves.find(Move("e1d1")) != moves.end());
+   assertUnit(moves.find(Move("e1f1")) != moves.end());
+
+   assertUnit(moves.find(Move("e1g1c")) != moves.end());
+   assertUnit(moves.find(Move("e1c1C")) != moves.end());
+
+   // TEARDOWN
+   board.board[4][0] = nullptr; // king
+
+   board.board[3][1] = nullptr;
+   board.board[4][1] = nullptr;
+   board.board[5][1] = nullptr;
 }
 
 
