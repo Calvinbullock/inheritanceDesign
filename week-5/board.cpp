@@ -12,6 +12,7 @@
 #include "pieceKing.h"
 #include "pieceQueen.h"
 #include "pieceRook.h"
+#include "piecePawn.h"
 #include "uiDraw.h"
 #include "position.h"
 #include "piece.h"
@@ -92,48 +93,36 @@ void Board::display(const Position & posHover, const Position & posSelect) const
 Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
 {
    // white
-   Rook*    rookW1      = new Rook(0, 0, true);
-   Knight*  knightW1    = new Knight(1, 0, true);
-   Bishop*  bishopeW1   = new Bishop(2, 0, true);
-   Queen*   queenW      = new Queen(3, 0, true);
-   King*    kingW       = new King(4, 0, true);
-   Bishop*  bishopW2    = new Bishop(5, 0, true);
-   Knight*  knightW2    = new Knight(6, 0, true);
-   Rook*    rookW2      = new Rook(7, 0, true);
+   board[0][0] = new Rook(0, 0, true);
+   board[1][0] = new Knight(1, 0, true);
+   board[2][0] = new Bishop(2, 0, true);
+   board[3][0] = new Queen(3, 0, true);
 
-   board[0][0] = rookW1;
-   board[1][0] = knightW1;
-   board[2][0] = bishopeW1;
-   board[3][0] = queenW;
-
-   board[4][0] = kingW;
-   board[5][0] = bishopW2 ;
-   board[6][0] = knightW2;
-   board[7][0] = rookW2;
-
-   //loop for pawns
+   board[4][0] = new King(4, 0, true);
+   board[5][0] = new Bishop(5, 0, true);
+   board[6][0] = new Knight(6, 0, true);
+   board[7][0] = new Rook(7, 0, true);
+   
+   // pawns
+   for (int i = 0; i < 8; i++) {
+      board[i][1] = new Pawn(i, 1, true);
+   }
 
    // black
-   Rook*    rookB1      = new Rook(0, 7, false);
-   Knight*  knightB1    = new Knight(1, 7, false);
-   Bishop*  bishopeB1   = new Bishop(2, 7, false);
-   Queen*   queenB      = new Queen(3, 7, false);
-   King*    kingB       = new King(4, 7, false);
-   Bishop*  bishopB2    = new Bishop(5, 7, false);
-   Knight*  knightB2    = new Knight(6, 7, false);
-   Rook*    rookB2      = new Rook(7, 7, false);
+   board[0][7] = new Rook(0, 7, false);
+   board[1][7] = new Knight(1, 7, false);
+   board[2][7] = new Bishop(2, 7, false);
+   board[3][7] = new Queen(3, 7, false);
 
-   board[0][7] = rookB1;
-   board[1][7] = knightB1;
-   board[2][7] = bishopeB1;
-   board[3][7] = queenB;
+   board[4][7] = new King(4, 7, false);
+   board[5][7] = new Bishop(5, 7, false);
+   board[6][7] = new Knight(6, 7, false);
+   board[7][7] = new Rook(7, 7, false);
 
-   board[4][7] = kingB;
-   board[5][7] = bishopB2 ;
-   board[6][7] = knightB2;
-   board[7][7] = rookB2;
-
-   //loop for pawns
+   // pawns
+   for (int i = 0; i < 8; i++) {
+      board[i][6] = new Pawn(i, 6, false);
+   }
 }
 
 Board::~Board()
