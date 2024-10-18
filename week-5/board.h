@@ -43,7 +43,7 @@ public:
 
    // create and destroy the board
    Board(ogstream* pgout = nullptr, bool noreset = false);
-   virtual ~Board()   {  }
+   virtual ~Board();
 
    // getters
    virtual int  getCurrentMove() const { return numMoves; }

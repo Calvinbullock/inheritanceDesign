@@ -136,6 +136,19 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    //loop for pawns
 }
 
+Board::~Board()
+{
+   //for (int col = 0; col < 8; ++col)
+   //{
+   //   for (int row = 0; row < 8; ++row)
+   //   {
+   //      // Access the piece at board[col][row]
+   //      delete board[col][row];
+   //      board[col][row] = nullptr; 
+   //   }
+   //}
+}
+
 /************************************************
  * BOARD : FREE
  *         Free up all the allocated memory
@@ -209,8 +222,7 @@ void Board::swap(Position& pos1, Position& pos2)
    else // capture
    {
       std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
-      delete board[pos1.getCol()][pos1.getRow()];
-      board[pos1.getCol()][pos1.getRow()] = nullptr;
+      board[pos1.getCol()][pos1.getRow()] = new Space(pos1.getCol(), pos1.getRow());
    }
 
 }
