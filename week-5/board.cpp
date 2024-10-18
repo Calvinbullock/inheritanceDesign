@@ -95,8 +95,8 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    Rook*    rookW1      = new Rook(0, 0, true);
    Knight*  knightW1    = new Knight(1, 0, true);
    Bishop*  bishopeW1   = new Bishop(2, 0, true);
-   King*    kingW       = new King(3, 0, true);
-   Queen*   queenW      = new Queen(4, 0, true);
+   Queen*   queenW      = new Queen(3, 0, true);
+   King*    kingW       = new King(4, 0, true);
    Bishop*  bishopW2    = new Bishop(5, 0, true);
    Knight*  knightW2    = new Knight(6, 0, true);
    Rook*    rookW2      = new Rook(7, 0, true);
@@ -104,9 +104,9 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    board[0][0] = rookW1;
    board[1][0] = knightW1;
    board[2][0] = bishopeW1;
-   board[3][0] = kingW;
+   board[3][0] = queenW;
 
-   board[4][0] = queenW;
+   board[4][0] = kingW;
    board[5][0] = bishopW2 ;
    board[6][0] = knightW2;
    board[7][0] = rookW2;
@@ -117,8 +117,8 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    Rook*    rookB1      = new Rook(0, 7, false);
    Knight*  knightB1    = new Knight(1, 7, false);
    Bishop*  bishopeB1   = new Bishop(2, 7, false);
-   King*    kingB       = new King(3, 7, false);
-   Queen*   queenB      = new Queen(4, 7, false);
+   Queen*   queenB      = new Queen(3, 7, false);
+   King*    kingB       = new King(4, 7, false);
    Bishop*  bishopB2    = new Bishop(5, 7, false);
    Knight*  knightB2    = new Knight(6, 7, false);
    Rook*    rookB2      = new Rook(7, 7, false);
@@ -126,9 +126,9 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    board[0][7] = rookB1;
    board[1][7] = knightB1;
    board[2][7] = bishopeB1;
-   board[3][7] = kingB;
+   board[3][7] = queenB;
 
-   board[4][7] = queenB;
+   board[4][7] = kingB;
    board[5][7] = bishopB2 ;
    board[6][7] = knightB2;
    board[7][7] = rookB2;
@@ -213,7 +213,6 @@ void Board::swap(Position& pos1, Position& pos2)
    // DOES NOT HANDLE ATTACKING
 
    //// no capture
-   std::cout << board[pos2.getCol()][pos2.getRow()]->getType() << endl;
    if (board[pos2.getCol()][pos2.getRow()]->getType() == SPACE)
    {
       // Swap the position on the board
