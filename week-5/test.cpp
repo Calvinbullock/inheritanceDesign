@@ -61,7 +61,7 @@ void testRunner()
    TestKnight().run();
    TestBishop().run(); 
    TestKing().run(); 
-   //TestPawn().run();
+   TestPawn().run();
    TestQueen().run();
    TestRook().run();
 }
