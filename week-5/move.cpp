@@ -109,7 +109,7 @@ void Move::read(string moveText)
 
    if (moveText.length() == 5)
    {  
-      switch (moveText[4])
+      switch (moveText[4]) // set moveType
       {
       case 'p':   // capture a pawn
       case 'n':   // capture a knight
@@ -129,14 +129,19 @@ void Move::read(string moveText)
       case 'c':
          moveType = CASTLE_KING;
          break;
-      case 'N':  // Promote to knight
-      case 'B':  // Promote to Bishop
-      case 'R':  // Promote to Rook
-      case 'Q':  // Promote to Queen
-         promote = pieceTypeFromLetter(moveText[4]);
+      case 'Q': // only promote to queen
+         moveType = PROMOTION;
+         promote = QUEEN;
+         break;
       default:
          moveType = MOVE_ERROR;
       }
+   }
+   else if (moveText.length() > 5)
+   {
+      // case 'rQ':
+      capture = pieceTypeFromLetter(moveText[4]);
+      moveType = PROMOTION;
    }
 }
 
@@ -179,7 +184,11 @@ string Move::getText()
       case CASTLE_KING:
          moveText.push_back('c');
          break;
+      case PROMOTION: 
+         moveText.push_back('Q'); // only promote to queen
+         break;
       }
+      
    }
    return moveText;
 }

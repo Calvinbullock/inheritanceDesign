@@ -786,7 +786,7 @@ void TestBoard::move_pawnEnpassant()
   *    a7a8Q 
   * +---a-b-c-d-e-f-g-h---+       +---a-b-c-d-e-f-g-h---+
   * |                     |       |                     |
-  * 8   .                 8       8  (r)                8
+  * 8   .                 8       8  (q)                8
   * 7  (p)                7       7   .                 7
   * 6                     6       6                     6
   * 5                     5       5                     5

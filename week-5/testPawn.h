@@ -21,16 +21,16 @@ public:
 
    void run()
    {
-      getMoves_simpleWhite();
-      getMoves_simpleBlack();
-      getMoves_initialAdvanceWhite();
-      getMoves_initialAdvanceBlack();
-      getMoves_captureWhite();
-      getMoves_captureBlack();
+      //getMoves_simpleWhite();
+      //getMoves_simpleBlack();
+      //getMoves_initialAdvanceWhite();
+      //getMoves_initialAdvanceBlack();
+      //getMoves_captureWhite();
+      //getMoves_captureBlack();
       //getMoves_enpassantWhite();
-      getMoves_enpassantBlack();
-      getMoves_promotionWhite();
-      //getMoves_promotionBlack();
+      //getMoves_enpassantBlack();
+      //getMoves_promotionWhite();
+      getMoves_promotionBlack();
 
       getType();
 

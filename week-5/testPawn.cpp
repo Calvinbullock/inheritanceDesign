@@ -286,7 +286,38 @@ void TestPawn::getMoves_captureBlack()
  **************************************/
 void TestPawn::getMoves_enpassantWhite()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(1, 4, true/*white*/);
+   board.board[1][4] = &pawn;
+   board.moveNumber = 17;
+
+   set <Move> moves;
+
+   Pawn pawn1(0, 4, false/*black*/); // left pawn
+   board.board[0][4] = &pawn1;
+   board.board[0][4]->lastMove = 16;
+
+   Pawn pawn2(2, 4, false/*black*/); // right pawn
+   board.board[2][4] = &pawn2;
+   board.board[2][4]->lastMove = 16;
+
+   Black black1(PAWN);
+   board.board[1][5] = &black1; // Top
+
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 2); // all moves open
+   assertUnit(moves.find(Move("b5a6E")) != moves.end());
+   assertUnit(moves.find(Move("b5c6E")) != moves.end());
+
+   // TEARDOWN
+   board.board[1][4] = nullptr; // pawn
+   board.board[0][4] = nullptr; // pawn
+   board.board[2][4] = nullptr; // pawn
+   board.board[1][5] = nullptr; // pawn
 }
 
 
@@ -313,16 +344,17 @@ void TestPawn::getMoves_enpassantBlack()
    BoardEmpty board;
    Pawn pawn(5, 3, false/*black*/);
    board.board[5][3] = &pawn;
+   board.moveNumber = 17;
 
    set <Move> moves;
 
-   Pawn pawn1(6, 3, true/*white*/);
-   board.board[6][3] = &pawn1;
-   pawn1.setLastMove(board.getCurrentMove());
-   Pawn pawn2(4, 3, true/*white*/);
+   Pawn pawn2(4, 3, true/*white*/); // left pawn
    board.board[4][3] = &pawn2;
-   pawn1.setLastMove(board.getCurrentMove());
+   board.board[4][3]->lastMove = 16;
 
+   Pawn pawn1(6, 3, true/*white*/); // right pawn
+   board.board[6][3] = &pawn1;
+   board.board[6][3]->lastMove = 16;
 
    White white1(PAWN);
    board.board[5][2] = &white1; // bottom
@@ -336,12 +368,16 @@ void TestPawn::getMoves_enpassantBlack()
    assertUnit(moves.find(Move("f4e3E")) != moves.end());
 
    // TEARDOWN
-   board.board[1][3] = nullptr; // pawn
+   board.board[6][3] = nullptr; // pawn
+   board.board[4][3] = nullptr; // pawn
+   board.board[5][3] = nullptr; // pawn
+   board.board[5][2] = nullptr; // pawn
 }
 
 /*************************************
  * GET MOVES TEST Promotion
- * Promotion: b6a7rQ
+ * Promotion: b6a7pQ
+ * checking we're addin pQ at the end.
  *
  * +---a-b-c-d-e-f-g-h---+
  * |                     |
@@ -358,8 +394,32 @@ void TestPawn::getMoves_enpassantBlack()
  **************************************/
 void TestPawn::getMoves_promotionWhite()
 {
-   //checking we're addin rQ at the end.
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(1, 6, true/*white*/);
+   board.board[1][6] = &pawn;
+
+   set <Move> moves;
+
+
+   Black black1(PAWN);
+   board.board[0][7] = &black1; // left
+   Black black2(PAWN);
+   board.board[2][7] = &black2; // right
+
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 3); // all moves open
+   assertUnit(moves.find(Move("b7b8Q")) != moves.end());
+   assertUnit(moves.find(Move("b7a8pQ")) != moves.end());
+   assertUnit(moves.find(Move("b7c8pQ")) != moves.end()); // will give false positive for "b7c8"
+ 
+   // TEARDOWN
+   board.board[1][6] = nullptr; // pawn
+   board.board[0][7] = nullptr; // pawn
+   board.board[2][7] = nullptr; // pawn
 }
 
 
@@ -376,13 +436,44 @@ void TestPawn::getMoves_promotionWhite()
  * 4                     4
  * 3                     3
  * 2          (P)        2
- * 1         r   r       1
+ * 1         r . r       1
  * |                     |
  * +---a-b-c-d-e-f-g-h---+
  **************************************/
 void TestPawn::getMoves_promotionBlack()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+   BoardEmpty board;
+   Pawn pawn(4, 1, false/*black*/);
+   board.board[4][1] = &pawn;
+
+   set <Move> moves;
+
+   White white1(ROOK);
+   board.board[3][0] = &white1; // left
+   White white2(ROOK);
+   board.board[5][0] = &white2; // right
+
+   // EXERCISE
+   pawn.getMoves(moves, board);
+
+   Move mov1("e2d1rQ");
+   Move mov2("e2d1");
+   std::cout << mov1.getText() << "--" << mov2.getText() << std::endl;
+   std::cout << (mov1 == mov2) << std::endl;                     // move constructor comparison
+   std::cout << (mov1.getText() == mov2.getText()) << std::endl; // string constructor
+
+   // VERIFY
+   assertUnit(moves.size() == 3); // all moves open
+   assertUnit(moves.find(Move("e2e1Q")) != moves.end());
+   assertUnit(moves.find(Move("e2d1rQ")) != moves.end());
+   assertUnit(moves.find(Move("e2f1")) != moves.end()); // will give false positive for "b7c8"
+
+
+   // TEARDOWN
+   board.board[1][6] = nullptr; // pawn
+   board.board[0][7] = nullptr; // pawn
+   board.board[2][7] = nullptr; // pawn
 }
 
 

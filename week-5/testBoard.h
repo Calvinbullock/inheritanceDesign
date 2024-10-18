@@ -39,8 +39,8 @@ public:
       //move_pawnSimple();
       //move_pawnCapture();
       //move_pawnDouble();
-      ///*move_pawnEnpassant();*/
-      ///*move_pawnPromotion();*/
+      //move_pawnEnpassant();
+      //move_pawnPromotion();
       //move_rookSlide();
       //move_rookAttack();
       //move_bishopSlide();
