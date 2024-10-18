@@ -358,6 +358,7 @@ void TestPawn::getMoves_enpassantBlack()
  **************************************/
 void TestPawn::getMoves_promotionWhite()
 {
+   //checking we're addin rQ at the end.
    assertUnit(NOT_YET_IMPLEMENTED);
 }
 

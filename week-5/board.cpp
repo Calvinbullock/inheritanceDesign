@@ -192,13 +192,37 @@ void Board::move(const Move & move)
    int srcRow = move.getSource().getRow();
 
    // set last move before swapping
-   assert(board[srcCol][srcRow] != nullptr);
-   assert(board[dest.getCol()][dest.getRow()] != nullptr);
-   board[srcCol][srcRow]->setLastMove(getCurrentMove()); // BUG: seg fault
+   board[srcCol][srcRow]->setLastMove(getCurrentMove());
 
    // swap the pieces
    swap(src, dest);
-   numMoves++;       
+   numMoves++;
+
+   switch (move.getMoveType())
+   {
+      case Move::CASTLE_KING:
+         if (numMoves % 2 == 0) // white turn
+         {
+            Position rookSrc = "h1";
+            Position rookDest = "f1";
+            swap(rookSrc, rookDest);
+         }
+         else // black turn
+         {
+            Position rookSrc = "h8";
+            Position rookDest = "f8";
+            swap(rookSrc, rookDest);
+         }
+
+         break;
+      case Move::CASTLE_QUEEN:
+         break;
+      case Move::ENPASSANT:
+         break;
+   }
+      
+  
+       
 
    // attacking make sure you kill the piece.
    // Does not handle and special movetypes.
@@ -210,11 +234,7 @@ void Board::swap(Position& pos1, Position& pos2)
    board[pos1.getCol()][pos1.getRow()]->setPosition(pos2);
    board[pos2.getCol()][pos2.getRow()]->setPosition(pos1);
 
-   //std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
-
-   // DOES NOT HANDLE ATTACKING
-
-   //// no capture
+   // no capture
    if (board[pos2.getCol()][pos2.getRow()]->getType() == SPACE)
    {
       // Swap the position on the board

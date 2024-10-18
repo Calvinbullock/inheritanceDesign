@@ -29,7 +29,7 @@ public:
       getMoves_captureBlack();
       //getMoves_enpassantWhite();
       getMoves_enpassantBlack();
-      //getMoves_promotionWhite();
+      getMoves_promotionWhite();
       //getMoves_promotionBlack();
 
       getType();
