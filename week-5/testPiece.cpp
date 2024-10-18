@@ -196,7 +196,7 @@ void TestPiece::isMoved_initial()
    piece.position = Position(2, 3);
    bool isMoved = true;
    // exercise
-   isMoved = piece.isMoved();
+   isMoved = piece.hasMoved();
    // verify
    assertUnit(isMoved == false);
    assertUnit(piece.fWhite == false);
@@ -218,7 +218,7 @@ void TestPiece::isMoved_hasMoved()
    piece.position = Position(2, 3);
    bool isMoved = false;
    // exercise
-   isMoved = piece.isMoved();
+   isMoved = piece.hasMoved();
    // verify
    assertUnit(isMoved == true);
    assertUnit(piece.fWhite == false);

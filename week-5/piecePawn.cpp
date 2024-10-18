@@ -34,7 +34,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       if (newPos.isValid())
       {
          // starting row and has not moved
-         if (this->position.getRow() == 6 && this->isMoved())
+         if (this->position.getRow() == 6 && this->hasMoved())
          {
             m = this->position.getColRowText()  // src
                + newPos.getColRowText();        // dest
@@ -107,10 +107,10 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          Position attackRight = Position(this->position.getCol() + 1, this->position.getRow() - 1);
          Position attackLeft = Position(this->position.getCol() - 1, this->position.getRow() - 1);
 
-         std::cout << (board[pawnRight].getType()) << std::endl;
-         std::cout << board[pawnRight].justMoved(board.getCurrentMove()) << std::endl;
-         std::cout << board[pawnRight].getLastMove() << std::endl;
-         std::cout << board[pawnRight].isWhite() << std::endl;
+         //std::cout << (board[pawnRight].getType()) << std::endl;
+         //std::cout << board[pawnRight].justMoved(board.getCurrentMove()) << std::endl;
+         //std::cout << board[pawnRight].getLastMove() << std::endl;
+         //std::cout << board[pawnRight].isWhite() << std::endl;
 
          if (board[pawnRight].getType() == PAWN &&
             board[pawnRight].justMoved(board.getCurrentMove()) &&
@@ -162,7 +162,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       if (newPos.isValid())
       {
          // starting row and has not moved
-         if (this->position.getRow() == 1 && this->isMoved())
+         if (this->position.getRow() == 1 && this->hasMoved())
          {
             m = this->position.getColRowText()     // src
                + newPos.getColRowText();           // dest

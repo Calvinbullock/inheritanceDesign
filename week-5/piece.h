@@ -64,7 +64,7 @@ public:
    virtual bool operator == (PieceType pt) const { return this->getType() == pt;       }
    virtual bool operator != (PieceType pt) const { return !(this->getType() == pt);    }
    virtual bool isWhite()                  const { return fWhite;                      }
-   virtual bool isMoved()                  const { return nMoves != 0;                 }
+   virtual bool hasMoved()                  const { return nMoves != 0;                 }
    virtual int  getNMoves()                const { return nMoves;                      }
    virtual int  getLastMove()              const { return lastMove; }
    virtual void decrementNMoves()                {                                     }
@@ -146,7 +146,7 @@ public:
    bool operator == (char letter)  const { assert(false); return true;  }
    bool operator != (char letter)  const { assert(false); return true;  }
    bool isWhite()                  const { assert(false); return true;  }
-   bool isMoved()                  const { assert(false); return true;  }
+   bool hasMoved()                  const { assert(false); return true;  }
    int  getNMoves()                const { assert(false); return 0;     }
    void decrementNMoves()                { assert(false);               }
    const Position & getPosition()  const { assert(false); return position; }

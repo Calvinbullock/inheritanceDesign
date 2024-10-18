@@ -260,8 +260,10 @@ void TestKing::getMoves_whiteCastle()
    board.board[4][0] = &king;
    Rook rook1(0, 0, true);
    board.board[0][0] = &rook1;
+   rook1.nMoves = 0;
    Rook rook2(7, 0, true);
    board.board[7][0] = &rook2;
+   rook2.nMoves = 0;
 
    set <Move> moves;
 
@@ -314,11 +316,14 @@ void TestKing::getMoves_blackCastle()
    // SETUP
    BoardEmpty board;
    King king(4, 7, false/*white*/);
+   king.nMoves = 0;
    board.board[4][7] = &king;
    Rook rook1(0, 7, false);
    board.board[0][7] = &rook1;
+   rook1.nMoves = 0;
    Rook rook2(7, 7, false);
    board.board[7][7] = &rook2;
+   rook2.nMoves = 0;
 
    set <Move> moves;
 
