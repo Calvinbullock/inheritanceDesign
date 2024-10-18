@@ -61,6 +61,69 @@ void King::getMoves(set<Move>& moves, const Board& board) const
          }
       }
    }
+   
+   Position rookPos = Position(0, 0);
+   Position empty1 = Position(1, 0);
+   Position empty2 = Position(2, 0);
+   Position empty3 = Position(3, 0);
+
+   // white
+   if (this->fWhite) {
+      if (!this->isMoved() &&                 // queen side castle
+         board[rookPos].isMoved() &&          // rook not moved
+         board[empty1].getType() == SPACE &&  // b1 is empty
+         board[empty2].getType() == SPACE &&  // c1 is empty
+         board[empty3].getType() == SPACE)    // d1 is empty
+      {
+         Move m = (string)"e1c1C";
+         moves.insert(m); 
+      }
+
+      empty1.set(5, 0);
+      empty2.set(6, 0);
+      rookPos.set(7, 0);
+
+      if (!this->isMoved() &&                 // king side castle
+         board[rookPos].isMoved() &&          // rook not moved
+         board[empty1].getType() == SPACE &&  // f1 is empty
+         board[empty2].getType() == SPACE)    // g1 is empty
+      {
+         Move m = (string)"e1g1c";
+         moves.insert(m); 
+      }
+   } 
+   else // black
+   {
+
+      empty1.set(3, 7);
+      empty2.set(2, 7);
+      empty3.set(1, 7);
+      rookPos.set(0, 7);
+
+      if (!this->isMoved() &&                 // queen side castle
+         board[rookPos].isMoved() &&          // rook not moved
+         board[empty1].getType() == SPACE &&  // b8 is empty
+         board[empty2].getType() == SPACE &&  // c8 is empty
+         board[empty3].getType() == SPACE)    // d8 is empty
+      {
+         Move m = (string)"e8c8C";
+         moves.insert(m); 
+      }
+
+      empty1.set(5, 7);
+      empty2.set(6, 7);
+      rookPos.set(7, 7);
+
+      if (!this->isMoved() &&                 // king side castle
+         board[rookPos].isMoved() &&          // rook not moved
+         board[empty1].getType() == SPACE &&  // f8 is empty
+         board[empty2].getType() == SPACE)    // g8 is empty
+      {
+         Move m = (string)"e8g8c";
+         moves.insert(m); 
+      }
+   }
+
 }
 
  /***************************************************
@@ -68,5 +131,5 @@ void King::getMoves(set<Move>& moves, const Board& board) const
  ***************************************************/
 void King::display(ogstream* pgout) const
 {
-   pgout->drawKing(position, fWhite);
+   pgout->drawKing(position, !fWhite);
 }
