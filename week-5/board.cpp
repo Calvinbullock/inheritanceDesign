@@ -172,16 +172,11 @@ void Board::assertBoard()
  *********************************************/
 void Board::move(const Move & move)
 {  
-   // TODO: do move count (and last move?)
-   set<Move> moves;
-
    Position src = move.getSource();
    Position dest = move.getDest();
 
    int srcCol = move.getSource().getCol();
    int srcRow = move.getSource().getRow();
-
-   PieceType pt = board[srcCol][srcRow]->getType();
 
   // set last move before swapping
    board[srcCol][srcRow]->setLastMove(getCurrentMove());
@@ -192,9 +187,6 @@ void Board::move(const Move & move)
 
    // attacking make sure you kill the piece.
    // Does not handle and special movetypes.
-   
-  
-
 }
 
 void Board::swap(Position& pos1, Position& pos2)
@@ -203,21 +195,23 @@ void Board::swap(Position& pos1, Position& pos2)
    board[pos1.getCol()][pos1.getRow()]->setPosition(pos2);
    board[pos2.getCol()][pos2.getRow()]->setPosition(pos1);
 
-   std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
+   //std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
 
    // DOES NOT HANDLE ATTACKING
 
    //// no capture
-   //if (board[pos2.getCol()][pos2.getRow()]->getType() == SPACE)
-   //{
-   //   // Swap the position on the board
-   //   std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
-   //}
-   //else // capture
-   //{
-   //   //board[pos1.getCol()][pos1.getRow()] = board[pos2.getCol()][pos2.getRow()];
-   //   //board[pos2.getCol()][pos2.getRow()]->
-   //}
+   std::cout << board[pos2.getCol()][pos2.getRow()]->getType() << endl;
+   if (board[pos2.getCol()][pos2.getRow()]->getType() == SPACE)
+   {
+      // Swap the position on the board
+      std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
+   }
+   else // capture
+   {
+      std::swap(board[pos1.getCol()][pos1.getRow()], board[pos2.getCol()][pos2.getRow()]);
+      delete board[pos1.getCol()][pos1.getRow()];
+      board[pos1.getCol()][pos1.getRow()] = nullptr;
+   }
 
 }
 
