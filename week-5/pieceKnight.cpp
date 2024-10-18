@@ -21,7 +21,7 @@
 void Knight::display(ogstream* pgout) const
 {
    // TODO: Knight is always black??
-   pgout->drawKnight(position, fWhite);
+   pgout->drawKnight(position, !fWhite);
 }
 
 /**********************************************
