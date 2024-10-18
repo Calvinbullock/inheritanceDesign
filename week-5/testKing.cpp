@@ -9,7 +9,8 @@
 
 #include "testKing.h"
 #include "piece.h"
-#include "pieceKing.h"     
+#include "pieceKing.h"
+#include "pieceRook.h" 
 #include "board.h"
 #include "uiDraw.h"
 #include <cassert>      
@@ -257,15 +258,21 @@ void TestKing::getMoves_whiteCastle()
    king.fWhite = true;
    king.position.set(4, 0);
    board.board[4][0] = &king;
+   Rook rook1(0, 0, true);
+   board.board[0][0] = &rook1;
+   Rook rook2(7, 0, true);
+   board.board[7][0] = &rook2;
+
+
 
    set <Move> moves;
 
-   White white1(PAWN);
-   board.board[3][1] = &white1;
-   White white2(PAWN);
-   board.board[4][1] = &white2;
-   White white3(PAWN);
-   board.board[5][1] = &white3;
+   White pWhite1(PAWN);
+   board.board[3][1] = &pWhite1;
+   White pWhite2(PAWN);
+   board.board[4][1] = &pWhite2;
+   White pWhite3(PAWN);
+   board.board[5][1] = &pWhite3;
 
    // EXERCISE
    king.getMoves(moves, board);

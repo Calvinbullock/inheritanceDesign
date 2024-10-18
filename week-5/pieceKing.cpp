@@ -33,7 +33,6 @@ void King::getMoves(set<Move>& moves, const Board& board) const
    
    for (int i = 0; i < 8; i++)
    {
-      // TODO: change to adjusts
       newPos.setCol(this->position.getCol() + posMoves[i].c);
       newPos.setRow(this->position.getRow() + posMoves[i].r);
 
@@ -69,8 +68,9 @@ void King::getMoves(set<Move>& moves, const Board& board) const
 
    // white
    if (this->fWhite) {
-      if (!this->isMoved() &&                 // queen side castle
+      if (this->isMoved() &&                 // queen side castle
          board[rookPos].isMoved() &&          // rook not moved
+         board[rookPos].getType() == ROOK &&  // rook exists in starting spot
          board[empty1].getType() == SPACE &&  // b1 is empty
          board[empty2].getType() == SPACE &&  // c1 is empty
          board[empty3].getType() == SPACE)    // d1 is empty
@@ -83,8 +83,9 @@ void King::getMoves(set<Move>& moves, const Board& board) const
       empty2.set(6, 0);
       rookPos.set(7, 0);
 
-      if (!this->isMoved() &&                 // king side castle
+      if (this->isMoved() &&                 // king side castle
          board[rookPos].isMoved() &&          // rook not moved
+         board[rookPos].getType() == ROOK &&  // rook exists in starting spot
          board[empty1].getType() == SPACE &&  // f1 is empty
          board[empty2].getType() == SPACE)    // g1 is empty
       {
@@ -100,8 +101,9 @@ void King::getMoves(set<Move>& moves, const Board& board) const
       empty3.set(1, 7);
       rookPos.set(0, 7);
 
-      if (!this->isMoved() &&                 // queen side castle
+      if (this->isMoved() &&                 // queen side castle
          board[rookPos].isMoved() &&          // rook not moved
+         board[rookPos].getType() == ROOK &&  // rook exists in starting spot
          board[empty1].getType() == SPACE &&  // b8 is empty
          board[empty2].getType() == SPACE &&  // c8 is empty
          board[empty3].getType() == SPACE)    // d8 is empty
@@ -114,8 +116,9 @@ void King::getMoves(set<Move>& moves, const Board& board) const
       empty2.set(6, 7);
       rookPos.set(7, 7);
 
-      if (!this->isMoved() &&                 // king side castle
+      if (this->isMoved() &&                 // king side castle
          board[rookPos].isMoved() &&          // rook not moved
+         board[rookPos].getType() == ROOK &&  // rook exists in starting spot
          board[empty1].getType() == SPACE &&  // f8 is empty
          board[empty2].getType() == SPACE)    // g8 is empty
       {
