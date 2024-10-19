@@ -2,7 +2,7 @@
  * Source File:
  *    TEST ROOK
  * Author:
- *    Daniel Malasky
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the rook
  ************************************************************************/

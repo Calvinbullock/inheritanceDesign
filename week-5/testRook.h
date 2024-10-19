@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ROOK
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the Rook
  ************************************************************************/

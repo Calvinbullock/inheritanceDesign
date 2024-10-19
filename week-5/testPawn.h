@@ -2,7 +2,7 @@
  * Header File:
  *    TEST PAWN
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for Pawn
  ************************************************************************/

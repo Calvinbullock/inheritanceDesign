@@ -2,7 +2,7 @@
  * Header File:
  *    QUEEN TEST
  * Author:
- *    <your name here>
+ *    Calvin Bullock, Daniel Malasky
  * Summary:
  *    The unit tests for the Queen
  ************************************************************************/
