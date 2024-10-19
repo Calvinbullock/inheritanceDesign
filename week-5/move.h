@@ -1,6 +1,6 @@
 /***********************************************************************
  * Header File:
- *    MOVE 
+ *    MOVE
  * Author:
  *    Calvin Bullock, Daniel Malasky
  * Summary:
@@ -24,7 +24,7 @@ class TestBoard;
 class Move
 {
 public:
-   enum MoveType { MOVE, ENPASSANT, CASTLE_KING, CASTLE_QUEEN, MOVE_ERROR };
+   enum MoveType { MOVE, ENPASSANT, CASTLE_KING, CASTLE_QUEEN, MOVE_ERROR, PROMOTION };
 
    friend TestMove;
    friend TestBoard;
@@ -38,19 +38,19 @@ public:
       read(moveText);
       text = getText();
    };
-   
-   Move(const Move &rhs)   { *this = rhs;}
+
+   Move(const Move& rhs) { *this = rhs; }
 
    // getters
    string getText();
    string getText() const;
-   const Position& getDest()     const { return dest;     }
-   const Position& getSource()   const { return source;   }
-   PieceType getPromotion()      const { return promote;  }
-   PieceType getCapture()        const { return capture;  }
+   const Position& getDest()     const { return dest; }
+   const Position& getSource()   const { return source; }
+   PieceType getPromotion()      const { return promote; }
+   PieceType getCapture()        const { return capture; }
    Move::MoveType getMoveType()  const { return moveType; }
    // TODO: moveType getters 
-   
+
    bool operator == (const Move& rhs) const;
    bool operator == (const string& rhs) const { return getText() == rhs; }
    bool operator != (const string& rhs) const { return getText() != rhs; }
@@ -64,11 +64,11 @@ public:
    void read(string moveText);
 
    void setSource(const Position& src) { source = src; }
-   void setDest (const Position& des) { dest = des; }
+   void setDest(const Position& des) { dest = des; }
 
-   const Move & operator =  (const char     * rhs) { read((string)rhs); return *this; }
-   const Move & operator =  (const string   & rhs) { read(rhs); return *this; }
-   const Move & operator =  (const Move& rhs);
+   const Move& operator =  (const char* rhs) { read((string)rhs); return *this; }
+   const Move& operator =  (const string& rhs) { read(rhs); return *this; }
+   const Move& operator =  (const Move& rhs);
 
 
    char letterFromPieceType(PieceType pt)     const;
@@ -93,4 +93,3 @@ private:
 //      /*<< move.letterFromPieceType(move.getCapture());*/
 //   return out;
 //};
-

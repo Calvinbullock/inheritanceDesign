@@ -1,6 +1,6 @@
 /***********************************************************************
  * Source File:
- *    MOVE 
+ *    MOVE
  * Author:
  *    Calvin Bullock, Daniel Malasky
  * Summary:
@@ -18,9 +18,9 @@ using namespace std;
  * MOVE : DEFAULT CONSTRUCTOR
  ***************************************************/
 Move::Move() : source(), dest(), promote(INVALID),
-   capture(INVALID), moveType(MOVE_ERROR), isWhite(true), text("")
+capture(INVALID), moveType(MOVE_ERROR), isWhite(true), text("")
 {
-   
+
 }
 
 /***************************************************
@@ -42,57 +42,57 @@ const Move& Move::operator=(const Move& rhs)
 /***************************************************
  * MOVE : LETTER FROM PIECE TYPE
  ***************************************************/
-char Move::letterFromPieceType(PieceType pt)     const 
-{ 
-   switch (pt) 
+char Move::letterFromPieceType(PieceType pt)     const
+{
+   switch (pt)
    {
-      case SPACE:
-         return ' ';
-         break;
-      case PAWN:
-         return 'p';
-      case BISHOP:
-         return 'b';
-      case KNIGHT:
-         return 'n';
-      case ROOK:
-         return 'r';
-      case QUEEN:
-         return 'q';
-      case KING:
-         return 'k';
-      case INVALID:
-         return 'i';
-      default:
-         return 'i';
+   case SPACE:
+      return ' ';
+      break;
+   case PAWN:
+      return 'p';
+   case BISHOP:
+      return 'b';
+   case KNIGHT:
+      return 'n';
+   case ROOK:
+      return 'r';
+   case QUEEN:
+      return 'q';
+   case KING:
+      return 'k';
+   case INVALID:
+      return 'i';
+   default:
+      return 'i';
    }
 }
 
 /***************************************************
- * MOVE : PIECE TYPE FROM LETTER 
+ * MOVE : PIECE TYPE FROM LETTER
  ***************************************************/
 PieceType Move::pieceTypeFromLetter(char letter) const
-{ 
-   switch (letter) 
+{
+   switch (letter)
    {
-      case ' ':
-         return SPACE;
-      case 'p':
-         return PAWN;
-      case 'b':
-         return BISHOP;
-      case 'n':
-         return KNIGHT;
-      case 'r':
-         return ROOK;
-      case 'q':
-         return QUEEN;
-      case 'k':
-         return KING;
-      case 'i':
-         return INVALID;
-      default:
-         return INVALID;
+   case ' ':
+      return SPACE;
+   case 'p':
+      return PAWN;
+   case 'b':
+      return BISHOP;
+   case 'n':
+      return KNIGHT;
+   case 'r':
+      return ROOK;
+   case 'q':
+      return QUEEN;
+   case 'k':
+      return KING;
+   case 'i':
+      return INVALID;
+   default:
+      return INVALID;
    }
 }
 
@@ -108,8 +108,8 @@ void Move::read(string moveText)
    moveType = MOVE; // default move
 
    if (moveText.length() == 5)
-   {  
-      switch (moveText[4])
+   {
+      switch (moveText[4]) // set moveType
       {
       case 'p':   // capture a pawn
       case 'n':   // capture a knight
@@ -129,14 +129,19 @@ void Move::read(string moveText)
       case 'c':
          moveType = CASTLE_KING;
          break;
-      case 'N':  // Promote to knight
-      case 'B':  // Promote to Bishop
-      case 'R':  // Promote to Rook
-      case 'Q':  // Promote to Queen
-         promote = pieceTypeFromLetter(moveText[4]);
+      case 'Q': // only promote to queen
+         moveType = PROMOTION;
+         promote = QUEEN;
+         break;
       default:
          moveType = MOVE_ERROR;
       }
+   }
+   else if (moveText.length() > 5)
+   {
+      // case 'rQ':
+      capture = pieceTypeFromLetter(moveText[4]);
+      moveType = PROMOTION;
    }
 }
 
@@ -179,7 +184,11 @@ string Move::getText()
       case CASTLE_KING:
          moveText.push_back('c');
          break;
+      case PROMOTION:
+         moveText.push_back('Q'); // only promote to queen
+         break;
       }
+
    }
    return moveText;
 }
@@ -239,4 +248,3 @@ bool Move::operator==(const Move& rhs) const
       text == rhs.text);
 
 }
-

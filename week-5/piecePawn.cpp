@@ -22,11 +22,11 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
    Move m;
    PieceType pt;
 
-   // black pawn
+   // BLACK
    if (!this->fWhite)
    {
       
-      // --------- FORWARD 2 ------------
+      // --------- BLACK FORWARD 2 ------------
       newPos.setRow(this->position.getRow() - 2);
       newPos.setCol(this->position.getCol());
 
@@ -47,39 +47,60 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          }
       }
 
-      // --------- FORWARD 1 ------------
+      // --------- BLACK FORWARD 1 ------------
       newPos.setRow(this->position.getRow() - 1);
+
       // valid move
       if (newPos.isValid())
       {
-         m = this->position.getColRowText()  // src
-            + newPos.getColRowText();        // dest
-
          // check if potential move is a space.
          if (board[newPos].getType() == SPACE)
          {
-            moves.insert(m); //insert a possible move.
+            if (newPos.getRow() == 0) // BLACK PAWN PROMOTION
+            {
+               m = this->position.getColRowText() +  // src
+                   newPos.getColRowText() +          // dest
+                   (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal move
+            {
+               m = this->position.getColRowText()  // src
+                  + newPos.getColRowText();        // dest
+               moves.insert(m); //insert a possible move.
+            }
          }
       }
 
-      // --------- ATTACK LEFT ------------
+      // --------- BLACK ATTACK LEFT ------------
       newPos.set(this->position.getCol() - 1, 
                  this->position.getRow() - 1);
       pt = board[newPos].getType();
 
-      // valid move
+      // valid move and capturable piece
       if (newPos.isValid() &&
          pt != SPACE &&
          board[newPos].isWhite())
       {
-         m = this->position.getColRowText()  // src
-            + newPos.getColRowText()         // dest
-            + m.letterFromPieceType(pt);     // capture
+         if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt) +       // capture
+               (string)"Q";                      // promotion
+            moves.insert(m); //insert a possible move.
+         }
+         else // normal attack move
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt);        // capture    
 
-         moves.insert(m); //insert a possible move.
+            moves.insert(m); //insert a possible move.
+         }
       }
 
-      // --------- ATTACK RIGHT ------------
+      // --------- BLACK ATTACK RIGHT ------------
       newPos.set(this->position.getCol() + 1,
                  this->position.getRow() - 1);
       pt = board[newPos].getType();
@@ -89,17 +110,25 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
           pt != SPACE &&
           board[newPos].isWhite())
       {
-         m = this->position.getColRowText()  // src
-            + newPos.getColRowText()         // dest
-            + m.letterFromPieceType(pt);     // capture
+         if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt) +       // capture
+               (string)"Q";                      // promotion
+            moves.insert(m); //insert a possible move.
+         }
+         else // normal attack move
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt);       // capture    
 
-         moves.insert(m); //insert a possible move.
+            moves.insert(m); //insert a possible move.
+         } 
       }
 
-      // --------- EN-PASSANT ------------
-    
-
-      // --------- EN-PASSANT ------------
+      // --------- BLACK EN-PASSANT ------------
       if (this->position.getRow() == 3)
       {
          Position pawnRight = Position(this->position.getCol() + 1, this->position.getRow());
@@ -107,11 +136,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          Position attackRight = Position(this->position.getCol() + 1, this->position.getRow() - 1);
          Position attackLeft = Position(this->position.getCol() - 1, this->position.getRow() - 1);
 
-         //std::cout << (board[pawnRight].getType()) << std::endl;
-         //std::cout << board[pawnRight].justMoved(board.getCurrentMove()) << std::endl;
-         //std::cout << board[pawnRight].getLastMove() << std::endl;
-         //std::cout << board[pawnRight].isWhite() << std::endl;
-
+         // --------- EN-PASSANT - RIGHT ------------
          if (board[pawnRight].getType() == PAWN &&
             board[pawnRight].justMoved(board.getCurrentMove()) &&
             board[pawnRight].isWhite())
@@ -121,40 +146,24 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
 
                 moves.insert(m);
          }
+         // --------- EN-PASSANT - LEFT ------------
+         if (board[pawnLeft].getType() == PAWN &&
+            board[pawnLeft].justMoved(board.getCurrentMove()) &&
+            board[pawnLeft].isWhite())
+         {
+            m = this->position.getColRowText() +          // src
+               attackLeft.getColRowText() + (string)"E";  // dest
+
+            moves.insert(m);
+         }
       }
 
 
 
-      //if (this->position.getRow() == 3) // en-passont 
-      //{
-      //   if (board[pawnRight].getType() == PAWN && 
-      //         board[pawnRight].justMoved(board.getCurrentMove()) &&
-      //         board[pawnLeft].isWhite())
-      //   {
-      //      m = this->position.getColRowText() // src
-      //         + attackRight.getColRowText() + (string)"E";   // dest
-      //      moves.insert(m);
-      //   }
-      //   if (board[pawnLeft].getType() == PAWN && 
-      //         board[pawnLeft].justMoved(board.getCurrentMove()) && 
-      //         board[pawnLeft].isWhite())
-      //   {
-
-      //      m = this->position.getColRowText() // src
-      //         + attackLeft.getColRowText() + (string)"E";   // dest
-      //      moves.insert(m);
-      //   }
-
-      //// --------- PROMOTION ------------
-      //if (this->position.getRow() == 0)
-      //{
-      //   board[this->position].set
-      //}
-
    }
-   else // White Pawn
+   else // WHITE PAWN
    {
-      // --------- FORWARD 2 ------------
+      // --------- WHITE FORWARD 2 ------------
       newPos.setRow(this->position.getRow() + 2);
       newPos.setCol(this->position.getCol());
 
@@ -164,8 +173,8 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          // starting row and has not moved
          if (this->position.getRow() == 1 && this->hasMoved())
          {
-            m = this->position.getColRowText()     // src
-               + newPos.getColRowText();           // dest
+            m = this->position.getColRowText()  // src
+               + newPos.getColRowText();        // dest
 
             // check if potential move is a space.
             if (board[newPos].getType() == SPACE)
@@ -175,22 +184,31 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          }
       }
 
-      // --------- FORWARD 1 ------------
+      // --------- WHITE FORWARD 1 ------------
       newPos.setRow(this->position.getRow() + 1);
       // valid move
       if (newPos.isValid())
       {
-         m = this->position.getColRowText()     // src
-            + newPos.getColRowText();           // dest
-
          // check if potential move is a space.
          if (board[newPos].getType() == SPACE)
          {
-            moves.insert(m); //insert a possible move.
+            if (newPos.getRow() == 7) // WHITE PAWN PROMOTION
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal move
+            {
+               m = this->position.getColRowText()  // src
+                  + newPos.getColRowText();        // dest
+               moves.insert(m); //insert a possible move.
+            }
          }
       }
 
-      // --------- ATTACK LEFT ------------
+      // --------- WHITE ATTACK LEFT ------------
       newPos.set(this->position.getCol() - 1,
          this->position.getRow() + 1);
       pt = board[newPos].getType();
@@ -200,14 +218,25 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          pt != SPACE &&
          !board[newPos].isWhite())
       {
-         m = this->position.getColRowText()  // src
-            + newPos.getColRowText()         // dest
-            + m.letterFromPieceType(pt);     // capture
+         if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt) +       // capture
+               (string)"Q";                      // promotion
+            moves.insert(m); //insert a possible move.
+         }
+         else // normal attack move
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt);       // capture    
 
-         moves.insert(m); //insert a possible move.
+            moves.insert(m); //insert a possible move.
+         }
       }
 
-      // --------- ATTACK RIGHT ------------
+      // --------- WHITE ATTACK RIGHT ------------
       newPos.set(this->position.getCol() + 1,
          this->position.getRow() + 1);
       pt = board[newPos].getType();
@@ -217,11 +246,52 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
          pt != SPACE &&
          !board[newPos].isWhite())
       {
-         m = this->position.getColRowText()  // src
-            + newPos.getColRowText()         // dest
-            + m.letterFromPieceType(pt);     // capture
+         if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt) +       // capture
+               (string)"Q";                      // promotion
+            moves.insert(m); //insert a possible move.
+         }
+         else // normal attack move
+         {
+            m = this->position.getColRowText() + // src
+               newPos.getColRowText() +          // dest
+               m.letterFromPieceType(pt);        // capture   
 
-         moves.insert(m); //insert a possible move.
+            moves.insert(m); //insert a possible move.
+         }
+      }
+
+      // --------- WHITE EN-PASSANT ------------
+      if (this->position.getRow() == 4)
+      {
+         Position pawnRight = Position(this->position.getCol() + 1, this->position.getRow());
+         Position pawnLeft = Position(this->position.getCol() - 1, this->position.getRow());
+         Position attackRight = Position(this->position.getCol() + 1, this->position.getRow() + 1);
+         Position attackLeft = Position(this->position.getCol() - 1, this->position.getRow() + 1);
+
+         // --------- EN-PASSANT - RIGHT ------------
+         if (board[pawnRight].getType() == PAWN &&
+            board[pawnRight].justMoved(board.getCurrentMove()) &&
+            !board[pawnRight].isWhite())
+         {
+            m = this->position.getColRowText() +            // src
+               attackRight.getColRowText() + (string)"E";   // dest
+
+            moves.insert(m);
+         }
+         // --------- EN-PASSANT - LEFT ------------
+         if (board[pawnLeft].getType() == PAWN &&
+            board[pawnLeft].justMoved(board.getCurrentMove()) &&
+            !board[pawnLeft].isWhite())
+         {
+            m = this->position.getColRowText() +            // src
+               attackLeft.getColRowText() + (string)"E";    // dest
+
+            moves.insert(m);
+         }
       }
    }
 }

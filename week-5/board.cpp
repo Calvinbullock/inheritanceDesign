@@ -183,44 +183,60 @@ void Board::move(const Move & move)
 
    switch (move.getMoveType())
    {
-      case Move::CASTLE_KING:
-         if (numMoves % 2 == 0) // white turn
-         {
-            Position rookSrc = "h1";
-            Position rookDest = "f1";
-            swap(rookSrc, rookDest);
-         }
-         else // black turn
-         {
-            Position rookSrc = "h8";
-            Position rookDest = "f8";
-            swap(rookSrc, rookDest);
-         }
-         break;
+   case Move::CASTLE_KING:
+      if (numMoves % 2 == 0) // white turn
+      {
+         Position rookSrc = "h1";
+         Position rookDest = "f1";
+         swap(rookSrc, rookDest);
+      }
+      else // black turn
+      {
+         Position rookSrc = "h8";
+         Position rookDest = "f8";
+         swap(rookSrc, rookDest);
+      }
+      break;
+   case Move::CASTLE_QUEEN:
+      if (numMoves % 2 == 0) // white turn
+      {
+         Position rookSrc = "a1";
+         Position rookDest = "d1";
+         swap(rookSrc, rookDest);
+      }
+      else // black turn
+      {
+         Position rookSrc = "a8";
+         Position rookDest = "d8";
+         swap(rookSrc, rookDest);
+      }
+      break;
+   case Move::ENPASSANT:
+      if (numMoves % 2 == 0) // white turn
+      {
+         Position pawnToKill(move.getDest());
+         pawnToKill.setRow(pawnToKill.getRow() - 1); // enemy pawn 1 below
 
-      case Move::CASTLE_QUEEN:
-         if (numMoves % 2 == 0) // white turn
-         {
-            Position rookSrc = "a1";
-            Position rookDest = "d1";
-            swap(rookSrc, rookDest);
-         }
-         else // black turn
-         {
-            Position rookSrc = "a8";
-            Position rookDest = "d8";
-            swap(rookSrc, rookDest);
-         }
-         break;
+         board[pawnToKill.getCol()][pawnToKill.getRow()] =
+            new Space(pawnToKill.getCol(), pawnToKill.getRow());
+      }
+      else // black turn
+      {
+         Position pawnToKill(move.getDest());
+         pawnToKill.setRow(pawnToKill.getRow() + 1); // enemy pawn 1 above
 
-      case Move::ENPASSANT:
-         break;
+         board[pawnToKill.getCol()][pawnToKill.getRow()] =
+            new Space(pawnToKill.getCol(), pawnToKill.getRow());
+      }
+      break;
+   case Move::PROMOTION:
+   
+
+      Position pawnToPromote(move.getDest());
+      board[pawnToPromote.getCol()][pawnToPromote.getRow()] =
+         new Queen(pawnToPromote.getCol(), pawnToPromote.getRow());
+
    }
-  
-       
-
-   // attacking make sure you kill the piece.
-   // Does not handle and special movetypes.
 }
 
 void Board::swap(Position& pos1, Position& pos2)
