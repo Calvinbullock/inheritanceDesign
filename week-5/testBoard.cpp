@@ -9,10 +9,12 @@
 
 
 #include "testBoard.h"
+#include "pieceType.h"
 #include "position.h"
 #include "piece.h"
 #include "board.h"
 #include <cassert>
+#include <iostream>
 
 
  /***********************************************
@@ -1256,7 +1258,6 @@ void TestBoard::move_kingShortCastle()
    board.board[7][0]->nMoves = 17;
    PieceSpy::reset();
 
-
    // EXERCISE
    board.move(move);
 
@@ -1300,7 +1301,59 @@ void TestBoard::move_kingShortCastle()
   ********************************************************/
 void TestBoard::move_kingLongCastle()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   Move move;
+   move.source.set(4, 0);
+   move.dest.set(2, 0);
+   move.promote = SPACE;
+   move.capture = SPACE;
+   move.isWhite = true;
+   move.moveType = Move::CASTLE_KING;
+
+   // king move
+   Board board(nullptr, true /*noreset*/);
+   board.numMoves = 17;
+   board.board[4][0] = new PieceSpy(4, 0, true  /*isWhite*/, KING);
+   board.board[4][0]->nMoves = 17;
+
+   // rook move
+   board.board[0][0] = new PieceSpy(0, 0, true  /*isWhite*/, ROOK);
+   board.board[7][0]->nMoves = 17;
+
+   board.board[3][0] = new PieceSpy(3, 0, true  /*isWhite*/, SPACE);
+   board.board[2][0] = new PieceSpy(2, 0, true  /*isWhite*/, SPACE);
+   board.board[1][0] = new PieceSpy(1, 0 , true  /*isWhite*/, SPACE);
+   PieceSpy::reset();
+
+   // EXERCISE
+   board.move(move);
+
+   // VERIFY
+   assertUnit(18 == board.numMoves);
+   assertUnit(KING == (board.board[2][0])->getType());
+   assertUnit(SPACE == (board.board[3][0])->getType());
+
+   assertUnit(ROOK == (board.board[0][0])->getType());
+   assertUnit(SPACE == (board.board[1][0])->getType());
+   assertUnit(SPACE == (board.board[4][0])->getType());
+
+   assertUnit(PieceSpy::numConstruct == 0);
+   assertUnit(PieceSpy::numCopy == 0);
+   assertUnit(PieceSpy::numDelete == 0);
+   assertUnit(PieceSpy::numAssign == 0);
+   assertUnit(PieceSpy::numMove == 0);
+
+   // TEARDOWN
+   delete board.board[0][0];
+   delete board.board[1][0];
+   delete board.board[2][0];
+   delete board.board[3][0];
+   delete board.board[4][0];
+
+   board.board[5][0] = nullptr;
+   board.board[7][0] = nullptr;
+   board.board[5][0] = nullptr;
+   board.board[7][0] = nullptr;
+   board.board[5][0] = nullptr;
 }
 
 
@@ -1322,5 +1375,53 @@ void TestBoard::move_kingLongCastle()
  ********************************************************/
 void TestBoard::construct_default()
 {
-   assertUnit(NOT_YET_IMPLEMENTED);
+   // SETUP
+
+   // EXERCISE
+   Board board = Board();
+
+   // VERIFY
+   assertUnit(ROOK == board.board[0][0]->getType());
+   assertUnit(KNIGHT == board.board[1][0]->getType());
+   assertUnit(BISHOP == board.board[2][0]->getType());
+   assertUnit(QUEEN == board.board[3][0]->getType());
+
+   assertUnit(KING == board.board[4][0]->getType());
+   assertUnit(BISHOP == board.board[5][0]->getType());
+   assertUnit(KNIGHT == board.board[6][0]->getType());
+   assertUnit(ROOK == board.board[7][0]->getType());
+
+   for (int i = 0; i < 8; i++) {
+      assertUnit(board.board[i][0]->fWhite);
+   }
+   
+   // pawns
+   for (int i = 0; i < 8; i++) {
+      assertUnit(PAWN == board.board[i][1]->getType());
+      assertUnit(board.board[i][1]->fWhite);
+   }
+   
+
+   // black
+   assertUnit(ROOK == board.board[0][7]->getType());
+   assertUnit(KNIGHT == board.board[1][7]->getType());
+   assertUnit(BISHOP == board.board[2][7]->getType());
+   assertUnit(QUEEN == board.board[3][7]->getType());
+
+   assertUnit(KING == board.board[4][7]->getType());
+   assertUnit(BISHOP == board.board[5][7]->getType());
+   assertUnit(KNIGHT == board.board[6][7]->getType());
+   assertUnit(ROOK == board.board[7][7]->getType());
+
+   for (int i = 0; i < 8; i++) {
+      assertUnit(!board.board[i][7]->fWhite);
+   }
+
+   // pawns
+   for (int i = 0; i < 8; i++) {
+      assertUnit(PAWN == board.board[i][6]->getType());
+   }
+
+   // TEARDOWN
+   board.free();
 }

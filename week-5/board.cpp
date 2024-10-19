@@ -127,15 +127,7 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
 
 Board::~Board()
 {
-   //for (int col = 0; col < 8; ++col)
-   //{
-   //   for (int row = 0; row < 8; ++row)
-   //   {
-   //      // Access the piece at board[col][row]
-   //      delete board[col][row];
-   //      board[col][row] = nullptr; 
-   //   }
-   //}
+   free();
 }
 
 /************************************************
@@ -144,11 +136,13 @@ Board::~Board()
  ************************************************/
 void Board::free()
 {
-   // set every piece on board to be null
-   for (int i = 0; i < 8; i++) {
-      for (const Piece *p : board[i]) {
-         if (p != nullptr) {
-            // TODO: delete it...
+   for (int col = 0; col < 8; ++col)
+   {
+      for (int row = 0; row < 8; ++row)
+      {
+         if (board[col][row] != nullptr) {
+            // NOTE: is this right??
+            board[col][row] = nullptr;
          }
       }
    }
@@ -202,14 +196,26 @@ void Board::move(const Move & move)
             Position rookDest = "f8";
             swap(rookSrc, rookDest);
          }
+         break;
 
-         break;
       case Move::CASTLE_QUEEN:
+         if (numMoves % 2 == 0) // white turn
+         {
+            Position rookSrc = "a1";
+            Position rookDest = "d1";
+            swap(rookSrc, rookDest);
+         }
+         else // black turn
+         {
+            Position rookSrc = "a8";
+            Position rookDest = "d8";
+            swap(rookSrc, rookDest);
+         }
          break;
+
       case Move::ENPASSANT:
          break;
    }
-      
   
        
 
