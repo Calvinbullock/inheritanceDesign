@@ -51,6 +51,7 @@ public:
    friend TestBoard;
    
    // constructors and stuff
+   Piece() {}
    Piece(const Position & pos, bool isWhite = true);
    Piece(int c, int r, bool isWhite = true);
    Piece(const Piece & piece)                         {}

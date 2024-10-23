@@ -55,27 +55,53 @@ void Board::reset(bool fFree)
 ***********************************************/
 const Piece& Board::operator [] (const Position& pos) const
 {
-  
-  // TODO: nullptr needs to return space piece
-  /* if (board[pos.getCol()][pos.getRow()] == nullptr) {
-      return Piece();
-   } else {
-      return *board[pos.getCol()][pos.getRow()];
-   }*/
+   //if (board[pos.getCol()][pos.getRow()] == nullptr) 
+   //{
+   //   static const Space emptySpace;  
+   //   return emptySpace;
+   //}
+   //else 
+   //{
+   //   return *board[pos.getCol()][pos.getRow()];
+   //}
+
    return *board[pos.getCol()][pos.getRow()];
+
 }
 Piece& Board::operator [] (const Position& pos)
 {
+   //if (board[pos.getCol()][pos.getRow()] == nullptr)
+   //{
+   //   static Space emptySpace;
+   //   return emptySpace;
+   //}
+   //else
+   //{
+   //   return *board[pos.getCol()][pos.getRow()];
+   //}
    return *board[pos.getCol()][pos.getRow()];
+
 }
 
  /***********************************************
  * BOARD : DISPLAY
  *         Display the board
  ***********************************************/
-void Board::display(const Position & posHover, const Position & posSelect) const
+void Board::display(const Position & posHover, const Position& posSelect, const Interface& pUI /*, const set<Move>& possible*/) const
 {
+   
+   // draw board
    pgout->drawBoard();
+
+   // draw any selections
+   pgout->drawHover(posHover);
+   pgout->drawSelected(posSelect);
+
+   // draw the possible moves
+   //set <Move> ::iterator it;
+   //for (it = possible.begin(); it != possible.end(); ++it)
+   //   pgout->drawPossible(it->getDest());
+
 
    for (int i = 0; i < 8; i++) {
       for (const Piece *p : board[i]) {

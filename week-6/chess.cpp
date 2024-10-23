@@ -33,7 +33,47 @@ void callBack(Interface *pUI, void * p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p;  
-   pBoard->display(Position(), Position());
+
+   set<Move> possibleMoves;
+
+   
+
+   // find selected piece
+   // get piece type
+   // getMoves
+   // board.move
+
+   //if (pUI->getSelectPosition() != -1 && pBoard[pUI->getSelectPosition()] == ' ')
+   //   pUI->clearSelectPosition();
+
+   // get possible moves
+   //pBoard[pUI->getSelectPosition().getCol()][pUI->getSelectPosition().getRow()].getMoves(possibleMoves, *pBoard);
+
+   Move selectedMove;
+   selectedMove.setSource(pUI->getPreviousPosition());
+   selectedMove.setDest(pUI->getSelectPosition());
+   
+
+   // move the piece
+   //pBoard->move(selectedMove);
+
+   //// move 
+   //pBoard->move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))
+   //   pUI->clearSelectPosition();
+   //else
+   //   possible = getPossibleMoves(board, pUI->getSelectPosition());
+
+   //// if we clicked on a blank spot, then it is not selected
+   //if (pUI->getSelectPosition() != -1 && board[pUI->getSelectPosition()] == ' ')
+   //   pUI->clearSelectPosition();
+
+   //// draw the board
+   //draw(board, *pUI, possible);
+
+   // display the board
+   pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI /*, possibleMoves*/);
+
+
 }
 
 
