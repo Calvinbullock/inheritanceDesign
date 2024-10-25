@@ -49,9 +49,20 @@ void callBack(Interface *pUI, void * p)
       (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
 
       Move selectedMove;
-      selectedMove.setSource(pUI->getPreviousPosition());
-      selectedMove.setDest(pUI->getSelectPosition());
+      //selectedMove.setSource(pUI->getPreviousPosition());
+      //selectedMove.setDest(pUI->getSelectPosition());
+     
+      // Check is selectedMove is in possible Moves
+      // Copy all attributes
+      set <Move>::iterator it;
+      for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
+         if (it->getSource() == pUI->getPreviousPosition() &&
+            it->getDest() == pUI->getSelectPosition())
+         {
+            selectedMove = *it;
+         }
 
+      // Move if possible
       if (possibleMoves.find(selectedMove) != possibleMoves.end()) 
       {
          // move the piece
@@ -61,21 +72,15 @@ void callBack(Interface *pUI, void * p)
       //pUI->clearSelectPosition();
    } 
 
-   //// move 
-   //pBoard->move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))
-   //   pUI->clearSelectPosition();
-   //else
-   //   possible = getPossibleMoves(board, pUI->getSelectPosition());
+   // Don't allow space selection ????????? DOES NOT WORK
+   if (pUI->getSelectPosition().isValid() && (*pBoard)[pUI->getSelectPosition()].getType() == SPACE)
+   {
+      pUI->clearSelectPosition();
+   }
 
-   //// if we clicked on a blank spot, then it is not selected
-   //if (pUI->getSelectPosition() != -1 && board[pUI->getSelectPosition()] == ' ')
-   //   pUI->clearSelectPosition();
-
-   //// draw the board
-   //draw(board, *pUI, possible);
 
    // display the board
-   pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI /*, possibleMoves*/);
+   pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI , possibleMoves);
 
 
 }

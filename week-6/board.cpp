@@ -94,8 +94,7 @@ Piece& Board::operator [] (const Position& pos)
  * BOARD : DISPLAY
  *         Display the board
  ***********************************************/
-void Board::display(const Position & posHover, const Position& posSelect, 
-                    const Interface& pUI, const set<Move>& possible) const
+void Board::display(const Position & posHover, const Position& posSelect, const Interface& pUI, const set<Move>& possible) const
 {
    
    // draw board
@@ -106,10 +105,12 @@ void Board::display(const Position & posHover, const Position& posSelect,
    pgout->drawSelected(posSelect);
 
    // draw the possible moves
-   //set <Move> ::iterator it;
-   for (it = possible.begin(); it != possible.end(); ++it)
-      pgout->drawPossible(it->getDest());
-
+   if (!possible.empty()) // if set is not empty
+   {
+      set <Move>::iterator it;
+      for (it = possible.begin(); it != possible.end(); ++it)
+         pgout->drawPossible(it->getDest());
+   }
 
    for (int i = 0; i < 8; i++) {
       for (const Piece *p : board[i]) {

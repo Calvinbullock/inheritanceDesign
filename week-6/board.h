@@ -13,7 +13,7 @@
 #include <cassert>
 #include "move.h"   // Because we return a set of Move
 #include "uiInteract.h"
-//#include <set>     // for draw
+#include <set>     // for draw
 
 class ogstream;
 class TestPawn;
@@ -50,8 +50,7 @@ public:
    // getters
    virtual int  getCurrentMove() const { return numMoves; }
    virtual bool whiteTurn()      const { return (numMoves == 0) || (numMoves % 2 == 0); }
-   virtual void display(const Position& posHover, const Position& posSelect, 
-                        const Interface& pUI, const std::set<Move>& possible) const;
+   virtual void display(const Position& posHover, const Position& posSelect, const Interface& pUI, const std::set<Move>& possible) const;
    virtual const Piece& operator [] (const Position& pos) const;
 
    // setters
