@@ -55,32 +55,17 @@ void Board::reset(bool fFree)
 ***********************************************/
 const Piece& Board::operator [] (const Position& pos) const
 {
-   //if (board[pos.getCol()][pos.getRow()] == nullptr) 
-   //{
-   //   static const Space emptySpace;  
-   //   return emptySpace;
-   //}
-   //else 
-   //{
-   //   return *board[pos.getCol()][pos.getRow()];
-   //}
-
+   assert(0 <= pos.getCol() && pos.getCol() < 8);
+   assert(0 <= pos.getRow() && pos.getRow() < 8);
+   assert(nullptr != board[pos.getCol()][pos.getRow()]);
    return *board[pos.getCol()][pos.getRow()];
-
 }
 Piece& Board::operator [] (const Position& pos)
 {
-   //if (board[pos.getCol()][pos.getRow()] == nullptr)
-   //{
-   //   static Space emptySpace;
-   //   return emptySpace;
-   //}
-   //else
-   //{
-   //   return *board[pos.getCol()][pos.getRow()];
-   //}
+   assert(0 <= pos.getCol() && pos.getCol() < 8);
+   assert(0 <= pos.getRow() && pos.getRow() < 8);
+   assert(nullptr != board[pos.getCol()][pos.getRow()]);
    return *board[pos.getCol()][pos.getRow()];
-
 }
 
  /***********************************************
