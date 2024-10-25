@@ -75,57 +75,59 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       // --------- BLACK ATTACK LEFT ------------
       newPos.set(this->position.getCol() - 1, 
                  this->position.getRow() - 1);
-      pt = board[newPos].getType();
-
+      
       // valid move and capturable piece
-      if (newPos.isValid() &&
-         pt != SPACE &&
-         board[newPos].isWhite())
+      if (newPos.isValid())
       {
-         if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+         pt = board[newPos].getType();
+         if ( pt != SPACE && board[newPos].isWhite())
          {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt) +       // capture
-               (string)"Q";                      // promotion
-            moves.insert(m); //insert a possible move.
-         }
-         else // normal attack move
-         {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt);        // capture    
+            if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt) +       // capture
+                  (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal attack move
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt);        // capture    
 
-            moves.insert(m); //insert a possible move.
+               moves.insert(m); //insert a possible move.
+            }
          }
       }
 
       // --------- BLACK ATTACK RIGHT ------------
       newPos.set(this->position.getCol() + 1,
                  this->position.getRow() - 1);
-      pt = board[newPos].getType();
-
+      
       // valid move and capturable piece
-      if (newPos.isValid() &&
-          pt != SPACE &&
-          board[newPos].isWhite())
+      if (newPos.isValid())
       {
-         if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+         pt = board[newPos].getType();
+         if (pt != SPACE && board[newPos].isWhite())
          {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt) +       // capture
-               (string)"Q";                      // promotion
-            moves.insert(m); //insert a possible move.
-         }
-         else // normal attack move
-         {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt);       // capture    
+            if (newPos.getRow() == 0) // BLACK ATTACKING PAWN PROMOTION
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt) +       // capture
+                  (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal attack move
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt);       // capture    
 
-            moves.insert(m); //insert a possible move.
-         } 
+               moves.insert(m); //insert a possible move.
+            }
+         }
       }
 
       // --------- BLACK EN-PASSANT ------------
@@ -211,56 +213,59 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       // --------- WHITE ATTACK LEFT ------------
       newPos.set(this->position.getCol() - 1,
          this->position.getRow() + 1);
-      pt = board[newPos].getType();
 
       // valid move
-      if (newPos.isValid() &&
-         pt != SPACE &&
-         !board[newPos].isWhite())
+      if (newPos.isValid())
       {
-         if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+         pt = board[newPos].getType();
+         if (pt != SPACE && !board[newPos].isWhite())
          {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt) +       // capture
-               (string)"Q";                      // promotion
-            moves.insert(m); //insert a possible move.
-         }
-         else // normal attack move
-         {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt);       // capture    
+            if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt) +       // capture
+                  (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal attack move
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt);       // capture    
 
-            moves.insert(m); //insert a possible move.
+               moves.insert(m); //insert a possible move.
+            }
          }
       }
+      
 
       // --------- WHITE ATTACK RIGHT ------------
       newPos.set(this->position.getCol() + 1,
          this->position.getRow() + 1);
-      pt = board[newPos].getType();
 
       // valid move and capturable piece
-      if (newPos.isValid() &&
-         pt != SPACE &&
-         !board[newPos].isWhite())
+      if (newPos.isValid())
       {
-         if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+         pt = board[newPos].getType();
+         if (pt != SPACE && !board[newPos].isWhite())
          {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt) +       // capture
-               (string)"Q";                      // promotion
-            moves.insert(m); //insert a possible move.
-         }
-         else // normal attack move
-         {
-            m = this->position.getColRowText() + // src
-               newPos.getColRowText() +          // dest
-               m.letterFromPieceType(pt);        // capture   
+            if (newPos.getRow() == 7) // WHITE ATTACKING PAWN PROMOTION
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt) +       // capture
+                  (string)"Q";                      // promotion
+               moves.insert(m); //insert a possible move.
+            }
+            else // normal attack move
+            {
+               m = this->position.getColRowText() + // src
+                  newPos.getColRowText() +          // dest
+                  m.letterFromPieceType(pt);        // capture   
 
-            moves.insert(m); //insert a possible move.
+               moves.insert(m); //insert a possible move.
+            }
          }
       }
 

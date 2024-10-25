@@ -59,8 +59,15 @@ public:
       return ((int)((colRow & 0xf0) >> 4) <= 7 &&
          (int)((colRow & 0x0f) >> 0) <= 7);
    }
-   void setValid() {                             }
-   void setInvalid() {                             }
+   void setValid() 
+   {
+      if (isInvalid())
+         set(0x00);
+   }
+   void setInvalid() 
+   {
+      set(0xff);
+   }
    bool operator <  (const Position& rhs) const { return colRow < rhs.colRow; }
    bool operator == (const Position& rhs) const { return colRow == rhs.colRow; }
    bool operator != (const Position& rhs) const

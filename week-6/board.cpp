@@ -160,8 +160,8 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    }
 
    // add spaces
-   for (int row = 2; row < 5; row++) {
-      for (int col = 0; col < 7; col++) {
+   for (int row = 2; row <= 5; row++) {
+      for (int col = 0; col <= 7; col++) {
          board[col][row] = new Space(col, row);
       }
    }
