@@ -14,6 +14,7 @@
 #include "piece.h"        // for PIECE and company
 #include "board.h"        // for BOARD
 #include "test.h"
+#include <iostream>
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
@@ -33,39 +34,44 @@ void callBack(Interface *pUI, void * p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p;  
-
    set<Move> possibleMoves;
+   Move selectedMove;
 
    // find selected piece
    // get piece type
    // getMoves
    // board.move
    // check if selected position isValid
-   
-   if (pUI->getSelectPosition().isValid() &&
-      (*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
+
+   //cout << "---------" << endl;
+   //cout << "selectPos " << pUI->getSelectPosition() << endl;
+   //cout << "prevPos " << pUI->getPreviousPosition() << endl;
+
+   if (pUI->getSelectPosition().isValid() && 
+         (*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
    {
       // get possible moves from a selected position
       (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
 
-      Move selectedMove;
       //selectedMove.setSource(pUI->getPreviousPosition());
       //selectedMove.setDest(pUI->getSelectPosition());
      
       // Check is selectedMove is in possible Moves
-      // Copy all attributes
+      // Copy all attributes    
       set <Move>::iterator it;
       for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
          if (it->getSource() == pUI->getPreviousPosition() &&
             it->getDest() == pUI->getSelectPosition())
          {
             selectedMove = *it;
+            //cout << "setMove " << selectedMove.getText() << endl;
          }
 
       // Move if possible
       if (possibleMoves.find(selectedMove) != possibleMoves.end()) 
       {
          // move the piece
+         //cout << "move " << selectedMove.getText() << endl;
          pBoard->move(selectedMove);
       }
 
@@ -78,11 +84,8 @@ void callBack(Interface *pUI, void * p)
       pUI->clearSelectPosition();
    }
 
-
    // display the board
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI , possibleMoves);
-
-
 }
 
 
