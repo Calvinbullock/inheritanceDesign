@@ -36,17 +36,12 @@ void callBack(Interface *pUI, void * p)
 
    set<Move> possibleMoves;
 
-   
-
    // find selected piece
    // get piece type
    // getMoves
    // board.move
    // check if selected position isValid
-
-   //if (pUI->getSelectPosition() != -1 && pBoard[pUI->getSelectPosition()] == ' ')
-   //   pUI->clearSelectPosition();
-
+   
    if (pUI->getSelectPosition().isValid() &&
       (*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
    {
@@ -57,12 +52,14 @@ void callBack(Interface *pUI, void * p)
       selectedMove.setSource(pUI->getPreviousPosition());
       selectedMove.setDest(pUI->getSelectPosition());
 
+      if (possibleMoves.find(selectedMove) != possibleMoves.end()) 
+      {
+         // move the piece
+         pBoard->move(selectedMove);
+      }
 
-      // move the piece
-      //pBoard->move(selectedMove);
-   }
-      
-   
+      //pUI->clearSelectPosition();
+   } 
 
    //// move 
    //pBoard->move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))

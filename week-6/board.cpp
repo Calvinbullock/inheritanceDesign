@@ -57,6 +57,17 @@ const Piece& Board::operator [] (const Position& pos) const
 {
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
+
+   if (board[pos.getCol()][pos.getRow()] == nullptr)
+   {
+      static Space emptySpace;
+      return emptySpace;
+   }
+   else
+   {
+      return *board[pos.getCol()][pos.getRow()];
+   }
+
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
    return *board[pos.getCol()][pos.getRow()];
 }
@@ -64,6 +75,17 @@ Piece& Board::operator [] (const Position& pos)
 {
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
+
+   if (board[pos.getCol()][pos.getRow()] == nullptr)
+   {
+      static Space emptySpace;
+      return emptySpace;
+   }
+   else
+   {
+      return *board[pos.getCol()][pos.getRow()];
+   }
+
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
    return *board[pos.getCol()][pos.getRow()];
 }
@@ -72,7 +94,8 @@ Piece& Board::operator [] (const Position& pos)
  * BOARD : DISPLAY
  *         Display the board
  ***********************************************/
-void Board::display(const Position & posHover, const Position& posSelect, const Interface& pUI /*, const set<Move>& possible*/) const
+void Board::display(const Position & posHover, const Position& posSelect, 
+                    const Interface& pUI, const set<Move>& possible) const
 {
    
    // draw board
@@ -84,8 +107,8 @@ void Board::display(const Position & posHover, const Position& posSelect, const 
 
    // draw the possible moves
    //set <Move> ::iterator it;
-   //for (it = possible.begin(); it != possible.end(); ++it)
-   //   pgout->drawPossible(it->getDest());
+   for (it = possible.begin(); it != possible.end(); ++it)
+      pgout->drawPossible(it->getDest());
 
 
    for (int i = 0; i < 8; i++) {
@@ -133,6 +156,13 @@ Board::Board(ogstream* pgout, bool noreset) : pgout(pgout), numMoves(0), board()
    // pawns
    for (int i = 0; i < 8; i++) {
       board[i][6] = new Pawn(i, 6, false);
+   }
+
+   // add spaces
+   for (int row = 2; row < 5; row++) {
+      for (int col = 0; col < 7; col++) {
+         board[col][row] = new Space(col, row);
+      }
    }
 }
 
