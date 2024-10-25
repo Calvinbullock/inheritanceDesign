@@ -36,52 +36,37 @@ void callBack(Interface *pUI, void * p)
    Board * pBoard = (Board *)p;  
    set<Move> possibleMoves;
    Move selectedMove;
+   
+   if (pUI->getSelectPosition().isValid()) {
+      if ((*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
+      {
+         // get possible moves from a selected position
+         (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
+      }
+      else if ((*pBoard)[pUI->getPreviousPosition()].getType() != SPACE)
+      {
+         (*pBoard)[pUI->getPreviousPosition()].getMoves(possibleMoves, *pBoard);
 
-   // find selected piece
-   // get piece type
-   // getMoves
-   // board.move
-   // check if selected position isValid
+         // Check is selectedMove is in possible Moves
+         set <Move>::iterator it;
+         for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 
-   //cout << "---------" << endl;
-   //cout << "selectPos " << pUI->getSelectPosition() << endl;
-   //cout << "prevPos " << pUI->getPreviousPosition() << endl;
-
-   if (pUI->getSelectPosition().isValid() && 
-         (*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
-   {
-      // get possible moves from a selected position
-      (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
-
-      //selectedMove.setSource(pUI->getPreviousPosition());
-      //selectedMove.setDest(pUI->getSelectPosition());
-     
-      // Check is selectedMove is in possible Moves
-      // Copy all attributes    
-      set <Move>::iterator it;
-      for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
-         if (it->getSource() == pUI->getPreviousPosition() &&
-            it->getDest() == pUI->getSelectPosition())
-         {
-            selectedMove = *it;
-            //cout << "setMove " << selectedMove.getText() << endl;
+            if (it->getSource() == pUI->getPreviousPosition() &&
+               it->getDest() == pUI->getSelectPosition())
+            {
+               selectedMove = *it;
+            }
          }
 
-      // Move if possible
-      if (possibleMoves.find(selectedMove) != possibleMoves.end()) 
-      {
-         // move the piece
-         //cout << "move " << selectedMove.getText() << endl;
-         pBoard->move(selectedMove);
+         // Move if possible
+         if (possibleMoves.find(selectedMove) != possibleMoves.end()) 
+         {
+            // move the piece
+            pBoard->move(selectedMove);
+         }
+
+         //pUI->clearSelectPosition();
       }
-
-      //pUI->clearSelectPosition();
-   } 
-
-   // Don't allow space selection ????????? DOES NOT WORK
-   if (pUI->getSelectPosition().isValid() && (*pBoard)[pUI->getSelectPosition()].getType() == SPACE)
-   {
-      pUI->clearSelectPosition();
    }
 
    // display the board
