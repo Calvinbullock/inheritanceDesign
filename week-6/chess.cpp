@@ -8,6 +8,7 @@
 ************************************************************************/
 
 
+#include "pieceType.h"
 #include "uiInteract.h"   // for Interface
 #include "uiDraw.h"       // for OGSTREAM
 #include "position.h"     // for POSITION
@@ -22,64 +23,42 @@
 using namespace std;
 
 
-/**************************************
- * GAMEPLAY - Handle rules for each turn
- **************************************/
-void gameplay(Interface* &pUI, Board* &pBoard, std::set<Move> &possibleMoves)
+void takeTurn(Interface *pUI, Board* &pBoard, std::set <Move> &possibleMoves)
 {
-   
    Move selectedMove;
 
-   // if valid selection
-   if (pUI->getSelectPosition().isValid())
+   // selection is not a space
+   if ((*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
    {
-      //cout << (*pBoard)[pUI->getSelectPosition()].getNMoves() << endl;
-       
-      cout << (*pBoard)[pUI->getSelectPosition()].getType() << endl;
-      //cout << pBoard->getCurrentMove() << endl;
-       
-      // selection is not a space
-      if ((*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
+      // get possible moves from a selected position
+      (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
+   }
+
+   // if previous move exists and is valid
+   if (pUI->getPreviousPosition().isValid())
+   {
+      if ((*pBoard)[pUI->getPreviousPosition()].getType() != SPACE)
       {
-         // get possible moves from a selected position
-         (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
-      }
-      // if previous move exists and is valid
-      if (pUI->getPreviousPosition().isValid())
-      {
-         if ((*pBoard)[pUI->getPreviousPosition()].getType() != SPACE)
+         // re-gets moves new selection/scope change
+         (*pBoard)[pUI->getPreviousPosition()].getMoves(possibleMoves, *pBoard);
+
+         // Check is selectedMove is in possible Moves
+         set <Move>::iterator it;
+         for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) 
          {
-            // re-gets moves new selection/scope change
-            (*pBoard)[pUI->getPreviousPosition()].getMoves(possibleMoves, *pBoard);
-
-            set <Move>::iterator its;
-            for (its = possibleMoves.begin(); its != possibleMoves.end(); ++its)
+            if (it->getSource() == pUI->getPreviousPosition() &&
+               it->getDest() == pUI->getSelectPosition())
             {
-               
-               cout << its->getText() << ",";
-               
+               selectedMove = *it;
             }
-            cout << endl;
+         }
 
-            // Check is selectedMove is in possible Moves
-            set <Move>::iterator it;
-            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
-            {
-               if (it->getSource() == pUI->getPreviousPosition() &&
-                  it->getDest() == pUI->getSelectPosition())
-               {
-                  selectedMove = *it;
-               }
-            }
-
-            // Move if possible
-            if (possibleMoves.find(selectedMove) != possibleMoves.end())
-            {
-               // move the piece
-               pBoard->move(selectedMove);
-               cout << selectedMove.getText() << endl;
-               pUI->clearSelectPosition();
-            }
+         // Move if possible
+         if (possibleMoves.find(selectedMove) != possibleMoves.end())
+         {
+            // move the piece
+            pBoard->move(selectedMove);
+            pUI->clearSelectPosition();
          }
       }
    }
@@ -96,11 +75,53 @@ void callBack(Interface *pUI, void * p)
 {
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
-   Board * pBoard = (Board *)p;
+   Board * pBoard = (Board *)p;  
    set<Move> possibleMoves;
-   
-   gameplay(pUI, pBoard, possibleMoves);
 
+   // TODO: pass into takeTurn
+   bool isWhiteTurn = (*pBoard).whiteTurn();
+   cout << "currMove " << pBoard->getCurrentMove() << endl;
+
+   // if valid selection
+   if (pUI->getSelectPosition().isValid()) 
+   {
+      bool selectedIsWhite = (*pBoard)[pUI->getSelectPosition()].isWhite();
+      PieceType selectedPT = (*pBoard)[pUI->getSelectPosition()].getType();
+
+      // turn color determination
+      if (isWhiteTurn && selectedIsWhite && selectedPT != SPACE)
+      {
+         cout << "1" << endl;
+         takeTurn(pUI, pBoard, possibleMoves);
+      }
+      else if (!isWhiteTurn && !selectedIsWhite)
+      {
+         cout << "3" << endl;
+         takeTurn(pUI, pBoard, possibleMoves);
+      }
+      else if (pUI->getPreviousPosition().isValid()) // Attacking
+      {
+         bool prevSelectedIsWhite = (*pBoard)[pUI->getPreviousPosition()].isWhite();
+         PieceType prevSelectedPT = (*pBoard)[pUI->getPreviousPosition()].getType();
+
+         if (isWhiteTurn && prevSelectedIsWhite && (!selectedIsWhite || selectedPT == SPACE)) // BUG: 
+         {
+            cout << "2" << endl;
+            takeTurn(pUI, pBoard, possibleMoves);
+         }
+         else if (!isWhiteTurn && !prevSelectedIsWhite && selectedIsWhite)
+         {
+            cout << "4" << endl;
+            takeTurn(pUI, pBoard, possibleMoves);
+         }
+      }
+      else
+      {
+         cout << "5" << endl;
+         pUI->clearSelectPosition();
+      }
+      pUI->clearPreviousPosition();
+   }
 
    //if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE) // can't select space
    //{
