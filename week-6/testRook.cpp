@@ -251,6 +251,78 @@ void TestRook::getMoves_slideToCapture()
 
 
 /*************************************
+ * (x = impossible move)
+ * +---a-b-c-d-e-f-g-h---+  
+ * |                     |
+ * 8       P             8
+ * 7       x             7
+ * 6       x             6
+ * 5       P             5
+ * 4       .             4
+ * 3       .             3
+ * 2   P .(r). . P x x   2
+ * 1       P             1
+ * |                     |
+ * +---a-b-c-d-e-f-g-h---+
+ **************************************/
+void TestRook::getMoves_slideToCaptureBlocked()
+{
+   // SETUP
+   BoardEmpty board;
+   Rook rook(7, 7, false /*white*/);
+   rook.fWhite = true;
+   rook.position.set(2, 1);
+   board.board[2][1] = &rook;
+
+   Black black1(PAWN);
+   board.board[2][0] = &black1; // bottom
+   Black black2(PAWN);
+   board.board[5][1] = &black2; // right
+   Black black3(PAWN);
+   board.board[2][4] = &black3; // 1st top
+   Black black4(PAWN);
+   board.board[2][7] = &black4; // 2nd top
+   Black black5(PAWN);
+   board.board[0][1] = &black5; // left
+
+   set <Move> moves;
+
+   // EXERCISE
+   rook.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 9);  
+
+   assertUnit(moves.find(Move("c2c1p")) != moves.end()); // move down
+
+   assertUnit(moves.find(Move("c2d2")) != moves.end()); // move right
+   assertUnit(moves.find(Move("c2e2")) != moves.end());
+   assertUnit(moves.find(Move("c2f2p")) != moves.end());
+   assertUnit(moves.find(Move("c2g2")) == moves.end());
+   assertUnit(moves.find(Move("c2h2p")) == moves.end());
+
+   assertUnit(moves.find(Move("c2c3")) != moves.end()); // move up
+   assertUnit(moves.find(Move("c2c4")) != moves.end());
+   assertUnit(moves.find(Move("c2c5p")) != moves.end());
+   assertUnit(moves.find(Move("c2c6")) == moves.end());
+   assertUnit(moves.find(Move("c2c7")) == moves.end());
+   assertUnit(moves.find(Move("c2c8p")) == moves.end());
+
+   assertUnit(moves.find(Move("c2b2")) != moves.end()); // move left
+   assertUnit(moves.find(Move("c2a2p")) != moves.end());
+
+   // TEARDOWN
+   board.board[4][3] = nullptr; // white rook
+
+   board.board[2][0] = nullptr;
+   board.board[5][1] = nullptr;
+   board.board[2][4] = nullptr;
+   board.board[2][7] = nullptr;
+   board.board[0][1] = nullptr;
+}
+
+
+/*************************************
  * GET TYPE : rook
  * Input:
  * Output: ROOK

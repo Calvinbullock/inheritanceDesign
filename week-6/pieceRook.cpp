@@ -37,8 +37,12 @@ void Rook::getMoves(set<Move>& moves, const Board& board) const
          newPos.setCol(this->position.getCol() + posMoves[i].c);
          newPos.setRow(this->position.getRow() + posMoves[i].r);
 
+         bool enemyHit = false;
+
          // slide while new move valid, and a space or an enemy
-         while (newPos.isValid() && (board[newPos].getType() == SPACE || this->fWhite != board[newPos].isWhite()))
+         while (newPos.isValid() &&
+            (board[newPos].getType() == SPACE || this->fWhite != board[newPos].isWhite()) &&
+            enemyHit == false)
          {
             // set new move
             Move m;
@@ -49,9 +53,17 @@ void Rook::getMoves(set<Move>& moves, const Board& board) const
 
             moves.insert(m); // add new move
 
+            // stop if enemy hit
+            if (this->fWhite != board[newPos].isWhite() && board[newPos].getType() != SPACE)
+            {
+               enemyHit = true;
+            }
+
             // next move
             newPos.setCol(newPos.getCol() + posMoves[i].c);
             newPos.setRow(newPos.getRow() + posMoves[i].r);
+
+            
 
          }
       }

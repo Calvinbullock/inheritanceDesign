@@ -57,36 +57,38 @@ const Piece& Board::operator [] (const Position& pos) const
 {
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
-
-   if (board[pos.getCol()][pos.getRow()] == nullptr)
-   {
-      static Space emptySpace;
-      return emptySpace;
-   }
-   else
-   {
-      return *board[pos.getCol()][pos.getRow()];
-   }
-
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
+
+   //if (board[pos.getCol()][pos.getRow()] == nullptr)
+   //{
+   //   static Space emptySpace;
+   //   return emptySpace;
+   //}
+   //else
+   //{
+   //   return *board[pos.getCol()][pos.getRow()];
+   //}
+
+   
    return *board[pos.getCol()][pos.getRow()];
 }
 Piece& Board::operator [] (const Position& pos)
 {
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
-
-   if (board[pos.getCol()][pos.getRow()] == nullptr)
-   {
-      static Space emptySpace;
-      return emptySpace;
-   }
-   else
-   {
-      return *board[pos.getCol()][pos.getRow()];
-   }
-
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
+
+   //if (board[pos.getCol()][pos.getRow()] == nullptr)
+   //{
+   //   static Space emptySpace;
+   //   return emptySpace;
+   //}
+   //else
+   //{
+   //   return *board[pos.getCol()][pos.getRow()];
+   //}
+
+   
    return *board[pos.getCol()][pos.getRow()];
 }
 

@@ -26,6 +26,7 @@ public:
       getMoves_slideToEnd();
       getMoves_slideToBlock();
       getMoves_slideToCapture();
+      getMoves_slideToCaptureBlocked();
 
       getType();
       
@@ -36,6 +37,8 @@ private:
    void getMoves_slideToEnd();
    void getMoves_slideToBlock();
    void getMoves_slideToCapture();
+   void getMoves_slideToCaptureBlocked();
+
    void getType();
 };
 

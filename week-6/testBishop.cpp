@@ -164,6 +164,77 @@ void TestBishop::getMoves_slideToBlock()
 
    // TEARDOWN
    board.board[2][1] = nullptr; // white bishop
+
+   board.board[3][0] = nullptr;
+   board.board[1][0] = nullptr;
+   board.board[0][3] = nullptr;
+   board.board[7][6] = nullptr;
+}
+
+/*************************************
+ * +---a-b-c-d-e-f-g-h---+
+ * |                     |
+ * 8                     8
+ * 7                 P   7
+ * 6               x     6
+ * 5             P       5
+ * 4   x       .         4
+ * 3     P   .           3
+ * 2      (b)            2
+ * 1     P   P           1
+ * |                     |
+ * +---a-b-c-d-e-f-g-h---+C
+ **************************************/
+void TestBishop::getMoves_slideToCaptureBlocked()
+{
+   // SETUP
+   BoardEmpty board;
+   Bishop bishop(7, 7, false /*white*/);
+   bishop.fWhite = true;
+   bishop.position.set(2, 1);
+   board.board[2][1] = &bishop;
+
+   // col row??
+   set <Move> moves;
+
+   Black black1(PAWN);
+   board.board[3][0] = &black1;
+   Black black2(PAWN);
+   board.board[1][0] = &black2;
+   Black black3(PAWN);
+   board.board[1][2] = &black3;
+   Black black4(PAWN);
+   board.board[5][4] = &black4;
+   Black black5(PAWN);
+   board.board[7][6] = &black5;
+
+   // EXERCISE
+   bishop.getMoves(moves, board);
+
+   // VERIFY
+   assertUnit(moves.size() == 6);  // No possible moves
+
+   assertUnit(moves.find(Move("c2d1p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b1p")) != moves.end());
+
+   assertUnit(moves.find(Move("c2b3p")) != moves.end());
+   assertUnit(moves.find(Move("c2a4p")) == moves.end());
+
+   assertUnit(moves.find(Move("c2d3")) != moves.end());
+   assertUnit(moves.find(Move("c2e4")) != moves.end());
+   assertUnit(moves.find(Move("c2f5p")) != moves.end());
+   assertUnit(moves.find(Move("c2g6")) == moves.end());
+   assertUnit(moves.find(Move("c2h7")) == moves.end());
+
+   // TEARDOWN
+   board.board[2][1] = nullptr; // white bishop
+
+   board.board[3][0] = nullptr;
+   board.board[1][0] = nullptr;
+   board.board[1][2] = nullptr;
+   board.board[5][4] = nullptr;
+   board.board[7][6] = nullptr;
 }
 
 
