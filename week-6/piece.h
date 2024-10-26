@@ -91,7 +91,6 @@ protected:
    Position position;              // current position of this piece
    int  lastMove;                  // last time this piece moved
    
-   
    struct CR {
       int c;
       int r;

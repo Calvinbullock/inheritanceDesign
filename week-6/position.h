@@ -94,7 +94,6 @@ public:
          set(0xff);
    }
 
-
    // Row/Col : The position class can work with row/column,
    //           which are 0..7 and 0...7
    Position(int c, int r) : colRow(0xff) { set(c, r); }
@@ -122,13 +121,11 @@ public:
 
    // Text:    The Position class can work with textual coordinates,
    //          such as "d4"
-
    Position(const char* s) : colRow(0x00) { *this = s; }
    const Position& operator =  (const char* rhs);
    const Position& operator =  (const string& rhs);
    string getColRowText();
    string getColRowText() const;
-
 
    // Pixels:    The Position class can work with screen coordinates,
    //            a.k.a. Pixels, these are X and Y coordinates. Note that

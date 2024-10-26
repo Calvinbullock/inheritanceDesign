@@ -15,7 +15,6 @@
 #include "piece.h"        // for PIECE and company
 #include "board.h"        // for BOARD
 #include "test.h"
-#include <iostream>
 #include <set>            // for STD::SET
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
