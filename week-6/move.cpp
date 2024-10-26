@@ -228,6 +228,8 @@ string Move::getText() const
       case CASTLE_KING:
          moveText.push_back('c');
          break;
+      case PROMOTION:
+         moveText.push_back('Q');
       }
    }
    return moveText;

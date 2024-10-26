@@ -34,7 +34,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       if (newPos.isValid())
       {
          // starting row and has not moved
-         if (this->position.getRow() == 6 && this->hasMoved())
+         if (this->position.getRow() == 6 && !this->hasMoved())
          {
             m = this->position.getColRowText()  // src
                + newPos.getColRowText();        // dest
@@ -173,7 +173,7 @@ void Pawn::getMoves(set<Move>& moves, const Board& board) const
       if (newPos.isValid())
       {
          // starting row and has not moved
-         if (this->position.getRow() == 1 && this->hasMoved())
+         if (this->position.getRow() == 1 && !this->hasMoved())
          {
             m = this->position.getColRowText()  // src
                + newPos.getColRowText();        // dest

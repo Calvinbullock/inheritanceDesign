@@ -223,12 +223,12 @@ void Board::move(const Move & move)
 
    // swap the pieces
    swap(src, dest);
-   numMoves++;
+   
 
    switch (move.getMoveType())
    {
    case Move::CASTLE_KING:
-      if (numMoves % 2 == 0) // white turn
+      if (whiteTurn()) // white turn
       {
          Position rookSrc = "h1";
          Position rookDest = "f1";
@@ -242,7 +242,7 @@ void Board::move(const Move & move)
       }
       break;
    case Move::CASTLE_QUEEN:
-      if (numMoves % 2 == 0) // white turn
+      if (whiteTurn()) // white turn
       {
          Position rookSrc = "a1";
          Position rookDest = "d1";
@@ -256,7 +256,7 @@ void Board::move(const Move & move)
       }
       break;
    case Move::ENPASSANT:
-      if (numMoves % 2 == 0) // white turn
+      if (whiteTurn()) // white turn
       {
          Position pawnToKill(move.getDest());
          pawnToKill.setRow(pawnToKill.getRow() - 1); // enemy pawn 1 below
@@ -281,6 +281,8 @@ void Board::move(const Move & move)
          new Queen(pawnToPromote.getCol(), pawnToPromote.getRow());
 
    }
+
+   numMoves++;
 }
 
 void Board::swap(Position& pos1, Position& pos2)

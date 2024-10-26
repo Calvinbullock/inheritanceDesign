@@ -790,19 +790,19 @@ void TestBoard::move_pawnEnpassant()
    move.moveType = Move::ENPASSANT;
 
    Board board(nullptr, true /*noreset*/);
-   board.numMoves = 17;
+   board.numMoves = 16;
    board.board[0][4] = new PieceSpy(4, 1, true  /*isWhite*/, PAWN);
    board.board[1][4] = new PieceSpy(4, 1, false  /*!isWhite*/, PAWN);
    board.board[1][5] = new PieceSpy(4, 3, true  /*isWhite*/, SPACE);
-   board.board[0][4]->nMoves = 17;
-   board.board[1][4]->nMoves = 16;  // enemy pawn just moved
+   board.board[0][4]->nMoves = 16;
+   board.board[1][4]->nMoves = 15;  // enemy pawn just moved
    PieceSpy::reset();
 
    // EXERCISE
    board.move(move);
 
    // VERIFY
-   assertUnit(18 == board.numMoves);
+   assertUnit(17 == board.numMoves);
    assertUnit(PAWN == (board.board[1][5])->getType());
    assertUnit(SPACE == (board.board[0][4])->getType());
    assertUnit(SPACE == (board.board[1][4])->getType());
@@ -1315,23 +1315,23 @@ void TestBoard::move_kingShortCastle()
 
    // king move
    Board board(nullptr, true /*noreset*/);
-   board.numMoves = 17;
+   board.numMoves = 16;
    board.board[4][0] = new PieceSpy(4, 0, true  /*isWhite*/, KING);
    board.board[6][0] = new PieceSpy(6, 0, true  /*isWhite*/, SPACE);
-   board.board[4][0]->nMoves = 17;
+   board.board[4][0]->nMoves = 16;
    PieceSpy::reset();
 
    // rook move
    board.board[7][0] = new PieceSpy(7, 0, true  /*isWhite*/, ROOK);
    board.board[5][0] = new PieceSpy(5, 0 , true  /*isWhite*/, SPACE);
-   board.board[7][0]->nMoves = 17;
+   board.board[7][0]->nMoves = 16;
    PieceSpy::reset();
 
    // EXERCISE
    board.move(move);
 
    // VERIFY
-   assertUnit(18 == board.numMoves);
+   assertUnit(17 == board.numMoves);
    assertUnit(KING == (board.board[6][0])->getType());
    assertUnit(SPACE == (board.board[4][0])->getType());
    assertUnit(ROOK == (board.board[5][0])->getType());

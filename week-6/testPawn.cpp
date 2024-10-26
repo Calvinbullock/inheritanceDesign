@@ -414,7 +414,7 @@ void TestPawn::getMoves_promotionWhite()
    assertUnit(moves.size() == 3); // all moves open
    assertUnit(moves.find(Move("b7b8Q")) != moves.end());
    assertUnit(moves.find(Move("b7a8pQ")) != moves.end());
-   assertUnit(moves.find(Move("b7c8pQ")) != moves.end()); // will give false positive for "b7c8"
+   assertUnit(moves.find(Move("b7c8pQ")) != moves.end()); 
 
    // TEARDOWN
    board.board[1][6] = nullptr; // pawn
@@ -457,22 +457,17 @@ void TestPawn::getMoves_promotionBlack()
    // EXERCISE
    pawn.getMoves(moves, board);
 
-   // TODO:
-   //std::cout << mov1.getText() << "--" << mov2.getText() << std::endl;
-   //std::cout << (mov1 == mov2) << std::endl;                     // move constructor comparison
-   //std::cout << (mov1.getText() == mov2.getText()) << std::endl; // string constructor
-
    // VERIFY
    assertUnit(moves.size() == 3); // all moves open
    assertUnit(moves.find(Move("e2e1Q")) != moves.end());
    assertUnit(moves.find(Move("e2d1rQ")) != moves.end());
-   assertUnit(moves.find(Move("e2f1rQ")) != moves.end()); // will give false positive for "b7c8"
+   assertUnit(moves.find(Move("e2f1rQ")) != moves.end()); 
 
 
    // TEARDOWN
-   board.board[1][6] = nullptr; // pawn
-   board.board[0][7] = nullptr; // pawn
-   board.board[2][7] = nullptr; // pawn
+   board.board[4][1] = nullptr; // pawn
+   board.board[3][0] = nullptr; // pawn
+   board.board[5][0] = nullptr; // pawn
 }
 
 

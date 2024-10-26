@@ -32,7 +32,9 @@ Piece::Piece(int c, int r, bool isWhite)
 { 
    position.setCol(c); 
    position.setRow(r); 
-   fWhite = isWhite; 
+   fWhite = isWhite;
+   nMoves = 0;
+   lastMove = 0;
 }
 
 /************************************************

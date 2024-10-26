@@ -65,7 +65,7 @@ public:
    virtual bool operator == (PieceType pt) const { return this->getType() == pt;       }
    virtual bool operator != (PieceType pt) const { return !(this->getType() == pt);    }
    virtual bool isWhite()                  const { return fWhite;                      }
-   virtual bool hasMoved()                  const { return nMoves != 0;                 }
+   virtual bool hasMoved()                 const { return nMoves != 0;                 }
    virtual int  getNMoves()                const { return nMoves;                      }
    virtual int  getLastMove()              const { return lastMove; }
    virtual void decrementNMoves()                {                                     }

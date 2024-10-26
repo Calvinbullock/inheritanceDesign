@@ -22,24 +22,22 @@
 using namespace std;
 
 
-/*************************************
- * All the interesting work happens here, when
- * I get called back from OpenGL to draw a frame.
- * When I am finished drawing, then the graphics
- * engine will wait until the proper amount of
- * time has passed and put the drawing on the screen.
+/**************************************
+ * GAMEPLAY - Handle rules for each turn
  **************************************/
-void callBack(Interface *pUI, void * p)
+void gameplay(Interface* &pUI, Board* &pBoard, std::set<Move> &possibleMoves)
 {
-   // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
-   Board * pBoard = (Board *)p;  
-   set<Move> possibleMoves;
-   Move selectedMove;
    
+   Move selectedMove;
+
    // if valid selection
-   if (pUI->getSelectPosition().isValid()) {
-      
+   if (pUI->getSelectPosition().isValid())
+   {
+      //cout << (*pBoard)[pUI->getSelectPosition()].getNMoves() << endl;
+       
+      cout << (*pBoard)[pUI->getSelectPosition()].getType() << endl;
+      //cout << pBoard->getCurrentMove() << endl;
+       
       // selection is not a space
       if ((*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
       {
@@ -54,9 +52,18 @@ void callBack(Interface *pUI, void * p)
             // re-gets moves new selection/scope change
             (*pBoard)[pUI->getPreviousPosition()].getMoves(possibleMoves, *pBoard);
 
+            set <Move>::iterator its;
+            for (its = possibleMoves.begin(); its != possibleMoves.end(); ++its)
+            {
+               
+               cout << its->getText() << ",";
+               
+            }
+            cout << endl;
+
             // Check is selectedMove is in possible Moves
             set <Move>::iterator it;
-            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) 
+            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
             {
                if (it->getSource() == pUI->getPreviousPosition() &&
                   it->getDest() == pUI->getSelectPosition())
@@ -70,11 +77,30 @@ void callBack(Interface *pUI, void * p)
             {
                // move the piece
                pBoard->move(selectedMove);
+               cout << selectedMove.getText() << endl;
                pUI->clearSelectPosition();
             }
          }
       }
    }
+}
+
+/*************************************
+ * All the interesting work happens here, when
+ * I get called back from OpenGL to draw a frame.
+ * When I am finished drawing, then the graphics
+ * engine will wait until the proper amount of
+ * time has passed and put the drawing on the screen.
+ **************************************/
+void callBack(Interface *pUI, void * p)
+{
+   // the first step is to cast the void pointer into a game object. This
+   // is the first step of every single callback function in OpenGL. 
+   Board * pBoard = (Board *)p;
+   set<Move> possibleMoves;
+   
+   gameplay(pUI, pBoard, possibleMoves);
+
 
    //if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE) // can't select space
    //{

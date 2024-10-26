@@ -44,6 +44,7 @@ public:
    // getters
    string getText();
    string getText() const;
+   string getRegText()           const { return text; }
    const Position& getDest()     const { return dest; }
    const Position& getSource()   const { return source; }
    PieceType getPromotion()      const { return promote; }
