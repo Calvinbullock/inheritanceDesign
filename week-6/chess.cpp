@@ -77,10 +77,7 @@ void callBack(Interface *pUI, void * p)
    // is the first step of every single callback function in OpenGL. 
    Board * pBoard = (Board *)p;  
    set<Move> possibleMoves;
-
-   // TODO: pass into takeTurn
    bool isWhiteTurn = (*pBoard).whiteTurn();
-   cout << "currMove " << pBoard->getCurrentMove() << endl;
 
    // if valid selection
    if (pUI->getSelectPosition().isValid()) 
@@ -91,12 +88,10 @@ void callBack(Interface *pUI, void * p)
       // turn color determination
       if (isWhiteTurn && selectedIsWhite && selectedPT != SPACE)
       {
-         cout << "1" << endl;
          takeTurn(pUI, pBoard, possibleMoves);
       }
       else if (!isWhiteTurn && !selectedIsWhite)
       {
-         cout << "3" << endl;
          takeTurn(pUI, pBoard, possibleMoves);
       }
       else if (pUI->getPreviousPosition().isValid()) // Attacking
@@ -104,32 +99,27 @@ void callBack(Interface *pUI, void * p)
          bool prevSelectedIsWhite = (*pBoard)[pUI->getPreviousPosition()].isWhite();
          PieceType prevSelectedPT = (*pBoard)[pUI->getPreviousPosition()].getType();
 
-         if (isWhiteTurn && prevSelectedIsWhite && (!selectedIsWhite || selectedPT == SPACE)) // BUG: 
+         if (isWhiteTurn && prevSelectedIsWhite 
+               && (!selectedIsWhite || selectedPT == SPACE))
          {
-            cout << "2" << endl;
             takeTurn(pUI, pBoard, possibleMoves);
          }
          else if (!isWhiteTurn && !prevSelectedIsWhite && selectedIsWhite)
          {
-            cout << "4" << endl;
             takeTurn(pUI, pBoard, possibleMoves);
          }
       }
       else
       {
-         cout << "5" << endl;
          pUI->clearSelectPosition();
       }
       pUI->clearPreviousPosition();
    }
 
-   //if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE) // can't select space
-   //{
-   //   pUI->clearSelectPosition();
-   //}
-
    // display the board
-   pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI , possibleMoves);
+   pBoard->display(pUI->getHoverPosition(), 
+                   pUI->getSelectPosition(), 
+                   *pUI , possibleMoves);
 }
 
 
