@@ -37,53 +37,27 @@ void callBack(Interface *pUI, void * p)
    set<Move> possibleMoves;
    Move selectedMove;
    
+   // if valid selection
    if (pUI->getSelectPosition().isValid()) {
-      //if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE) // can't select space
-      //{
-      //   pUI->clearSelectPosition();
-      //}
+      
+      // selection is not a space
       if ((*pBoard)[pUI->getSelectPosition()].getType() != SPACE)
       {
          // get possible moves from a selected position
          (*pBoard)[pUI->getSelectPosition()].getMoves(possibleMoves, *pBoard);
-
-         //// capture
-         //if (pUI->getPreviousPosition().isValid())
-         //{
-         //   if ((*pBoard)[pUI->getPreviousPosition()].getType() != SPACE)
-         //   {
-         //      // Check is selectedMove is in possible Moves
-         //      set <Move>::iterator it;
-         //      for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
-
-         //         if (it->getSource() == pUI->getPreviousPosition() &&
-         //            it->getDest() == pUI->getSelectPosition())
-         //         {
-         //            selectedMove = *it;
-         //         }
-         //      }
-
-         //      // Move if possible
-         //      if (possibleMoves.find(selectedMove) != possibleMoves.end())
-         //      {
-         //         // move the piece
-         //         pBoard->move(selectedMove);
-         //         pUI->clearSelectPosition();
-         //      }
-         //   }
-         //}
-
       }
+      // if previous move exists and is valid
       if (pUI->getPreviousPosition().isValid())
       {
          if ((*pBoard)[pUI->getPreviousPosition()].getType() != SPACE)
          {
+            // re-gets moves new selection/scope change
             (*pBoard)[pUI->getPreviousPosition()].getMoves(possibleMoves, *pBoard);
 
             // Check is selectedMove is in possible Moves
             set <Move>::iterator it;
-            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
-
+            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it) 
+            {
                if (it->getSource() == pUI->getPreviousPosition() &&
                   it->getDest() == pUI->getSelectPosition())
                {
@@ -98,11 +72,14 @@ void callBack(Interface *pUI, void * p)
                pBoard->move(selectedMove);
                pUI->clearSelectPosition();
             }
-
-            //pUI->clearSelectPosition();
          }
       }
    }
+
+   //if ((*pBoard)[pUI->getSelectPosition()].getType() == SPACE) // can't select space
+   //{
+   //   pUI->clearSelectPosition();
+   //}
 
    // display the board
    pBoard->display(pUI->getHoverPosition(), pUI->getSelectPosition(), *pUI , possibleMoves);
