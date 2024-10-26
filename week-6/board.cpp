@@ -58,18 +58,6 @@ const Piece& Board::operator [] (const Position& pos) const
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
-
-   //if (board[pos.getCol()][pos.getRow()] == nullptr)
-   //{
-   //   static Space emptySpace;
-   //   return emptySpace;
-   //}
-   //else
-   //{
-   //   return *board[pos.getCol()][pos.getRow()];
-   //}
-
-   
    return *board[pos.getCol()][pos.getRow()];
 }
 Piece& Board::operator [] (const Position& pos)
@@ -77,18 +65,6 @@ Piece& Board::operator [] (const Position& pos)
    assert(0 <= pos.getCol() && pos.getCol() < 8);
    assert(0 <= pos.getRow() && pos.getRow() < 8);
    assert(nullptr != board[pos.getCol()][pos.getRow()]);
-
-   //if (board[pos.getCol()][pos.getRow()] == nullptr)
-   //{
-   //   static Space emptySpace;
-   //   return emptySpace;
-   //}
-   //else
-   //{
-   //   return *board[pos.getCol()][pos.getRow()];
-   //}
-
-   
    return *board[pos.getCol()][pos.getRow()];
 }
 
@@ -227,59 +203,61 @@ void Board::move(const Move & move)
 
    switch (move.getMoveType())
    {
-   case Move::CASTLE_KING:
-      if (whiteTurn()) // white turn
-      {
-         Position rookSrc = "h1";
-         Position rookDest = "f1";
-         swap(rookSrc, rookDest);
-      }
-      else // black turn
-      {
-         Position rookSrc = "h8";
-         Position rookDest = "f8";
-         swap(rookSrc, rookDest);
-      }
-      break;
-   case Move::CASTLE_QUEEN:
-      if (whiteTurn()) // white turn
-      {
-         Position rookSrc = "a1";
-         Position rookDest = "d1";
-         swap(rookSrc, rookDest);
-      }
-      else // black turn
-      {
-         Position rookSrc = "a8";
-         Position rookDest = "d8";
-         swap(rookSrc, rookDest);
-      }
-      break;
-   case Move::ENPASSANT:
-      if (whiteTurn()) // white turn
-      {
-         Position pawnToKill(move.getDest());
-         pawnToKill.setRow(pawnToKill.getRow() - 1); // enemy pawn 1 below
+      case Move::CASTLE_KING:
+         if (whiteTurn()) // white turn
+         {
+            Position rookSrc = "h1";
+            Position rookDest = "f1";
+            swap(rookSrc, rookDest);
+         }
+         else // black turn
+         {
+            Position rookSrc = "h8";
+            Position rookDest = "f8";
+            swap(rookSrc, rookDest);
+         }
+         break;
+      case Move::CASTLE_QUEEN:
+         if (whiteTurn()) // white turn
+         {
+            Position rookSrc = "a1";
+            Position rookDest = "d1";
+            swap(rookSrc, rookDest);
+         }
+         else // black turn
+         {
+            Position rookSrc = "a8";
+            Position rookDest = "d8";
+            swap(rookSrc, rookDest);
+         }
+         break;
+      case Move::ENPASSANT:
+         if (whiteTurn()) // white turn
+         {
+            Position pawnToKill(move.getDest());
+            pawnToKill.setRow(pawnToKill.getRow() - 1); // enemy pawn 1 below
 
-         board[pawnToKill.getCol()][pawnToKill.getRow()] =
-            new Space(pawnToKill.getCol(), pawnToKill.getRow());
-      }
-      else // black turn
-      {
-         Position pawnToKill(move.getDest());
-         pawnToKill.setRow(pawnToKill.getRow() + 1); // enemy pawn 1 above
+            board[pawnToKill.getCol()][pawnToKill.getRow()] =
+               new Space(pawnToKill.getCol(), pawnToKill.getRow());
+         }
+         else // black turn
+         {
+            Position pawnToKill(move.getDest());
+            pawnToKill.setRow(pawnToKill.getRow() + 1); // enemy pawn 1 above
 
-         board[pawnToKill.getCol()][pawnToKill.getRow()] =
-            new Space(pawnToKill.getCol(), pawnToKill.getRow());
-      }
-      break;
-   case Move::PROMOTION:
-   
-
-      Position pawnToPromote(move.getDest());
-      board[pawnToPromote.getCol()][pawnToPromote.getRow()] =
-         new Queen(pawnToPromote.getCol(), pawnToPromote.getRow());
-
+            board[pawnToKill.getCol()][pawnToKill.getRow()] =
+               new Space(pawnToKill.getCol(), pawnToKill.getRow());
+         }
+         break;
+      case Move::PROMOTION:
+         Position pawnToPromote(move.getDest());
+         
+         if (board[pawnToPromote.getCol()][pawnToPromote.getRow()]->isWhite())
+            board[pawnToPromote.getCol()][pawnToPromote.getRow()] = 
+               new Queen(pawnToPromote.getCol(), pawnToPromote.getRow(), true);
+         else
+            board[pawnToPromote.getCol()][pawnToPromote.getRow()] = 
+               new Queen(pawnToPromote.getCol(), pawnToPromote.getRow(), false);
    }
 
    numMoves++;
