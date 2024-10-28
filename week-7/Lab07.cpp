@@ -16,7 +16,114 @@
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"      // for POINT
 #include "test.h"
+#include <cmath>
 using namespace std;
+
+#define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
+#define RADIUS_EARTH 6378000.0 //m
+#define EARTH_SURFACE 35786000.0 //m - Distance from earths surface
+#define EARTH_CENTER 42164000.0 //m - Distance from earths center 
+#define TIME 48 // seconds/frame
+
+// EVENTUALLY WILL BE A CLASS
+// Initial velocity
+double DX = -3100.0;
+double DY = 0.0;
+
+
+/******************************************************************
+* GET GRAVITY : magnitude of acceleration due to gravity at an altitude
+* 
+* gh = magnitude of acceleration due to gravity at an altitude(h)
+* g = gravity at sea level : 9.80665 m / s2
+* r = radius of the earth : 6, 378, 000 m
+* h = height above the earth in meters
+
+* gh = g * ((r/(r+h)) * (r/(r+h)))
+*********************************************************/
+double getGravity(double g, double r, double h)
+{
+   return g * ((r / (r + h)) * (r / (r + h)));
+}
+
+/****************************************************
+* GET DIRECTION GRAVITY: direction of the pull of gravity, in radians
+* 
+* xe = horizontal position of the center of the earth: 0 m
+* ye = vertical position of the center of the earth: 0 m
+* xs = horizontal position of the satellite in meters
+* ys = vertical position of the satellite in meters
+* 
+* d = atan(xe - xs, ye - ys)
+*****************************************************/
+double getDirectionGravity(double xe, double ye, double xs, double ys)
+{
+   return atan2(xe - xs, ye - ys);
+}
+
+/**********************************************
+* GETDDX: get horizontal component of acceleration
+* 
+* ddx = horizontal component of acceleration
+* a = total acceleration
+* angle = angle(0° is up) of the direction of acceleration
+* 
+* ddx = a * sin(angle)
+*********************************************************/
+double getDDX(double a, double angle)
+{
+   return a * sin(angle);
+}
+
+/**********************************************
+* GETDDY: get vertical component of acceleration
+* 
+* ddy = vertical component of acceleration
+* a = total acceleration
+* angle = angle (0° is up) of the direction of acceleration
+*
+* ddy = a * cos(angle)	
+*********************************************************/
+double getDDY(double a, double angle)
+{
+   return a * cos(angle);
+}
+
+/********************************************************
+* GET AXIS DISTANCE : horizontal or vertical position at time t(m)
+* 
+* x0 = initial horizontal position (m)
+* dx = horizontal component of velocity (m/s)
+* ddx = horizontal component of acceleration (m/s2)
+* t = time (s)
+* 
+* * xt = horizontal position at time t (m)
+*
+* xt = x0 + dx * t + ½ * ddx * t^2
+*********************************************************/
+double getAxisDistance(double x0, double dx, double ddx, double t)
+{
+   return x0 + dx * t + (1/2) * ddx * (t * t);
+}
+
+
+/********************************************************
+* GET AXIS VELOCITY : horizontal or vertical velocity at time t(m/s)
+*
+* dx0 = initial horizontal velocity(m / s)
+* ddx = horizontal component of acceleration(m / s2)
+* t = time(s)
+*
+* dxt = horizontal velocity at time t(m / s)
+*
+* dxt = dx0 + ddx t
+*********************************************************/
+double getAxisVelocity(double dx0, double ddx, double t)
+{
+   return dx0 + (ddx * t);
+}
+
+
 
 /*************************************************************************
  * Demo
@@ -28,23 +135,30 @@ public:
    Demo(Position ptUpperRight) :
       ptUpperRight(ptUpperRight)
    {
-      ptHubble.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptHubble.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      //ptHubble.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      //ptHubble.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
-      ptSputnik.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptSputnik.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      //ptSputnik.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      //ptSputnik.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
-      ptStarlink.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptStarlink.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      //ptStarlink.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      //ptStarlink.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
-      ptCrewDragon.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptCrewDragon.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      //ptCrewDragon.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      //ptCrewDragon.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
-      ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      //ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      //ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
-      ptGPS.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptGPS.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+
+      // Initial Position
+      ptGPS.setMetersX(0.0);
+      ptGPS.setMetersY(42164000.0);
+
+      // velocity with constant acceleration
+      // v = v0 + a t
+
+
 
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
@@ -68,6 +182,7 @@ public:
    double angleShip;
    double angleEarth;
 };
+
 
 /*************************************
  * All the interesting work happens here, when
@@ -101,8 +216,36 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
+   // positions
+   double currXPos = pDemo->ptGPS.getMetersX();
+   double currYPos = pDemo->ptGPS.getMetersY();
+
+   // Gravity
+   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
+   double gravityAngle = getDirectionGravity(0.0, 0.0, currXPos, currYPos);
+
+
+   // Acceleration
+   double ddx = getDDX(gravity, gravityAngle);
+   double ddy = getDDY(gravity, gravityAngle);
+
+   // Velocity
+   DX = getAxisVelocity(DX, ddx, TIME);
+   DY = getAxisVelocity(DY, ddy, TIME);
+   
+
+   // new distance
+   double xPos = getAxisDistance(currXPos, DX, ddx, TIME);
+   double yPos = getAxisDistance(currYPos, DY, ddy, TIME);
+
+   // orbit the GPS satelite
+   pDemo->ptGPS.setMetersX(getAxisDistance(currXPos, DX, ddx, TIME));
+   pDemo->ptGPS.setMetersY(getAxisDistance(currYPos, DY, ddy, TIME));
+
+   // TODO:
+   // SLOW DOWN
    // rotate the earth
-   pDemo->angleEarth += 0.01;
+   pDemo->angleEarth -= 0.01;
    pDemo->angleShip += 0.02;
    pDemo->phaseStar++;
 
