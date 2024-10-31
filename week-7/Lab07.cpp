@@ -11,12 +11,17 @@
  *      ??
  *****************************************************************/
 
+#define _USE_MATH_DEFINES
+
+
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"      // for POINT
 #include "test.h"
 #include <cmath>
+#include <math.h>       // for M_PI
+
 using namespace std;
 
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
@@ -245,7 +250,7 @@ void callBack(const Interface* pUI, void* p)
    // TODO:
    // SLOW DOWN
    // rotate the earth
-   pDemo->angleEarth -= 0.01;
+   pDemo->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
    pDemo->angleShip += 0.02;
    pDemo->phaseStar++;
 
