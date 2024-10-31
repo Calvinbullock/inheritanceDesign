@@ -12,6 +12,7 @@
  *      ~3hrs
  *****************************************************************/
 
+#include <vector>
 #define _USE_MATH_DEFINES
 
 #include <cassert>      // for ASSERT
@@ -34,6 +35,7 @@ using namespace std;
 // Initial velocity
 double DX = -3100.0;
 double DY = 0.0;
+int starCount = 300; // number or stars
 
 
 /******************************************************************
@@ -163,16 +165,29 @@ public:
       // velocity with constant acceleration
       // v = v0 + a t
 
-
-
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+
+      // populate star vector
+      for (int i = 0; i < starCount; i++) {
+         ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+         ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+         positions.push_back(ptStar);
+      }
+
+      // populate starPhase vector 
+      for (int i = 0; i < starCount; i++) {
+         unsigned char phase = 4 * random(1, 50);
+         starPhases.push_back(phase);
+      }
 
       angleShip = 0.0;
       angleEarth = 0.0;
       phaseStar = 0;
    }
 
+   std::vector<unsigned char> starPhases;
+   std::vector<Position> positions;
    Position ptHubble;
    Position ptSputnik;
    Position ptStarlink;
@@ -290,6 +305,12 @@ void callBack(const Interface* pUI, void* p)
 
    // draw a single star
    gout.drawStar(pDemo->ptStar, pDemo->phaseStar);
+
+   // draw stars
+   for (int i = 0; i < starCount; ++i) {
+      pDemo->starPhases[i]++;
+      gout.drawStar(pDemo->positions[i], pDemo->starPhases[i]);
+   }
 
    // draw the earth
    pt.setMeters(0.0, 0.0);
