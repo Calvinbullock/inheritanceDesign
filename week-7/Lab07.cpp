@@ -1,25 +1,25 @@
 /*************************************************************
  * 1. Name:
- *      Demo
+ *      Daniel Malasky & Calvin Bullock
  * 2. Assignment Name:
  *      Lab 07: Orbit Simulator
  * 3. Assignment Description:
  *      Simulate satellites orbiting the earth
  * 4. What was the hardest part? Be as specific as possible.
- *      ??
+ *      The hardest part was understanding the physics, but the
+ *      video in the problem definition helped out a lot with this.
  * 5. How long did it take for you to complete the assignment?
- *      ??
+ *      ~3hrs
  *****************************************************************/
 
 #define _USE_MATH_DEFINES
 
-
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
-#include "position.h"      // for POINT
+#include "position.h"   // for POINT
 #include "test.h"
-#include <cmath>
+#include <cmath>        // for sin, cos
 #include <math.h>       // for M_PI
 
 using namespace std;
@@ -216,7 +216,6 @@ void callBack(const Interface* pUI, void* p)
    if (pUI->isRight())
       pDemo->ptShip.addPixelsX(1.0);
 
-
    //
    // perform all the game logic
    //
@@ -229,7 +228,6 @@ void callBack(const Interface* pUI, void* p)
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
    double gravityAngle = getDirectionGravity(0.0, 0.0, currXPos, currYPos);
 
-
    // Acceleration
    double ddx = getDDX(gravity, gravityAngle);
    double ddy = getDDY(gravity, gravityAngle);
@@ -238,7 +236,6 @@ void callBack(const Interface* pUI, void* p)
    DX = getAxisVelocity(DX, ddx, TIME);
    DY = getAxisVelocity(DY, ddy, TIME);
    
-
    // new distance
    double xPos = getAxisDistance(currXPos, DX, ddx, TIME);
    double yPos = getAxisDistance(currYPos, DY, ddy, TIME);
