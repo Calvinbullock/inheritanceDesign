@@ -2,14 +2,14 @@
  * Header File:
  *    VELOCITY
  * Author:
- *    Calvin, Hyrum Bullock
+ *    <your name here>
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/
 
 #pragma once
 
-// for unit tests
+ // for unit tests
 class TestPosition;
 class TestVelocity;
 class TestAcceleration;
@@ -32,34 +32,35 @@ class Velocity
 
 public:
    // constructors
-   Velocity()                     : dx(0.0), dy(0.0) {}
-   Velocity(double dx, double dy) : dx(dx), dy(dy) {}
+   Velocity() : dx(0.0), dy(0.0) { }
+   Velocity(double dx, double dy) : dx(dx), dy(dy) { }
 
    // getters
-   double getDX() const { return this->dx; }
-   double getDY() const { return this->dy; }
-   double getSpeed() const;
-   Angle getAngle() const;
+   double getDX()       const { return dx; }
+   double getDY()       const { return dy; }
+   double getSpeed()    const;
+   Angle  getAngle()    const;
 
    // setters
-   void set(const Angle &angle, double magnitude);
    void setDX(double dx) { this->dx = dx; }
    void setDY(double dy) { this->dy = dy; }
+   void set(const Angle& angle, double magnitude);
    void addDX(double dx) { this->dx += dx; }
    void addDY(double dy) { this->dy += dy; }
-   void add(const Acceleration &acceleration, double time);
-   void add(const Velocity &rhs)
+   void add(const Acceleration& acceleration, double time);
+   void addV(const Velocity& rhs) { dx += rhs.dx; dy += rhs.dy; }
+   void reverse() { dx = -dx, dy = -dy; }
+
+   // overload the += operator
+   Velocity& operator+=(const Velocity& rhs)
    {
-    this->dx += rhs.dx;
-    this->dy += rhs.dy;
-   }
-   void reverse()
-   {
-      this->dx *= -1;
-      this->dy *= -1;
+      dx += rhs.dx;
+      dy += rhs.dy;
+      return *this;
    }
 
 private:
-   double dx; // horizontal velocity
-   double dy; // vertical velocity
+   double dx;           // horizontal velocity
+   double dy;           // vertical velocity
 };
+

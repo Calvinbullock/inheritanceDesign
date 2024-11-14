@@ -2,11 +2,9 @@
  * Header File:
  *    ACCELERATION
  * Author:
- *    Calvin, Hyrum
+ *    Daniel Malasky
  * Summary:
  *    Everything we need to know about acceleration
- *    Handles the changes to acceleration and stores the values for change
- *      in acceleration.
  ************************************************************************/
 
 
@@ -32,31 +30,25 @@ class Acceleration
 
 public:
    // constructors
-   Acceleration()                       : ddx(0.0), ddy(0.0) { }
+   Acceleration() : ddx(0.0), ddy(0.0) { }
    Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) { }
 
    // getters
-   double getDDX()   const           { return this->ddx; }
-   double getDDY()   const           { return this->ddy; }
+   double getDDX()   const { return ddx; }
+   double getDDY()   const { return ddy; }
 
-   // setters
-   void setDDX(double ddx)           { this->ddx = ddx; }
-   void setDDY(double ddy)           { this->ddy = ddy; }
-   void set(const Angle & a, double magnitude);
-   void addDDX(double ddx)           { this->ddx += ddx; }
-   void addDDY(double ddy)           { this->ddy += ddy; }
-   void add(const Acceleration& rhs);
-
-   Acceleration& operator+ (const Acceleration& rhs)
-   {
-      ddx = rhs.ddx + this->ddx;
-      ddy = rhs.ddy + this->ddy;
-      return *this;
+   // setters                        
+   void setDDX(double ddx) { this->ddx = ddx; }
+   void setDDY(double ddy) { this->ddy = ddy; }
+   void set(const Angle& a, double magnitude);
+   void addDDX(double ddx) { this->ddx += ddx; }
+   void addDDY(double ddy) { this->ddy += ddy; }
+   void add(const Acceleration& rhs) {
+      this->ddx += rhs.ddx;
+      this->ddy += rhs.ddy;
    }
 
 private:
    double ddx;     // horizontal acceleration
    double ddy;     // vertical acceleration
 };
-
-

@@ -2,7 +2,7 @@
  * Source File:
  *    ANGLE
  * Author:
- *    Calvin, Hyrum Bullock
+ *    Daniel Malasky
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
@@ -12,54 +12,57 @@
 #include <cassert>
 using namespace std;
 
-/************************************
- * ANGLE : CONVERT TO DEGREES
- ************************************/
-double Angle::convertToDegrees(double r) const
-{
-   double d = r * (180.0 / M_PI);
-   return d;
-}
 
 /************************************
- * ANGLE : SET DX DY
- ************************************/
-void Angle::setDxDy(double dx, double dy) {
-   this->dx = dx; 
-   this->dy = dy; 
-
-   radians = normalize(atan2(dx, dy));
-}
-
-/************************************
- * ANGLE : CONVERT TO RADIANS
- ************************************/
-double Angle::convertToRadians(double d) const
-{
-   double r = (2.0 * M_PI) * (d / 360.0);
-   return r;
-}
-
-/************************************
- * ANGLE : NORMALIZE
- ************************************/
+  * ANGLE : NORMALIZE
+  ************************************/
 double Angle::normalize(double radians) const
 {
-   // double normalizedRadians;
+   double twoPi = 2 * M_PI;
 
-   // check if radians needs to be normalized
-   if (radians > TWO_PI)
+   return (radians)-floor((radians) / (twoPi)) * (twoPi);
+}
+
+/************************************
+  * ANGLE : SETRADIANS
+  * Sets radians with range of 0 - 2PI
+  ************************************/
+void Angle::setRadians(double radians)
+{
+   if (radians <= 0 || radians >= (2 * M_PI))
    {
-      radians = fmod(radians, TWO_PI);
+      this->radians = normalize(radians);
+   }
+   else
+   {
+      this->radians = radians;
+   }
+}
+
+/**********************************************
+  * ANGLE : SETDEGREES
+  * Converts degrees to radians, sets radians
+  *********************************************/
+void Angle::setDegrees(double degrees)
+{
+   double r = (2 * M_PI) * (degrees / 360);
+   setRadians(r);
+}
+
+/**********************************************************
+  * ANGLE : ADD
+  * Adds the given value to radians, within range (0, 2PI)
+  *********************************************************/
+Angle& Angle::add(double delta)
+{
+   radians += delta;
+
+   if (radians <= 0 || radians >= (2 * M_PI))
+   {
+      radians = normalize(radians);
    }
 
-   while(radians < 0)
-   {
-      radians = radians + TWO_PI;
-   }
-
-   
-   return radians;
+   return *this;
 }
 
 

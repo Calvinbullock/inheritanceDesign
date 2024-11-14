@@ -17,6 +17,7 @@
 
 #define NOT_YET_IMPLEMENTED false
 
+#define assertEqualsTolerance(value, test, tol) assertUnitParameters(closeEnough(value, test, tol), #test, __LINE__, __FUNCTION__)
 #define assertEquals(value, test) assertUnitParameters(closeEnough(value, test), #test, __LINE__, __FUNCTION__)
 #define assertUnit(condition)              assertUnitParameters(condition, #condition, __LINE__, __FUNCTION__)
 
@@ -53,7 +54,11 @@ protected:
       double difference = value - test;
       return (difference >= -tolerance) && (difference <= tolerance);
    }
-
+   bool closeEnough(double value, double test, double tolerance) const
+   {
+      double difference = value - test;
+      return (difference >= -tolerance) && (difference <= tolerance);
+   }
    /*************************************************************
     * RESET
     * Reset the statistics

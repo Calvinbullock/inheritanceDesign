@@ -1,8 +1,8 @@
 /***********************************************************************
  * Source File:
- *    ACCELERATION 
+ *    ACCELERATION
  * Author:
- *    Calvin, Hyrum
+ *    Daniel Malasky
  * Summary:
  *    Everything we need to know about changing speed
  ************************************************************************/
@@ -12,22 +12,14 @@
 
 #include <cmath>
 
-/*********************************************
- * ACCELERATION : ADD
- *  a += a
- *********************************************/
-void Acceleration::add(const Acceleration& acceleration)
-{
-   ddx += acceleration.ddx;
-   ddy += acceleration.ddy;
-}
 
-/*********************************************
- * ACCELERATION : SET
- *  set from angle and direction
- *********************************************/
-void Acceleration::set(const Angle& angle, double magnitude)
+
+ /*********************************************
+  * ACCELERATION : SET
+  *  set from angle and direction
+  *********************************************/
+void Acceleration::set(const Angle& a, double magnitude)
 {
-   ddx = sin(angle.getRadians()) * magnitude;
-   ddy = cos(angle.getRadians()) * magnitude;
+   ddx = magnitude * sin(a.getRadians());
+   ddy = magnitude * cos(a.getRadians());
 }
