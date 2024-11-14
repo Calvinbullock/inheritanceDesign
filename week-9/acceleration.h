@@ -1,6 +1,6 @@
 /***********************************************************************
  * Header File:
- *    ACCELERATION 
+ *    ACCELERATION
  * Author:
  *    Calvin, Hyrum
  * Summary:
@@ -38,8 +38,8 @@ public:
    // getters
    double getDDX()   const           { return this->ddx; }
    double getDDY()   const           { return this->ddy; }
-                                     
-   // setters                        
+
+   // setters
    void setDDX(double ddx)           { this->ddx = ddx; }
    void setDDY(double ddy)           { this->ddy = ddy; }
    void set(const Angle & a, double magnitude);
@@ -47,7 +47,7 @@ public:
    void addDDY(double ddy)           { this->ddy += ddy; }
    void add(const Acceleration& rhs);
 
-   Acceleration& operator+ (const Acceleration& rhs) 
+   Acceleration& operator+ (const Acceleration& rhs)
    {
       ddx = rhs.ddx + this->ddx;
       ddy = rhs.ddy + this->ddy;

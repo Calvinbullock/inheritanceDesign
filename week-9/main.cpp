@@ -42,10 +42,10 @@ int starCount = 300; // number or stars
  * Demo
  * Test structure to capture the LM that will move around the screen
  *************************************************************************/
-class Demo
+class Simulator
 {
 public:
-   Demo(Position ptUpperRight) :
+   Simulator(Position ptUpperRight) :
       ptUpperRight(ptUpperRight)
    {
       //ptHubble.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
@@ -121,7 +121,7 @@ void callBack(const Interface* pUI, void* p)
 {
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL.
-   Demo* pDemo = (Demo*)p;
+   Simulator* pSim = (Simulator*)p;
 
    //
    // accept input
@@ -129,28 +129,28 @@ void callBack(const Interface* pUI, void* p)
 
    // move by a little
    if (pUI->isUp())
-      pDemo->ptShip.addPixelsY(1.0);
+      pSim->ptShip.addPixelsY(1.0);
    if (pUI->isDown())
-      pDemo->ptShip.addPixelsY(-1.0);
+      pSim->ptShip.addPixelsY(-1.0);
    if (pUI->isLeft())
-      pDemo->ptShip.addPixelsX(-1.0);
+      pSim->ptShip.addPixelsX(-1.0);
    if (pUI->isRight())
-      pDemo->ptShip.addPixelsX(1.0);
+      pSim->ptShip.addPixelsX(1.0);
 
    //
    // perform all the game logic
    //
 
    // positions
-   double currXPos = pDemo->ptGPS.getMetersX();
-   double currYPos = pDemo->ptGPS.getMetersY();
+   double currXPos = pSim->ptGPS.getMetersX();
+   double currYPos = pSim->ptGPS.getMetersY();
 
    // TODO:
    // SLOW DOWN
    // rotate the earth
-   pDemo->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
-   pDemo->angleShip += 0.02;
-   pDemo->phaseStar++;
+   pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
+   pSim->angleShip += 0.02;
+   pSim->phaseStar++;
 
    //
    // draw everything
@@ -160,47 +160,47 @@ void callBack(const Interface* pUI, void* p)
    ogstream gout(pt);
 
    // draw satellites
-   gout.drawCrewDragon(pDemo->ptCrewDragon, pDemo->angleShip);
-   gout.drawHubble    (pDemo->ptHubble,     pDemo->angleShip);
-   gout.drawSputnik   (pDemo->ptSputnik,    pDemo->angleShip);
-   gout.drawStarlink  (pDemo->ptStarlink,   pDemo->angleShip);
-   gout.drawShip      (pDemo->ptShip,       pDemo->angleShip, pUI->isSpace());
-   gout.drawGPS       (pDemo->ptGPS,        pDemo->angleShip);
+   gout.drawCrewDragon(pSim->ptCrewDragon, pSim->angleShip);
+   gout.drawHubble    (pSim->ptHubble,     pSim->angleShip);
+   gout.drawSputnik   (pSim->ptSputnik,    pSim->angleShip);
+   gout.drawStarlink  (pSim->ptStarlink,   pSim->angleShip);
+   gout.drawShip      (pSim->ptShip,       pSim->angleShip, pUI->isSpace());
+   gout.drawGPS       (pSim->ptGPS,        pSim->angleShip);
 
    // draw parts
-   pt.setPixelsX(pDemo->ptCrewDragon.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptCrewDragon.getPixelsY() + 20);
-   gout.drawCrewDragonRight(pt, pDemo->angleShip); // notice only two parameters are set
-   pt.setPixelsX(pDemo->ptHubble.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptHubble.getPixelsY() + 20);
-   gout.drawHubbleLeft(pt, pDemo->angleShip);      // notice only two parameters are set
-   pt.setPixelsX(pDemo->ptGPS.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptGPS.getPixelsY() + 20);
-   gout.drawGPSCenter(pt, pDemo->angleShip);       // notice only two parameters are set
-   pt.setPixelsX(pDemo->ptStarlink.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptStarlink.getPixelsY() + 20);
-   gout.drawStarlinkArray(pt, pDemo->angleShip);   // notice only two parameters are set
+   pt.setPixelsX(pSim->ptCrewDragon.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptCrewDragon.getPixelsY() + 20);
+   gout.drawCrewDragonRight(pt, pSim->angleShip); // notice only two parameters are set
+   pt.setPixelsX(pSim->ptHubble.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptHubble.getPixelsY() + 20);
+   gout.drawHubbleLeft(pt, pSim->angleShip);      // notice only two parameters are set
+   pt.setPixelsX(pSim->ptGPS.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptGPS.getPixelsY() + 20);
+   gout.drawGPSCenter(pt, pSim->angleShip);       // notice only two parameters are set
+   pt.setPixelsX(pSim->ptStarlink.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptStarlink.getPixelsY() + 20);
+   gout.drawStarlinkArray(pt, pSim->angleShip);   // notice only two parameters are set
 
    // draw fragments
-   pt.setPixelsX(pDemo->ptSputnik.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptSputnik.getPixelsY() + 20);
-   gout.drawFragment(pt, pDemo->angleShip);
-   pt.setPixelsX(pDemo->ptShip.getPixelsX() + 20);
-   pt.setPixelsY(pDemo->ptShip.getPixelsY() + 20);
-   gout.drawFragment(pt, pDemo->angleShip);
+   pt.setPixelsX(pSim->ptSputnik.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptSputnik.getPixelsY() + 20);
+   gout.drawFragment(pt, pSim->angleShip);
+   pt.setPixelsX(pSim->ptShip.getPixelsX() + 20);
+   pt.setPixelsY(pSim->ptShip.getPixelsY() + 20);
+   gout.drawFragment(pt, pSim->angleShip);
 
    // draw a single star
-   gout.drawStar(pDemo->ptStar, pDemo->phaseStar);
+   gout.drawStar(pSim->ptStar, pSim->phaseStar);
 
    // draw stars
    for (int i = 0; i < starCount; ++i) {
-      pDemo->starPhases[i]++;
-      gout.drawStar(pDemo->positions[i], pDemo->starPhases[i]);
+      pSim->starPhases[i]++;
+      gout.drawStar(pSim->positions[i], pSim->starPhases[i]);
    }
 
    // draw the earth
    pt.setMeters(0.0, 0.0);
-   gout.drawEarth(pt, pDemo->angleEarth);
+   gout.drawEarth(pt, pSim->angleEarth);
 }
 
 double Position::metersFromPixels = 40.0;
@@ -226,15 +226,16 @@ int main(int argc, char** argv)
    ptUpperRight.setZoom(128000.0 /* 128km equals 1 pixel */);
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
+
    Interface ui(0, NULL,
-      "Demo",   /* name on the window */
+      "Orbit Sim",   /* name on the window */
       ptUpperRight);
 
    // Initialize the demo
-   Demo demo(ptUpperRight);
+   Simulator sim(ptUpperRight);
 
    // set everything into action
-   ui.run(callBack, &demo);
+   //ui.run(callBack, &demo);
 
    return 0;
 }
