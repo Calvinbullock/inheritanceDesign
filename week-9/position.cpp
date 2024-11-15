@@ -28,6 +28,25 @@ Position& Position::operator = (const Position& pt)
    return *this;
 }
 
+/********************************************************
+* ADD : calculating new position and adding
+* to the current position
+*
+* s0 = initial distance (m)
+* v  = velocity (m/s)
+* a  = acceleration (m/s^2)
+* t  = time (s)
+*
+* s  = distance at time t (m)
+*
+* s = s0 + v * t + ½ * a * t^2
+*********************************************************/
+void Position::add(Velocity v, Acceleration a, double t)
+{
+   x += v.getDX() * t + 0.5 * a.getDDX() * (t * t);
+   y += v.getDY() * t + 0.5 * a.getDDY() * (t * t);
+}
+
 /******************************************
  * POSITION insertion
  *       Display coordinates on the screen

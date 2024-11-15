@@ -13,6 +13,8 @@
 
 #include <iostream> 
 #include <cmath>
+#include "velocity.h"
+#include "acceleration.h"
 
 class TestPosition;
 class Acceleration;
@@ -55,6 +57,8 @@ public:
    void addMetersY(double dyMeters)      { setMetersY(getMetersY() + dyMeters);     }
    void addPixelsX(double dxPixels)      { setPixelsX(getPixelsX() + dxPixels);     }
    void addPixelsY(double dyPixels)      { setPixelsY(getPixelsY() + dyPixels);     }
+
+   void add(Velocity v, Acceleration a, double t);
 
    // deal with the ratio of meters to pixels
    void setZoom(double metersFromPixels)
