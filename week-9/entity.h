@@ -26,7 +26,14 @@ public:
 
    // Constructors                                                         // TEMP width TODO:
    Entity() {}
-   Entity(Position& pos, Velocity& vel, Angle a, bool isBroke = false, double width = 10.0) {}
+   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double w = 10.0)
+   {
+      position = pos;
+      velocity = vel; 
+      angle = a;
+      isBroken = isBroke;
+      width = w;
+   }
 
    // Getters
    Position getPosition() const { return position;      }
@@ -43,7 +50,7 @@ public:
    void setWidth     (double newWidth)        { width = newWidth;  }
 
    void orbit(double time, double grav, Acceleration accel);
-   virtual void draw(ogstream gout) = 0;
+   virtual void draw(ogstream& gout) = 0;
    virtual void impact() = 0;
 
 protected:

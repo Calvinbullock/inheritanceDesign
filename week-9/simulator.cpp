@@ -46,12 +46,17 @@ public:
    Simulator(Position ptUpperRight) :
       ptUpperRight(ptUpperRight)
    {
+
+      ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
+      ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+
       // initial GPS satellite values
-      Position initialGPSPos = Position(0.0, 2164000.0);
+      Position initialGPSPos = Position(0.0, 42164000.0);
       Velocity initialGPSVel = Velocity(-3100.0, 0.0);
+      Angle a = Angle();
 
       // Create 1 GPS Satellite
-      GPS = SatelliteGPS(initialGPSPos, initialGPSVel, Angle());
+      GPS = SatelliteGPS(initialGPSPos, initialGPSVel, a);
       
       //entities.push_back(GPS);
 
@@ -158,7 +163,7 @@ void callBack(const Interface* pUI, void* p)
    // draw satellites
  
    gout.drawShip      (pSim->ptShip,       pSim->angleShip, pUI->isSpace());
-   gout.drawGPS       (pSim->ptGPS,        pSim->angleShip);
+   pSim->GPS.draw(gout);
 
    // draw parts
 

@@ -6,10 +6,10 @@ class SatelliteGPS : public Satellite
 {
 public:
    SatelliteGPS() : Satellite() {}
-   SatelliteGPS(Position& pos, Velocity& vel, Angle a, bool isBroke = false) : Satellite(pos, vel, a , isBroke) {}
+   SatelliteGPS(Position& pos, Velocity& vel, Angle& a, bool isBroke = false) : Satellite(pos, vel, a , isBroke) {}
 
 
-   virtual void draw(ogstream gout);
+   virtual void draw(ogstream& gout);
    virtual void impact();
 
 private:
