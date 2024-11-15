@@ -47,9 +47,6 @@ public:
       ptUpperRight(ptUpperRight)
    {
 
-      ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
       // initial GPS satellite values
       Position initialGPSPos = Position(0.0, 42164000.0);
       Velocity initialGPSVel = Velocity(-3100.0, 0.0);
@@ -59,7 +56,6 @@ public:
       GPS = SatelliteGPS(initialGPSPos, initialGPSVel, a);
       
       //entities.push_back(GPS);
-
 
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
@@ -77,7 +73,6 @@ public:
          starPhases.push_back(phase);
       }
 
-      angleShip = 0.0;
       angleEarth = 0.0;
       phaseStar = 0;
    }
@@ -88,8 +83,6 @@ public:
 
    SatelliteGPS GPS;
 
-   Position ptShip;
-   Position ptGPS;
    Position ptStar;
    Position ptUpperRight;
 
@@ -113,19 +106,6 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
 
-   //
-   // accept input
-   //
-
-   // move by a little
-   if (pUI->isUp())
-      pSim->ptShip.addPixelsY(1.0);
-   if (pUI->isDown())
-      pSim->ptShip.addPixelsY(-1.0);
-   if (pUI->isLeft())
-      pSim->ptShip.addPixelsX(-1.0);
-   if (pUI->isRight())
-      pSim->ptShip.addPixelsX(1.0);
 
    //
    // perform all the game logic
@@ -146,10 +126,8 @@ void callBack(const Interface* pUI, void* p)
    pSim->GPS.orbit(TIME, gravity, acceleration);
 
 
-
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
-   pSim->angleShip += 0.02;
    pSim->phaseStar++;
 
    //
@@ -160,12 +138,8 @@ void callBack(const Interface* pUI, void* p)
    ogstream gout(pt);
 
    // draw satellites
- 
-   gout.drawShip      (pSim->ptShip,       pSim->angleShip, pUI->isSpace());
-
    pSim->GPS.draw(gout);
    pSim->GPS.rotate(0.02);
-
 
    // draw a single star
    gout.drawStar(pSim->ptStar, pSim->phaseStar);
