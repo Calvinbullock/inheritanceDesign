@@ -20,3 +20,9 @@ void Entity::orbit(double time, double grav, Acceleration accel)
    //pDemo->ptGPS.setMetersX(getAxisDistance(currXPos, DX, ddx, TIME));
    //pDemo->ptGPS.setMetersY(getAxisDistance(currYPos, DY, ddy, TIME));
 }
+
+void Entity::rotate(double delta)
+{
+   angle.add(delta);
+
+}

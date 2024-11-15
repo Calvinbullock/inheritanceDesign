@@ -50,6 +50,7 @@ public:
    void setWidth     (double newWidth)        { width = newWidth;  }
 
    void orbit(double time, double grav, Acceleration accel);
+   virtual void rotate(double delta);
    virtual void draw(ogstream& gout) = 0;
    virtual void impact() = 0;
 

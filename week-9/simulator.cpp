@@ -135,7 +135,6 @@ void callBack(const Interface* pUI, void* p)
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
    
 
-
    // direction of the pull of gravity
    double gravityAngle = getDirectionGravity(Position(), pSim->GPS.getPosition());
       
@@ -163,23 +162,10 @@ void callBack(const Interface* pUI, void* p)
    // draw satellites
  
    gout.drawShip      (pSim->ptShip,       pSim->angleShip, pUI->isSpace());
+
    pSim->GPS.draw(gout);
+   pSim->GPS.rotate(0.02);
 
-   // draw parts
-
-   gout.drawCrewDragonRight(pt, pSim->angleShip); // notice only two parameters are set
-
-   gout.drawHubbleLeft(pt, pSim->angleShip);      // notice only two parameters are set
-   pt.setPixelsX(pSim->ptGPS.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptGPS.getPixelsY() + 20);
-   gout.drawGPSCenter(pt, pSim->angleShip);       // notice only two parameters are set
-   gout.drawStarlinkArray(pt, pSim->angleShip);   // notice only two parameters are set
-
-   // draw fragments
-   gout.drawFragment(pt, pSim->angleShip);
-   pt.setPixelsX(pSim->ptShip.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptShip.getPixelsY() + 20);
-   gout.drawFragment(pt, pSim->angleShip);
 
    // draw a single star
    gout.drawStar(pSim->ptStar, pSim->phaseStar);
