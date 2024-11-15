@@ -32,6 +32,12 @@ public:
    Position(double x, double y);
    Position(const Position & pt) : x(pt.x), y(pt.y) {}
    Position& operator = (const Position& pt);
+   Position& operator -=(const Position& rhs)
+   {
+      this->x -= rhs.x;
+      this->y -= rhs.y;
+      return *this;
+   }
 
    // getters
    double getMetersX()       const { return x;                    }

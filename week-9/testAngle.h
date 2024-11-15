@@ -24,11 +24,6 @@ public:
    {
       // Ticket 1: From before
       defaultConstructor();
-      setUp();
-      setDown();
-      setRight();
-      setLeft();
-      reverse();
       setRadians_noNormalize();
       setDegrees_noNormalize();
       getDegrees_0();
@@ -63,10 +58,6 @@ public:
       getDy_left();
       getDy_right();
       getDy_diagonal();
-      isRight_right();
-      isRight_left();
-      isLeft_right();
-      isLeft_left();
       setDxDy_up();
       setDxDy_right();
       setDxDy_left();
@@ -102,82 +93,6 @@ private:
     * SETTERS
     *****************************************************************
     *****************************************************************/
-
-    /*********************************************
-     * name:    SET UP
-     * input:   nothing
-     * output:  0 degrees
-     *********************************************/
-   void setUp()
-   {  // setup
-      Angle a;
-      a.radians = -99.9;
-      // exercise
-      a.setUp();
-      // verify
-      assertEquals(a.radians, 0.0);
-   }  // teardown
-
-   /*********************************************
-    * name:    SET DOWN
-    * input:   nothing
-    * output:  180 degrees
-    *********************************************/
-   void setDown()
-   {  // setup
-      Angle a;
-      a.radians = -99.9;
-      // exercise
-      a.setDown();
-      // verify
-      assertEquals(a.radians, M_PI);
-   }  // teardown
-
-   /*********************************************
-    * name:    SET RIGHT
-    * input:   nothing
-    * output:  90 degrees
-    *********************************************/
-   void setRight()
-   {  // setup
-      Angle a;
-      a.radians = -99.9;
-      // exercise
-      a.setRight();
-      // verify
-      assertEquals(a.radians, M_PI_2);
-   }  // teardown
-
-   /*********************************************
-    * name:    SET LEFT
-    * input:   nothing
-    * output:  270 degrees
-    *********************************************/
-   void setLeft()
-   {  // setup
-      Angle a;
-      a.radians = -99.9;
-      // exercise
-      a.setLeft();
-      // verify
-      assertEquals(a.radians, M_PI + M_PI_2);
-   }  // teardown
-
-   /*********************************************
-    * name:    REVERSE
-    * input:   90
-    * output:  270 degrees
-    *********************************************/
-   void reverse()
-   {  // setup
-      Angle a;
-      a.radians = M_PI_2; // 90 degrees
-      // exercise
-      a.reverse();
-      // verify
-      assertEquals(a.radians, M_PI_2 + M_PI);
-   }  // teardown
-
    /*********************************************
     * name:    SET RADIANS - NO NORMALIZATION
     * input:   45 degrees
@@ -821,78 +736,6 @@ private:
       // verify
       assertEquals(dy, 0.866025);
       assertEquals(a.radians, M_PI / 6.0);
-   }  // teardown
-
-   /*********************************************
-    * name:    IS RIGHT - right
-    * input:   30 degrees
-    * output:  true
-    *********************************************/
-   void isRight_right()
-   {
-      // setup
-      Angle a;
-      a.radians = M_PI / 6.0; // 30 degrees
-      bool inRange = false;
-      // exercise
-      inRange = a.isRight();
-      // verify
-      assertEquals(inRange, true);
-      assertEquals(a.radians, M_PI / 6.0);
-   }  // teardown
-
-   /*********************************************
-    * name:    IS RIGHT - LEFT
-    * input:   330 degrees
-    * output:  false
-    *********************************************/
-   void isRight_left()
-   {
-      // setup
-      Angle a;
-      a.radians = (11.0 * M_PI) / 6.0; // 330 degrees
-      bool inRange = true;
-      // exercise
-      inRange = a.isRight();
-      // verify
-      assertEquals(inRange, false);
-      assertEquals(a.radians, (11.0 * M_PI) / 6.0);
-   }  // teardown
-
-   /*********************************************
-    * name:    IS LEFT - right
-    * input:   30 degrees
-    * output:  false
-    *********************************************/
-   void isLeft_right()
-   {
-      // setup
-      Angle a;
-      a.radians = M_PI / 6.0; // 30 degrees
-      bool inRange = true;
-      // exercise
-      inRange = a.isLeft();
-      // verify
-      assertEquals(inRange, false);
-      assertEquals(a.radians, M_PI / 6.0);
-   }  // teardown
-
-   /*********************************************
- * name:    IS LEFT - LEFT
- * input:   330 degrees
- * output:  true
- *********************************************/
-   void isLeft_left()
-   {
-      // setup
-      Angle a;
-      a.radians = (11.0 * M_PI) / 6.0; // 330 degrees
-      bool inRange = false;
-      // exercise
-      inRange = a.isLeft();
-      // verify
-      assertEquals(inRange, true);
-      assertEquals(a.radians, (11.0 * M_PI) / 6.0);
    }  // teardown
 
 };

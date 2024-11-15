@@ -54,18 +54,12 @@ public:
    // dx = sin a
    double getDx()   const { return sin(radians); }
    double getDy()   const { return cos(radians); }
-   bool   isRight() const { return radians > 0.0 && radians <= M_PI_2; }
-   bool   isLeft()  const { return radians >= (M_PI + M_PI_2) && radians < 2 * M_PI; }
+
 
 
    // Setters
    void setDegrees(double degrees);
    void setRadians(double radians);
-   void setUp() { this->radians = 0.0; }
-   void setDown() { this->radians = M_PI; }
-   void setRight() { this->radians = M_PI_2; }
-   void setLeft() { this->radians = M_PI + M_PI_2; }
-   void reverse() { this->radians += M_PI; }
    Angle& add(double delta);
 
    // set based on the components

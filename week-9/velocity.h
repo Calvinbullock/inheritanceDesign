@@ -39,7 +39,7 @@ public:
    double getDX()       const { return dx; }
    double getDY()       const { return dy; }
    double getSpeed()    const;
-   Angle  getAngle()    const;
+   //Angle  getAngle()    const;
 
    // setters
    void setDX(double dx) { this->dx = dx; }

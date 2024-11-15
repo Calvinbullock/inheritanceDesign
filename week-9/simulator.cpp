@@ -13,11 +13,13 @@
 
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
+#include "satelliteGPS.h" // for GPS satellite
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"   // for POINT
 #include "test.h"
 #include <cmath>        // for sin, cos
 #include <math.h>       // for M_PI
+#include "physics.cpp"  // for physics
 
 using namespace std;
 
@@ -44,28 +46,15 @@ public:
    Simulator(Position ptUpperRight) :
       ptUpperRight(ptUpperRight)
    {
-      //ptHubble.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      //ptHubble.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      // initial GPS satellite values
+      Position initialGPSPos = Position(0.0, 2164000.0);
+      Velocity initialGPSVel = Velocity(-3100.0, 0.0);
 
-      //ptSputnik.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      //ptSputnik.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
+      // Create 1 GPS Satellite
+      GPS = SatelliteGPS(initialGPSPos, initialGPSVel, Angle());
+      
+      //entities.push_back(GPS);
 
-      //ptStarlink.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      //ptStarlink.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      //ptCrewDragon.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      //ptCrewDragon.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-
-      // Initial Position
-      ptGPS.setMetersX(0.0);
-      ptGPS.setMetersY(42164000.0);
-
-      // velocity with constant acceleration
-      // v = v0 + a t
 
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
@@ -90,10 +79,10 @@ public:
 
    std::vector<unsigned char> starPhases;
    std::vector<Position> positions;
-   Position ptHubble;
-   Position ptSputnik;
-   Position ptStarlink;
-   Position ptCrewDragon;
+   //std::vector<Satellite> entities; // TODO:
+
+   SatelliteGPS GPS;
+
    Position ptShip;
    Position ptGPS;
    Position ptStar;
@@ -137,8 +126,23 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
-   // TODO:
-   // SLOW DOWN
+   // Gravity
+   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
+   
+
+
+   // direction of the pull of gravity
+   double gravityAngle = getDirectionGravity(Position(), pSim->GPS.getPosition());
+      
+   // Acceleration
+   Acceleration acceleration;
+   acceleration.set(gravity, gravityAngle);
+
+   // orbit entities
+   pSim->GPS.orbit(TIME, gravity, acceleration);
+
+
+
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
    pSim->angleShip += 0.02;
@@ -152,30 +156,21 @@ void callBack(const Interface* pUI, void* p)
    ogstream gout(pt);
 
    // draw satellites
-   gout.drawCrewDragon(pSim->ptCrewDragon, pSim->angleShip);
-   gout.drawHubble    (pSim->ptHubble,     pSim->angleShip);
-   gout.drawSputnik   (pSim->ptSputnik,    pSim->angleShip);
-   gout.drawStarlink  (pSim->ptStarlink,   pSim->angleShip);
+ 
    gout.drawShip      (pSim->ptShip,       pSim->angleShip, pUI->isSpace());
    gout.drawGPS       (pSim->ptGPS,        pSim->angleShip);
 
    // draw parts
-   pt.setPixelsX(pSim->ptCrewDragon.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptCrewDragon.getPixelsY() + 20);
+
    gout.drawCrewDragonRight(pt, pSim->angleShip); // notice only two parameters are set
-   pt.setPixelsX(pSim->ptHubble.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptHubble.getPixelsY() + 20);
+
    gout.drawHubbleLeft(pt, pSim->angleShip);      // notice only two parameters are set
    pt.setPixelsX(pSim->ptGPS.getPixelsX() + 20);
    pt.setPixelsY(pSim->ptGPS.getPixelsY() + 20);
    gout.drawGPSCenter(pt, pSim->angleShip);       // notice only two parameters are set
-   pt.setPixelsX(pSim->ptStarlink.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptStarlink.getPixelsY() + 20);
    gout.drawStarlinkArray(pt, pSim->angleShip);   // notice only two parameters are set
 
    // draw fragments
-   pt.setPixelsX(pSim->ptSputnik.getPixelsX() + 20);
-   pt.setPixelsY(pSim->ptSputnik.getPixelsY() + 20);
    gout.drawFragment(pt, pSim->angleShip);
    pt.setPixelsX(pSim->ptShip.getPixelsX() + 20);
    pt.setPixelsY(pSim->ptShip.getPixelsY() + 20);

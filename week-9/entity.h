@@ -24,30 +24,31 @@ class Entity
 {
 public:
 
-   // Constructors
+   // Constructors                                                         // TEMP width TODO:
    Entity() {}
+   Entity(Position& pos, Velocity& vel, Angle a, bool isBroke = false, double width = 10.0) {}
 
    // Getters
-   Position getPosition() const { return pos;      }
-   Velocity getVelocity() const { return vel;      }
+   Position getPosition() const { return position;      }
+   Velocity getVelocity() const { return velocity;      }
    bool     getIsBroken() const { return isBroken; }
    double   getWidth()    const { return width;    }
    Angle    getAngle()    const { return angle;    }
 
    // Setters
-   void setPosition  (const Position& newPos) { pos = newPos;      }
-   void setVelocity  (const Velocity& newVel) { vel = newVel;      }
+   void setPosition  (const Position& newPos) { position = newPos;      }
+   void setVelocity  (const Velocity& newVel) { velocity = newVel;      }
    void setIsBroken  (bool broken)            { isBroken = broken; }
    void setAngle     (const Angle& newAngle)  { angle = newAngle;  }
    void setWidth     (double newWidth)        { width = newWidth;  }
 
-   void orbit(double time, double grav, Acceleration accel) {}
-   virtual void draw(ogstream gout);
-   virtual void impact();
+   void orbit(double time, double grav, Acceleration accel);
+   virtual void draw(ogstream gout) = 0;
+   virtual void impact() = 0;
 
 protected:
-   Position pos;
-   Velocity vel;
+   Position position;
+   Velocity velocity;
    Angle angle;
    bool isBroken;
    double width;

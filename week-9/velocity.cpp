@@ -80,9 +80,9 @@ void Velocity::set(const Angle& angle, double magnitude)
  *  dx = cos(a) x speed
  *  dy = sin(a) x speed
  ************************************************/
-Angle Velocity::getAngle() const
-{
-   return Angle();
-}
+//Angle Velocity::getAngle() const
+//{
+//   return Angle();
+//}
 
 

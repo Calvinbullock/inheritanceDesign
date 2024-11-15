@@ -21,6 +21,7 @@ public:
 
    // Constructors
    Satellite() : Entity() {}
+   Satellite(Position& pos, Velocity& vel, Angle a, bool isBroke = false) : Entity(pos, vel, a, isBroke) {}
 
 protected:
    int fragmentCount;

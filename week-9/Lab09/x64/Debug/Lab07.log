@@ -1,4 +1,4 @@
-﻿  test.cpp
-  velocity.cpp
+﻿  physics.cpp
+  simulator.cpp
   Generating Code...
-  Lab07.vcxproj -> C:\Users\Naniel\Documents\School\Fall2024\CSE231\week9\x64\Debug\Lab09.exe
+  Lab07.vcxproj -> C:\Users\Naniel\Documents\School\Fall2024\CSE231\Repo\week-9\x64\Debug\Lab09.exe
