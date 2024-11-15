@@ -13,3 +13,8 @@ week-2-cb/Week-2-SDD.pdf
 */.idea/
 */CMakeLists.txt
 */cmake-build-debug
+
+# Visual Studio files
+*/x86/*
+*/Lab09/*
+*/Lab07/*
