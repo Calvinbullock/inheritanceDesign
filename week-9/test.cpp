@@ -13,6 +13,8 @@
 #include "testAcceleration.h"
 #include "testVelocity.h"
 #include "testPhysics.h"
+#include "testEntity.h"
+
 
 #ifdef _WIN32
 #include <windows.h>
@@ -38,4 +40,5 @@ void testRunner()
    TestAcceleration().run();
    TestVelocity().run();
    TestPhysics().run();
+   TestEntity().run();
 }

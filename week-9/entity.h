@@ -14,7 +14,9 @@
 #include "uiDraw.h"
 #include "velocity.h"
 #include "angle.h"
+#include <cassert>
 
+class TestEntity;
 
 /***********************************************************************
  * Entity
@@ -23,13 +25,14 @@
 class Entity
 {
 public:
+   friend TestEntity;
 
    // Constructors                                                         // TEMP width TODO:
    Entity() {}
    Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double w = 10.0)
    {
       position = pos;
-      velocity = vel; 
+      velocity = vel;
       angle = a;
       isBroken = isBroke;
       width = w;
@@ -61,3 +64,22 @@ protected:
    bool isBroken;
    double width;
 };
+
+/***************************************************
+ * ENTITY DERIVED
+ * A simple derived class so we can test Entity.
+ ***************************************************/
+class EntityDerived : public Entity
+{
+public:
+   EntityDerived() {}
+   EntityDerived(Position& pos, Velocity& vel, Angle& a,
+                  bool isBroke = false, double w = 10.0)
+                  : Entity(pos, vel, a) {}
+
+   void orbit(double time, double grav, Acceleration accel) {assert(false);}
+   virtual void rotate(double delta)                        {assert(false);}
+   virtual void draw(ogstream& gout)                        {assert(false);}
+   virtual void impact()                                    {assert(false);}
+};
+

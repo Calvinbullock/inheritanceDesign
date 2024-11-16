@@ -13,7 +13,7 @@
 class TestPosition;
 class TestVelocity;
 class TestAcceleration;
-class TestProjectile;
+class TestEntity;
 
 // for add()
 class Acceleration;
@@ -28,7 +28,7 @@ class Velocity
    // for unit tests
    friend TestPosition;
    friend TestVelocity;
-   friend TestProjectile;
+   friend TestEntity;
 
 public:
    // constructors
