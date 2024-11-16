@@ -1,10 +1,10 @@
 /***********************************************************************
  * Header File:
- *    TEST EntityDerived
+ *    TEST Entity
  * Author:
  *    Daniel Malasky, Calvin Bullock
  * Summary:
- *    All the unit tests for EntityDerived
+ *    All the unit tests for Entity
  ************************************************************************/
 
 #pragma once
@@ -14,8 +14,8 @@
 #include "unitTest.h"
 
 /*******************************
-* TEST EntityDerived
-* A friend class for EntityDerived which contains the EntityDerived unit tests
+* TEST ENTITY
+*     A friend class for Entity which contains the Entity unit tests
 ********************************/
 class TestEntity : public UnitTest
 {

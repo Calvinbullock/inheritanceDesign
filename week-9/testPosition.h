@@ -2,7 +2,7 @@
  * Header File:
  *    Test Position : Test the Position class
  * Author:
- *    Br. Helfrich
+ *    Daniel Malasky & Calvin Bullock
  * Summary:
  *    All the unit tests for Position
  ************************************************************************/
@@ -14,7 +14,7 @@
 #include "unitTest.h"
 
 /*******************************
- * TEST Position
+ * TEST POSITION
  * A friend class for Position which contains the Position unit tests
  ********************************/
 class TestPosition : public UnitTest

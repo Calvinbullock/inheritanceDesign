@@ -2,7 +2,7 @@
  * Source File:
  *    VELOCITY
  * Author:
- *    Matt Benson
+ *    Daniel Malasky & Calvin Bullock
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/

@@ -1,10 +1,10 @@
 /***********************************************************************
- * Header File:
+ * Source File:
  *    Satellite class
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
- *    TODO:
+ *    Everything to know about satellite's
  ************************************************************************/
 
 #pragma once
@@ -13,7 +13,7 @@
 
 /***********************************************************************
  * Entity
- *    TODO:
+ *    Everything to know about satellite's
  ************************************************************************/
 class Satellite : public Entity
 {

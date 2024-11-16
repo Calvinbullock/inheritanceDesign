@@ -1,3 +1,11 @@
+/***********************************************************************
+ * Source File:
+ *    physics equations
+ * Author:
+ *    Daniel Malasky & Calvin Bullock
+ * Summary:
+ *    physics!
+ ************************************************************************/
 
 #define _USE_MATH_DEFINES
 

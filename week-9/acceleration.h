@@ -2,7 +2,7 @@
  * Header File:
  *    ACCELERATION
  * Author:
- *    Daniel Malasky
+ *    Daniel Malasky, Calvin Bullock
  * Summary:
  *    Everything we need to know about acceleration
  ************************************************************************/

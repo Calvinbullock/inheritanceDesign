@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ANGLE
  * Author:
- *    Daniel Malasky
+ *    Daniel Malasky & Calvin Bullock
  * Summary:
  *    All the unit tests for ANGLE
  ************************************************************************/
@@ -15,7 +15,7 @@
 
  /*******************************
   * TEST ANGLE
-  * A friend class for Angle which contains the Angle unit tests
+  *   A friend class for Angle which contains the Angle unit tests
   ********************************/
 class TestAngle : public UnitTest
 {

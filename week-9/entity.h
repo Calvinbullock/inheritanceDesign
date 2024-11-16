@@ -4,7 +4,7 @@
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
- *    TODO:
+ *    Everything we need to know about Entity
  ************************************************************************/
 
 #pragma once
@@ -20,7 +20,7 @@ class TestEntity;
 
 /***********************************************************************
  * Entity
- *    TODO:
+ *    Everything we need to know about Entity
  ************************************************************************/
 class Entity
 {

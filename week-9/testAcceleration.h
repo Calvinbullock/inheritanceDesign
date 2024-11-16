@@ -2,7 +2,7 @@
  * Header File:
  *    TEST ACCELERATION
  * Author:
- *    Daniel Malasky
+ *    Daniel Malasky,
  * Summary:
  *    Unit tests for the Acceleration class.
  ************************************************************************/

@@ -1,7 +1,7 @@
 
 /***********************************************************************
  * Header File:
- *    Test Position : Test the inline physics functions
+ *    Test Physics: Test the inline physics functions
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
@@ -25,8 +25,8 @@
 #define EARTH_CENTER 42164000.0 //m - Distance from earths center
 
 /*******************************
- * TEST Position
- * A friend class for Position which contains the Position unit tests
+ * TEST PHYSICS
+ *    A class for physics which contains physics equations unit tests
  ********************************/
 class TestPhysics : public UnitTest {
 public:

@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Source File:
+ *    Entity
+ * Author:
+ *    Daniel Malasky, Calvin Bullock
+ * Summary:
+ *    Everything we need to know about a Entity
+ ************************************************************************/
+
 #include "entity.h"
 #include <math.h>
 

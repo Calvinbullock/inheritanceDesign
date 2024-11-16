@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Source File:
+ *    SatelliteGPS class
+ * Author:
+ *    Daniel Malasky & Calvin Bullock
+ * Summary:
+ *    Everything to know about a GPS satellite's
+ ************************************************************************/
+
 #include "satelliteGPS.h"
 
 /****************************************
@@ -15,5 +24,5 @@ void SatelliteGPS::draw(ogstream& gout)
 *****************************************/
 void SatelliteGPS::impact()
 {
-   //TODO:
+   // TODO:
 }

@@ -2,7 +2,7 @@
  * Header File:
  *    VELOCITY
  * Author:
- *    <your name here>
+ *    Daniel Malasky & Calvin Bullock
  * Summary:
  *    Everything we need to know about speed
  ************************************************************************/
