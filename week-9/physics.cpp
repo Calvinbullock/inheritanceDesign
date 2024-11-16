@@ -5,7 +5,6 @@
 #include <math.h>       // for M_PI
 #include "position.h"   // for position
 
-
 /******************************************************************
 * GET GRAVITY : magnitude of acceleration due to gravity at an altitude
 *
@@ -36,78 +35,4 @@ inline double getDirectionGravity(Position earthCenter, Position satPos)
    return atan2(earthCenter.getMetersX() - satPos.getMetersX(),
                 earthCenter.getMetersY() - satPos.getMetersY() );
 }
-
-/**********************************************
-* GETDDX: get horizontal component of acceleration
-*
-* ddx = horizontal component of acceleration
-* a = total acceleration
-* angle = angle(0° is up) of the direction of acceleration
-*
-* ddx = a * sin(angle)
-*********************************************************/
-inline double getDDX(double a, double angle)
-{
-   return a * sin(angle);
-}
-
-/**********************************************
-* GETDDY: get vertical component of acceleration
-*
-* ddy = vertical component of acceleration
-* a = total acceleration
-* angle = angle (0° is up) of the direction of acceleration
-*
-* ddy = a * cos(angle)
-*********************************************************/
-inline double getDDY(double a, double angle)
-{
-   return a * cos(angle);
-}
-
-/********************************************************
-* GET AXIS DISTANCE : horizontal or vertical position at time t(m)
-*
-* x0 = initial horizontal position (m)
-* dx = horizontal component of velocity (m/s)
-* ddx = horizontal component of acceleration (m/s2)
-* t = time (s)
-*
-* * xt = horizontal position at time t (m)
-*
-* xt = x0 + dx * t + ½ * ddx * t^2
-*********************************************************/
-inline double getAxisDistance(double x0, double dx, double ddx, double t)
-{
-   return x0 + dx * t + (1/2) * ddx * (t * t);
-}
-
-
-
-
-//// positions
-//double currXPos = pDemo->ptGPS.getMetersX();
-//double currYPos = pDemo->ptGPS.getMetersY();
-//
-//// Gravity
-//double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
-//double gravityAngle = getDirectionGravity(0.0, 0.0, currXPos, currYPos);
-//
-//// Acceleration
-//double ddx = getDDX(gravity, gravityAngle);
-//double ddy = getDDY(gravity, gravityAngle);
-//
-//// Velocity
-//DX = getAxisVelocity(DX, ddx, TIME);
-//DY = getAxisVelocity(DY, ddy, TIME);
-//
-//// new distance
-//double xPos = getAxisDistance(currXPos, DX, ddx, TIME);
-//double yPos = getAxisDistance(currYPos, DY, ddy, TIME);
-//
-//// orbit the GPS satelite
-//pDemo->ptGPS.setMetersX(getAxisDistance(currXPos, DX, ddx, TIME));
-//pDemo->ptGPS.setMetersY(getAxisDistance(currYPos, DY, ddy, TIME));
-
-
 
