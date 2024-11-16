@@ -54,7 +54,6 @@ public:
 
       // Create 1 GPS Satellite
       GPS = SatelliteGPS(initialGPSPos, initialGPSVel, a);
-      
       //entities.push_back(GPS);
 
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
@@ -106,25 +105,26 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
 
-
    //
    // perform all the game logic
    //
 
    // Gravity
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
-   
 
+   // TODO: -- this should all be in a loop of entity's when we add more GPA [
    // direction of the pull of gravity
-   double gravityAngle = getDirectionGravity(Position(), pSim->GPS.getPosition());
-      
+   Angle gravityAngle;
+   double gravityAngleRadians = getDirectionGravity(Position(), pSim->GPS.getPosition());
+   gravityAngle.setRadians(gravityAngleRadians);
+
    // Acceleration
    Acceleration acceleration;
-   acceleration.set(gravity, gravityAngle);
+   acceleration.set(gravityAngle, gravity);
 
    // orbit entities
    pSim->GPS.orbit(TIME, gravity, acceleration);
-
+   // ]
 
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
