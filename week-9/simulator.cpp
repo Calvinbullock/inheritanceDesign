@@ -1,11 +1,13 @@
 
 /***********************************************************************
  * Header File:
- *    TODO:
+ *    For Simulator class, main function and callback
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
- *    TODO:
+ *    Holds the class with all the simulator class parts.
+ *       also has the callback function for the openGL
+ *       and the main function.
  ************************************************************************/
 
 #include <vector>
@@ -112,7 +114,7 @@ void callBack(const Interface* pUI, void* p)
    // Gravity
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
 
-   // TODO: -- this should all be in a loop of entity's when we add more GPA [
+   // TODO: -- this should all be in a loop of entity's when we add more Entitys [
    // direction of the pull of gravity
    Angle gravityAngle;
    double gravityAngleRadians = getDirectionGravity(Position(), pSim->GPS.getPosition());
