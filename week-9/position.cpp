@@ -41,7 +41,7 @@ Position& Position::operator = (const Position& pt)
 *
 * s = s0 + v * t + ½ * a * t^2
 *********************************************************/
-void Position::add(Velocity v, Acceleration a, double t)
+void Position::add(Acceleration a, Velocity v, double t)
 {
    x += v.getDX() * t + 0.5 * a.getDDX() * (t * t);
    y += v.getDY() * t + 0.5 * a.getDDY() * (t * t);
@@ -56,7 +56,7 @@ std::ostream& operator << (std::ostream& out, const Position& pt)
    out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << "m)";
    return out;
 }
-   
+
 /*******************************************
 * POSITION extraction
 *       Prompt for coordinates

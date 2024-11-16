@@ -1,6 +1,6 @@
 /***********************************************************************
  * Header File:
- *    Point : The representation of a position 
+ *    Point : The representation of a position
  * Author:
  *    Br. Helfrich
  * Summary:
@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include <iostream> 
+#include <iostream>
 #include <cmath>
 #include "velocity.h"
 #include "acceleration.h"
@@ -22,13 +22,13 @@ class Velocity;
 
 /*********************************************
  * Position
- * A single position on the field in Meters  
+ * A single position on the field in Meters
  *********************************************/
 class Position
 {
 public:
    friend TestPosition;
-   
+
    // constructors
    Position()            : x(0.0), y(0.0)  {}
    Position(double x, double y);
@@ -58,7 +58,7 @@ public:
    void addPixelsX(double dxPixels)      { setPixelsX(getPixelsX() + dxPixels);     }
    void addPixelsY(double dyPixels)      { setPixelsY(getPixelsY() + dyPixels);     }
 
-   void add(Velocity v, Acceleration a, double t);
+   void add(Acceleration a, Velocity v, double t);
 
    // deal with the ratio of meters to pixels
    void setZoom(double metersFromPixels)
