@@ -125,7 +125,7 @@ void callBack(const Interface* pUI, void* p)
    acceleration.set(gravityAngle, gravity);
 
    // orbit entities
-   pSim->GPS.orbit(TIME, gravity, acceleration);
+   pSim->GPS.orbit(TIME, acceleration);
    // ]
 
    // rotate the earth
@@ -190,7 +190,6 @@ int main(int argc, char** argv)
 
    // set everything into action
    ui.run(callBack, &demo);
-
 
    return 0;
 }

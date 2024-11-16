@@ -52,7 +52,7 @@ public:
    void setAngle     (const Angle& newAngle)  { angle = newAngle;  }
    void setWidth     (double newWidth)        { width = newWidth;  }
 
-   void orbit(double time, double grav, Acceleration accel);
+   void orbit(double time, Acceleration accel);
    virtual void rotate(double delta);
    virtual void draw(ogstream& gout) = 0;
    virtual void impact() = 0;
@@ -77,9 +77,8 @@ public:
                   bool isBroke = false, double w = 10.0)
                   : Entity(pos, vel, a) {}
 
-   void orbit(double time, double grav, Acceleration accel) {assert(false);}
-   virtual void rotate(double delta)                        {assert(false);}
-   virtual void draw(ogstream& gout)                        {assert(false);}
-   virtual void impact()                                    {assert(false);}
+   virtual void rotate(double delta)           {assert(false);}
+   virtual void draw(ogstream& gout)           {assert(false);}
+   virtual void impact()                       {assert(false);}
 };
 

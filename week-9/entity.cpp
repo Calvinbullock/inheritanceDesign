@@ -2,11 +2,10 @@
 #include <math.h>
 
 // orbit the GPS satelite //TODO: fix comments
-void Entity::orbit(double time, double grav, Acceleration accel)
+void Entity::orbit(double time, Acceleration accel)
 {
-   velocity.add(accel, time);
-
    position.add(accel, velocity, time);
+   velocity.add(accel, time);
 }
 
 void Entity::rotate(double delta)
