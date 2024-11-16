@@ -12,16 +12,15 @@
 #include "unitTest.h"
 #include "velocity.h"
 
- /*********************************************
-  * TEST VELOCITY
-  * Unit tests for Velocity
-  *********************************************/
+/*********************************************
+* TEST VELOCITY
+* Unit tests for Velocity
+*********************************************/
 class TestVelocity : public UnitTest
 {
 public:
    void run()
    {
-      // Ticket 5: From before
       constructor_default();
       constructor_nonDefault();
       getDX();
@@ -47,7 +46,6 @@ public:
       add_moving4Seconds();
       add_moving1Second();
 
-      // Ticket 6: Reverse and add
       reverse_stationary();
       reverse_up();
       reverse_down();

@@ -22,7 +22,6 @@ class TestAngle : public UnitTest
 public:
    void run()
    {
-      // Ticket 1: From before
       defaultConstructor();
       setRadians_noNormalize();
       setDegrees_noNormalize();
@@ -47,7 +46,6 @@ public:
       add_positiveLap();
       add_negativeLap();
 
-      // Ticket 2: Components
       getDx_up();
       getDx_down();
       getDx_left();

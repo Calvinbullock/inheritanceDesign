@@ -24,7 +24,6 @@ class TestAcceleration : public UnitTest
 public:
    void run()
    {
-      // Ticket 3: Without Add
       constructor_default();
       constructor_nonDefault();
       getDDX();
@@ -37,7 +36,6 @@ public:
       set_right();
       set_diagonal();
 
-      // Ticket 4: Add
       addDDX_zero();
       addDDX_value();
       addDDY_zero();
