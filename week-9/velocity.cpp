@@ -61,28 +61,3 @@ void Velocity::set(const Angle& angle, double magnitude)
    dx = magnitude * sin(angle.getRadians());
    dy = magnitude * cos(angle.getRadians());
 }
-
-
-/************************************************
- * Velocity :: GET ANGLE
- * Determine the direction things are going
- * where 0 is up. This returns angle (clockwise) in radians
- *        dx
- *     +-------/
- *     |      /
- *  dy |     /
- *     |    / speed
- *     | a /
- *     |  /
- *     | /
- *
- *  a = atan2(dx, dy)
- *  dx = cos(a) x speed
- *  dy = sin(a) x speed
- ************************************************/
-//Angle Velocity::getAngle() const
-//{
-//   return Angle();
-//}
-
-
