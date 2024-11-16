@@ -22,11 +22,14 @@ class TestEntity : public UnitTest
 public:
    void run()
    {
+      // getters
       getPosition();
       getVelocity();
       getIsBroken();
       getWidth();
       getAngle();
+
+      // setters
       setPosition();
       setVelocity();
       setIsBroken();
