@@ -4,7 +4,7 @@
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
- *    Everything to know about a Hubble satellite's
+ *    Everything to know about a Hubble satellite
  ************************************************************************/
 
 #pragma once
@@ -13,7 +13,7 @@
 
 /****************************************
 * SateliteHubble
-*    Everything to know about a Hubble satellite's
+*    Everything to know about a Hubble satellite
 *****************************************/
 class SatelliteHubble : public Satellite
 {

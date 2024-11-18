@@ -145,7 +145,11 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="satelliteDragon.cpp" />
     <ClCompile Include="satelliteGPS.cpp" />
+    <ClCompile Include="satelliteHubble.cpp" />
+    <ClCompile Include="satelliteSputnik.cpp" />
+    <ClCompile Include="satelliteStarlink.cpp" />
     <ClCompile Include="simulator.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -158,7 +162,11 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
+    <ClInclude Include="satelliteDragon.h" />
     <ClInclude Include="satelliteGPS.h" />
+    <ClInclude Include="satelliteHubble.h" />
+    <ClInclude Include="satelliteSputnik.h" />
+    <ClInclude Include="satelliteStarlink.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testAcceleration.h" />
     <ClInclude Include="testAngle.h" />

@@ -4,7 +4,7 @@
  * Author:
  *    Daniel Malasky & Calvin Bullock
  * Summary:
- *    Everything to know about a GPS satellite's
+ *    Everything to know about a GPS satellite
  ************************************************************************/
 
 #pragma once
@@ -13,7 +13,7 @@
 
 /****************************************
 * SateliteGPS
-*    Everything to know about a GPS satellite's
+*    Everything to know about a GPS satellite
 *****************************************/
 class SatelliteGPS : public Satellite
 {
