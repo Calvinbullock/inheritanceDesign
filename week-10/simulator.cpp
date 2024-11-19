@@ -16,6 +16,8 @@
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "satelliteGPS.h" // for GPS satellite
+#include "satelliteDragon.h" 
+#include "satelliteHubble.h"
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"   // for POINT
 #include "test.h"
@@ -26,10 +28,11 @@
 using namespace std;
 
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
-#define RADIUS_EARTH 6378000.0 //m
-#define EARTH_SURFACE 35786000.0 //m - Distance from earths surface
-#define EARTH_CENTER 42164000.0 //m - Distance from earths center
-#define TIME 48 // seconds/frame
+#define RADIUS_EARTH 6378000.0    // m
+#define EARTH_SURFACE 35786000.0  // m - Distance from earths surface
+#define EARTH_CENTER 42164000.0   // m - Distance from earths center
+#define TIME 48                   // seconds/frame
+#define ROTATION_SPEED 0.02       // rotation speed for satellites
 
 // EVENTUALLY WILL BE A CLASS
 // Initial velocity
@@ -49,14 +52,7 @@ public:
       ptUpperRight(ptUpperRight)
    {
 
-      // initial GPS satellite values
-      Position initialGPSPos = Position(0.0, 42164000.0);
-      Velocity initialGPSVel = Velocity(-3100.0, 0.0);
-      Angle a = Angle();
-
-      // Create 1 GPS Satellite
-      GPS = SatelliteGPS(initialGPSPos, initialGPSVel, a);
-      //entities.push_back(GPS);
+      initializeSatellites();
 
       ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
@@ -78,11 +74,56 @@ public:
       phaseStar = 0;
    }
 
+   
+   void initializeSatellites() 
+   {
+      // initial GPS satellite values
+      Position initialPos = Position(0.0, 26560000.0);
+      Velocity initialVel = Velocity(-3880.0, 0.0);
+      Angle a = Angle();
+
+      // Create 1 GPS Satellite
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      initialPos = Position(23001634.72, 13280000.0 );
+      initialVel = Velocity(-1940.00, 3360.18);
+      a = Angle();
+
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // initial Hubble satellite values
+      initialPos = Position(0.0, -42164000.0);
+      initialVel = Velocity(3100.0, 0.0);
+      a = Angle();
+
+      // Create 1 Hubble Satellite
+      entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
+      
+   }
+
+   // Destructor
+   ~Simulator() 
+   {
+      // Clean up the dynamically allocated memory
+      for (Entity* entity : entities)
+      {
+         delete entity;
+      }
+   } 
+
+   // TODO: will this work?
+   //void createSatellites(/*pos, vel, a, satType*/)
+   //{
+   //   for (int i =0; i < entities.size(); i++)
+   //   {
+   //      entities[i].initialize(/*vel, pos, a*/)
+   //   }
+   //}
+
+
    std::vector<unsigned char> starPhases;
    std::vector<Position> positions;
-   //std::vector<Satellite> entities; // TODO:
-
-   SatelliteGPS GPS;
+   std::vector<Entity*> entities;;
 
    Position ptStar;
    Position ptUpperRight;
@@ -111,37 +152,41 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
-   // Gravity
-   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, EARTH_SURFACE);
+   
 
-   // TODO: -- this should all be in a loop of entity's when we add more Entitys [
-   // direction of the pull of gravity
-   Angle gravityAngle;
-   double gravityAngleRadians = getDirectionGravity(Position(), pSim->GPS.getPosition());
-   gravityAngle.setRadians(gravityAngleRadians);
 
-   // Acceleration
-   Acceleration acceleration;
-   acceleration.set(gravityAngle, gravity);
+   Position pt;
+   ogstream gout(pt);
 
-   // orbit entities
-   pSim->GPS.orbit(TIME, acceleration);
-   // ]
+   // Orbit, rotate, and draw all entities
+   for (int i = 0; i < pSim->entities.size(); i++)
+   {
+
+      double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[i]->getPosition());
+
+      // Gravity
+      double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
+
+      Angle gravityAngle;
+      double gravityAngleRadians = getDirectionGravity(Position(), pSim->entities[i]->getPosition());
+      gravityAngle.setRadians(gravityAngleRadians);
+
+      // Acceleration
+      Acceleration acceleration;
+      acceleration.set(gravityAngle, gravity);
+
+      pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
+      pSim->entities[i]->draw(gout);                // draw
+      pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+   }
 
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
    pSim->phaseStar++;
 
    //
-   // draw everything
-   //
-
-   Position pt;
-   ogstream gout(pt);
-
-   // draw satellites
-   pSim->GPS.draw(gout);
-   pSim->GPS.rotate(0.02);
+   // draw everything else
+   // 
 
    // draw a single star
    gout.drawStar(pSim->ptStar, pSim->phaseStar);

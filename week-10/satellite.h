@@ -23,6 +23,16 @@ public:
    Satellite() : Entity() {}
    Satellite(Position& pos, Velocity& vel, Angle& a, bool isBroke = false) : Entity(pos, vel, a, isBroke) {}
 
+   virtual void draw(ogstream& gout) { assert(false); }
+   virtual void impact() { assert(false); }
+   // TODO: Do we need this?
+   //void initialize(Position pos, Velocity vel, Angle a)
+   //{
+   //   position = pos;
+   //   velocity = vel;
+   //   angle = a;
+   //}
+
 protected:
    int fragmentCount;
 };
