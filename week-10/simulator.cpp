@@ -29,8 +29,6 @@ using namespace std;
 
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
 #define RADIUS_EARTH 6378000.0    // m
-#define EARTH_SURFACE 35786000.0  // m - Distance from earths surface
-#define EARTH_CENTER 42164000.0   // m - Distance from earths center
 #define TIME 48                   // seconds/frame
 #define ROTATION_SPEED 0.02       // rotation speed for satellites
 
