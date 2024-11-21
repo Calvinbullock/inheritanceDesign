@@ -19,7 +19,7 @@ void SatelliteGPS::draw(ogstream& gout)
 }
 
 /****************************************
-* DRAW
+* IMPACT
 * What happens on impact?
 *****************************************/
 void SatelliteGPS::impact()

@@ -7,7 +7,7 @@
  *    Everything to know about a Sputnik satellite
  ************************************************************************/
 
-#include "SatelliteSputnik.h"
+#include "satelliteSputnik.h"
 
  /****************************************
  * DRAW

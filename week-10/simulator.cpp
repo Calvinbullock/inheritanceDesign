@@ -10,13 +10,14 @@
  *       and the main function.
  ************************************************************************/
 
+#include "satelliteShip.h"
 #include <vector>
 #define _USE_MATH_DEFINES
 
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "satelliteGPS.h" // for GPS satellite
-#include "satelliteDragon.h" 
+#include "satelliteDragon.h"
 #include "satelliteHubble.h"
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"   // for POINT
@@ -72,13 +73,23 @@ public:
       phaseStar = 0;
    }
 
-   
-   void initializeSatellites() 
+   void initializeSatellites()
    {
-      // initial GPS satellite values
-      Position initialPos = Position(0.0, 26560000.0);
-      Velocity initialVel = Velocity(-3880.0, 0.0);
+      // initial DreamChaser satellite values
+      Position initialPos;
+      initialPos.setPixelsX(-450);
+      initialPos.setPixelsY(450);
+      Velocity initialVel = Velocity(0.0, -2000);
       Angle a = Angle();
+
+      dreamChaser.setPosition(initialPos);
+      dreamChaser.setVelocity(initialVel);
+      dreamChaser.setAngle(a);
+
+      // initial GPS satellite values
+      initialPos = Position(0.0, 26560000.0);
+      initialVel = Velocity(-3880.0, 0.0);
+      a = Angle();
 
       // Create 1 GPS Satellite
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
@@ -96,18 +107,18 @@ public:
 
       // Create 1 Hubble Satellite
       entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
-      
+
    }
 
    // Destructor
-   ~Simulator() 
+   ~Simulator()
    {
       // Clean up the dynamically allocated memory
       for (Entity* entity : entities)
       {
          delete entity;
       }
-   } 
+   }
 
    // TODO: will this work?
    //void createSatellites(/*pos, vel, a, satType*/)
@@ -121,7 +132,8 @@ public:
 
    std::vector<unsigned char> starPhases;
    std::vector<Position> positions;
-   std::vector<Entity*> entities;;
+   std::vector<Entity*> entities;
+   SatelliteShip dreamChaser;
 
    Position ptStar;
    Position ptUpperRight;
@@ -150,11 +162,30 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
-   
-
-
    Position pt;
    ogstream gout(pt);
+
+   //
+   // get dream Chase orbit
+   // TODO: DreamChaser is going no where
+   //
+   double distanceFromEarth = computeDistance(Position(0, 0), pSim->dreamChaser.getPosition());
+
+   // Gravity
+   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
+
+   Angle gravityAngle;
+   double gravityAngleRadians = getDirectionGravity(Position(), pSim->dreamChaser.getPosition());
+   gravityAngle.setRadians(gravityAngleRadians);
+
+   Thrust thrust;
+   thrust.set(pUI);
+
+   // Acceleration
+   Acceleration acceleration;
+   acceleration = pSim->dreamChaser.input(thrust, gravity);
+   //acceleration.set(gravityAngle, gravity);
+   pSim->dreamChaser.orbit(TIME, acceleration);
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
@@ -181,10 +212,11 @@ void callBack(const Interface* pUI, void* p)
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
    pSim->phaseStar++;
+   pSim->dreamChaser.draw(gout);
 
    //
    // draw everything else
-   // 
+   //
 
    // draw a single star
    gout.drawStar(pSim->ptStar, pSim->phaseStar);
@@ -225,8 +257,8 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
    Interface ui(0, NULL,
-      "Demo",   /* name on the window */
-      ptUpperRight);
+                "Demo",   /* name on the window */
+                ptUpperRight);
 
    // Initialize the demo
    Simulator demo(ptUpperRight);

@@ -7,7 +7,7 @@
  *    Everything to know about a Starlink satellite
  ************************************************************************/
 
-#include "SatelliteStarlink.h"
+#include "satelliteStarlink.h"
 
  /****************************************
  * DRAW

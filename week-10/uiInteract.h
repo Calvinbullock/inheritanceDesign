@@ -23,6 +23,8 @@ using std::max;
 
 #define GL_SILENCE_DEPRECATION
 
+class TestThrust;
+
 /********************************************
  * INTERFACE
  * All the data necessary to keep our graphics
@@ -30,6 +32,9 @@ using std::max;
  ********************************************/
 class Interface
 {
+   // for unit test
+   friend TestThrust;
+
 public:
    Interface() {}
 
@@ -39,7 +44,7 @@ public:
    {
       initialize(argc, argv, title, ptUpperRight);
    }
-   
+
    // Destructor, in case any housecleaning needs to occur
    ~Interface();
 
@@ -57,7 +62,7 @@ public:
 
    // How many frames per second are we configured for?
    void setFramesPerSecond(double value);
-   
+
    // Key event indicating a key has been pressed or not.  The callbacks
    // should be the only onces to call this
    void keyEvent(int key, bool fDown);
@@ -65,14 +70,14 @@ public:
 
    // Current frame rate
    double frameRate() const { return timePeriod;   }
-   
+
    // Get various key events
    int  isDown()      const { return isDownPress;  }
    int  isUp()        const { return isUpPress;    }
    int  isLeft()      const { return isLeftPress;  }
    int  isRight()     const { return isRightPress; }
    bool isSpace()     const { return isSpacePress; }
-   
+
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
 

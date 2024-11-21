@@ -11,6 +11,7 @@
 #include "testPosition.h"
 #include "testAngle.h"
 #include "testAcceleration.h"
+#include "testThrust.h"
 #include "testVelocity.h"
 #include "testPhysics.h"
 #include "testEntity.h"
@@ -41,4 +42,5 @@ void testRunner()
    TestVelocity().run();
    TestPhysics().run();
    TestEntity().run();
+   TestThrust().run();
 }
