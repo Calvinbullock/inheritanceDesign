@@ -13,21 +13,22 @@
 #define _USE_MATH_DEFINES
 
 #include <vector>
-#include <cassert>      // for ASSERT
 #include <cmath>        // for sin, cos
+#include <math.h>       // for M_PI
+#include <cassert>      // for ASSERT
+
+#include "test.h"
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
-#include <math.h>       // for M_PI
 
 #include "satelliteShip.h"
-#include "satelliteGPS.h" // for GPS satellite
+#include "satelliteGPS.h"
 #include "satelliteDragon.h"
 #include "satelliteHubble.h"
 #include "star.h"
 
-#include "test.h"
 #include "position.h"   // for POINT
-#include "physics.cpp"  // for physics
+#include "physics.cpp"  // for physics EQTNs
 
 using namespace std;
 
@@ -143,6 +144,7 @@ void callBack(const Interface* pUI, void* p)
    // get dream Chase orbit
    // TODO: DreamChaser is going no where
    //
+   // -- MOVE THIS INTO A FUNCTION??? [
    double distanceFromEarth = computeDistance(Position(0, 0), pSim->dreamChaser.getPosition());
 
    // Gravity
@@ -160,6 +162,7 @@ void callBack(const Interface* pUI, void* p)
    acceleration = pSim->dreamChaser.input(thrust, gravity);
    //acceleration.set(gravityAngle, gravity);
    pSim->dreamChaser.orbit(TIME, acceleration);
+   // ]
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
