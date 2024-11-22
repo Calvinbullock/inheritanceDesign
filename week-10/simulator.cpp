@@ -26,6 +26,7 @@
 #include "satelliteDragon.h"
 #include "satelliteHubble.h"
 #include "star.h"
+#include "earth.h"
 
 #include "position.h"   // for POINT
 #include "physics.cpp"  // for physics EQTNs
@@ -48,7 +49,7 @@ public:
    Simulator(Position ptUpperRight, int starCountIn) : ptUpperRight(ptUpperRight)
    {
       starCount = starCountIn;
-      angleEarth = 0.0;
+      earth = Earth();
 
       initializeSatellites();
 
@@ -114,7 +115,7 @@ public:
 
    int starCount;          // number or stars
    Position ptUpperRight;
-   double angleEarth;      // TODO: move to ship class?
+   Earth earth;
 };
 
 
@@ -183,22 +184,23 @@ void callBack(const Interface* pUI, void* p)
       pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
    }
 
-   // rotate the earth
-   pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
-   pSim->dreamChaser.draw(gout);
+   //
+   // Draw all but satellites
+   //
 
-   //
-   // draw everything else
-   //
+   // rotate / draw the earth
+   pSim->earth.rotate(0.00349);
+   pSim->earth.draw(gout);
+
+   // draw ship
+   pSim->dreamChaser.draw(gout);
 
    // draw stars
    for (int i = 0; i < pSim->getStarCount(); ++i) {
       pSim->stars[i].draw(gout);
    }
 
-   // draw the earth
    pt.setMeters(0.0, 0.0);
-   gout.drawEarth(pt, pSim->angleEarth);
 }
 
 double Position::metersFromPixels = 40.0;
