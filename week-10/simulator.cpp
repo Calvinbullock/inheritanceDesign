@@ -11,6 +11,7 @@
  ************************************************************************/
 
 #include "satelliteShip.h"
+#include "star.h"
 #include <vector>
 #define _USE_MATH_DEFINES
 
@@ -47,67 +48,54 @@ int starCount = 300; // number or stars
 class Simulator
 {
 public:
-   Simulator(Position ptUpperRight) :
-      ptUpperRight(ptUpperRight)
+   Simulator(Position ptUpperRight) : ptUpperRight(ptUpperRight)
    {
-
       initializeSatellites();
-
-      ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
       // populate star vector
       for (int i = 0; i < starCount; i++) {
-         ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-         ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-         positions.push_back(ptStar);
-      }
-
-      // populate starPhase vector
-      for (int i = 0; i < starCount; i++) {
-         unsigned char phase = 4 * random(1, 50);
-         starPhases.push_back(phase);
+         stars.push_back(Star(ptUpperRight));
       }
 
       angleEarth = 0.0;
-      phaseStar = 0;
    }
 
+   /****************************************
+   * INITIALIZE SATELLITES
+   * initialize all the satellites and add them
+   *     to the satellite vector.
+   *     (DreamChaser is instantiated but not
+   *     added to the vector)
+   * *****************************************/
    void initializeSatellites()
    {
-      // initial DreamChaser satellite values
+      // initial DreamChaser satellite
       Position initialPos;
       initialPos.setPixelsX(-450);
       initialPos.setPixelsY(450);
       Velocity initialVel = Velocity(0.0, -2000);
       Angle a = Angle();
-
       dreamChaser.setPosition(initialPos);
       dreamChaser.setVelocity(initialVel);
       dreamChaser.setAngle(a);
 
-      // initial GPS satellite values
+      // initial GPS satellite
       initialPos = Position(0.0, 26560000.0);
       initialVel = Velocity(-3880.0, 0.0);
       a = Angle();
-
-      // Create 1 GPS Satellite
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
+      // initial GPS satellite
       initialPos = Position(23001634.72, 13280000.0 );
       initialVel = Velocity(-1940.00, 3360.18);
       a = Angle();
-
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
-      // initial Hubble satellite values
+      // initial Hubble satellite
       initialPos = Position(0.0, -42164000.0);
       initialVel = Velocity(3100.0, 0.0);
       a = Angle();
-
-      // Create 1 Hubble Satellite
       entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
-
    }
 
    // Destructor
@@ -120,28 +108,12 @@ public:
       }
    }
 
-   // TODO: will this work?
-   //void createSatellites(/*pos, vel, a, satType*/)
-   //{
-   //   for (int i =0; i < entities.size(); i++)
-   //   {
-   //      entities[i].initialize(/*vel, pos, a*/)
-   //   }
-   //}
-
-
-   std::vector<unsigned char> starPhases;
-   std::vector<Position> positions;
    std::vector<Entity*> entities;
+   std::vector<Star> stars;
    SatelliteShip dreamChaser;
 
-   Position ptStar;
    Position ptUpperRight;
-
-   unsigned char phaseStar;
-
-   double angleShip;
-   double angleEarth;
+   double angleEarth; // TODO: move to ship class?
 };
 
 
@@ -190,7 +162,6 @@ void callBack(const Interface* pUI, void* p)
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
    {
-
       double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[i]->getPosition());
 
       // Gravity
@@ -211,20 +182,15 @@ void callBack(const Interface* pUI, void* p)
 
    // rotate the earth
    pSim->angleEarth -= 0.00349; // 2PI / 1800 || full orbit / frames in a min
-   pSim->phaseStar++;
    pSim->dreamChaser.draw(gout);
 
    //
    // draw everything else
    //
 
-   // draw a single star
-   gout.drawStar(pSim->ptStar, pSim->phaseStar);
-
    // draw stars
    for (int i = 0; i < starCount; ++i) {
-      pSim->starPhases[i]++;
-      gout.drawStar(pSim->positions[i], pSim->starPhases[i]);
+      pSim->stars[i].draw(gout);
    }
 
    // draw the earth
