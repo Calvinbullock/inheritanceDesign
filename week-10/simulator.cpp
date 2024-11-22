@@ -10,21 +10,23 @@
  *       and the main function.
  ************************************************************************/
 
-#include "satelliteShip.h"
-#include "star.h"
-#include <vector>
 #define _USE_MATH_DEFINES
 
+#include <vector>
 #include <cassert>      // for ASSERT
+#include <cmath>        // for sin, cos
 #include "uiInteract.h" // for INTERFACE
+#include "uiDraw.h"     // for RANDOM and DRAW*
+#include <math.h>       // for M_PI
+
+#include "satelliteShip.h"
 #include "satelliteGPS.h" // for GPS satellite
 #include "satelliteDragon.h"
 #include "satelliteHubble.h"
-#include "uiDraw.h"     // for RANDOM and DRAW*
-#include "position.h"   // for POINT
+#include "star.h"
+
 #include "test.h"
-#include <cmath>        // for sin, cos
-#include <math.h>       // for M_PI
+#include "position.h"   // for POINT
 #include "physics.cpp"  // for physics
 
 using namespace std;
