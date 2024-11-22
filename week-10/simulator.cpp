@@ -34,15 +34,9 @@ using namespace std;
 
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
 #define RADIUS_EARTH 6378000.0    // m
-#define TIME 48                   // seconds/frame
 #define ROTATION_SPEED 0.02       // rotation speed for satellites
-
-// EVENTUALLY WILL BE A CLASS
-// Initial velocity
-double DX = -3100.0;
-double DY = 0.0;
-int starCount = 300; // number or stars
-
+#define TIME 48                   // seconds/frame
+#define STAR_COUNT 300            // number or stars
 
 /*************************************************************************
  * Demo
@@ -51,17 +45,20 @@ int starCount = 300; // number or stars
 class Simulator
 {
 public:
-   Simulator(Position ptUpperRight) : ptUpperRight(ptUpperRight)
+   Simulator(Position ptUpperRight, int starCountIn) : ptUpperRight(ptUpperRight)
    {
+      starCount = starCountIn;
+      angleEarth = 0.0;
+
       initializeSatellites();
 
       // populate star vector
       for (int i = 0; i < starCount; i++) {
          stars.push_back(Star(ptUpperRight));
       }
-
-      angleEarth = 0.0;
    }
+
+   int getStarCount() { return starCount; }
 
    /****************************************
    * INITIALIZE SATELLITES
@@ -115,8 +112,9 @@ public:
    std::vector<Star> stars;
    SatelliteShip dreamChaser;
 
+   int starCount;          // number or stars
    Position ptUpperRight;
-   double angleEarth; // TODO: move to ship class?
+   double angleEarth;      // TODO: move to ship class?
 };
 
 
@@ -194,7 +192,7 @@ void callBack(const Interface* pUI, void* p)
    //
 
    // draw stars
-   for (int i = 0; i < starCount; ++i) {
+   for (int i = 0; i < pSim->getStarCount(); ++i) {
       pSim->stars[i].draw(gout);
    }
 
@@ -232,7 +230,7 @@ int main(int argc, char** argv)
                 ptUpperRight);
 
    // Initialize the demo
-   Simulator demo(ptUpperRight);
+   Simulator demo(ptUpperRight, STAR_COUNT);
 
    // set everything into action
    ui.run(callBack, &demo);
