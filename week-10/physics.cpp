@@ -7,6 +7,8 @@
  *    physics!
  ************************************************************************/
 
+#pragma once
+
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
 #define RADIUS_EARTH 6378000.0    // m
 
@@ -29,9 +31,9 @@
  * d = atan(xe - xs, ye - ys)
  *****************************************************/
 inline double getDirectionGravity(Position earthCenter, Position satPos)
-{
-   return atan2(earthCenter.getMetersX() - satPos.getMetersX(),
-      earthCenter.getMetersY() - satPos.getMetersY());
+{  
+   return atan2(satPos.getMetersY() - earthCenter.getMetersY(),
+                satPos.getMetersX() - earthCenter.getMetersX());
 }
 
 
@@ -58,6 +60,8 @@ inline Acceleration getGravity(Position satPos)
    Angle gravityAngle;
    double gravityAngleRadians = getDirectionGravity(Position(), satPos);
    gravityAngle.setRadians(gravityAngleRadians);
+
+   std::cout << "angle: " << gravityAngle.getRadians() << std::endl;
 
    Acceleration aGravity;
    aGravity.set(gravityAngle, gravity);

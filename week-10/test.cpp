@@ -40,7 +40,7 @@ void testRunner()
    TestAngle().run();
    TestAcceleration().run();
    TestVelocity().run();
-   //TestPhysics().run();
+   TestPhysics().run();
    TestEntity().run();
    TestThrust().run();
 }

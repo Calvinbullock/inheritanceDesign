@@ -135,6 +135,8 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
+   // cout << getDirectionGravity(Position(), Position(0, 6378000.0)) << endl;
+
    Position pt;
    ogstream gout(pt);
 
