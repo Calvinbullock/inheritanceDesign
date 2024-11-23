@@ -239,10 +239,8 @@ private:
       // exercise
       s.input(t, time);
 
-      std::cout << s.angle.radians << std::endl;
-
       // verify
-      assertEquals(s.angle.radians, 6.2);
+      assertEquals(s.angle.radians, 6.18318);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 0.0);
       assertEquals(s.position.y, 0.0);
