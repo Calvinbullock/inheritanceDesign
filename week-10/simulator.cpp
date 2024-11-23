@@ -21,10 +21,12 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 
-#include "satelliteShip.h"
 #include "satelliteGPS.h"
-#include "satelliteDragon.h"
+#include "satelliteShip.h"
 #include "satelliteHubble.h"
+#include "satelliteDragon.h"
+#include "satelliteSputnik.h"
+#include "satelliteStarlink.h"
 #include "star.h"
 #include "earth.h"
 
@@ -80,15 +82,43 @@ public:
       dreamChaser.setVelocity(initialVel);
       dreamChaser.setAngle(a);
 
-      // initial GPS satellite
+      //
+      // gps
+      //
+
+      // GPS satellite 1
       initialPos = Position(0.0, 26560000.0);
       initialVel = Velocity(-3880.0, 0.0);
       a = Angle();
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
-      // initial GPS satellite
+      // GPS satellite 2
       initialPos = Position(23001634.72, 13280000.0 );
       initialVel = Velocity(-1940.00, 3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // GPS satellite 3
+      initialPos = Position(23001634.72, -13280000.0 );
+      initialVel = Velocity(1940.00, 3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // GPS satellite 4
+      initialPos = Position(0.0, -26560000.0);
+      initialVel = Velocity(3360.18, 0.0);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // GPS satellite 5
+      initialPos = Position(-23001634.72, -13280000.0 );
+      initialVel = Velocity(1940.00, -3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // GPS satellite 6
+      initialPos = Position(-23001634.72, 13280000.0 );
+      initialVel = Velocity(-1940.00, -3360.18);
       a = Angle();
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
@@ -97,6 +127,30 @@ public:
       initialVel = Velocity(3100.0, 0.0);
       a = Angle();
       entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
+
+      // spudnik
+      initialPos = Position(-36515095.13, 21082000.0);
+      initialVel = Velocity(2050.0, 2684.68);
+      a = Angle();
+      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a));
+
+      // spudnik
+      initialPos = Position(-36515095.13, 21082000.0);
+      initialVel = Velocity(2050.0, 2684.68);
+      a = Angle();
+      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a));
+
+      // starlink
+      initialPos = Position(0.0, -13020000.0);
+      initialVel = Velocity(5800.0, 0.0);
+      a = Angle();
+      entities.push_back(new SatelliteStarlink(initialPos, initialVel, a));
+
+      // Dragon
+      initialPos = Position(0.0, 8000000.0);
+      initialVel = Velocity(-7900.0, 0.0);
+      a = Angle();
+      entities.push_back(new SatelliteDragon(initialPos, initialVel, a));
    }
 
    // Destructor
@@ -148,10 +202,6 @@ void callBack(const Interface* pUI, void* p)
 
    // Gravity
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
-
-   Angle gravityAngle;
-   double gravityAngleRadians = getDirectionGravity(Position(), pSim->dreamChaser.getPosition());
-   gravityAngle.setRadians(gravityAngleRadians);
 
    Thrust thrust;
    thrust.set(pUI);
