@@ -78,13 +78,7 @@ public:
       initialPos.setPixelsY(450);
       Velocity initialVel = Velocity(0.0, -2000);
       Angle a = Angle();
-      dreamChaser.setPosition(initialPos);
-      dreamChaser.setVelocity(initialVel);
-      dreamChaser.setAngle(a);
-
-      //
-      // gps
-      //
+      entities.push_back(new SatelliteShip(initialPos, initialVel, a));
 
       // GPS satellite 1
       initialPos = Position(0.0, 26560000.0);
@@ -106,7 +100,7 @@ public:
 
       // GPS satellite 4
       initialPos = Position(0.0, -26560000.0);
-      initialVel = Velocity(3360.18, 0.0);
+      initialVel = Velocity(3880.0, 0.0);
       a = Angle();
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
@@ -159,7 +153,6 @@ public:
 
    std::vector<Entity*> entities;
    std::vector<Star> stars;
-   SatelliteShip dreamChaser;
 
    int starCount;          // number or stars
    Position ptUpperRight;
@@ -187,25 +180,19 @@ void callBack(const Interface* pUI, void* p)
    Position pt;
    ogstream gout(pt);
 
-   //
-   // get dream Chase orbit
-   // TODO: DreamChaser is going no where
-   //
-   // -- MOVE THIS INTO A FUNCTION??? [
-   double distanceFromEarth = computeDistance(Position(0, 0), pSim->dreamChaser.getPosition());
+   double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[0]->getPosition());
 
    // Gravity
    double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
 
+   // thrust for dreamChaser
    Thrust thrust;
    thrust.set(pUI);
 
-   // Acceleration
-   Acceleration acceleration;
-   acceleration = pSim->dreamChaser.input(thrust, gravity);
-   //acceleration.set(gravityAngle, gravity);
-   pSim->dreamChaser.orbit(TIME, acceleration);
-   // ]
+   // Use dynamic_cast to check if the entity is a Satellite
+   if (Satellite* satellite = dynamic_cast<Satellite*>(pSim->entities[0])) {
+      satellite->input(thrust, gravity, TIME);
+   }
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
@@ -225,7 +212,11 @@ void callBack(const Interface* pUI, void* p)
 
       pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
       pSim->entities[i]->draw(gout);                // draw
-      pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+
+      // rotate all but the dreamChaser
+      if (!(i == 0)) {
+         pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+      }
    }
 
    //
@@ -235,9 +226,6 @@ void callBack(const Interface* pUI, void* p)
    // rotate / draw the earth
    pSim->earth.rotate(0.00349);
    pSim->earth.draw(gout);
-
-   // draw ship
-   pSim->dreamChaser.draw(gout);
 
    // draw stars
    for (int i = 0; i < pSim->getStarCount(); ++i) {
