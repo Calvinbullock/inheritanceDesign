@@ -25,6 +25,7 @@
 #include "satelliteGPS.h"
 #include "satelliteDragon.h"
 #include "satelliteHubble.h"
+#include "satelliteSputnik.h"
 #include "star.h"
 #include "earth.h"
 
@@ -79,15 +80,39 @@ public:
       dreamChaser.setVelocity(initialVel);
       dreamChaser.setAngle(a);
 
-      // initial GPS satellite
+      // Satellite 1
       initialPos = Position(0.0, 26560000.0);
       initialVel = Velocity(-3880.0, 0.0);
       a = Angle();
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
-      // initial GPS satellite
-      initialPos = Position(23001634.72, 13280000.0 );
+      // Satellite 2
+      initialPos = Position(23001634.72, 13280000.0);
       initialVel = Velocity(-1940.00, 3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // Satellite 3
+      initialPos = Position(23001634.72, -13280000.0);
+      initialVel = Velocity(1940.00, 3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // Satellite 4
+      initialPos = Position(0.0, -26560000.0);
+      initialVel = Velocity(3880.0, 0.0);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // Satellite 5
+      initialPos = Position(-23001634.72, -13280000.0);
+      initialVel = Velocity(1940.00, -3360.18);
+      a = Angle();
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+
+      // Satellite 6
+      initialPos = Position(-23001634.72, 13280000.0);
+      initialVel = Velocity(-1940.00, -3360.18);
       a = Angle();
       entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
 
@@ -96,6 +121,13 @@ public:
       initialVel = Velocity(3100.0, 0.0);
       a = Angle();
       entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
+
+      // Satellite Sputnik
+      initialPos = Position(-36515095.13, 21082000.0);
+      initialVel = Velocity(2050.0, 2684.68);
+      a = Angle();
+      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a));
+
    }
 
    // Destructor
@@ -161,11 +193,13 @@ void callBack(const Interface* pUI, void* p)
    //pSim->dreamChaser.orbit(TIME);
    // ]
 
+   //cout << pSim->entities.size() << endl;
+
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
    {
 
-      //pSim->entities[i]->orbit(TIME); // orbit entities
+      pSim->entities[i]->orbit(TIME);               // orbit entities
       pSim->entities[i]->draw(gout);                // draw
       pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
    }

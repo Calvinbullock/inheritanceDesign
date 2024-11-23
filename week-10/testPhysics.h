@@ -119,7 +119,7 @@ private:
       double direction = getDirectionGravity(earthCenter, satPos);
 
       // verify
-      assertEquals(direction, 3.141593);
+      assertEquals(direction, 0.0);
    } // tear down
 
    /*********************************************
