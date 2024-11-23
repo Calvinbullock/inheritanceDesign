@@ -27,9 +27,8 @@ public:
       input_mainDown();
       input_mainLeft();
       input_mainDiagonal();
-      /*input_coastClockwise();*/
-      /*input_coastCounterClockwise();*/
-      /*input_noFuel();*/
+      input_clockwise();
+      input_counterClockwise();
 
       report("Satellite");
    }
@@ -66,9 +65,10 @@ private:
       s.input(t, time);
 
       // verify
+      assertEquals(s.angle.radians, 0.0);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, 0.0);      // pos is changing due to gravity
+      assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, 0.0);
       assertEquals(s.velocity.dy, 0.0);
       assertUnit(t.clockwise == false);
@@ -100,9 +100,10 @@ private:
       s.input(t, time);
 
       // verify
+      assertEquals(s.angle.radians, 3.141593);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, -3.0);      // pos is changing due to gravity
+      assertEquals(s.position.y, -3.0);
       assertEquals(s.velocity.dx, 0.0);
       assertEquals(s.velocity.dy, -2.0);
       assertUnit(t.clockwise == false);
@@ -134,9 +135,10 @@ private:
       s.input(t, time);
 
       // verify
+      assertEquals(s.angle.radians, -1.57079);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, -3.0);
-      assertEquals(s.position.y, 0.0);      // pos is changing due to gravity
+      assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, -2.0);
       assertEquals(s.velocity.dy, 0.0);
       assertUnit(t.clockwise == false);
@@ -157,25 +159,21 @@ private:
       s.position.y = 0.0;
       s.velocity.dx = 0.0;
       s.velocity.dy = 0.0;
-      s.angle.radians = 0.785398;;
+      s.angle.radians = 0.785398;
       Thrust t;
       t.clockwise = false;
       t.counterClockwise = false;
       t.mainEngine = true;
       double time = 1.0;
 
-      std::cout << "p " << s.position.x  << std::endl;
-      std::cout << "p " << s.position.y  << std::endl;
-      std::cout << "v " << s.velocity.dx << std::endl;
-      std::cout << "v " << s.velocity.dy << std::endl;
-
       // exercise
       s.input(t, time);
 
       // verify
+      assertEquals(s.angle.radians, 0.785398);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 2.12132);
-      assertEquals(s.position.y, 2.12132); // pos is changing due to gravity
+      assertEquals(s.position.y, 2.12132);
       assertEquals(s.velocity.dx, 1.41421);
       assertEquals(s.velocity.dy, 1.41421);
       assertUnit(t.clockwise == false);
@@ -188,7 +186,7 @@ private:
    * input:   v=(0, 0), t=(t, f, f) a=0deg
    * output:  a=(0, -1.0)
    *********************************************/
-   void input_coastClockwise()
+   void input_clockwise()
    {  // setup
       Satellite s;
       s.isBroken = false;
@@ -198,23 +196,24 @@ private:
       s.velocity.dy = 0.0;
       s.angle.radians = 0.0;
       Thrust t;
-      t.clockwise = false;
+      t.clockwise = true;
       t.counterClockwise = false;
-      t.mainEngine = true;
+      t.mainEngine = false;
       double time = 1.0;
 
       // exercise
       s.input(t, time);
 
       // verify
+      assertEquals(s.angle.radians, 0.1);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, -2.0);      // pos is changing due to gravity
+      assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, 0.0);
-      assertEquals(s.velocity.dy, -2.0);
-      assertUnit(t.clockwise == false);
+      assertEquals(s.velocity.dy, 0.0);
+      assertUnit(t.clockwise == true);
       assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
+      assertUnit(t.mainEngine == false);
    }  // teardown
 
    /*********************************************
@@ -222,7 +221,7 @@ private:
    * input:   v=(0, 0), t=(t, f, f) a=.4rad
    * output:  a=(0, -1.0)
    *********************************************/
-   void input_coastCounterClockwise()
+   void input_counterClockwise()
    {  // setup
       Satellite s;
       s.isBroken = false;
@@ -233,56 +232,24 @@ private:
       s.angle.radians = 0.0;
       Thrust t;
       t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = true;
+      t.counterClockwise = true;
+      t.mainEngine = false;
       double time = 1.0;
 
       // exercise
       s.input(t, time);
 
-      // verify
-      assertUnit(s.isBroken == false);
-      assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, -2.0);      // pos is changing due to gravity
-      assertEquals(s.velocity.dx, 0.0);
-      assertEquals(s.velocity.dy, -2.0);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT NO FUEL
-   * input:   v=(0, 0), t=(f, f, f) a=0deg
-   * output:  a=(0, -1.0)
-   *********************************************/
-   void input_noFuel()
-   {  // setup
-      Satellite s;
-      s.isBroken = false;
-      s.position.x = 0.0;
-      s.position.y = 0.0;
-      s.velocity.dx = 0.0;
-      s.velocity.dy = 0.0;
-      s.angle.radians = 0.0;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = true;
-      double time = 1.0;
-
-      // exercise
-      s.input(t, time);
+      std::cout << s.angle.radians << std::endl;
 
       // verify
+      assertEquals(s.angle.radians, 6.2);
       assertUnit(s.isBroken == false);
       assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, -2.0);      // pos is changing due to gravity
+      assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, 0.0);
-      assertEquals(s.velocity.dy, -2.0);
+      assertEquals(s.velocity.dy, 0.0);
       assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
+      assertUnit(t.counterClockwise == true);
+      assertUnit(t.mainEngine == false);
    }  // teardown
-
 };
