@@ -15,10 +15,9 @@ week-2-cb/Week-2-SDD.pdf
 */cmake-build-debug
 
 # Visual Studio files
+*/x86
+*/x64
 */x86/*
 */x64/*
-*/Lab09/*
-*/Lab07/*
-/.vs/*
-
-week-10/.vs/
+*/Lab*/*
+*/.vs
