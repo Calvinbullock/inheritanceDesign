@@ -47,6 +47,7 @@ public:
       this->ddx += rhs.ddx;
       this->ddy += rhs.ddy;
    }
+   void reverseDDX() { ddx *= -1; }
 
 private:
    double ddx;     // horizontal acceleration
