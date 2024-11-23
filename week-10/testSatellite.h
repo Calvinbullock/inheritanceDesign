@@ -43,8 +43,8 @@ private:
 
    /*********************************************
  * name:    INPUT NOTHING
- * input:   v=(0, 0), t=(f, f, f) a=0deg
- * output:  a=(0, -1.0)
+ * input:   v=(0, 0), t=(f, f, f) a=0.0rad
+ * output:  p=(0.0, 0.0) v=(0.0, 0.0)
  *********************************************/
    void input_none()
    {  // setup
@@ -78,8 +78,8 @@ private:
 
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING DOWN
-   * input:   v=(0, 0), t=(f, f, t) a=0deg
-   * output:  a=(0, 1.9795404)
+   * input:   v=(0, 0), t=(f, f, t) a=3.141593rad
+   * output:  p=(0.0, -3.0) v=(0.0, -2.0)
    *********************************************/
    void input_mainDown()
    {  // setup
@@ -113,8 +113,8 @@ private:
 
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING LEFT
-   * input:   v=(0, 0), t=(f, f, t) a=270deg
-   * output:  a=(2.9795404, -1.0)
+   * input:   v=(0, 0), t=(f, f, t) a=-1.57079rad
+   * output:  p=(-3.0, 0.0) v=(-2.0, 0.0)
    *********************************************/
    void input_mainLeft()
    {  // setup
@@ -148,8 +148,8 @@ private:
 
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING DIAGONAL
-   * input:   v=(0, 0), t=(f, f, t) a=30deg
-   * output:  a=(-1.4897, 1.580357)
+   * input:   v=(0, 0), t=(f, f, t) a=0.785398rad
+   * output:  p=(2.12132, 2.12132) v=(1.41421, 1.41421)
    *********************************************/
    void input_mainDiagonal()
    {  // setup
@@ -183,8 +183,8 @@ private:
 
    /*********************************************
    * name:    INPUT COAST CLOCKWISE
-   * input:   v=(0, 0), t=(t, f, f) a=0deg
-   * output:  a=(0, -1.0)
+   * input:   v=(0, 0), t=(t, f, f) a=0rad
+   * output:  rad=0.1
    *********************************************/
    void input_clockwise()
    {  // setup
@@ -218,8 +218,8 @@ private:
 
    /*********************************************
    * name:    INPUT COAST COUNTERCLOCKWISE
-   * input:   v=(0, 0), t=(t, f, f) a=.4rad
-   * output:  a=(0, -1.0)
+   * input:   v=(0, 0), t=(f, t, f) a=0.0rad
+   * output:  rad=6.18318
    *********************************************/
    void input_counterClockwise()
    {  // setup
