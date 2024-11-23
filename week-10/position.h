@@ -17,6 +17,7 @@
 #include "acceleration.h"
 
 class TestPosition;
+class TestSatellite;
 class Acceleration;
 class Velocity;
 class TestEntity;
@@ -30,6 +31,7 @@ class Position
 public:
    friend TestPosition;
    friend TestEntity;
+   friend TestSatellite;
 
    // constructors
    Position()            : x(0.0), y(0.0)  {}

@@ -13,6 +13,7 @@
 class TestPosition;
 class TestVelocity;
 class TestAcceleration;
+class TestSatellite;
 class TestEntity;
 
 // for add()
@@ -28,6 +29,7 @@ class Velocity
    // for unit tests
    friend TestPosition;
    friend TestVelocity;
+   friend TestSatellite;
    friend TestEntity;
 
 public:

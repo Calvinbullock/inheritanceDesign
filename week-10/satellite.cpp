@@ -11,23 +11,21 @@
 
 /***************************************************************
  * INPUT
- * Accept input from the Neil Armstrong
+ * update position and velocity based on user input
  ***************************************************************/
-
-void Satellite::input(const Thrust& thrust, double gravity, const int &time)
+void Satellite::input(const Thrust& thrust, const double &time)
 {
-   // Acceleration due to gravity
-   Acceleration a;
-
-   // add gravity
-   a.addDDY(gravity);
-
    // main engines
    if (thrust.isMain())
    {
+      Acceleration a;
+
       a.addDDX(-sin(angle.getRadians()) * SHIP_THRUST);
       a.addDDY(cos(angle.getRadians()) * SHIP_THRUST);
       a.reverseDDX();
+
+      /*std::cout << "ax " << a.getDDX() << std::endl;*/
+      /*std::cout << "ay " << a.getDDY() << std::endl;*/
 
       velocity.add(a, time);
       position.add(a, velocity, time);
@@ -41,7 +39,7 @@ void Satellite::input(const Thrust& thrust, double gravity, const int &time)
    // counter clockwise
    if (thrust.isCounter())
    {
-      angle.add(SHIP_ROTATION);
+      angle.add(-SHIP_ROTATION);
    }
 
    this->thrust = thrust;

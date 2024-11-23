@@ -38,7 +38,7 @@ using namespace std;
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
 #define RADIUS_EARTH 6378000.0    // m
 #define ROTATION_SPEED 0.02       // rotation speed for satellites
-#define TIME 48                   // seconds/frame
+#define TIME 48.0                 // seconds/frame
 #define STAR_COUNT 300            // number or stars
 
 /*************************************************************************
@@ -180,18 +180,13 @@ void callBack(const Interface* pUI, void* p)
    Position pt;
    ogstream gout(pt);
 
-   double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[0]->getPosition());
-
-   // Gravity
-   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
-
    // thrust for dreamChaser
    Thrust thrust;
    thrust.set(pUI);
 
    // Use dynamic_cast to check if the entity is a Satellite
    if (Satellite* satellite = dynamic_cast<Satellite*>(pSim->entities[0])) {
-      satellite->input(thrust, gravity, TIME);
+      satellite->input(thrust, TIME);
    }
 
    // Orbit, rotate, and draw all entities
@@ -267,7 +262,7 @@ int main(int argc, char** argv)
    Simulator demo(ptUpperRight, STAR_COUNT);
 
    // set everything into action
-   ui.run(callBack, &demo);
+   //ui.run(callBack, &demo);
 
    return 0;
 }

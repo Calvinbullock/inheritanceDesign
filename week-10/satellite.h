@@ -17,12 +17,17 @@
 //#define SHIP_THRUST 96     // m/sec
 #define SHIP_ROTATION 0.1  // radians
 
+class TestSatellite;
+
 /***********************************************************************
  * Entity
  *    Everything to know about satellite's
  ************************************************************************/
 class Satellite : public Entity
 {
+
+friend TestSatellite;
+
 public:
 
    // Constructors
@@ -33,7 +38,7 @@ public:
    virtual void draw(ogstream& gout) { assert(false); }
    virtual void impact() { assert(false); }
 
-   void input(const Thrust &t, double gravity, const int &time);
+   void input(const Thrust &t, const double &time);
 
    // TODO: Do we need this?
    //void initialize(Position pos, Velocity vel, Angle a)

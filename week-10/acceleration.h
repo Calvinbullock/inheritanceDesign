@@ -14,6 +14,7 @@ class TestAcceleration;
 class TestVelocity;
 class TestPosition;
 class TestEntity;
+class TestSatellite;
 class Angle;
 
 
@@ -26,6 +27,7 @@ class Acceleration
    friend TestPosition;
    friend TestVelocity;
    friend TestAcceleration;
+   friend TestSatellite;
    friend TestEntity;
 
 public:
