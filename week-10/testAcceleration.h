@@ -44,6 +44,7 @@ public:
       add_valueZero();
       add_zeroValue();
       add_valueValue();
+      reverseDDX_posToNeg();
 
       report("Acceleration");
    }
@@ -498,6 +499,27 @@ private:
       assertEquals(aLHS.ddy, 9.9);
       assertEquals(aRHS.ddx, 4.4);
       assertEquals(aRHS.ddy, 7.7);
+   }  // teardown
+
+
+   /*********************************************
+    * name:    REVERSE DDX POSITIVE TO NEGATIVE
+    * input:   -1, 0
+    * output:  +1, 0
+    *********************************************/
+   void reverseDDX_posToNeg()
+   {
+      // setup
+      Acceleration a;
+      a.ddx = -1;
+      a.ddy = 0;
+
+      // exercise
+      a.reverseDDX();
+
+      // verify
+      assertEquals(a.ddx, 1);
+      assertEquals(a.ddy, 0);
    }  // teardown
 
 };

@@ -27,7 +27,7 @@ void Satellite::input(const Thrust& thrust, double gravity, const int &time)
    {
       a.addDDX(-sin(angle.getRadians()) * SHIP_THRUST);
       a.addDDY(cos(angle.getRadians()) * SHIP_THRUST);
-      a.reverseX();
+      a.reverseDDX();
 
       velocity.add(a, time);
       position.add(a, velocity, time);
