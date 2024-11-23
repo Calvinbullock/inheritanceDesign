@@ -128,13 +128,7 @@ public:
       a = Angle();
       entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
 
-      // spudnik
-      initialPos = Position(-36515095.13, 21082000.0);
-      initialVel = Velocity(2050.0, 2684.68);
-      a = Angle();
-      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a));
-
-      // spudnik
+      // sputnik
       initialPos = Position(-36515095.13, 21082000.0);
       initialVel = Velocity(2050.0, 2684.68);
       a = Angle();
