@@ -1,3 +1,11 @@
+/***********************************************************************
+ * Source File:
+ *    Star
+ * Author:
+ *    Daniel Malasky & Calvin Bullock
+ * Summary:
+ *    Everything to know about Star
+ ************************************************************************/
 
 #pragma once
 

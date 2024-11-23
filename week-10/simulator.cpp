@@ -29,12 +29,11 @@
 #include "earth.h"
 
 #include "position.h"   // for POINT
-#include "physics.cpp"  // for physics EQTNs
+
 
 using namespace std;
 
-#define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
-#define RADIUS_EARTH 6378000.0    // m
+
 #define ROTATION_SPEED 0.02       // rotation speed for satellites
 #define TIME 48                   // seconds/frame
 #define STAR_COUNT 300            // number or stars
@@ -144,42 +143,27 @@ void callBack(const Interface* pUI, void* p)
    // TODO: DreamChaser is going no where
    //
    // -- MOVE THIS INTO A FUNCTION??? [
-   double distanceFromEarth = computeDistance(Position(0, 0), pSim->dreamChaser.getPosition());
 
-   // Gravity
-   double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
-
-   Angle gravityAngle;
-   double gravityAngleRadians = getDirectionGravity(Position(), pSim->dreamChaser.getPosition());
-   gravityAngle.setRadians(gravityAngleRadians);
+   // DO we need this for ship?
+   //Angle gravityAngle;
+   //double gravityAngleRadians = getDirectionGravity(Position(), pSim->dreamChaser.getPosition());
+   //gravityAngle.setRadians(gravityAngleRadians);
 
    Thrust thrust;
    thrust.set(pUI);
 
    // Acceleration
-   Acceleration acceleration;
-   acceleration = pSim->dreamChaser.input(thrust, gravity);
+   //Acceleration acceleration;
+   //acceleration = pSim->dreamChaser.input(thrust, gravity);
    //acceleration.set(gravityAngle, gravity);
-   pSim->dreamChaser.orbit(TIME, acceleration);
+   //pSim->dreamChaser.orbit(TIME);
    // ]
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
    {
-      double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[i]->getPosition());
 
-      // Gravity
-      double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
-
-      Angle gravityAngle;
-      double gravityAngleRadians = getDirectionGravity(Position(), pSim->entities[i]->getPosition());
-      gravityAngle.setRadians(gravityAngleRadians);
-
-      // Acceleration
-      Acceleration acceleration;
-      acceleration.set(gravityAngle, gravity);
-
-      pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
+      //pSim->entities[i]->orbit(TIME); // orbit entities
       pSim->entities[i]->draw(gout);                // draw
       pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
    }

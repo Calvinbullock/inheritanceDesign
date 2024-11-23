@@ -1,4 +1,11 @@
-
+/***********************************************************************
+ * Source File:
+ *    Earth Class
+ * Author:
+ *    Daniel Malasky & Calvin Bullock
+ * Summary:
+ *    Everything to know about Earth
+ ************************************************************************/
 #pragma once
 
 #include "position.h"

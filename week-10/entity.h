@@ -15,6 +15,7 @@
 #include "velocity.h"
 #include "angle.h"
 #include <cassert>
+#include "physics.cpp"  // for physics EQTNs
 
 class TestEntity;
 
@@ -52,7 +53,7 @@ public:
    void setAngle     (const Angle& newAngle)  { angle = newAngle;  }
    void setWidth     (double newWidth)        { width = newWidth;  }
 
-   void orbit(double time, Acceleration accel);
+   void orbit(double time);
    virtual void rotate(double delta);
    virtual void draw(ogstream& gout) = 0;
    virtual void impact() = 0;

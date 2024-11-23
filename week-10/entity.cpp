@@ -14,10 +14,17 @@
 * SATELLITE ORBIT
 * Handles the satellite orbit calculations
 *********************************************/
-void Entity::orbit(double time, Acceleration accel)
+void Entity::orbit(double time)
 {
-   position.add(accel, velocity, time);
-   velocity.add(accel, time);
+   Acceleration aGravity = getGravity(position);
+   
+   std::cout << aGravity.getDDX() << std::endl;
+   std::cout << aGravity.getDDY() << std::endl;
+
+   velocity.add(aGravity, time / 2.0);
+   position.add(aGravity, velocity, time);
+   velocity.add(aGravity, time / 2.0);
+
 }
 
 /*********************************************

@@ -16,7 +16,7 @@
 
  /*********************************************
   * ACCELERATION : SET
-  *  set from angle and direction
+  *  set from angle and magnitude
   *********************************************/
 void Acceleration::set(const Angle& a, double magnitude)
 {

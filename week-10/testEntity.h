@@ -12,6 +12,9 @@
 
 #include "entity.h"
 #include "unitTest.h"
+#include <iostream>   // testing
+
+using namespace std;  // testing
 
 /*******************************
 * TEST ENTITY
@@ -37,11 +40,12 @@ public:
       setAngle();
 
       //orbit
-      orbit_zero();
+      orbit_stationaryNorth();
+    /*  orbit_zero();
       orbit_noTime();
       orbit_noAcceleration();
       orbit_noVelocity();
-      orbit_all();
+      orbit_all();*/
 
       report("Entity");
    }
@@ -237,152 +241,188 @@ private:
    }
 
    /*********************************************
-    * name:    ORBIT WHILE NOT MOVING
+    * name:    Orbit Starting north, straight down
     * input:   position=(100, 200), v=(0, 0), a=(0,0) t=1.0
     * output:  position=(100, 200), v=(0, 0)
     *********************************************/
-   void orbit_zero()
+   void orbit_stationaryNorth()
    {  // setup
-      EntityDerived entity;
-      entity.position.x = 100.0;
-      entity.position.y = 200.0;
-      entity.velocity.dx = 0.0;
-      entity.velocity.dy = 0.0;
-      Acceleration a;
-      a.ddx = 0.0;
-      a.ddy = 0.0;
+      EntityDerived e;
+      e.position.x = 0.0;
+      e.position.y = 6378000.0;
+      e.velocity.dx = 0.0;
+      e.velocity.dy = 0.0;
+      e.angle.radians = 1.234;
+      e.isBroken = false;
+      e.width = 0;
       double t = 1.0;
 
-      // exercise
-      entity.orbit(t, a);
-
-      // verify
-      assertEquals(entity.position.x, 100.0);     // did not move
-      assertEquals(entity.position.y, 200.0);     // did not move
-      assertEquals(entity.velocity.dx, 0.0); // same as before
-      assertEquals(entity.velocity.dy, 0.0); // same as before
-      assertEquals(a.ddx, 0.0);         // no acceleration
-      assertEquals(a.ddy, 0.0);
-      assertEquals(t, 1.0);
-   }  // teardown
-
-   /*********************************************
-    * name:    ORBIT WITH ZERO TIME
-    * input:   position=(100, 200), v=(30, 40), a=(5, 6) t=0.0
-    * output:  position=(100, 200), v=(30, 40)
-    *********************************************/
-   void orbit_noTime()
-   {  // setup
-      EntityDerived entity;
-      entity.position.x = 100.0;
-      entity.position.y = 200.0;
-      entity.velocity.dx = 30.0;
-      entity.velocity.dy = 40.0;
-      Acceleration a;
-      a.ddx = 5.0;
-      a.ddy = 6.0;
-      double t = 0.0;                   // zero time!
+      cout << "yBefore: " << e.position.y << endl;
+      cout << "yVelBefore: " << e.velocity.dy << endl;
 
       // exercise
-      entity.orbit(t, a);
+      e.orbit(t);
+
+      cout << "yAfter: " << e.position.y << endl;
+      cout << "yVelAfter: " << e.velocity.dy << endl;
 
       // verify
-      assertEquals(entity.position.x, 100.0);     // did not move
-      assertEquals(entity.position.y, 200.0);
-      assertEquals(entity.velocity.dx, 30.0);// no change in velocity
-      assertEquals(entity.velocity.dy, 40.0);
-      assertEquals(a.ddx, 5.0);         // no change in acceleration
-      assertEquals(a.ddy, 6.0);
-      assertEquals(t, 0.0);
+      assertEqualsTolerance(0.0, e.velocity.dx, 0.01);      // no horizontal movement
+      assertEqualsTolerance(-9.806, e.velocity.dy, 0.01);   // fall towards center
+      assertEqualsTolerance(0.0, e.position.x, 0.01);       // no horizontal movement
+      assertEqualsTolerance(6378000.0 - 9.806, e.position.y, 0.01); // fall towards center
+      assertEquals(e.angle.radians, 1.234);                   // no rotation
+      assertEquals(e.isBroken, false);                      // no rotation
    }  // teardown
 
-   /*********************************************
-    * name:    ORBIT WITH VELOCITY NO ACCELERATION
-    * input:   position=(100, 200), v=(30, 40), a=(0, 0) t=2.0
-    * output:  position=(160, 280), v=(30, 40)
-    *********************************************/
-   void orbit_noAcceleration()
-   {  // setup
-      EntityDerived entity;
-      entity.position.x = 100.0;
-      entity.position.y = 200.0;
-      entity.velocity.dx = 30.0;
-      entity.velocity.dy = 40.0;
-      Acceleration a;
-      a.ddx = 0.0;
-      a.ddy = 0.0;
-      double t = 2.0;
 
-      // exercise
-      entity.orbit(t, a);
+   ///*********************************************
+   // * name:    ORBIT WHILE NOT MOVING
+   // * input:   position=(100, 200), v=(0, 0), a=(0,0) t=1.0
+   // * output:  position=(100, 200), v=(0, 0)
+   // *********************************************/
+   //void orbit_zero()
+   //{  // setup
+   //   EntityDerived entity;
+   //   entity.position.x = 100.0;
+   //   entity.position.y = 200.0;
+   //   entity.velocity.dx = 0.0;
+   //   entity.velocity.dy = 0.0;
+   //   Acceleration a;
+   //   a.ddx = 0.0;
+   //   a.ddy = 0.0;
+   //   double t = 1.0;
 
-      // verify
-      assertEquals(entity.position.x, 160.0);     // 100(x) + 30(dx)*2 + .5*0(ddx)*2*2
-      assertEquals(entity.position.y, 280.0);     // 200(y) + 40(dy)*2 + .5*0(ddy)*2*2
-      assertEquals(entity.velocity.dx, 30.0);// no change in velocity
-      assertEquals(entity.velocity.dy, 40.0);
-      assertEquals(a.ddx, 0.0);         // acceleration  unchanged
-      assertEquals(a.ddy, 0.0);
-      assertEquals(t, 2.0);
-   }  // teardown
+   //   // exercise
+   //   entity.orbit(t, a);
 
-   /*********************************************
-    * name:    ORBIT WITH NO VELOCITY BUT ACCELERATION
-    * input:   position=(100, 200), v=(0, 0), a=(5, 6) t=2.0
-    * output:  position=(110, 212), v=(10, 12)
-    *********************************************/
-   void orbit_noVelocity()
-   {  // setup
-      EntityDerived entity;
-      entity.position.x = 100.0;
-      entity.position.y = 200.0;
-      entity.velocity.dx = 0.0;
-      entity.velocity.dy = 0.0;
-      Acceleration a;
-      a.ddx = 5.0;
-      a.ddy = 6.0;
-      double t = 2.0;
+   //   // verify
+   //   assertEquals(entity.position.x, 100.0);     // did not move
+   //   assertEquals(entity.position.y, 200.0);     // did not move
+   //   assertEquals(entity.velocity.dx, 0.0); // same as before
+   //   assertEquals(entity.velocity.dy, 0.0); // same as before
+   //   assertEquals(a.ddx, 0.0);         // no acceleration
+   //   assertEquals(a.ddy, 0.0);
+   //   assertEquals(t, 1.0);
+   //}  // teardown
 
-      // exercise
-      entity.orbit(t, a);
+   ///*********************************************
+   // * name:    ORBIT WITH ZERO TIME
+   // * input:   position=(100, 200), v=(30, 40), a=(5, 6) t=0.0
+   // * output:  position=(100, 200), v=(30, 40)
+   // *********************************************/
+   //void orbit_noTime()
+   //{  // setup
+   //   EntityDerived entity;
+   //   entity.position.x = 100.0;
+   //   entity.position.y = 200.0;
+   //   entity.velocity.dx = 30.0;
+   //   entity.velocity.dy = 40.0;
+   //   Acceleration a;
+   //   a.ddx = 5.0;
+   //   a.ddy = 6.0;
+   //   double t = 0.0;                   // zero time!
 
-      // verify
-      assertEquals(entity.position.x, 110.0); // 100 + 0*2 + .5*5*4
-      assertEquals(entity.position.y, 212.0); // 200 + 0*2 + .5*6*4
-      assertEquals(entity.velocity.dx, 10.0);  // 0 + 5*2 = 10.0
-      assertEquals(entity.velocity.dy, 12.0);  // 0 + 6*2 = 12.0
-      assertEquals(a.ddx, 5.0);
-      assertEquals(a.ddy, 6.0);
-      assertEquals(t, 2.0);
-   }  // teardown
+   //   // exercise
+   //   entity.orbit(t, a);
 
-   /*********************************************
-    * name:    ORBIT WITH VELOCITY, ACCELERATION, AND TIME
-    * input:   position=(100, 200), v=(30, 40), a=(5, 6) t=2.0
-    * output:  position=(170, 292), v=(40, 52)
-    *********************************************/
-   void orbit_all()
-   {  // setup
-      EntityDerived entity;
-      entity.position.x = 100.0;
-      entity.position.y = 200.0;
-      entity.velocity.dx = 30.0;
-      entity.velocity.dy = 40.0;
-      Acceleration a;
-      a.ddx = 5.0;
-      a.ddy = 6.0;
-      double t = 2.0;
+   //   // verify
+   //   assertEquals(entity.position.x, 100.0);     // did not move
+   //   assertEquals(entity.position.y, 200.0);
+   //   assertEquals(entity.velocity.dx, 30.0);// no change in velocity
+   //   assertEquals(entity.velocity.dy, 40.0);
+   //   assertEquals(a.ddx, 5.0);         // no change in acceleration
+   //   assertEquals(a.ddy, 6.0);
+   //   assertEquals(t, 0.0);
+   //}  // teardown
 
-      // exercise
-      entity.orbit(t, a);
+   ///*********************************************
+   // * name:    ORBIT WITH VELOCITY NO ACCELERATION
+   // * input:   position=(100, 200), v=(30, 40), a=(0, 0) t=2.0
+   // * output:  position=(160, 280), v=(30, 40)
+   // *********************************************/
+   //void orbit_noAcceleration()
+   //{  // setup
+   //   EntityDerived entity;
+   //   entity.position.x = 100.0;
+   //   entity.position.y = 200.0;
+   //   entity.velocity.dx = 30.0;
+   //   entity.velocity.dy = 40.0;
+   //   Acceleration a;
+   //   a.ddx = 0.0;
+   //   a.ddy = 0.0;
+   //   double t = 2.0;
 
-      // verify
-      assertEquals(entity.position.x, 170.0); // 100 + 30*2 + .5*5*4 = 100 + 60 + 10
-      assertEquals(entity.position.y, 292.0); // 200 + 40*2 + .5*6*4 = 200 + 80 + 12
-      assertEquals(entity.velocity.dx, 40.0);  // 30 + 5*2
-      assertEquals(entity.velocity.dy, 52.0);  // 40 + 6*2
-      assertEquals(a.ddx, 5.0);
-      assertEquals(a.ddy, 6.0);
-      assertEquals(t, 2.0);
-   }  // teardown
+   //   // exercise
+   //   entity.orbit(t, a);
+
+   //   // verify
+   //   assertEquals(entity.position.x, 160.0);     // 100(x) + 30(dx)*2 + .5*0(ddx)*2*2
+   //   assertEquals(entity.position.y, 280.0);     // 200(y) + 40(dy)*2 + .5*0(ddy)*2*2
+   //   assertEquals(entity.velocity.dx, 30.0);// no change in velocity
+   //   assertEquals(entity.velocity.dy, 40.0);
+   //   assertEquals(a.ddx, 0.0);         // acceleration  unchanged
+   //   assertEquals(a.ddy, 0.0);
+   //   assertEquals(t, 2.0);
+   //}  // teardown
+
+   ///*********************************************
+   // * name:    ORBIT WITH NO VELOCITY BUT ACCELERATION
+   // * input:   position=(100, 200), v=(0, 0), a=(5, 6) t=2.0
+   // * output:  position=(110, 212), v=(10, 12)
+   // *********************************************/
+   //void orbit_noVelocity()
+   //{  // setup
+   //   EntityDerived entity;
+   //   entity.position.x = 100.0;
+   //   entity.position.y = 200.0;
+   //   entity.velocity.dx = 0.0;
+   //   entity.velocity.dy = 0.0;
+   //   Acceleration a;
+   //   a.ddx = 5.0;
+   //   a.ddy = 6.0;
+   //   double t = 2.0;
+
+   //   // exercise
+   //   entity.orbit(t, a);
+
+   //   // verify
+   //   assertEquals(entity.position.x, 110.0); // 100 + 0*2 + .5*5*4
+   //   assertEquals(entity.position.y, 212.0); // 200 + 0*2 + .5*6*4
+   //   assertEquals(entity.velocity.dx, 10.0);  // 0 + 5*2 = 10.0
+   //   assertEquals(entity.velocity.dy, 12.0);  // 0 + 6*2 = 12.0
+   //   assertEquals(a.ddx, 5.0);
+   //   assertEquals(a.ddy, 6.0);
+   //   assertEquals(t, 2.0);
+   //}  // teardown
+
+   ///*********************************************
+   // * name:    ORBIT WITH VELOCITY, ACCELERATION, AND TIME
+   // * input:   position=(100, 200), v=(30, 40), a=(5, 6) t=2.0
+   // * output:  position=(170, 292), v=(40, 52)
+   // *********************************************/
+   //void orbit_all()
+   //{  // setup
+   //   EntityDerived entity;
+   //   entity.position.x = 100.0;
+   //   entity.position.y = 200.0;
+   //   entity.velocity.dx = 30.0;
+   //   entity.velocity.dy = 40.0;
+   //   Acceleration a;
+   //   a.ddx = 5.0;
+   //   a.ddy = 6.0;
+   //   double t = 2.0;
+
+   //   // exercise
+   //   entity.orbit(t, a);
+
+   //   // verify
+   //   assertEquals(entity.position.x, 170.0); // 100 + 30*2 + .5*5*4 = 100 + 60 + 10
+   //   assertEquals(entity.position.y, 292.0); // 200 + 40*2 + .5*6*4 = 200 + 80 + 12
+   //   assertEquals(entity.velocity.dx, 40.0);  // 30 + 5*2
+   //   assertEquals(entity.velocity.dy, 52.0);  // 40 + 6*2
+   //   assertEquals(a.ddx, 5.0);
+   //   assertEquals(a.ddy, 6.0);
+   //   assertEquals(t, 2.0);
+   //}  // teardown
 };
