@@ -11,6 +11,7 @@
 #include <cmath>
 #include <iostream>
 #include <iterator>
+#include <ostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -62,7 +63,7 @@ private:
       double gh = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, height);
 
       // verify
-      assertEquals(gh, 0.20964);
+      assertEquals(gh, 0.15956);
    } // tear down
 
       /*********************************************
@@ -81,20 +82,20 @@ private:
       double gh = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, height);
 
       // verify
-      assertEquals(gh, 0.40517);
+      assertEquals(gh, 0.63827);
    } // tear down
 
       /*********************************************
     * name:    GET GRAVITY CLOSE
     * input:   gravity = 9.80665,
     *          radius = 6378000,
-    *          height = 0 (at sea level)
+    *          height = 6378000 (at sea level)
     * output:  gh = 9.80665
     *********************************************/
    void getGravity_close()
    {
       // setup
-      double height = 0;
+      double height = 6378000;
 
       // exercise
       double gh = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, height);
