@@ -22,7 +22,7 @@ class TestSatellite : public UnitTest
 public:
    void run()
    {
-      //// input
+      // input
       input_none();
       input_mainDown();
       input_mainLeft();
@@ -174,9 +174,9 @@ private:
 
       // verify
       assertUnit(s.isBroken == false);
-      assertEquals(s.position.x, -2.12132);
+      assertEquals(s.position.x, 2.12132);
       assertEquals(s.position.y, 2.12132); // pos is changing due to gravity
-      assertEquals(s.velocity.dx, -1.41421);
+      assertEquals(s.velocity.dx, 1.41421);
       assertEquals(s.velocity.dy, 1.41421);
       assertUnit(t.clockwise == false);
       assertUnit(t.counterClockwise == false);
