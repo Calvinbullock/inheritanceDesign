@@ -215,7 +215,7 @@ private:
       entity.setWidth(20.0);
 
       // Verify
-      assertEquals(entity.width, 20.0);
+      assertEquals(entity.radius, 20.0);
    }
 
    /*********************************************

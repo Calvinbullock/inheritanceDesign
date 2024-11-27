@@ -21,7 +21,10 @@ class SatelliteShip : public Satellite
 public:
    SatelliteShip() : Satellite() {}
    SatelliteShip(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-         : Satellite(pos, vel, a, isBroke) {}
+         : Satellite(pos, vel, a, isBroke) 
+   {
+      this->radius = 10; // pixels
+   }
 
    virtual void draw(ogstream& gout) { gout.drawShip(position, angle.getRadians(), thrust.isMain()); }
    virtual void impact();

@@ -9,15 +9,6 @@
 
 #include "satelliteSputnik.h"
 
- /****************************************
- * DRAW
- * Draw the Sputnik satellite
- *****************************************/
-void SatelliteSputnik::draw(ogstream& gout)
-{
-   gout.drawSputnik(position, angle.getRadians());
-}
-
 /****************************************
 * DRAW
 * What happens on impact?

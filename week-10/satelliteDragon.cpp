@@ -9,20 +9,39 @@
 
 #include "satelliteDragon.h"
 
- /****************************************
- * DRAW
- * Draw the Dragon satellite
- *****************************************/
-void SatelliteDragon::draw(ogstream& gout)
+/****************************************
+* IMPACT - DRAGON RIGHT
+* What happens on impact?
+*****************************************/
+void DragonRight::impact()
 {
-   gout.drawCrewDragon(position, angle.getRadians());
+   // TODO:
 }
 
 /****************************************
-* DRAW
+* IMPACT - DRAGON LEFT
+* What happens on impact?
+*****************************************/
+void DragonLeft::impact()
+{
+   // TODO:
+}
+
+/****************************************
+* IMPACT - DRAGON CENTER
+* What happens on impact?
+*****************************************/
+void DragonCenter::impact()
+{
+   // TODO:
+}
+
+/****************************************
+* IMPACT - SATELLITE DRAGON
 * What happens on impact?
 *****************************************/
 void SatelliteDragon::impact()
 {
    // TODO:
 }
+

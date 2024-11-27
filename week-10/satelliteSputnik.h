@@ -21,7 +21,10 @@ public:
    SatelliteSputnik() : Satellite() {}
    SatelliteSputnik(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) {}
+      : Satellite(pos, vel, a, isBroke) 
+   {
+      this->radius = 4;    
+   }
 
    virtual void draw(ogstream& gout);
    virtual void impact();

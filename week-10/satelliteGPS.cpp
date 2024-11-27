@@ -9,17 +9,33 @@
 
 #include "satelliteGPS.h"
 
-/****************************************
-* DRAW
-* Draw the GPS satellite
-*****************************************/
-void SatelliteGPS::draw(ogstream& gout)
-{
-   gout.drawGPS(position, angle.getRadians());
-}
 
 /****************************************
-* IMPACT
+* IMPACT - GPS RIGHT
+* What happens on impact?
+*****************************************/
+void GPSRight::impact()
+{
+   // TODO:
+}
+/****************************************
+* IMPACT - GPS LEFT
+* What happens on impact?
+*****************************************/
+void GPSLeft::impact()
+{
+   // TODO:
+}
+/****************************************
+* IMPACT - GPS CENTER
+* What happens on impact?
+*****************************************/
+void GPSCenter::impact()
+{
+   // TODO:
+}
+/****************************************
+* IMPACT - SATELLITE GPS
 * What happens on impact?
 *****************************************/
 void SatelliteGPS::impact()

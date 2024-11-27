@@ -60,6 +60,12 @@
     <ClCompile Include="satelliteStarlink.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="satelliteShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="satellite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -117,6 +123,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="satelliteStarlink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="satelliteShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testPhysics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testThrust.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thrust.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testSatellite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

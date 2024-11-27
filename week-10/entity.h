@@ -29,28 +29,29 @@ public:
 
    // Constructors                                                         // TEMP width TODO:
    Entity() {}
-   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double w = 10.0)
+   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0)
    {
       position = pos;
       velocity = vel;
       angle = a;
       isBroken = isBroke;
-      width = w;
+      radius = r;
    }
 
    // Getters
-   Position getPosition() const { return position;      }
-   Velocity getVelocity() const { return velocity;      }
+   Position getPosition() const { return position; }
+   Velocity getVelocity() const { return velocity; }
    bool     getIsBroken() const { return isBroken; }
-   double   getWidth()    const { return width;    }
+   double   getRadius()   const { return radius;   }
    Angle    getAngle()    const { return angle;    }
 
    // Setters
-   void setPosition  (const Position& newPos) { position = newPos;      }
-   void setVelocity  (const Velocity& newVel) { velocity = newVel;      }
-   void setIsBroken  (bool broken)            { isBroken = broken; }
-   void setAngle     (const Angle& newAngle)  { angle = newAngle;  }
-   void setWidth     (double newWidth)        { width = newWidth;  }
+   void setPosition  (const Position& newPos) { position = newPos;  }
+   void setVelocity  (const Velocity& newVel) { velocity = newVel;  }
+   void setIsBroken  (bool broken)            { isBroken = broken;  }
+   void setAngle     (const Angle& newAngle)  { angle = newAngle;   }
+   void setRadius    (double newRadius)       { radius = newRadius; }
+   //void setRadiusPixels(double pixelRadius)   { radius = pixelRadius * position.get}
 
    void orbit(double time, Acceleration accel);
    virtual void rotate(double delta);
@@ -62,7 +63,7 @@ protected:
    Velocity velocity;
    Angle angle;
    bool isBroken;
-   double width;
+   double radius;
 };
 
 /***************************************************
