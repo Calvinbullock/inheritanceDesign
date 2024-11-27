@@ -11,15 +11,6 @@
 
 /****************************************
 * DRAW
-* Draw the GPS satellite
-*****************************************/
-void SatelliteHubble::draw(ogstream& gout)
-{
-   gout.drawHubble(position, angle.getRadians());
-}
-
-/****************************************
-* DRAW
 * What happens on impact?
 *****************************************/
 void SatelliteHubble::impact()

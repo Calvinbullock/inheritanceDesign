@@ -23,7 +23,85 @@ public:
                 Angle& a, bool isBroke = false)
                : Satellite(pos, vel, a , isBroke) {}
 
-   virtual void draw(ogstream& gout);
+   virtual void draw(ogstream& gout)
+   {
+      gout.drawHubble(position, angle.getRadians());
+   }
    virtual void impact();
 };
 
+/****************************************
+* SateliteHubbleTelescope
+*    Everything to know about a Hubble satellite
+*****************************************/
+class SatelliteHubbleTelescope : public Satellite
+{
+public:
+   SatelliteHubbleTelescope() : Satellite() {}
+   SatelliteHubbleTelescope(Position& pos, Velocity& vel,
+                Angle& a, bool isBroke = false)
+               : Satellite(pos, vel, a , isBroke) {}
+
+   virtual void draw(ogstream& gout)
+   {
+      gout.drawHubbleTelescope(position, angle.getRadians());
+   }
+   virtual void impact();
+};
+
+/****************************************
+* SateliteHubbleLeft
+*    Everything to know about a Hubble satellite
+*****************************************/
+class SatelliteHubbleLeft : public Satellite
+{
+public:
+   SatelliteHubbleLeft() : Satellite() {}
+   SatelliteHubbleLeft(Position& pos, Velocity& vel,
+                Angle& a, bool isBroke = false)
+               : Satellite(pos, vel, a , isBroke) {}
+
+   virtual void draw(ogstream& gout)
+   {
+      gout.drawHubbleLeft(position, angle.getRadians());
+   }
+   virtual void impact();
+};
+
+/****************************************
+* SateliteHubbleRight
+*    Everything to know about a Hubble satellite
+*****************************************/
+class SatelliteHubbleRight : public Satellite
+{
+public:
+   SatelliteHubbleRight() : Satellite() {}
+   SatelliteHubbleRight(Position& pos, Velocity& vel,
+                Angle& a, bool isBroke = false)
+               : Satellite(pos, vel, a , isBroke) {}
+
+   virtual void draw(ogstream& gout)
+   {
+      gout.drawHubbleRight(position, angle.getRadians());
+   }
+   virtual void impact();
+};
+
+/****************************************
+* SateliteHubbleComputer
+*    Everything to know about a Hubble satellite
+*****************************************/
+class SatelliteHubbleComputer : public Satellite
+{
+public:
+   SatelliteHubbleComputer() : Satellite() {}
+   SatelliteHubbleComputer(Position& pos, Velocity& vel,
+                Angle& a, bool isBroke = false)
+               : Satellite(pos, vel, a , isBroke) {}
+
+   virtual void draw(ogstream& gout)
+   {
+      gout.drawHubbleComputer(position, angle.getRadians());
+   }
+   virtual void impact();
+};
