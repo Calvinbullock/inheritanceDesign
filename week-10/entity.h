@@ -27,7 +27,8 @@ class Entity
 public:
    friend TestEntity;
 
-   // Constructors                                                         // TEMP width TODO:
+   // Constructors
+   // TEMP width TODO:
    Entity() {}
    Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0)
    {

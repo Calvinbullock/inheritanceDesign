@@ -40,14 +40,6 @@ public:
 
    void input(const Thrust &t, const double &time);
 
-   // TODO: Do we need this?
-   //void initialize(Position pos, Velocity vel, Angle a)
-   //{
-   //   position = pos;
-   //   velocity = vel;
-   //   angle = a;
-   //}
-
 protected:
    int fragmentCount;
    Thrust thrust;
