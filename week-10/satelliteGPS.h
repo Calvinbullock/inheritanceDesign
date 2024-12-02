@@ -43,7 +43,7 @@ public:
       this->radius = 8; // pixels
    }
 
-   virtual void draw(ogstream& gout) { gout.drawGPSLeft(position, angle.getRadians()) }
+   virtual void draw(ogstream& gout) { gout.drawGPSLeft(position, angle.getRadians()); }
    virtual void impact();
 };
 

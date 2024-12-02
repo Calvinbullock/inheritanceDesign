@@ -26,7 +26,7 @@ public:
       this->radius = 4;    
    }
 
-   virtual void draw(ogstream& gout);
+   virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }
    virtual void impact();
 };
 

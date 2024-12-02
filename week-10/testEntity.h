@@ -121,7 +121,7 @@ private:
       EntityDerived entity(position, vel, angle, false, 10);
 
       // Exercise
-      double result = entity.getWidth();
+      double result = entity.getRadius();
 
       // Verify
       assertEquals(result, 10.0);
@@ -212,7 +212,7 @@ private:
       EntityDerived entity;
 
       // Exercise
-      entity.setWidth(20.0);
+      entity.setRadius(20.0);
 
       // Verify
       assertEquals(entity.radius, 20.0);
