@@ -11,11 +11,6 @@
 
 #include "entity.h"
 #include "acceleration.h"
-#include "thrust.h"
-
-#define SHIP_THRUST 2      // m/sec^2
-//#define SHIP_THRUST 96     // m/sec
-#define SHIP_ROTATION 0.1  // radians
 
 class TestSatellite;
 
@@ -33,14 +28,11 @@ public:
    // Constructors
    Satellite() : Entity() {}
    Satellite(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke), thrust() {}
+      : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout) { assert(false); }
    virtual void impact() { assert(false); }
 
-   void input(const Thrust &t, const double &time);
-
 protected:
    int fragmentCount;
-   Thrust thrust;
 };

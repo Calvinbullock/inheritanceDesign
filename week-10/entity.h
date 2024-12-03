@@ -15,8 +15,14 @@
 #include "velocity.h"
 #include "angle.h"
 #include <cassert>
+#include "thrust.h"
 
 class TestEntity;
+
+
+#define SHIP_THRUST 2      // m/sec^2
+//#define SHIP_THRUST 96     // m/sec
+#define SHIP_ROTATION 0.1  // radians
 
 /***********************************************************************
  * Entity
@@ -30,7 +36,7 @@ public:
    // Constructors
    // TEMP width TODO:
    Entity() {}
-   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0)
+   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0): thrust()
    {
       position = pos;
       velocity = vel;
@@ -59,12 +65,15 @@ public:
    virtual void draw(ogstream& gout) = 0;
    virtual void impact() = 0;
 
+   virtual void input(const Thrust &t, const double &time);
+
 protected:
    Position position;
    Velocity velocity;
    Angle angle;
    bool isBroken;
    double radius;
+   Thrust thrust;
 };
 
 /***************************************************

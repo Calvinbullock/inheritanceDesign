@@ -185,9 +185,7 @@ void callBack(const Interface* pUI, void* p)
    thrust.set(pUI);
 
    // Use dynamic_cast to check if the entity is a Satellite
-   if (Satellite* satellite = dynamic_cast<Satellite*>(pSim->entities[0])) {
-      satellite->input(thrust, TIME);
-   }
+   pSim->entities[0]->input(thrust, TIME);
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
