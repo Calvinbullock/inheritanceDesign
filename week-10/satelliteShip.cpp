@@ -13,7 +13,7 @@
 * IMPACT
 * What happens on impact?
 *****************************************/
-void SatelliteShip::impact()
+void SatelliteShip::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }

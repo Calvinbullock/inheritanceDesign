@@ -226,6 +226,14 @@ void callBack(const Interface* pUI, void* p)
    }
 
    pt.setMeters(0.0, 0.0);
+
+   if (pUI->isSpace())
+   {
+      for (int i = 0; i < pSim->entities.size(); i++)
+      {
+         pSim->entities[i]->impact(pSim->entities);
+      }
+   }
 }
 
 double Position::metersFromPixels = 40.0;

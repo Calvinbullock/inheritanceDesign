@@ -27,7 +27,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonRight(position, angle.getRadians()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -46,7 +46,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonLeft(position, angle.getRadians()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -65,7 +65,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonCenter(position, angle.getRadians()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
  /****************************************
@@ -78,12 +78,12 @@ public:
    SatelliteDragon() : Satellite() {}
    SatelliteDragon(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) 
+      : Satellite(pos, vel, a, isBroke)
    {
       this->radius = 7; // pixels
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragon(position, angle.getRadians()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 

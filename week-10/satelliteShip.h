@@ -27,7 +27,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawShip(position, angle.getRadians(), thrust.isMain()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 
    //virtual void input(const Thrust& thrust, const double &time);
 

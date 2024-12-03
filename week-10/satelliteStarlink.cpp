@@ -13,7 +13,7 @@
 * DRAW
 * What happens on impact?
 *****************************************/
-void SatelliteStarlink::impact()
+void SatelliteStarlink::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }

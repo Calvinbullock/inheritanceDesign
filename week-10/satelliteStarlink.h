@@ -27,7 +27,7 @@ public:
    {
       gout.drawHubble(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
  /****************************************
@@ -46,7 +46,7 @@ public:
    {
       gout.drawStarlinkBody(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 
@@ -66,5 +66,5 @@ public:
    {
       gout.drawStarlinkArray(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };

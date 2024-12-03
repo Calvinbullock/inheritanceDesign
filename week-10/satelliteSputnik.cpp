@@ -13,7 +13,7 @@
 * DRAW
 * What happens on impact?
 *****************************************/
-void SatelliteSputnik::impact()
+void SatelliteSputnik::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }

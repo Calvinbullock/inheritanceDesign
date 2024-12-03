@@ -21,12 +21,12 @@ public:
    SatelliteSputnik() : Satellite() {}
    SatelliteSputnik(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) 
+      : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 4;    
+      this->radius = 4;
    }
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 

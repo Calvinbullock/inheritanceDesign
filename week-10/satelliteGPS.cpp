@@ -14,7 +14,7 @@
 * IMPACT - GPS RIGHT
 * What happens on impact?
 *****************************************/
-void GPSRight::impact()
+void GPSRight::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }
@@ -22,7 +22,7 @@ void GPSRight::impact()
 * IMPACT - GPS LEFT
 * What happens on impact?
 *****************************************/
-void GPSLeft::impact()
+void GPSLeft::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }
@@ -30,7 +30,7 @@ void GPSLeft::impact()
 * IMPACT - GPS CENTER
 * What happens on impact?
 *****************************************/
-void GPSCenter::impact()
+void GPSCenter::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }
@@ -38,7 +38,7 @@ void GPSCenter::impact()
 * IMPACT - SATELLITE GPS
 * What happens on impact?
 *****************************************/
-void SatelliteGPS::impact()
+void SatelliteGPS::impact(std::vector<Entity> &entities)
 {
    // TODO:
 }

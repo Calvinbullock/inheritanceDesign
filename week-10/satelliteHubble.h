@@ -27,7 +27,7 @@ public:
    {
       gout.drawHubble(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -46,7 +46,7 @@ public:
    {
       gout.drawHubbleTelescope(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -65,7 +65,7 @@ public:
    {
       gout.drawHubbleLeft(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -84,7 +84,7 @@ public:
    {
       gout.drawHubbleRight(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };
 
 /****************************************
@@ -103,5 +103,5 @@ public:
    {
       gout.drawHubbleComputer(position, angle.getRadians());
    }
-   virtual void impact();
+   virtual void impact(std::vector<Entity> &entities);
 };

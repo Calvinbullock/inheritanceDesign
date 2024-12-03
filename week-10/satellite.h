@@ -31,7 +31,7 @@ public:
       : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout) { assert(false); }
-   virtual void impact() { assert(false); }
+   virtual void impact(std::vector<Entity> &entities) { assert(false); }
 
 protected:
    int fragmentCount;
