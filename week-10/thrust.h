@@ -10,7 +10,7 @@
 #pragma once
 #include "uiInteract.h"  // for Interface
 
-class TestSatellite;
+class TestEntity;
 
  /*****************************************************
   * THRUST
@@ -19,7 +19,7 @@ class TestSatellite;
 class Thrust
 {
    friend TestThrust;
-   friend TestSatellite;
+   friend TestEntity;
 
 public:
    // Thrust is initially turned off
@@ -47,8 +47,8 @@ public:
    void set(const Interface* pUI)
    {
      mainEngine       = pUI->isDown();
-     clockwise        = pUI->isLeft();
-     counterClockwise = pUI->isRight();
+     clockwise        = pUI->isRight();
+     counterClockwise = pUI->isLeft();
    }
 
 private:

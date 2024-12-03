@@ -374,7 +374,7 @@ private:
      /*********************************************
       * name:    SET LEFT ONLY
       * input:   isDown=0 isLeft=1 isRight=0
-      * output:  mainEngine=false clockwise=false counterClockwise=false
+      * output:  mainEngine=false clockwise=false counterClockwise=true
       *********************************************/
       void set_left()
       {  // setup
@@ -382,39 +382,6 @@ private:
          ui.isDownPress = 0;
          ui.isLeftPress = 1;
          ui.isRightPress = 0;
-         Thrust t;
-         t.mainEngine = true;
-         t.clockwise = false;
-         t.counterClockwise = true;
-
-         // exercise
-         t.set(&ui);
-
-         // verify
-         assertUnit(t.mainEngine == false);
-         assertUnit(t.clockwise == true);
-         assertUnit(t.counterClockwise == false);
-         assertUnit(ui.isDownPress == 0);
-         assertUnit(ui.isLeftPress == 1);
-         assertUnit(ui.isRightPress == 0);
-
-         // teardown
-         ui.isDownPress = 0;
-         ui.isLeftPress = 0;
-         ui.isRightPress = 0;
-      }
-
-     /*********************************************
-      * name:    SET RIGHT ONLY
-      * input:   isDown=0 isLeft=0 isRight=2
-      * output:  mainEngine=false clockwise=false counterClockwise=true
-      *********************************************/
-      void set_right()
-      {  // setup
-         Interface ui;
-         ui.isDownPress = 0;
-         ui.isLeftPress = 0;
-         ui.isRightPress = 2;
          Thrust t;
          t.mainEngine = true;
          t.clockwise = true;
@@ -428,8 +395,41 @@ private:
          assertUnit(t.clockwise == false);
          assertUnit(t.counterClockwise == true);
          assertUnit(ui.isDownPress == 0);
+         assertUnit(ui.isLeftPress == 1);
+         assertUnit(ui.isRightPress == 0);
+
+         // teardown
+         ui.isDownPress = 0;
+         ui.isLeftPress = 0;
+         ui.isRightPress = 0;
+      }
+
+     /*********************************************
+      * name:    SET RIGHT ONLY
+      * input:   isDown=0 isLeft=0 isRight=1
+      * output:  mainEngine=false clockwise=true counterClockwise=false
+      *********************************************/
+      void set_right()
+      {  // setup
+         Interface ui;
+         ui.isDownPress = 0;
+         ui.isLeftPress = 0;
+         ui.isRightPress = 1;
+         Thrust t;
+         t.mainEngine = true;
+         t.clockwise = false;
+         t.counterClockwise = true;
+
+         // exercise
+         t.set(&ui);
+
+         // verify
+         assertUnit(t.mainEngine == false);
+         assertUnit(t.clockwise == true);
+         assertUnit(t.counterClockwise == false);
+         assertUnit(ui.isDownPress == 0);
          assertUnit(ui.isLeftPress == 0);
-         assertUnit(ui.isRightPress == 2);
+         assertUnit(ui.isRightPress == 1);
 
          // teardown
          ui.isDownPress = 0;
