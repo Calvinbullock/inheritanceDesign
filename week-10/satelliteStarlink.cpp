@@ -8,12 +8,14 @@
  ************************************************************************/
 
 #include "satelliteStarlink.h"
+#include <iostream>
 
 /****************************************
 * DRAW
 * What happens on impact?
 *****************************************/
-void SatelliteStarlink::impact(std::vector<Entity> &entities)
+void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 {
+   std::cout << "Kaboom" << std::endl;
    // TODO:
 }

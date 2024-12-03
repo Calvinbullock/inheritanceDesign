@@ -13,7 +13,7 @@
 * IMPACT - DRAGON RIGHT
 * What happens on impact?
 *****************************************/
-void DragonRight::impact(std::vector<Entity> &entities)
+void DragonRight::impact(std::vector<Entity*> &entities)
 {
    // TODO:
 }
@@ -22,7 +22,7 @@ void DragonRight::impact(std::vector<Entity> &entities)
 * IMPACT - DRAGON LEFT
 * What happens on impact?
 *****************************************/
-void DragonLeft::impact(std::vector<Entity> &entities)
+void DragonLeft::impact(std::vector<Entity*> &entities)
 {
    // TODO:
 }
@@ -31,7 +31,7 @@ void DragonLeft::impact(std::vector<Entity> &entities)
 * IMPACT - DRAGON CENTER
 * What happens on impact?
 *****************************************/
-void DragonCenter::impact(std::vector<Entity> &entities)
+void DragonCenter::impact(std::vector<Entity*> &entities)
 {
    // TODO:
 }
@@ -40,7 +40,7 @@ void DragonCenter::impact(std::vector<Entity> &entities)
 * IMPACT - SATELLITE DRAGON
 * What happens on impact?
 *****************************************/
-void SatelliteDragon::impact(std::vector<Entity> &entities)
+void SatelliteDragon::impact(std::vector<Entity*> &entities)
 {
    // TODO:
 }

@@ -26,7 +26,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSRight(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity> &entities);
+   virtual void impact(std::vector<Entity*> &entities);
 };
 
  /****************************************
@@ -44,7 +44,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSLeft(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity> &entities);
+   virtual void impact(std::vector<Entity*> &entities);
 };
 
 /****************************************
@@ -62,7 +62,7 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSCenter(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity> &entities);
+   virtual void impact(std::vector<Entity*> &entities);
 };
 
 /****************************************
@@ -80,6 +80,6 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPS(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity> &entities);
+   virtual void impact(std::vector<Entity*> &entities);
 };
 

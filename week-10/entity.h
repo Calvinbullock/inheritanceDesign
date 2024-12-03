@@ -65,7 +65,7 @@ public:
    void orbit(double time, Acceleration accel);
    virtual void rotate(double delta);
    virtual void draw(ogstream& gout) = 0;
-   virtual void impact(std::vector<Entity> &entities) = 0;
+   virtual void impact(std::vector<Entity*> &entities) = 0;
 
    virtual void input(const Thrust &t, const double &time);
 
@@ -92,6 +92,6 @@ public:
 
    virtual void rotate(double delta)           {assert(false);}
    virtual void draw(ogstream& gout)           {assert(false);}
-   virtual void impact(std::vector<Entity> &entities)                       {assert(false);}
+   virtual void impact(std::vector<Entity*> &entities)                       {assert(false);}
 };
 

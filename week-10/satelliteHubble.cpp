@@ -13,7 +13,7 @@
 * DRAW
 * What happens on impact?
 *****************************************/
-void SatelliteHubble::impact(std::vector<Entity> &entities)
+void SatelliteHubble::impact(std::vector<Entity*> &entities)
 {
    // TODO:
 }

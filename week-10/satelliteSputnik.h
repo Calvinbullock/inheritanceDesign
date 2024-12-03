@@ -27,6 +27,6 @@ public:
    }
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity> &entities);
+   virtual void impact(std::vector<Entity*> &entities);
 };
 
