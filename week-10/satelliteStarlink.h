@@ -25,7 +25,8 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      gout.drawHubble(position, angle.getRadians());
+      if (!isBroken)
+         gout.drawStarlink(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -44,7 +45,8 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      gout.drawStarlinkBody(position, angle.getRadians());
+      if (!isBroken)
+         gout.drawStarlinkBody(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -64,7 +66,8 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      gout.drawStarlinkArray(position, angle.getRadians());
+      if (!isBroken)
+         gout.drawStarlinkArray(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
