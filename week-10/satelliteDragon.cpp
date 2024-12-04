@@ -42,6 +42,10 @@ void DragonCenter::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteDragon::impact(std::vector<Entity*> &entities)
 {
-   // TODO:
+   this->isBroken = true;
+   
+   entities.push_back(new DragonCenter(this->position, this->velocity, this->angle));
+   entities.push_back(new DragonLeft(this->position, this->velocity, this->angle));
+   entities.push_back(new DragonRight(this->position, this->velocity, this->angle));
 }
 

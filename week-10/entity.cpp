@@ -43,11 +43,7 @@ void Entity::input(const Thrust& thrust, const double &time)
       a.addDDY(cos(angle.getRadians()) * SHIP_THRUST);
       a.reverseDDX();
 
-      /*std::cout << "ax " << a.getDDX() << std::endl;*/
-      /*std::cout << "ay " << a.getDDY() << std::endl;*/
-
       velocity.add(a, time);
-      position.add(a, velocity, time);
    }
 
    // clockwise
