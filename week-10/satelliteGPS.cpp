@@ -16,6 +16,7 @@
 *****************************************/
 void GPSRight::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 /****************************************
@@ -24,6 +25,7 @@ void GPSRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void GPSLeft::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 /****************************************
@@ -32,6 +34,7 @@ void GPSLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void GPSCenter::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 /****************************************
@@ -40,5 +43,14 @@ void GPSCenter::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteGPS::impact(std::vector<Entity*> &entities)
 {
-   // TODO:
+   this->isBroken = true;
+
+   entities.push_back(new GPSCenter(this->position, this->velocity, this->angle));
+   entities.push_back(new GPSLeft(this->position, this->velocity, this->angle));
+   entities.push_back(new GPSRight(this->position, this->velocity, this->angle));
+
+   for (double degrees = 0.0; degrees <= 360.0; degrees += 90.0)
+   {
+      //entities.push_back(new Fragment(this->position, this->velocity, this->angle));
+   }
 }

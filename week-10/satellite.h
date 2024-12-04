@@ -11,6 +11,7 @@
 
 #include "entity.h"
 #include "acceleration.h"
+#include "fragments.h"
 
 class TestSatellite;
 

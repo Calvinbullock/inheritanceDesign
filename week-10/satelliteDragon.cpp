@@ -15,6 +15,7 @@
 *****************************************/
 void DragonRight::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 
@@ -24,6 +25,7 @@ void DragonRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void DragonLeft::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 
@@ -33,6 +35,7 @@ void DragonLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void DragonCenter::impact(std::vector<Entity*> &entities)
 {
+   //this->isBroken = true;
    // TODO:
 }
 
