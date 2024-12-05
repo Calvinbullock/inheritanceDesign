@@ -140,6 +140,9 @@
     <ClInclude Include="testSatellite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fragment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

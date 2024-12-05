@@ -27,6 +27,7 @@ public:
       : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout) { gout.drawFragment(position, angle.getRadians()); }
+   virtual void impact(std::vector<Entity*>& entities) {}
 
 protected:
 };

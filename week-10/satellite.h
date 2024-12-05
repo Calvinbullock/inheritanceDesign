@@ -11,7 +11,7 @@
 
 #include "entity.h"
 #include "acceleration.h"
-#include "fragments.h"
+#include "fragment.h"
 
 class TestSatellite;
 
@@ -36,4 +36,6 @@ public:
 
 protected:
    int fragmentCount;
+   bool isDefunct;
+   int chanceDefunct;
 };

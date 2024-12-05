@@ -141,6 +141,41 @@ public:
       entities.push_back(new SatelliteDragon(initialPos, initialVel, a));
    }
 
+   /****************************************
+   * checkCollision
+   * Check to see if any entities have collided
+   * *****************************************/
+   void checkCollision(int iSat) 
+   {
+      cout << "loop1" << endl;
+      for (int iCheck = iSat + 1; iCheck < entities.size(); iCheck++) 
+      {
+         cout << "loop2" << endl;
+         cout << iSat << endl;
+         // Find distance between the two ships
+         double distance = computeDistance(entities[iSat]->getPosition(),
+                                             entities[iCheck]->getPosition());
+         // Find the min distance two entities can be
+         double minDistance = entities[iSat]->getRadius() + entities[iCheck]->getRadius();
+
+         // If they collide break the entities
+         if (distance < minDistance)
+         {
+            entities[iSat]->impact(entities);
+            entities[iCheck]->impact(entities);
+            delete entities[iSat];
+            delete entities[iCheck];
+            entities[iSat] = nullptr;
+            entities[iCheck] = nullptr;
+            entities.erase(entities.begin() + iCheck);
+            entities.erase(entities.begin() + iSat);
+
+            /*return;*/
+         }
+      }
+
+   }
+
    // Destructor
    ~Simulator()
    {
@@ -148,6 +183,7 @@ public:
       for (Entity* entity : entities)
       {
          delete entity;
+         entity = nullptr;
       }
    }
 
@@ -180,6 +216,11 @@ void callBack(const Interface* pUI, void* p)
    Position pt;
    ogstream gout(pt);
 
+   // draw stars
+   for (int i = 0; i < pSim->getStarCount(); ++i) {
+      pSim->stars[i].draw(gout);
+   }
+
    // thrust for dreamChaser
    Thrust thrust;
    thrust.set(pUI);
@@ -204,36 +245,39 @@ void callBack(const Interface* pUI, void* p)
       acceleration.set(gravityAngle, gravity);
 
       pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
-      pSim->entities[i]->draw(gout);                // draw
+      
+      if (!pSim->entities[i]->getIsBroken())
+      {
+         pSim->entities[i]->draw(gout);                // draw
+      }
 
       // rotate all but the dreamChaser
       if (!(i == 0)) {
          pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
       }
+
+      // Check collision
+      pSim->checkCollision(i);
    }
 
-   //
-   // Draw all but satellites
-   //
-
+   
    // rotate / draw the earth
    pSim->earth.rotate(0.00349);
    pSim->earth.draw(gout);
 
-   // draw stars
-   for (int i = 0; i < pSim->getStarCount(); ++i) {
-      pSim->stars[i].draw(gout);
-   }
+
 
    pt.setMeters(0.0, 0.0);
 
-   if (pUI->isSpace())
-   {
-      for (int i = 0; i < pSim->entities.size(); i++)
-      {
-         pSim->entities[i]->impact(pSim->entities);
-      }
-   }
+
+   
+   //if (pUI->isSpace())
+   //{
+   //   for (int i = 0; i < pSim->entities.size(); i++)
+   //   {
+   //      pSim->entities[i]->impact(pSim->entities);
+   //   }
+   //}
 }
 
 double Position::metersFromPixels = 40.0;

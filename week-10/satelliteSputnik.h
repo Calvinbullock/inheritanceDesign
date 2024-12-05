@@ -23,7 +23,7 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 4;
+      this->radius = 4 * this->position.getZoom();
    }
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }

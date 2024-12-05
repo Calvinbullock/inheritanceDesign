@@ -21,12 +21,14 @@ public:
    SatelliteHubble() : Satellite() {}
    SatelliteHubble(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) {}
+               : Satellite(pos, vel, a , isBroke) \
+   {
+      this->radius = 10 * this->position.getZoom();
+   }
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawHubble(position, angle.getRadians());
+      gout.drawHubble(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -45,8 +47,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawHubbleTelescope(position, angle.getRadians());
+      gout.drawHubbleTelescope(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -65,8 +66,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawHubbleLeft(position, angle.getRadians());
+      gout.drawHubbleLeft(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -85,8 +85,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawHubbleRight(position, angle.getRadians());
+      gout.drawHubbleRight(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -105,8 +104,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawHubbleComputer(position, angle.getRadians());
+      gout.drawHubbleComputer(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };

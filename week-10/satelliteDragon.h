@@ -80,7 +80,9 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 7; // pixels
+      this->radius = 7 * this->position.getZoom(); // pixels
+      this->isDefunct = false;
+      this->chanceDefunct = 4000;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragon(position, angle.getRadians()); }

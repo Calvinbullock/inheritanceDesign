@@ -43,6 +43,11 @@ void GPSCenter::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteGPS::impact(std::vector<Entity*> &entities)
 {
+   if (isBroken)
+   {
+      return;
+   }
+   
    this->isBroken = true;
 
    entities.push_back(new GPSCenter(this->position, this->velocity, this->angle));

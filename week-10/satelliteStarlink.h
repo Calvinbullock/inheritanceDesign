@@ -21,12 +21,14 @@ public:
    SatelliteStarlink() : Satellite() {}
    SatelliteStarlink(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) {}
+      : Satellite(pos, vel, a, isBroke) 
+   {
+      this->radius = 6 * this->position.getZoom();
+   }
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawStarlink(position, angle.getRadians());
+      gout.drawStarlink(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -45,8 +47,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawStarlinkBody(position, angle.getRadians());
+      gout.drawStarlinkBody(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };
@@ -66,8 +67,7 @@ public:
 
    virtual void draw(ogstream& gout)
    {
-      if (!isBroken)
-         gout.drawStarlinkArray(position, angle.getRadians());
+      gout.drawStarlinkArray(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
 };

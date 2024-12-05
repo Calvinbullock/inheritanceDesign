@@ -162,6 +162,7 @@
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="fragment.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
     <ClInclude Include="satelliteDragon.h" />

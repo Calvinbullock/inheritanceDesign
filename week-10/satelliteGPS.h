@@ -76,7 +76,7 @@ public:
    SatelliteGPS(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
                : Satellite(pos, vel, a , isBroke)
    {
-      this->radius = 12; // pixels
+      this->radius = 12 * this->position.getZoom(); // pixels
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPS(position, angle.getRadians()); }
