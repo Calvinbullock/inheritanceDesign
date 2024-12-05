@@ -8,6 +8,7 @@
  ************************************************************************/
 
 #include "satelliteHubble.h"
+#include "fragments.h"
 
 /****************************************
 * DRAW
@@ -15,7 +16,6 @@
 *****************************************/
 void SatelliteHubble::impact(std::vector<Entity*> &entities)
 {
-   std::cout << "Kaboom" << std::endl;
    int fragCount = 4; // temp value
    isBroken = true;
 
@@ -30,25 +30,57 @@ void SatelliteHubble::impact(std::vector<Entity*> &entities)
 * What happens on impact?
 *****************************************/
 void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
-{}
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
+}
 
 /****************************************
 * DRAW
 * What happens on impact?
 *****************************************/
 void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
-{}
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
+}
 
 /****************************************
 * DRAW
 * What happens on impact?
 *****************************************/
 void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
-{}
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
+}
 
 /****************************************
 * DRAW
 * What happens on impact?
 *****************************************/
 void SatelliteHubbleTelescope::impact(std::vector<Entity*> &entities)
-{}
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
+}
