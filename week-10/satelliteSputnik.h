@@ -28,5 +28,6 @@ public:
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 

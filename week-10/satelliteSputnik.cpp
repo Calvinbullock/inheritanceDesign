@@ -15,5 +15,11 @@
 *****************************************/
 void SatelliteSputnik::impact(std::vector<Entity*> &entities)
 {
-   // TODO:
+   int fragCount = 4; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
 }
