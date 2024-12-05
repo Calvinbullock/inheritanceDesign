@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "entity.h"
 #include "satellite.h"
 
  /****************************************
@@ -21,7 +22,7 @@ public:
    SatelliteStarlink() : Satellite() {}
    SatelliteStarlink(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) 
+      : Satellite(pos, vel, a, isBroke)
    {
       this->radius = 6 * this->position.getZoom();
    }
@@ -31,25 +32,27 @@ public:
       gout.drawStarlink(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
  /****************************************
  * SateliteGPSBody
  *    Everything to know about a Starlink satellite
  *****************************************/
-class SatelliteStarlinkBody : public Satellite
+class SatelliteStarlinkBody : public Entity
 {
 public:
-   SatelliteStarlinkBody() : Satellite() {}
+   SatelliteStarlinkBody() : Entity() {}
    SatelliteStarlinkBody(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) {}
+      : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawStarlinkBody(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
 
@@ -57,17 +60,18 @@ public:
  * SateliteGPSArray
  *    Everything to know about a Starlink satellite
  *****************************************/
-class SatelliteStarlinkArray : public Satellite
+class SatelliteStarlinkArray : public Entity
 {
 public:
-   SatelliteStarlinkArray() : Satellite() {}
+   SatelliteStarlinkArray() : Entity() {}
    SatelliteStarlinkArray(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke) {}
+      : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawStarlinkArray(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };

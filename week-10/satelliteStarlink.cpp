@@ -17,7 +17,6 @@
 *****************************************/
 void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 4; // temp value
    isBroken = true;
 
    velocity.addDX(10.0);
@@ -33,7 +32,7 @@ void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteStarlinkArray::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 3;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
@@ -48,7 +47,7 @@ void SatelliteStarlinkArray::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteStarlinkBody::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 3;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
