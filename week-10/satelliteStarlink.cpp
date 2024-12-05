@@ -8,7 +8,8 @@
  ************************************************************************/
 
 #include "satelliteStarlink.h"
-#include <iostream>
+#include "fragments.h"
+#include "velocity.h"
 
 /****************************************
 * DRAW
@@ -16,6 +17,42 @@
 *****************************************/
 void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 {
-   std::cout << "Kaboom" << std::endl;
-   // TODO:
+   int fragCount = 4; // temp value
+   isBroken = true;
+
+   velocity.addDX(10.0);
+   entities.push_back(new SatelliteStarlinkBody(position, velocity, angle));
+
+   velocity.addDY(10.0);
+   entities.push_back(new SatelliteStarlinkArray(position, velocity, angle));
+}
+
+/****************************************
+* DRAW
+* What happens on impact?
+*****************************************/
+void SatelliteStarlinkArray::impact(std::vector<Entity*> &entities)
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
+}
+
+/****************************************
+* DRAW
+* What happens on impact?
+*****************************************/
+void SatelliteStarlinkBody::impact(std::vector<Entity*> &entities)
+{
+   int fragCount = 2; // temp value
+   isBroken = true;
+
+   for (int i = 0; i < fragCount; i++)
+   {
+      entities.push_back(new Fragment(position, velocity, angle));
+   }
 }
