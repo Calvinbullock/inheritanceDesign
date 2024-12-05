@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "entity.h"
 #include "satellite.h"
 
 /****************************************
@@ -31,80 +32,85 @@ public:
       gout.drawHubble(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
 /****************************************
 * SateliteHubbleTelescope
 *    Everything to know about a Hubble satellite
 *****************************************/
-class SatelliteHubbleTelescope : public Satellite
+class SatelliteHubbleTelescope : public Entity
 {
 public:
-   SatelliteHubbleTelescope() : Satellite() {}
+   SatelliteHubbleTelescope() : Entity() {}
    SatelliteHubbleTelescope(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawHubbleTelescope(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
 /****************************************
 * SateliteHubbleLeft
 *    Everything to know about a Hubble satellite
 *****************************************/
-class SatelliteHubbleLeft : public Satellite
+class SatelliteHubbleLeft : public Entity
 {
 public:
-   SatelliteHubbleLeft() : Satellite() {}
+   SatelliteHubbleLeft() : Entity() {}
    SatelliteHubbleLeft(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawHubbleLeft(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
 /****************************************
 * SateliteHubbleRight
 *    Everything to know about a Hubble satellite
 *****************************************/
-class SatelliteHubbleRight : public Satellite
+class SatelliteHubbleRight : public Entity
 {
 public:
-   SatelliteHubbleRight() : Satellite() {}
+   SatelliteHubbleRight() : Entity() {}
    SatelliteHubbleRight(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawHubbleRight(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };
 
 /****************************************
 * SateliteHubbleComputer
 *    Everything to know about a Hubble satellite
 *****************************************/
-class SatelliteHubbleComputer : public Satellite
+class SatelliteHubbleComputer : public Entity
 {
 public:
-   SatelliteHubbleComputer() : Satellite() {}
+   SatelliteHubbleComputer() : Entity() {}
    SatelliteHubbleComputer(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke) {}
 
    virtual void draw(ogstream& gout)
    {
       gout.drawHubbleComputer(position, angle.getRadians());
    }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust &t, const double &time) {}
 };

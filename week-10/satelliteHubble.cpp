@@ -16,7 +16,6 @@
 *****************************************/
 void SatelliteHubble::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 4; // temp value
    isBroken = true;
 
    entities.push_back(new SatelliteHubbleLeft(position, velocity, angle));
@@ -31,7 +30,7 @@ void SatelliteHubble::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 2;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
@@ -46,7 +45,7 @@ void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 2;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
@@ -61,7 +60,7 @@ void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 2;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
@@ -76,7 +75,7 @@ void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleTelescope::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2; // temp value
+   int fragCount = 3;
    isBroken = true;
 
    for (int i = 0; i < fragCount; i++)
