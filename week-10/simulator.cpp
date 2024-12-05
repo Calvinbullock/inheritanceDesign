@@ -225,7 +225,7 @@ void callBack(const Interface* pUI, void* p)
    Thrust thrust;
    thrust.set(pUI);
 
-   // Use dynamic_cast to check if the entity is a Satellite
+   // Use input on ship
    pSim->entities[0]->input(thrust, TIME);
 
    // Orbit, rotate, and draw all entities

@@ -26,6 +26,8 @@ friend TestSatellite;
 
 public:
 
+   // Add chance Defunct to constructor
+
    // Constructors
    Satellite() : Entity() {}
    Satellite(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
@@ -35,7 +37,6 @@ public:
    virtual void impact(std::vector<Entity*> &entities) { assert(false); }
 
 protected:
-   int fragmentCount;
    bool isDefunct;
    int chanceDefunct;
 };
