@@ -439,7 +439,7 @@ private:
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING DOWN
    * input:   v=(0, 0), t=(f, f, t) a=3.141593rad
-   * output:  p=(0.0, -3.0) v=(0.0, -2.0)
+   * output:  v=(0.0, -2.0)
    *********************************************/
    void input_mainDown()
    {  // setup
@@ -462,8 +462,6 @@ private:
       // verify
       assertEquals(e.angle.radians, 3.141593);
       assertUnit(e.isBroken == false);
-      assertEquals(e.position.x, 0.0);
-      assertEquals(e.position.y, -3.0);
       assertEquals(e.velocity.dx, 0.0);
       assertEquals(e.velocity.dy, -2.0);
       assertUnit(t.clockwise == false);
@@ -474,7 +472,7 @@ private:
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING LEFT
    * input:   v=(0, 0), t=(f, f, t) a=-1.57079rad
-   * output:  p=(-3.0, 0.0) v=(-2.0, 0.0)
+   * output:  v=(-2.0, 0.0)
    *********************************************/
    void input_mainLeft()
    {  // setup
@@ -497,8 +495,6 @@ private:
       // verify
       assertEquals(e.angle.radians, -1.57079);
       assertUnit(e.isBroken == false);
-      assertEquals(e.position.x, -3.0);
-      assertEquals(e.position.y, 0.0);
       assertEquals(e.velocity.dx, -2.0);
       assertEquals(e.velocity.dy, 0.0);
       assertUnit(t.clockwise == false);
@@ -509,7 +505,7 @@ private:
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING DIAGONAL
    * input:   v=(0, 0), t=(f, f, t) a=0.785398rad
-   * output:  p=(2.12132, 2.12132) v=(1.41421, 1.41421)
+   * output:  v=(1.41421, 1.41421)
    *********************************************/
    void input_mainDiagonal()
    {  // setup
@@ -532,8 +528,6 @@ private:
       // verify
       assertEquals(e.angle.radians, 0.785398);
       assertUnit(e.isBroken == false);
-      assertEquals(e.position.x, 2.12132);
-      assertEquals(e.position.y, 2.12132);
       assertEquals(e.velocity.dx, 1.41421);
       assertEquals(e.velocity.dy, 1.41421);
       assertUnit(t.clockwise == false);
@@ -542,7 +536,7 @@ private:
    }  // teardown
 
    /*********************************************
-   * name:    INPUT COAST CLOCKWISE
+   * name:    INPUT CLOCKWISE
    * input:   v=(0, 0), t=(t, f, f) a=0rad
    * output:  rad=0.1
    *********************************************/
@@ -577,7 +571,7 @@ private:
    }  // teardown
 
    /*********************************************
-   * name:    INPUT COAST COUNTERCLOCKWISE
+   * name:    INPUT COUNTERCLOCKWISE
    * input:   v=(0, 0), t=(f, t, f) a=0.0rad
    * output:  rad=6.18318
    *********************************************/

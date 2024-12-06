@@ -11,6 +11,7 @@
 
 #include <cassert>
 #include <vector>
+#include <random>
 
 #include "acceleration.h"
 #include "position.h"
@@ -25,6 +26,7 @@ class TestEntity;
 #define SHIP_THRUST 2      // m/sec^2
 //#define SHIP_THRUST 96     // m/sec
 #define SHIP_ROTATION 0.1  // radians
+#define EXPLOSION_SPEED 2500.0
 
 /***********************************************************************
  * Entity
@@ -76,6 +78,15 @@ protected:
    bool isBroken;
    double radius;
    Thrust thrust;
+
+   double randomDegreesGen()
+   {
+      std::random_device dev;
+      std::mt19937 rng(dev());
+      std::uniform_real_distribution<double> dist6(0.0, 360.0); // Continuous range [0.0, 360.0]
+
+      return dist6(rng);
+   }
 };
 
 /***************************************************

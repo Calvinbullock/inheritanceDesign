@@ -147,11 +147,11 @@ public:
    * *****************************************/
    void checkCollision(int iSat) 
    {
-      cout << "loop1" << endl;
+      //cout << "loop1" << endl;
       for (int iCheck = iSat + 1; iCheck < entities.size(); iCheck++) 
       {
-         cout << "loop2" << endl;
-         cout << iSat << endl;
+         //cout << "loop2" << endl;
+         //cout << iSat << endl;
          // Find distance between the two ships
          double distance = computeDistance(entities[iSat]->getPosition(),
                                              entities[iCheck]->getPosition());

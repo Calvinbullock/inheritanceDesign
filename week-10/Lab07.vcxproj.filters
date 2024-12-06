@@ -143,6 +143,12 @@
     <ClInclude Include="fragment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="testEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="earth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

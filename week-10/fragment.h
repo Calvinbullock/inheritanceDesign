@@ -27,7 +27,9 @@ public:
       : Entity(pos, vel, a, isBroke) {}
 
    virtual void draw(ogstream& gout) { gout.drawFragment(position, angle.getRadians()); }
-   virtual void impact(std::vector<Entity*>& entities) {}
+   virtual void impact(std::vector<Entity*>& entities) { isBroken = true; }
+   virtual void rotate(double delta) { angle.add(delta * 20); } // fragments spin faster
 
-protected:
+private: 
+   int lifespan = 5;
 };

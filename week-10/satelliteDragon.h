@@ -23,49 +23,52 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 6; // pixels
+      this->radius = 6 * this->position.getZoom();
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonRight(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust& t, const double& time) {} // remove if you want to move
 };
 
 /****************************************
 * DragonLeft
 *    Everything to know about a Dragon Left Part
 *****************************************/
-class DragonLeft : public Satellite
+class DragonLeft : public Entity
 {
 public:
-   DragonLeft() : Satellite() {}
+   DragonLeft() : Entity() {}
    DragonLeft(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+      : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 6; // pixels
+      this->radius = 6 * this->position.getZoom();
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonLeft(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust& t, const double& time) {} // remove if you want to move
 };
 
 /****************************************
 * DragonCenter
 *    Everything to know about a Dragon Center Part
 *****************************************/
-class DragonCenter : public Satellite
+class DragonCenter : public Entity
 {
 public:
-   DragonCenter() : Satellite() {}
+   DragonCenter() : Entity() {}
    DragonCenter(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+      : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 6; // pixels
+      this->radius = 6 * this->position.getZoom();
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonCenter(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust& t, const double& time) {} // remove if you want to move
 };
 
  /****************************************
@@ -80,12 +83,13 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 7 * this->position.getZoom(); // pixels
+      this->radius = 7 * this->position.getZoom();
       this->isDefunct = false;
       this->chanceDefunct = 4000;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragon(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Thrust& t, const double& time) {} // remove if you want to move
 };
 
