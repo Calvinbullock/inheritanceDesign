@@ -142,6 +142,40 @@ public:
    }
 
    /****************************************
+   * EarthCollisionCheck
+   * Check to see if any entities have collided
+   *     with the earth
+   * *****************************************/
+   void earthCollisionCheck()
+   {
+      //for (int i = 0; i < entities.size(); i++)
+      for (int i = 0; i < 1; i++)
+      {
+         // check for earth collision
+         double distanceToEarth = computeDistance(earth.getPosition(),
+                                                  entities[i]->getPosition());
+         double minDistanceToEarth = earth.getRadius() + entities[i]->getRadius();
+
+         std::cout << distanceToEarth << std::endl;
+         std::cout << minDistanceToEarth << std::endl;
+
+         // BUG:  TODO: THIS CHECK IS TO SLOW NEED TO FIX
+         if (distanceToEarth < minDistanceToEarth)
+         {
+            std::cout << "here" << std::endl;
+            entities[i]->impact(entities);
+
+            // remove entity from list
+            delete entities[i];
+            entities.erase(entities.begin() + i);
+
+            // stop further check for this satellite
+            //return;
+         }
+      }
+   }
+
+   /****************************************
    * checkCollision
    * Check to see if any entities have collided
    * *****************************************/
@@ -224,6 +258,8 @@ void callBack(const Interface* pUI, void* p)
    // thrust for dreamChaser
    Thrust thrust;
    thrust.set(pUI);
+
+   pSim->earthCollisionCheck();
 
    // Use input on ship
    pSim->entities[0]->input(thrust, TIME);
