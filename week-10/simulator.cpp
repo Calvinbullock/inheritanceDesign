@@ -10,6 +10,7 @@
  *       and the main function.
  ************************************************************************/
 
+#include "fragment.h"
 #define _USE_MATH_DEFINES
 
 #include <vector>
@@ -178,17 +179,18 @@ public:
    /****************************************
    * checkCollision
    * Check to see if any entities have collided
+   *
+   * NOTE: Must be called in a loop, thought the
+   *     entities list
    * *****************************************/
-   void checkCollision(int iSat) 
+   void checkCollision(int iSat)
    {
-      //cout << "loop1" << endl;
-      for (int iCheck = iSat + 1; iCheck < entities.size(); iCheck++) 
+      // check for satellite collisions
+      for (int iCheck = iSat + 1; iCheck < entities.size(); iCheck++)
       {
-         //cout << "loop2" << endl;
-         //cout << iSat << endl;
          // Find distance between the two ships
          double distance = computeDistance(entities[iSat]->getPosition(),
-                                             entities[iCheck]->getPosition());
+                                           entities[iCheck]->getPosition());
          // Find the min distance two entities can be
          double minDistance = entities[iSat]->getRadius() + entities[iCheck]->getRadius();
 
@@ -197,17 +199,14 @@ public:
          {
             entities[iSat]->impact(entities);
             entities[iCheck]->impact(entities);
+
+            // remove entities from list
             delete entities[iSat];
             delete entities[iCheck];
-            entities[iSat] = nullptr;
-            entities[iCheck] = nullptr;
             entities.erase(entities.begin() + iCheck);
             entities.erase(entities.begin() + iSat);
-
-            /*return;*/
          }
       }
-
    }
 
    // Destructor
@@ -303,24 +302,11 @@ void callBack(const Interface* pUI, void* p)
       }
    }
 
-   
    // rotate / draw the earth
    pSim->earth.rotate(0.00349);
    pSim->earth.draw(gout);
 
-
-
    pt.setMeters(0.0, 0.0);
-
-
-   
-   //if (pUI->isSpace())
-   //{
-   //   for (int i = 0; i < pSim->entities.size(); i++)
-   //   {
-   //      pSim->entities[i]->impact(pSim->entities);
-   //   }
-   //}
 }
 
 double Position::metersFromPixels = 40.0;
