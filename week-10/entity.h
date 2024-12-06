@@ -70,6 +70,7 @@ public:
    virtual void impact(std::vector<Entity*> &entities) = 0;
 
    virtual void input(const Thrust &t, const double &time);
+   virtual bool hasExpired() { return false; } // only fragment class will override
 
 protected:
    Position position;
