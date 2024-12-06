@@ -267,33 +267,40 @@ void callBack(const Interface* pUI, void* p)
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)
    {
-      double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[i]->getPosition());
-
-      // Gravity
-      double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
-
-      Angle gravityAngle;
-      double gravityAngleRadians = getDirectionGravity(Position(), pSim->entities[i]->getPosition());
-      gravityAngle.setRadians(gravityAngleRadians);
-
-      // Acceleration
-      Acceleration acceleration;
-      acceleration.set(gravityAngle, gravity);
-
-      pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
-      
+      // TODO: check if ship is dead and draw GAME OVER & pause physics
       if (!pSim->entities[i]->getIsBroken())
       {
+         double distanceFromEarth = computeDistance(Position(0, 0), pSim->entities[i]->getPosition());
+
+         // Gravity
+         double gravity = getGravity(GRAVITY_SEA_LEVEL, RADIUS_EARTH, distanceFromEarth);
+
+         Angle gravityAngle;
+         double gravityAngleRadians = getDirectionGravity(Position(), pSim->entities[i]->getPosition());
+         gravityAngle.setRadians(gravityAngleRadians);
+
+         // Acceleration
+         Acceleration acceleration;
+         acceleration.set(gravityAngle, gravity);
+
+         pSim->entities[i]->orbit(TIME, acceleration); // orbit entities
+
          pSim->entities[i]->draw(gout);                // draw
-      }
 
-      // rotate all but the dreamChaser
-      if (!(i == 0)) {
-         pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
-      }
+         // rotate all but the dreamChaser
+         if (!(i == 0)) {
+            pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+         }
 
-      // Check collision
-      pSim->checkCollision(i);
+         // Check collision
+         pSim->checkCollision(i);
+
+         if (pSim->entities[i]->hasExpired())
+         {
+            delete pSim->entities[i];
+            pSim->entities.erase(pSim->entities.begin() + i);
+         }
+      }
    }
 
    
