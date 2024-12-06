@@ -72,6 +72,7 @@ public:
    * *****************************************/
    void initializeSatellites()
    {
+      // TODO: this may need fine tuning
       int chanceDefunct = 300; // 1 in X frames chance of defunct
 
       // initial DreamChaser satellite
@@ -296,8 +297,7 @@ void callBack(const Interface* pUI, void* p)
                pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
             }
             else
-            {
-               // JUMP TO HERE!!
+         {
                pSim->entities[i]->rotate(ROTATION_SPEED_DEFUNCT);    // rotate faster
             }
          }
