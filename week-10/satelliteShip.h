@@ -23,7 +23,7 @@ public:
    SatelliteShip(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
          : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 10 * this->position.getZoom(); // pixels
+      radius = 10 * position.getZoom(); // pixels
    }
 
    virtual void draw(ogstream& gout) { gout.drawShip(position, angle.getRadians(), thrust.isMain()); }

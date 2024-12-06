@@ -16,21 +16,14 @@
 *****************************************/
 void GPSRight::impact(std::vector<Entity*> &entities)
 {
-   this->isBroken = true;
-
+   isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < FRAG_COUNT; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
-      entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
-
-   //for (double degrees = 0.0; degrees < 360.0; degrees += 120.0) // 3 fragments
-   //{
-   //   explosionVelocity.set(degrees, EXPLOSION_SPEED);
-   //   entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
-   //}
 }
 /****************************************
 * IMPACT - GPS LEFT
@@ -38,21 +31,14 @@ void GPSRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void GPSLeft::impact(std::vector<Entity*> &entities)
 {
-   this->isBroken = true;
-   
+   isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < FRAG_COUNT; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
-      entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
-
-   //for (double degrees = 0.0; degrees < 360.0; degrees += 120.0) // 3 fragments
-   //{
-   //   explosionVelocity.set(degrees, EXPLOSION_SPEED);
-   //   entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
-   //}
 }
 /****************************************
 * IMPACT - GPS CENTER
@@ -60,21 +46,14 @@ void GPSLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void GPSCenter::impact(std::vector<Entity*> &entities)
 {
-   this->isBroken = true;
-
+   isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < FRAG_COUNT; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
-      entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
-
-   //for (double degrees = 0.0; degrees < 360.0; degrees += 120.0) // 3 fragments
-   //{
-   //   explosionVelocity.set(degrees, EXPLOSION_SPEED);
-   //   entities.push_back(new Fragment(this->position, explosionVelocity, this->angle));
-   //}
 }
 /****************************************
 * IMPACT - SATELLITE GPS
@@ -88,13 +67,13 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
    {
       return;
    }
-   
+
    this->isBroken = true;
 
    Velocity explosionVelocity;
    Position pos(this->position);
 
-   
+
    explosionVelocity.set(90.0, EXPLOSION_SPEED);
    pos.addMetersX(100.0);
    entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));

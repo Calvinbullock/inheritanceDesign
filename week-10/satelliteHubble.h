@@ -22,7 +22,7 @@ public:
    SatelliteHubble() : Satellite() {}
    SatelliteHubble(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke) \
+               : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 10 * this->position.getZoom();
    }
@@ -45,7 +45,11 @@ public:
    SatelliteHubbleTelescope() : Entity() {}
    SatelliteHubbleTelescope(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke)
+   {
+      radius = 10 * position.getZoom();
+      fragmentCount = 3;
+   }
 
    virtual void draw(ogstream& gout)
    {
@@ -65,7 +69,11 @@ public:
    SatelliteHubbleLeft() : Entity() {}
    SatelliteHubbleLeft(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke)
+   {
+      radius = 7 * position.getZoom();
+      fragmentCount = 2;
+   }
 
    virtual void draw(ogstream& gout)
    {
@@ -85,7 +93,11 @@ public:
    SatelliteHubbleRight() : Entity() {}
    SatelliteHubbleRight(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke)
+   {
+      radius = 8 * position.getZoom();
+      fragmentCount = 2;
+   }
 
    virtual void draw(ogstream& gout)
    {
@@ -105,7 +117,11 @@ public:
    SatelliteHubbleComputer() : Entity() {}
    SatelliteHubbleComputer(Position& pos, Velocity& vel,
                 Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke) {}
+               : Entity(pos, vel, a , isBroke)
+   {
+      radius = 8 * position.getZoom();
+      fragmentCount = 2;
+   }
 
    virtual void draw(ogstream& gout)
    {

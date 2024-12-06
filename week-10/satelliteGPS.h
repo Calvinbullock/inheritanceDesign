@@ -25,7 +25,7 @@ public:
    GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 8 * this->position.getZoom(); 
+      this->radius = 8 * this->position.getZoom();
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSRight(position, angle.getRadians()); }
@@ -44,7 +44,8 @@ public:
    GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 8 * this->position.getZoom(); 
+      this->radius = 8 * this->position.getZoom();
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSLeft(position, angle.getRadians()); }
@@ -63,7 +64,8 @@ public:
    GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 7 * this->position.getZoom(); 
+      this->radius = 7 * this->position.getZoom();
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSCenter(position, angle.getRadians()); }
@@ -83,6 +85,7 @@ public:
                : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 12 * this->position.getZoom();
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPS(position, angle.getRadians()); }

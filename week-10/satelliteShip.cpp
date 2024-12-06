@@ -15,5 +15,5 @@
 *****************************************/
 void SatelliteShip::impact(std::vector<Entity*> &entities)
 {
-   // TODO:
+   isBroken = true;
 }

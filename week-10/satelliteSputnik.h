@@ -24,6 +24,7 @@ public:
       : Satellite(pos, vel, a, isBroke)
    {
       this->radius = 4 * this->position.getZoom();
+      fragmentCount = 4;
    }
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }
