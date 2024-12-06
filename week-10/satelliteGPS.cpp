@@ -82,6 +82,8 @@ void GPSCenter::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteGPS::impact(std::vector<Entity*> &entities)
 {
+   // TODO: fix pos, allow parts to be seen.
+   
    if (isBroken)
    {
       return;
