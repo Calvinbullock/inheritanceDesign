@@ -13,6 +13,7 @@ public:
    {
       position = positionIn;
       rotation = rotaionIn;
+      radius = 6378000; // radius in meters
    }
 
    void rotate(double delta)
@@ -25,7 +26,11 @@ public:
       gout.drawEarth(position, rotation);
    }
 
+   double getRadius() { return radius; }
+   Position getPosition() { return position;}
+
 private:
    Position position;
    double rotation;
+   double radius;
 };
