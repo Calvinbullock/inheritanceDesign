@@ -20,11 +20,11 @@ class SatelliteStarlink : public Satellite
 {
 public:
    SatelliteStarlink() : Satellite() {}
-   SatelliteStarlink(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+   SatelliteStarlink(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
+                     bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {
       radius = 6 * position.getZoom();
+      chanceDefunct = setChanceDefunct;
    }
 
    virtual void draw(ogstream& gout)

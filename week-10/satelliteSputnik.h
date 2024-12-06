@@ -19,12 +19,12 @@ class SatelliteSputnik : public Satellite
 {
 public:
    SatelliteSputnik() : Satellite() {}
-   SatelliteSputnik(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+   SatelliteSputnik(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
+                    bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {
       this->radius = 4 * this->position.getZoom();
       fragmentCount = 4;
+      chanceDefunct = setChanceDefunct;
    }
 
    virtual void draw(ogstream& gout) { gout.drawSputnik(position, angle.getRadians()); }

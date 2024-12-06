@@ -20,11 +20,11 @@ class SatelliteHubble : public Satellite
 {
 public:
    SatelliteHubble() : Satellite() {}
-   SatelliteHubble(Position& pos, Velocity& vel,
-                Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke)
+   SatelliteHubble(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
+                   bool isBroke = false) : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 10 * this->position.getZoom();
+      chanceDefunct = setChanceDefunct;
    }
 
    virtual void draw(ogstream& gout)

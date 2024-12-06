@@ -36,11 +36,12 @@
 
 using namespace std;
 
-#define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth
-#define RADIUS_EARTH 6378000.0    // m
-#define ROTATION_SPEED 0.02       // rotation speed for satellites
-#define TIME 48.0                 // seconds/frame
-#define STAR_COUNT 300            // number or stars
+#define GRAVITY_SEA_LEVEL 9.80665   // m/s2 acceleration towards the earth
+#define RADIUS_EARTH 6378000.0      // m
+#define ROTATION_SPEED 0.02         // rotation speed for satellites
+#define ROTATION_SPEED_DEFUNCT 0.2    // rotation speed for defunct satellites
+#define TIME 48.0                   // seconds/frame
+#define STAR_COUNT 300              // number or stars
 
 /*************************************************************************
  * Demo
@@ -68,11 +69,11 @@ public:
    * INITIALIZE SATELLITES
    * initialize all the satellites and add them
    *     to the satellite vector.
-   *     (DreamChaser is instantiated but not
-   *     added to the vector)
    * *****************************************/
    void initializeSatellites()
    {
+      int chanceDefunct = 300; // 1 in X frames chance of defunct
+
       // initial DreamChaser satellite
       Position initialPos;
       initialPos.setPixelsX(-450);
@@ -85,61 +86,61 @@ public:
       initialPos = Position(0.0, 26560000.0);
       initialVel = Velocity(-3880.0, 0.0);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // GPS satellite 2
       initialPos = Position(23001634.72, 13280000.0 );
       initialVel = Velocity(-1940.00, 3360.18);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // GPS satellite 3
       initialPos = Position(23001634.72, -13280000.0 );
       initialVel = Velocity(1940.00, 3360.18);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // GPS satellite 4
       initialPos = Position(0.0, -26560000.0);
       initialVel = Velocity(3880.0, 0.0);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // GPS satellite 5
       initialPos = Position(-23001634.72, -13280000.0 );
       initialVel = Velocity(1940.00, -3360.18);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // GPS satellite 6
       initialPos = Position(-23001634.72, 13280000.0 );
       initialVel = Velocity(-1940.00, -3360.18);
       a = Angle();
-      entities.push_back(new SatelliteGPS(initialPos, initialVel, a));
+      entities.push_back(new SatelliteGPS(initialPos, initialVel, a, chanceDefunct));
 
       // initial Hubble satellite
       initialPos = Position(0.0, -42164000.0);
       initialVel = Velocity(3100.0, 0.0);
       a = Angle();
-      entities.push_back(new SatelliteHubble(initialPos, initialVel, a));
+      entities.push_back(new SatelliteHubble(initialPos, initialVel, a, chanceDefunct));
 
       // sputnik
       initialPos = Position(-36515095.13, 21082000.0);
       initialVel = Velocity(2050.0, 2684.68);
       a = Angle();
-      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a));
+      entities.push_back(new SatelliteSputnik(initialPos, initialVel, a, chanceDefunct));
 
       // starlink
       initialPos = Position(0.0, -13020000.0);
       initialVel = Velocity(5800.0, 0.0);
       a = Angle();
-      entities.push_back(new SatelliteStarlink(initialPos, initialVel, a));
+      entities.push_back(new SatelliteStarlink(initialPos, initialVel, a, chanceDefunct));
 
       // Dragon
       initialPos = Position(0.0, 8000000.0);
       initialVel = Velocity(-7900.0, 0.0);
       a = Angle();
-      entities.push_back(new SatelliteDragon(initialPos, initialVel, a));
+      entities.push_back(new SatelliteDragon(initialPos, initialVel, a, chanceDefunct));
    }
 
    /****************************************
@@ -286,9 +287,19 @@ void callBack(const Interface* pUI, void* p)
 
          pSim->entities[i]->draw(gout);                // draw
 
-         // rotate all but the dreamChaser
+         // rotate all but the dreamChaser / check defunct
          if (!(i == 0)) {
-            pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+            pSim->entities[i]->defunctChance(i);
+
+            if (!pSim->entities[i]->getIsDefunct())
+            {
+               pSim->entities[i]->rotate(ROTATION_SPEED);    // rotate
+            }
+            else
+            {
+               // JUMP TO HERE!!
+               pSim->entities[i]->rotate(ROTATION_SPEED_DEFUNCT);    // rotate faster
+            }
          }
 
          // Check collision
