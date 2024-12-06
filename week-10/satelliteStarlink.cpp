@@ -32,11 +32,10 @@ void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteStarlinkArray::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 3;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
@@ -49,11 +48,10 @@ void SatelliteStarlinkArray::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteStarlinkBody::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 3;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));

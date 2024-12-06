@@ -23,7 +23,8 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 6 * this->position.getZoom();
+      radius = 6 * position.getZoom();
+      fragmentCount = 2;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonRight(position, angle.getRadians()); }
@@ -43,7 +44,8 @@ public:
       Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 6 * this->position.getZoom();
+      radius = 6 * position.getZoom();
+      fragmentCount = 2;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonLeft(position, angle.getRadians()); }
@@ -63,7 +65,8 @@ public:
       Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 6 * this->position.getZoom();
+      radius = 6 * position.getZoom();
+      fragmentCount = 4;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonCenter(position, angle.getRadians()); }
@@ -83,9 +86,9 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 7 * this->position.getZoom();
-      this->isDefunct = false;
-      this->chanceDefunct = 4000;
+      radius = 7 * position.getZoom();
+      isDefunct = false;
+      chanceDefunct = 4000;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragon(position, angle.getRadians()); }

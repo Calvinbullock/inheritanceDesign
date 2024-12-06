@@ -30,11 +30,10 @@ void SatelliteHubble::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
@@ -47,11 +46,10 @@ void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
@@ -64,11 +62,10 @@ void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 2;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
@@ -81,13 +78,13 @@ void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteHubbleTelescope::impact(std::vector<Entity*> &entities)
 {
-   int fragCount = 3;
    isBroken = true;
    Velocity explosionVelocity;
 
-   for (int i = 0; i < fragCount; i++)
+   for (int i = 0; i < fragmentCount; i++)
    {
       explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
+

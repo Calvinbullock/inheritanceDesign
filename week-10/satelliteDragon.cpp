@@ -15,8 +15,14 @@
 *****************************************/
 void DragonRight::impact(std::vector<Entity*> &entities)
 {
-   //this->isBroken = true;
-   // TODO:
+   isBroken = true;
+   Velocity explosionVelocity;
+
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }
 
 /****************************************
@@ -25,8 +31,14 @@ void DragonRight::impact(std::vector<Entity*> &entities)
 *****************************************/
 void DragonLeft::impact(std::vector<Entity*> &entities)
 {
-   //this->isBroken = true;
-   // TODO:
+   isBroken = true;
+   Velocity explosionVelocity;
+
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }
 
 /****************************************
@@ -35,8 +47,14 @@ void DragonLeft::impact(std::vector<Entity*> &entities)
 *****************************************/
 void DragonCenter::impact(std::vector<Entity*> &entities)
 {
-   //this->isBroken = true;
-   // TODO:
+   isBroken = true;
+   Velocity explosionVelocity;
+
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }
 
 /****************************************
@@ -46,7 +64,7 @@ void DragonCenter::impact(std::vector<Entity*> &entities)
 void SatelliteDragon::impact(std::vector<Entity*> &entities)
 {
    this->isBroken = true;
-   
+
    entities.push_back(new DragonCenter(this->position, this->velocity, this->angle));
    entities.push_back(new DragonLeft(this->position, this->velocity, this->angle));
    entities.push_back(new DragonRight(this->position, this->velocity, this->angle));

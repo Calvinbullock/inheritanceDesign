@@ -24,7 +24,7 @@ public:
       Angle& a, bool isBroke = false)
       : Satellite(pos, vel, a, isBroke)
    {
-      this->radius = 6 * this->position.getZoom();
+      radius = 6 * position.getZoom();
    }
 
    virtual void draw(ogstream& gout)
@@ -45,7 +45,11 @@ public:
    SatelliteStarlinkBody() : Entity() {}
    SatelliteStarlinkBody(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke) {}
+      : Entity(pos, vel, a, isBroke)
+   {
+      radius = 2 * position.getZoom();
+      fragmentCount = 3;
+   }
 
    virtual void draw(ogstream& gout)
    {
@@ -66,7 +70,11 @@ public:
    SatelliteStarlinkArray() : Entity() {}
    SatelliteStarlinkArray(Position& pos, Velocity& vel,
       Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke) {}
+      : Entity(pos, vel, a, isBroke)
+   {
+      radius = 4 * position.getZoom();
+      fragmentCount = 3;
+   }
 
    virtual void draw(ogstream& gout)
    {

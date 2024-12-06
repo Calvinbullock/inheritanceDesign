@@ -79,6 +79,7 @@ protected:
    bool isBroken;
    double radius;
    Thrust thrust;
+   int fragmentCount;
 
    double randomDegreesGen()
    {
