@@ -12,6 +12,7 @@
 #include "entity.h"
 #include "acceleration.h"
 #include "fragment.h"
+#include "uiDraw.h"
 
 class TestSatellite;
 
@@ -32,6 +33,8 @@ public:
    Satellite() : Entity() {}
    Satellite(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke) {}
+
+   void defunctChance() { isDefunct = 0 == random(0, chanceDefunct); }
 
    virtual void draw(ogstream& gout) { assert(false); }
    virtual void impact(std::vector<Entity*> &entities) { assert(false); }
