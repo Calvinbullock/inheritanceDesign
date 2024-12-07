@@ -229,7 +229,7 @@ private:
       assertUnit(entity.isBroken);
    }
    /*********************************************
-    * name:  SET WIDTH
+    * name:  SET Radius
     * input:  entity with initial width
     * output: entity with width = 2
     *********************************************/
