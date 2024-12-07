@@ -36,6 +36,11 @@ public:
       isDefunct = 0 == random(0, chanceDefunct);
    }
 
+   virtual void defunct(int randNum) 
+   {
+      isDefunct = randNum == 0;
+   }
+
    virtual void draw(ogstream& gout) { assert(false); }
    virtual void impact(std::vector<Entity*> &entities) { assert(false); }
 

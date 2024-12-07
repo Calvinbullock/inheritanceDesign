@@ -738,6 +738,15 @@ void ogstream::drawShip(const Position& center, double rotation, bool thrust)
 }
 
 /************************************************************************
+ * GET SHIP FRONT
+ * Helper function to access rotate
+ *************************************************************************/
+Position ogstream::getShipFront(const Position& origin, double x, double y, double rotation)
+{
+   return rotate(origin, x, y, rotation);
+}
+
+/************************************************************************
  * DRAW Earth
  * Draw Earth
  *  INPUT center    The position of the ship

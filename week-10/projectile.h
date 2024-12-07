@@ -15,14 +15,21 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       radius = 1 * position.getZoom();
+      lifespan = 70; // 70 / 30 = 2.33 sec
+      activeTime = 0;
    }
 
+   virtual bool hasExpired()
+   {
+      activeTime++;
+      return activeTime == lifespan;
+   }
    virtual void draw(ogstream& gout) { gout.drawProjectile(position); }
-   virtual void impact(std::vector<Entity*>& entities) { /*isBroken = true; */ }
-   //void fire(const Interface* pUI, std::vector<Entity*>& entities, SatelliteShip ship);
+   virtual void impact(std::vector<Entity*>& entities) { isBroken = true; }
 
-protected:
-
+private:
+   int lifespan;
+   int activeTime;
 
 };
 
@@ -31,8 +38,5 @@ protected:
 
 // TODO:
 /*
-   Create a copy constructor off the ship
    set the position to bigger than the ship.
-   put FIRE IN SHIP INPUT
-
 */

@@ -73,7 +73,7 @@ public:
    void initializeSatellites()
    {
       // TODO: this may need fine tuning
-      int chanceDefunct = 300; // 1 in X frames chance of defunct
+      int chanceDefunct = 3000; // 1 in X frames chance of defunct
 
       // initial DreamChaser satellite
       Position initialPos;

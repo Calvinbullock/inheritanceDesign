@@ -26,7 +26,9 @@ public:
    Fragment(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      lifespan = 150; // 150 / 30 = 5 sec
+      // TODO: setting radius crashes when ship hits anything
+      //radius = 2 * position.getZoom();
+      lifespan = random(50, 100); // 150 / 30 = 5 sec
       activeTime = 0;
    }
 

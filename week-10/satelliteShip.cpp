@@ -16,6 +16,8 @@
 void SatelliteShip::impact(std::vector<Entity*> &entities)
 {
    isBroken = true;
+
+
 }
 
 /***************************************************************
@@ -26,10 +28,15 @@ void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, 
 {
    if (pUI->isSpace())
    {
+     
       Velocity fireVelocity;
-      fireVelocity.set(angle, velocity.getSpeed() + PROJ_SPEED);
-
-      entities.push_back(new Projectile(this->position, fireVelocity, this->angle));
+      fireVelocity.set(angle, PROJ_SPEED);
+      Position shipFront(this->position);
+      ogstream gout;
+      shipFront = gout.getShipFront(this->position, 0.0, 19.0, this->angle.getRadians());
+     
+      entities.push_back(new Projectile(shipFront, fireVelocity, this->angle));
+      
    }
 
    // main engines

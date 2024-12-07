@@ -72,6 +72,7 @@ public:
    virtual void drawStarlinkArray(const Position& center, double rotation, const Position& offset = Position());
 
    virtual void drawShip(const Position& center, double rotation, bool thrust);
+   Position getShipFront(const Position& origin, double x, double y, double rotation);
 
    virtual void drawEarth(const Position& center, double rotation);
 

@@ -89,6 +89,7 @@ protected:
    bool isDefunct;
    int chanceDefunct;
 
+   // TODO: switch to random from uiDraw
    double randomDegreesGen()
    {
       std::random_device dev;
