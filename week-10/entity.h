@@ -51,6 +51,9 @@ public:
       radius = r;
    }
 
+   virtual ~Entity() {}
+
+
    // Getters
    Position getPosition()  const { return position; }
    Velocity getVelocity()  const { return velocity; }
