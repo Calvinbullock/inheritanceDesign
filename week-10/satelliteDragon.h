@@ -19,14 +19,17 @@ class TestSatellite;
 *****************************************/
 class DragonRight : public Satellite
 {
-
-   
-
 public:
    DragonRight() : Satellite() {}
    DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
                : Satellite(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 6 * position.getZoom();
       fragmentCount = 2;
    }
@@ -48,6 +51,12 @@ public:
       Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 6 * position.getZoom();
       fragmentCount = 2;
    }
@@ -69,6 +78,12 @@ public:
       Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 6 * position.getZoom();
       fragmentCount = 4;
    }
@@ -88,7 +103,7 @@ class SatelliteDragon : public Satellite
    friend TestSatellite;
 
 public:
-   SatelliteDragon() : Satellite() 
+   SatelliteDragon() : Satellite()
    {
       isBroken = false;
       radius = 7 * position.getZoom();

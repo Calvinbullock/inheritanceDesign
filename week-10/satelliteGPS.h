@@ -24,6 +24,12 @@ public:
    GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
@@ -44,6 +50,12 @@ public:
    GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
@@ -64,6 +76,12 @@ public:
    GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
+      // new velocity should increase between 5,000 - 9,000 m/s
+      double magnitude = random(5000, 9000);
+      Velocity randVel;
+      randVel.set(a, magnitude);
+      velocity += randVel += vel;
+
       radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
@@ -83,7 +101,7 @@ class SatelliteGPS : public Satellite
    friend TestSatellite;
 
 public:
-   SatelliteGPS() : Satellite() 
+   SatelliteGPS() : Satellite()
    {
       isBroken = false;
       radius = 12 * position.getZoom(); // pixels to meters
