@@ -21,7 +21,7 @@ void GPSRight::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -36,7 +36,7 @@ void GPSLeft::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -51,7 +51,7 @@ void GPSCenter::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
