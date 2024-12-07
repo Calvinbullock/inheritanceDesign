@@ -29,6 +29,7 @@ class TestSatelliteShip;
 #define SHIP_ROTATION 0.1  // radians
 #define EXPLOSION_SPEED 2500.0
 #define PROJ_SPEED 9000.0 // m/s
+#define EXPLOSION_DISPLACEMENT 4 //pix
 
 /***********************************************************************
  * Entity

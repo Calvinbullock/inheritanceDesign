@@ -30,9 +30,13 @@ public:
    void run()
    {
       // Sputnik
+      sputnikConstructor_default();
+      sputnikConstructor_nonDefault();
       sputnikImpact();
       
       // Hubble
+      hubbleConstructor_default();
+      hubbleConstructor_nonDefault();
       hubbleImpact();
       hubbleTelescopeImpact();
       hubbleLeftImpact();
@@ -40,19 +44,23 @@ public:
       hubbleComputerImpact();
       
       // GPS
-      GPSConstructor_default();
+      gpsConstructor_default();
+      gpsConstructor_nonDefault();
       gpsImpact();
       gpsLeftImpact();
       gpsRightImpact();
       gpsCenterImpact();
       
       // Starlink
+      starlinkConstructor_default();
+      starlinkConstructor_nonDefault();
       starlinkImpact();
       starlinkArrayImpact();
       starlinkBodyImpact();
       
       // Dragon
       dragonConstructor_default();
+      dragonConstructor_nonDefault();
       dragonImpact();
       dragonLeftImpact();
       dragonRightImpact();
@@ -62,6 +70,68 @@ public:
    }
 
 private:
+
+   /*********************************************
+   * name:    HUBBLE Default Constructor
+   * input:   none
+   *********************************************/
+   void hubbleConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteHubble s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 400.0);    // default value: 12 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 0); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE NON Default Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void hubbleConstructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteHubble s(p, v, a, 4000);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.chanceDefunct, 4000);
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 0); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
    /*********************************************
     * name:  HUBBLE IMPACT
     * output: isBroken == True
@@ -250,7 +320,11 @@ private:
    // GPS
    //
 
-   void GPSConstructor_default()
+   /*********************************************
+   * name:    GPS Default Constructor
+   * input:   none
+   *********************************************/
+   void gpsConstructor_default()
    {
       // setup
 
@@ -265,6 +339,41 @@ private:
       assertEquals(s.velocity.dy, 0.0);
       assertEquals(s.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
       assertEquals(s.fragmentCount, 2); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS NON Default Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void gpsConstructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteGPS s(p, v, a, 4000);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.chanceDefunct, 4000);
+      assertEquals(s.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
+      assertEquals(s.fragmentCount, 2); // default value: 2
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -399,6 +508,67 @@ private:
    }
 
    /*********************************************
+   * name:    STARLINK Default Constructor
+   * input:   none
+   *********************************************/
+   void starlinkConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteStarlink s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 240.0);    // default value: 6 * 40(meterFromPixels) = 240
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS NON Default Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void starlinkConstructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteStarlink s(p, v, a, 4000);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.chanceDefunct, 4000);
+      assertEquals(s.radius, 240.0);    // default value: 6 * 40(meterFromPixels) = 240
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
     * name:  STARLINK IMPACT
     * input: isBroken = false, fragmentCount = 0;
     * output: isBroken == True
@@ -495,6 +665,67 @@ private:
    }
 
    /*********************************************
+   * name:    Sputnik Default Constructor
+   * input:   none
+   *********************************************/
+   void sputnikConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteSputnik s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 160.0);    // default value: 4 * 40(meterFromPixels) = 480
+      assertEquals(s.fragmentCount, 4); // default value: 4
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    SPUTNIK NON Default Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void sputnikConstructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteSputnik s(p, v, a, 4000);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.chanceDefunct, 4000);
+      assertEquals(s.radius, 160.0);    // default value: 4 * 40(meterFromPixels) = 160
+      assertEquals(s.fragmentCount, 4); // default value: 4
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
     * name:  SPUTNIK IMPACT
     * input: isBroken = false, fragmentCount = 4;
     * output: isBroken == True
@@ -552,7 +783,40 @@ private:
 
    } // teardown
    
-   
+   /*********************************************
+   * name:    DRAGON NON Default Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void dragonConstructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteDragon s(p, v, a, 4000);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.chanceDefunct, 4000);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
   
    /*********************************************
     * name:  DRAGON IMPACT

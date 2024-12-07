@@ -73,13 +73,16 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
 
    Velocity explosionVelocity;
    Position pos(this->position);
+   
 
    explosionVelocity.set(90.0, EXPLOSION_SPEED);
    pos.addMetersX(100.0);
    entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));
+
    explosionVelocity.set(0.0, EXPLOSION_SPEED);
    pos.addMetersX(-20.0);
    entities.push_back(new GPSLeft(pos, explosionVelocity, this->angle));
+
    explosionVelocity.set(180.0, EXPLOSION_SPEED);
    pos.addMetersY(10.0);
    entities.push_back(new GPSRight(pos, explosionVelocity, this->angle));

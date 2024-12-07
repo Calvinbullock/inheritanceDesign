@@ -19,11 +19,17 @@
 class SatelliteHubble : public Satellite
 {
 public:
-   SatelliteHubble() : Satellite() {}
+   SatelliteHubble() : Satellite() 
+   {
+      isBroken = false;
+      this->radius = 10 * this->position.getZoom();
+      fragmentCount = 0;
+   }
    SatelliteHubble(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                    bool isBroke = false) : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 10 * this->position.getZoom();
+      fragmentCount = 0;
       chanceDefunct = setChanceDefunct;
    }
 

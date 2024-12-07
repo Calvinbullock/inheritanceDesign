@@ -18,7 +18,12 @@
 class SatelliteSputnik : public Satellite
 {
 public:
-   SatelliteSputnik() : Satellite() {}
+   SatelliteSputnik() : Satellite() 
+   {
+      isBroken = false;
+      this->radius = 4 * this->position.getZoom();
+      fragmentCount = 4;
+   }
    SatelliteSputnik(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                     bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {

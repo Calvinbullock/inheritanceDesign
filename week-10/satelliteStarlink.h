@@ -19,11 +19,17 @@
 class SatelliteStarlink : public Satellite
 {
 public:
-   SatelliteStarlink() : Satellite() {}
+   SatelliteStarlink() : Satellite() 
+   {
+      isBroken = false;
+      fragmentCount = 2;
+      radius = 6 * position.getZoom();
+   }
    SatelliteStarlink(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                      bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {
       radius = 6 * position.getZoom();
+      fragmentCount = 2;
       chanceDefunct = setChanceDefunct;
    }
 
