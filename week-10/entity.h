@@ -92,16 +92,6 @@ protected:
    // for satellite defunct
    bool isDefunct;
    int chanceDefunct;
-
-   // TODO: switch to random from uiDraw
-   double randomDegreesGen()
-   {
-      std::random_device dev;
-      std::mt19937 rng(dev());
-      std::uniform_real_distribution<double> dist6(0.0, 360.0); // Continuous range [0.0, 360.0]
-
-      return dist6(rng);
-   }
 };
 
 /***************************************************

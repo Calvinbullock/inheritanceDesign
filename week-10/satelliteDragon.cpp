@@ -20,7 +20,7 @@ void DragonRight::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -36,7 +36,7 @@ void DragonLeft::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -52,7 +52,7 @@ void DragonCenter::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
