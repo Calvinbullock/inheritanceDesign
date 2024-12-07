@@ -11,6 +11,8 @@
 #include "uiInteract.h"  // for Interface
 
 class TestEntity;
+class TestSatelliteShip;
+
 
  /*****************************************************
   * THRUST
@@ -20,6 +22,8 @@ class Thrust
 {
    friend TestThrust;
    friend TestEntity;
+   friend TestSatelliteShip;
+
 
 public:
    // Thrust is initially turned off

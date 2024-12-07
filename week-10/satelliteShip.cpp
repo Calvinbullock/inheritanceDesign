@@ -26,6 +26,8 @@ void SatelliteShip::impact(std::vector<Entity*> &entities)
  ***************************************************************/
 void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, const double& time)
 {
+   
+   
    if (pUI->isSpace())
    {
      
@@ -63,4 +65,7 @@ void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, 
    }
 
    this->thrust.set(pUI);
+
+
+   
 }

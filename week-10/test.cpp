@@ -16,6 +16,7 @@
 #include "testVelocity.h"
 #include "testPhysics.h"
 #include "testEntity.h"
+#include "testSatelliteShip.h"
 
 
 #ifdef _WIN32
@@ -45,4 +46,5 @@ void testRunner()
    TestEntity().run();
    TestThrust().run();
    TestSatellite().run();
+   TestSatelliteShip().run();
 }

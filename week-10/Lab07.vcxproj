@@ -181,6 +181,7 @@
     <ClInclude Include="testPhysics.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testSatellite.h" />
+    <ClInclude Include="testSatelliteShip.h" />
     <ClInclude Include="testThrust.h" />
     <ClInclude Include="testVelocity.h" />
     <ClInclude Include="thrust.h" />

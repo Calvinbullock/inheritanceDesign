@@ -159,8 +159,8 @@ public:
                                                   entities[i]->getPosition());
          double minDistanceToEarth = earth.getRadius() + entities[i]->getRadius();
 
-         std::cout << distanceToEarth << std::endl;
-         std::cout << minDistanceToEarth << std::endl;
+         //std::cout << distanceToEarth << std::endl;
+         //std::cout << minDistanceToEarth << std::endl;
 
          // BUG:  TODO: THIS CHECK IS TO SLOW NEED TO FIX
          if (distanceToEarth < minDistanceToEarth)
@@ -256,10 +256,6 @@ void callBack(const Interface* pUI, void* p)
       pSim->stars[i].draw(gout);
    }
 
-   //// thrust for dreamChaser
-   //Thrust thrust;
-   //thrust.set(pUI);
-
    pSim->earthCollisionCheck();
 
    // Use input on ship
@@ -354,7 +350,7 @@ int main(int argc, char** argv)
    Simulator demo(ptUpperRight, STAR_COUNT);
 
    // set everything into action
-   ui.run(callBack, &demo);
+   //ui.run(callBack, &demo);
 
    return 0;
 }

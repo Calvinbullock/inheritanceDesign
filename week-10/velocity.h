@@ -15,6 +15,8 @@ class TestVelocity;
 class TestAcceleration;
 class TestSatellite;
 class TestEntity;
+class TestSatelliteShip;
+
 
 // for add()
 class Acceleration;
@@ -30,6 +32,7 @@ class Velocity
    friend TestPosition;
    friend TestVelocity;
    friend TestSatellite;
+   friend TestSatelliteShip;
    friend TestEntity;
 
 public:

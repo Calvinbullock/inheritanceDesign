@@ -12,12 +12,16 @@
 #include "satellite.h"
 #include "projectile.h"
 
+class TestSatelliteShip;
+
  /****************************************
  * SateliteShip
  *    Everything to know about a ship satellite
  *****************************************/
 class SatelliteShip : public Satellite
 {
+
+   friend TestSatelliteShip;
 
 public:
    SatelliteShip() : Satellite() {}
