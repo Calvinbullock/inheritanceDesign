@@ -70,7 +70,7 @@ public:
    virtual void draw(ogstream& gout) = 0;
    virtual void impact(std::vector<Entity*> &entities) = 0;
 
-   virtual void input(const Interface* pUI, std::vector<Entity*>& entities, const double &time);
+   virtual void input(const Interface* pUI, std::vector<Entity*>& entities, const double& time) {}
    virtual bool hasExpired() { return false; } // only fragment class will override
 
 protected:
