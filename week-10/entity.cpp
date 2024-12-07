@@ -32,8 +32,16 @@ void Entity::rotate(double delta)
  * INPUT
  * update position and velocity based on user input
  ***************************************************************/
-void Entity::input(const Thrust& thrust, const double &time)
+void Entity::input(const Interface* pUI, std::vector<Entity*>& entities, const double &time)
 {
+   if (pUI->isSpace())
+   {
+      Velocity fireVelocity;
+      fireVelocity.set(angle, velocity.getSpeed() + PROJ_SPEED);
+
+      entities.push_back(new Projectile(ship.getPosition(), fireVelocity, ship.getAngle()));
+   }
+
    // main engines
    if (thrust.isMain())
    {
@@ -57,5 +65,5 @@ void Entity::input(const Thrust& thrust, const double &time)
       angle.add(-SHIP_ROTATION);
    }
 
-   this->thrust = thrust;
+   this->thrust.set(pUI);
 }

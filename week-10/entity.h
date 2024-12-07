@@ -27,6 +27,7 @@ class TestEntity;
 //#define SHIP_THRUST 96     // m/sec
 #define SHIP_ROTATION 0.1  // radians
 #define EXPLOSION_SPEED 2500.0
+#define PROJ_SPEED 9000.0 // m/s
 
 /***********************************************************************
  * Entity
@@ -69,7 +70,7 @@ public:
    virtual void draw(ogstream& gout) = 0;
    virtual void impact(std::vector<Entity*> &entities) = 0;
 
-   virtual void input(const Thrust &t, const double &time);
+   virtual void input(const Interface* pUI, std::vector<Entity*>& entities, const double &time);
    virtual bool hasExpired() { return false; } // only fragment class will override
 
 protected:
