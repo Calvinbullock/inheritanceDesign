@@ -12,11 +12,16 @@
 #include "entity.h"
 #include "satelliteShip.h"
 
+class TestSatelliteShip;
+
 /*************************************************************************
  * PROJECTILE
  *************************************************************************/
 class Projectile : public Entity
 {
+
+   friend TestSatelliteShip;
+
 public:
    Projectile() : Entity() {}
    Projectile(Position& pos, Velocity& vel,

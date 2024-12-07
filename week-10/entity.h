@@ -22,6 +22,7 @@
 
 class TestEntity;
 class TestSatellite;
+class TestSatelliteShip;
 
 #define SHIP_THRUST 2      // m/sec^2
 //#define SHIP_THRUST 96     // m/sec
@@ -38,6 +39,7 @@ class Entity
 public:
    friend TestEntity;
    friend TestSatellite;
+   friend TestSatelliteShip;
 
    // Constructors
    // TEMP width TODO:
