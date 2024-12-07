@@ -28,24 +28,15 @@ public:
    {
       // impact
       hubbleImpact();
-      std::cout << "here 1" << std::endl;
-      //hubbleTelescopeImpact();
-      //std::cout << "here 2" << std::endl;
-      //hubbleLeftImpact();
-      //std::cout << "here 3" << std::endl;
-      //hubbleRightImpact();
-      //std::cout << "here 4" << std::endl;
-      //hubbleComputerImpact();
-      //std::cout << "here 5" << std::endl;
+      hubbleTelescopeImpact();
+      hubbleLeftImpact();
+      hubbleRightImpact();
+      hubbleComputerImpact();
 
-      //gpsImpact();
-      //std::cout << "here 6" << std::endl;
-      //gpsLeftImpact();
-      //std::cout << "here 7" << std::endl;
-      //gpsRightImpact();
-      //std::cout << "here 8" << std::endl;
-      //gpsCenterImpact();
-      //std::cout << "here 9" << std::endl;
+      gpsImpact();
+      gpsLeftImpact();
+      gpsRightImpact();
+      gpsCenterImpact();
 
       report("Satellite");
    }
@@ -66,6 +57,8 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteHubble sat = SatelliteHubble();
+      sat.isBroken = false;
+      sat.fragmentCount = 4;
 
       // Exercise
       sat.impact(entities);
@@ -82,14 +75,11 @@ private:
       //assertUnit(typeid(*entities[3]) == typeid(SatelliteHubbleComputer()));
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      delete entities[3];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
-      entities[3] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
@@ -103,6 +93,8 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteHubbleTelescope sat = SatelliteHubbleTelescope();
+      sat.isBroken = false;
+      sat.fragmentCount = 3;
 
       // Exercise
       sat.impact(entities);
@@ -119,12 +111,11 @@ private:
       //assertUnit(typeid(*entities[3]) == typeid(SatelliteHubbleComputer()));
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
@@ -138,13 +129,13 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteHubbleLeft sat = SatelliteHubbleLeft();
+      sat.isBroken = false;
+      sat.fragmentCount = 3;
 
       // Exercise
       sat.impact(entities);
 
       // Verify
-      std::cout << "here: " << entities.size() << std::endl;
-      std::cout << "frag: " << sat.fragmentCount << std::endl;
       assertUnit(sat.isBroken == true);
       assertUnit(entities.size() == 3);
 
@@ -156,10 +147,11 @@ private:
       //assertUnit(typeid(*entities[3]) == typeid(SatelliteHubbleComputer()));
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
@@ -173,6 +165,8 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteHubbleRight sat = SatelliteHubbleRight();
+      sat.isBroken = false;
+      sat.fragmentCount = 2;
 
       // Exercise
       sat.impact(entities);
@@ -189,10 +183,11 @@ private:
       //assertUnit(typeid(*entities[3]) == typeid(SatelliteHubbleComputer()));
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
@@ -206,6 +201,8 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteHubbleComputer sat = SatelliteHubbleComputer();
+      sat.isBroken = false;
+      sat.fragmentCount = 2;
 
       // Exercise
       sat.impact(entities);
@@ -222,10 +219,11 @@ private:
       //assertUnit(typeid(*entities[3]) == typeid(SatelliteHubbleComputer()));
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
@@ -239,6 +237,7 @@ private:
       // Setup
       std::vector<Entity*> entities;
       SatelliteGPS sat = SatelliteGPS();
+      sat.isBroken = false;
 
       // Exercise
       sat.impact(entities);
@@ -250,16 +249,16 @@ private:
       // TODO: how to type check??
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
     * name:  GPS RIGHT IMPACT
+    * input: isBroken = false, fragmentCount = 3;
     * output: isBroken == True
               entities.size == 3
               entities has: [ Fragment, Fragment, Fragment]
@@ -269,6 +268,8 @@ private:
       // Setup
       std::vector<Entity*> entities;
       GPSRight sat = GPSRight();
+      sat.isBroken = false;
+      sat.fragmentCount = 3;
 
       // Exercise
       sat.impact(entities);
@@ -280,16 +281,16 @@ private:
       // TODO: how to type check??
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
     * name:  GPS LEFT IMPACT
+    * input: isBroken = false, fragmentCount = 3;
     * output: isBroken == True
               entities.size == 3
               entities has: [ Fragment, Fragment, Fragment]
@@ -299,6 +300,7 @@ private:
       // Setup
       std::vector<Entity*> entities;
       GPSLeft sat = GPSLeft();
+      sat.fragmentCount = 3;
 
       // Exercise
       sat.impact(entities);
@@ -310,16 +312,16 @@ private:
       // TODO: how to type check??
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
    /*********************************************
     * name:  GPS CENTER IMPACT
+    * input: isBroken = false, fragmentCount = 3;
     * output: isBroken == True
               entities.size == 3
               entities has: [ Fragment, Fragment, Fragment]
@@ -329,6 +331,7 @@ private:
       // Setup
       std::vector<Entity*> entities;
       GPSCenter sat = GPSCenter();
+      sat.fragmentCount = 3;
 
       // Exercise
       sat.impact(entities);
@@ -340,12 +343,11 @@ private:
       // TODO: how to type check??
 
       // teardown
-      delete entities[0];
-      delete entities[1];
-      delete entities[2];
-      entities[0] = nullptr;
-      entities[1] = nullptr;
-      entities[2] = nullptr;
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
    }
 
 };
