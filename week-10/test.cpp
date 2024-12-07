@@ -12,6 +12,7 @@
 #include "testAngle.h"
 #include "testAcceleration.h"
 #include "testSatellite.h"
+#include "testSimulator.h"
 #include "testThrust.h"
 #include "testVelocity.h"
 #include "testPhysics.h"
@@ -47,4 +48,5 @@ void testRunner()
    TestThrust().run();
    TestSatellite().run();
    TestSatelliteShip().run();
+   TestSimulator().run();
 }

@@ -19,6 +19,7 @@
 #include "velocity.h"
 #include "angle.h"
 #include "thrust.h"
+class TestSimulator;
 
 class TestEntity;
 class TestSatellite;
@@ -40,6 +41,7 @@ public:
    friend TestEntity;
    friend TestSatellite;
    friend TestSatelliteShip;
+   friend TestSimulator;
 
    // Constructors
    // TEMP width TODO:

@@ -42,13 +42,19 @@ using namespace std;
 #define TIME 48.0                   // seconds/frame
 #define STAR_COUNT 300              // number or stars
 
+class TestSimulator;
+
 /*************************************************************************
  * Demo
  * Test structure to capture the LM that will move around the screen
  *************************************************************************/
 class Simulator
 {
+
+friend TestSimulator;
+
 public:
+   Simulator() : ptUpperRight() {}
    Simulator(Position ptUpperRight, int starCountIn) : ptUpperRight(ptUpperRight)
    {
       starCount = starCountIn;
