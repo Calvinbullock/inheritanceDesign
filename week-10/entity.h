@@ -21,7 +21,7 @@
 #include "thrust.h"
 
 class TestEntity;
-
+class TestSatellite;
 
 #define SHIP_THRUST 2      // m/sec^2
 //#define SHIP_THRUST 96     // m/sec
@@ -37,12 +37,13 @@ class Entity
 {
 public:
    friend TestEntity;
+   friend TestSatellite;
 
    // Constructors
    // TEMP width TODO:
-   Entity() {}
+   Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0) {}
    Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0)
-         : thrust(), isDefunct(), chanceDefunct()
+         : thrust(), isDefunct(), chanceDefunct(), fragmentCount()
    {
       position = pos;
       velocity = vel;
