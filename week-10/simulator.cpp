@@ -10,7 +10,6 @@
  *       and the main function.
  ************************************************************************/
 
-#include "fragment.h"
 #define _USE_MATH_DEFINES
 
 #include <vector>
@@ -159,13 +158,13 @@ public:
                                                   entities[i]->getPosition());
          double minDistanceToEarth = earth.getRadius() + entities[i]->getRadius();
 
-         std::cout << distanceToEarth << std::endl;
-         std::cout << minDistanceToEarth << std::endl;
+         //std::cout << distanceToEarth << std::endl;    // TODO: remove
+         //std::cout << minDistanceToEarth << std::endl; // TODO: remove
 
          // BUG:  TODO: THIS CHECK IS TO SLOW NEED TO FIX
          if (distanceToEarth < minDistanceToEarth)
          {
-            std::cout << "here" << std::endl;
+            //std::cout << "here" << std::endl; // TODO: remove
             entities[i]->impact(entities);
 
             // remove entity from list

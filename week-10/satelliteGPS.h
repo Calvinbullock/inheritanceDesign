@@ -11,9 +11,6 @@
 
 #include "satellite.h"
 
-//TODO: temp value
-const int FRAG_COUNT = 3;
-
  /****************************************
  * GPSRight
  *    Everything to know about a GPS satellite Right part
