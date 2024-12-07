@@ -11,12 +11,17 @@
 
 #include "satellite.h"
 
+class TestSatellite;
+
 /****************************************
 * DragonRight
 *    Everything to know about a Dragon Right Part
 *****************************************/
 class DragonRight : public Satellite
 {
+
+   
+
 public:
    DragonRight() : Satellite() {}
    DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
@@ -79,12 +84,21 @@ public:
  *****************************************/
 class SatelliteDragon : public Satellite
 {
+
+   friend TestSatellite;
+
 public:
-   SatelliteDragon() : Satellite() {}
+   SatelliteDragon() : Satellite() 
+   {
+      isBroken = false;
+      radius = 7 * position.getZoom();
+      fragmentCount = 2;
+   }
    SatelliteDragon(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                    bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {
       radius = 7 * position.getZoom();
+      fragmentCount = 2;
       isDefunct = false;
       chanceDefunct = setChanceDefunct;
    }

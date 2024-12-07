@@ -13,8 +13,12 @@ public:
    void run()
    {
       
+      // constructor
+      constructor_default();
+      constructor_nonDefault();
+
       // input
-      //input_none();
+      input_none();
       input_mainDown();
       //input_mainLeft();
       //input_mainDiagonal();
@@ -25,17 +29,84 @@ public:
    }
 
 private:
-   /*****************************************************************
-*****************************************************************
-* INPUT
-*****************************************************************
-*****************************************************************/
 
-/*********************************************
-* name:    INPUT NOTHING
-* input:   v=(0, 0), t=(f, f, f) a=0.0rad
-* output:  p=(0.0, 0.0) v=(0.0, 0.0)
-*********************************************/
+
+   // Constructors
+
+   /*********************************************
+   * name:    Default Constructor
+   * input:   none
+   *********************************************/
+   void constructor_default()
+   {
+      // setup
+      
+      // exercise
+      SatelliteShip s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 5); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+      
+   } // teardown
+
+   /*********************************************
+   * name:    Default Constructor
+   * input:   none
+   *********************************************/
+   void constructor_nonDefault()
+   {
+      // setup
+      Position p;
+      p.x = 4000.0;
+      p.y = 4500.0;
+      Velocity v;
+      v.dx = 3000.0;
+      v.dy = 3500.0;
+      Angle a;
+      a.radians = 3.1415;
+
+      // exercise
+      SatelliteShip s(p,v,a);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      assertEquals(s.position.x, 4000.0);
+      assertEquals(s.position.y, 4500.0);
+      assertEquals(s.velocity.dx, 3000.0);
+      assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 5); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+
+
+
+   /*****************************************************************
+   *****************************************************************
+   * INPUT
+   *****************************************************************
+   *****************************************************************/
+
+   /*********************************************
+   * name:    INPUT NOTHING
+   * input:   v=(0, 0), t=(f, f, f) a=0.0rad
+   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   *********************************************/
    void input_none()
    {  // setup
       Interface ui;
@@ -68,7 +139,7 @@ private:
       assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, 0.0);
       assertEquals(s.velocity.dy, 0.0);
-      assertEquals(entities.size(), 0);
+      assertUnit(entities.size() == 0);
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);

@@ -10,8 +10,10 @@
 #pragma once
 #include "uiInteract.h"  // for Interface
 
+class TestThrust;
 class TestEntity;
 class TestSatelliteShip;
+class TestSatellite;
 
 
  /*****************************************************
@@ -22,7 +24,9 @@ class Thrust
 {
    friend TestThrust;
    friend TestEntity;
+   friend TestSatellite;
    friend TestSatelliteShip;
+
 
 
 public:
