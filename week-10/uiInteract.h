@@ -24,6 +24,8 @@ using std::max;
 #define GL_SILENCE_DEPRECATION
 
 class TestThrust;
+class TestEntity;
+class EntityDerived;
 class TestSatelliteShip;
 
 /********************************************
@@ -35,6 +37,9 @@ class Interface
 {
    // for unit test
    friend TestThrust;
+   friend TestEntity;
+   friend TestEntity;
+   friend EntityDerived;
    friend TestSatelliteShip;
 
 public:

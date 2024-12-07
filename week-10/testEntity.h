@@ -10,7 +10,10 @@
 #pragma once
 
 #include "entity.h"
+#include "uiInteract.h"
 #include "unitTest.h"
+
+class Interface;
 
 /*******************************
 * TEST ENTITY
@@ -21,6 +24,10 @@ class TestEntity : public UnitTest
 public:
    void run()
    {
+      // constructor
+      entityDefaultConstructor();
+      entityConstructor();
+
       // getters
       getPosition();
       getVelocity();
@@ -43,12 +50,127 @@ public:
       orbit_all();
 
       // input
-      //input_nothing();
+      input_none();
 
       report("Entity");
    }
 
 private:
+   /*********************************************
+   * name:    ENTITY DEFAULT CONSTRUCTOR
+   * input:   None
+   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   *********************************************/
+   void entityDefaultConstructor()
+   {
+      // setup
+
+      // exercise
+      EntityDerived e = EntityDerived();
+
+      // verify
+      assertEquals(e.angle.radians, 0.0);
+      assertEquals(e.position.x, 0.0);
+      assertEquals(e.position.y, 0.0);
+      assertEquals(e.velocity.dx, 0.0);
+      assertEquals(e.velocity.dy, 0.0);
+      assertEquals(e.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
+      assertEquals(e.fragmentCount, 2); // default value: 5
+      assertUnit(e.isBroken == false);
+      assertUnit(e.thrust.clockwise == false);
+      assertUnit(e.thrust.counterClockwise == false);
+      assertUnit(e.thrust.mainEngine == false);
+   } // teardown
+
+   /*********************************************
+   * name:    ENTITY DEFAULT CONSTRUCTOR
+   * input:   pos(0.0, 0.0), vel(0.0, 0.1), a.radians = 0.0
+   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   *********************************************/
+   void entityConstructor()
+   {
+      // setup
+      Position pos;
+      pos.x = 0.0;
+      pos.y = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Angle a;
+      a.radians = 0;
+
+      // exercise
+      EntityDerived e = EntityDerived(pos, vel, a);
+
+      // verify
+      assertEquals(e.angle.radians, 0.0);
+      assertEquals(e.position.x, 0.0);
+      assertEquals(e.position.y, 0.0);
+      assertEquals(e.velocity.dx, 0.0);
+      assertEquals(e.velocity.dy, 0.0);
+      assertEquals(e.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
+      assertEquals(e.fragmentCount, 2); // default value: 5
+      assertUnit(e.isBroken == false);
+      assertUnit(e.thrust.clockwise == false);
+      assertUnit(e.thrust.counterClockwise == false);
+      assertUnit(e.thrust.mainEngine == false);
+   } // teardown
+
+   /*********************************************
+   * name:    INPUT NOTHING
+   * input:   v=(0, 0), t=(f, f, f) a=0.0rad
+   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   *********************************************/
+   void input_none()
+   {  // setup
+      Interface ui;
+      ui.isDownPress = 0;
+      ui.isLeftPress = 0;
+      ui.isRightPress = 0;
+      ui.isSpacePress = 0;
+
+      EntityDerived entity;
+      entity.isBroken = false;
+      entity.position.x = 0.0;
+      entity.position.y = 0.0;
+      entity.velocity.dx = 0.0;
+      entity.velocity.dy = 0.0;
+      entity.angle.radians = 0.0;
+      entity.thrust.clockwise = false;
+      entity.thrust.counterClockwise = false;
+      entity.thrust.mainEngine = false;
+
+      double time = 1.0;
+
+      std::vector<Entity*> entities = {};
+
+      // exercise
+      entity.input(&ui, entities, time);
+
+      // verify
+      assertEquals(entity.angle.radians, 0.0);
+      assertEquals(entity.position.x, 0.0);
+      assertEquals(entity.position.y, 0.0);
+      assertEquals(entity.velocity.dx, 0.0);
+      assertEquals(entity.velocity.dy, 0.0);
+      assertUnit(entities.size() == 0);
+      assertUnit(entity.isBroken == false);
+      assertUnit(entity.thrust.clockwise == false);
+      assertUnit(entity.thrust.counterClockwise == false);
+      assertUnit(entity.thrust.mainEngine == false);
+      assertUnit(ui.isDownPress == 0);
+      assertUnit(ui.isLeftPress == 0);
+      assertUnit(ui.isRightPress == 0);
+      assertUnit(ui.isSpacePress == 0);
+
+      // teardown
+      ui.isDownPress = 0;
+      ui.isLeftPress = 0;
+      ui.isRightPress = 0;
+      ui.isSpacePress = 0;
+
+   }
+
    /*********************************************
     * name:  GET POSITION
     * input:  entity with position (10.0, 20.0)
@@ -57,10 +179,17 @@ private:
    void getPosition()
    {
       // Setup
-      Position position(10.0, 20.0);
-      Velocity vel(3.0, 4.0);
+      Position position;
+      position.x = 10.0;
+      position.y = 20.0;
+      Velocity vel;
+      vel.dx = 3.0;
+      vel.dy = 4.0;
       Angle angle(45.0);
-      EntityDerived entity(position, vel, angle);
+      EntityDerived entity;
+      entity.position = position;
+      entity.velocity = vel;
+      entity.angle = angle;
 
       // Exercise
       Position result = entity.getPosition();
@@ -85,7 +214,10 @@ private:
       vel.dx = 3.0;
       vel.dy = 4.0;
       Angle angle(45.0);
-      EntityDerived entity(position, vel, angle);
+      EntityDerived entity;
+      entity.position = position;
+      entity.velocity = vel;
+      entity.angle = angle;
 
       // Exercise
       Velocity result = entity.getVelocity();
