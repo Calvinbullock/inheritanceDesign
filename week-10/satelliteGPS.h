@@ -11,11 +11,7 @@
 
 #include "satellite.h"
 
-//TODO: temp value
-const int FRAG_COUNT = 3;
-
 class TestSatellite;
-
 
  /****************************************
  * GPSRight

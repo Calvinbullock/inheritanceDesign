@@ -9,6 +9,7 @@
 
 #include "satelliteHubble.h"
 #include "fragment.h"
+#include "uiDraw.h"
 
 /****************************************
 * DRAW
@@ -35,7 +36,7 @@ void SatelliteHubbleLeft::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -51,7 +52,7 @@ void SatelliteHubbleRight::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -67,7 +68,7 @@ void SatelliteHubbleComputer::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
@@ -83,7 +84,7 @@ void SatelliteHubbleTelescope::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(randomDegreesGen(), EXPLOSION_SPEED);
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
       entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }

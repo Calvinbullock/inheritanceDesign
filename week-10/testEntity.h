@@ -78,8 +78,12 @@ private:
    void getVelocity()
    {
       // Setup
-      Position position(10.0, 20.0);
-      Velocity vel(3.0, 4.0);
+      Position position;
+      position.x = 10.0;
+      position.y = 20.0;
+      Velocity vel;
+      vel.dx = 3.0;
+      vel.dy = 4.0;
       Angle angle(45.0);
       EntityDerived entity(position, vel, angle);
 
@@ -100,7 +104,7 @@ private:
    {
       // Setup
       EntityDerived entity;
-      entity.setIsBroken(true);
+      entity.isBroken = true;
 
       // Exercise
       bool result = entity.getIsBroken();
@@ -117,10 +121,18 @@ private:
    void getWidth()
    {
       // Setup
-      Position position(10.0, 20.0);
-      Velocity vel(3.0, 4.0);
+      Position position;
+      position.x = 10.0;
+      position.y = 20.0;
+      Velocity vel;
+      vel.dx = 3.0;
+      vel.dy = 4.0;
       Angle angle(45.0);
-      EntityDerived entity(position, vel, angle, false, 10);
+
+      EntityDerived entity;
+      entity.position = position;
+      entity.velocity = vel;
+      entity.angle = angle;
 
       // Exercise
       double result = entity.getRadius();
@@ -137,10 +149,18 @@ private:
    void getAngle()
    {
       // Setup
-      Position position(10.0, 20.0);
-      Velocity vel(3.0, 4.0);
+      Position position;
+      position.x = 10.0;
+      position.y = 20.0;
+      Velocity vel;
+      vel.dx = 3.0;
+      vel.dy = 4.0;
       Angle angle(45.0);
-      EntityDerived entity(position, vel, angle);
+
+      EntityDerived entity;
+      entity.position = position;
+      entity.velocity = vel;
+      entity.angle = angle;
 
       // Exercise
       Angle result = entity.getAngle();
@@ -158,7 +178,9 @@ private:
    {
       // Setup
       EntityDerived entity;
-      Position newPos(50.0, 60.0);
+      Position newPos;
+      newPos.x = 50.0;
+      newPos.y = 60.0;
 
       // Exercise
       entity.setPosition(newPos);
@@ -177,7 +199,9 @@ private:
    {
       // Setup
       EntityDerived entity;
-      Velocity newVel(10.0, 15.0);
+      Velocity newVel;
+      newVel.dx = 10.0;
+      newVel.dy = 15.0;
 
       // Exercise
       entity.setVelocity(newVel);
