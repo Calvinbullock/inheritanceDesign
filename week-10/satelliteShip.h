@@ -10,6 +10,7 @@
 #pragma once
 
 #include "satellite.h"
+#include "projectile.h"
 
  /****************************************
  * SateliteShip
@@ -28,6 +29,8 @@ public:
 
    virtual void draw(ogstream& gout) { gout.drawShip(position, angle.getRadians(), thrust.isMain()); }
    virtual void impact(std::vector<Entity*> &entities);
+   virtual void input(const Interface* pUI, std::vector<Entity*>& entities, const double& time);
+
 
    //virtual void input(const Thrust& thrust, const double &time);
 

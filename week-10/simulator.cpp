@@ -256,14 +256,16 @@ void callBack(const Interface* pUI, void* p)
       pSim->stars[i].draw(gout);
    }
 
-   // thrust for dreamChaser
-   Thrust thrust;
-   thrust.set(pUI);
+   //// thrust for dreamChaser
+   //Thrust thrust;
+   //thrust.set(pUI);
 
    pSim->earthCollisionCheck();
 
    // Use input on ship
-   pSim->entities[0]->input(thrust, TIME);
+   pSim->entities[0]->input(pUI, pSim->entities, TIME);
+
+   // Fire Projectile
 
    // Orbit, rotate, and draw all entities
    for (int i = 0; i < pSim->entities.size(); i++)

@@ -145,6 +145,7 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="satellite.cpp" />
     <ClCompile Include="satelliteDragon.cpp" />
     <ClCompile Include="satelliteGPS.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="fragment.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="projectile.h" />
     <ClInclude Include="satellite.h" />
     <ClInclude Include="satelliteDragon.h" />
     <ClInclude Include="satelliteGPS.h" />
