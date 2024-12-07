@@ -26,20 +26,18 @@ class Satellite : public Entity
 friend TestSatellite;
 
 public:
-
-   // Add chance Defunct to constructor
-
    // Constructors
    Satellite() : Entity() {}
    Satellite(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke) {}
 
-   void defunctChance() { isDefunct = 0 == random(0, chanceDefunct); }
+   virtual void defunctChance(int i) {
+      if (isDefunct) { return; }
+      isDefunct = 0 == random(0, chanceDefunct);
+   }
 
    virtual void draw(ogstream& gout) { assert(false); }
    virtual void impact(std::vector<Entity*> &entities) { assert(false); }
 
 protected:
-   bool isDefunct;
-   int chanceDefunct;
 };

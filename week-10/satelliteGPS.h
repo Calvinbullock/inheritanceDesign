@@ -26,6 +26,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       this->radius = 8 * this->position.getZoom();
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPSRight(position, angle.getRadians()); }
@@ -81,11 +82,11 @@ class SatelliteGPS : public Satellite
 {
 public:
    SatelliteGPS() : Satellite() {}
-   SatelliteGPS(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-               : Satellite(pos, vel, a , isBroke)
+   SatelliteGPS(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
+                bool isBroke = false) : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 12 * this->position.getZoom();
-      fragmentCount = 3;
+      chanceDefunct = setChanceDefunct;
    }
 
    virtual void draw(ogstream& gout) { gout.drawGPS(position, angle.getRadians()); }

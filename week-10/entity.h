@@ -40,7 +40,8 @@ public:
    // Constructors
    // TEMP width TODO:
    Entity() {}
-   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0): thrust()
+   Entity(Position& pos, Velocity& vel, Angle& a, bool isBroke = false, double r = 10.0)
+         : thrust(), isDefunct(), chanceDefunct()
    {
       position = pos;
       velocity = vel;
@@ -50,11 +51,12 @@ public:
    }
 
    // Getters
-   Position getPosition() const { return position; }
-   Velocity getVelocity() const { return velocity; }
-   bool     getIsBroken() const { return isBroken; }
-   double   getRadius()   const { return radius;   }
-   Angle    getAngle()    const { return angle;    }
+   Position getPosition()  const { return position; }
+   Velocity getVelocity()  const { return velocity; }
+   bool     getIsBroken()  const { return isBroken; }
+   double   getRadius()    const { return radius;   }
+   Angle    getAngle()     const { return angle;    }
+   bool     getIsDefunct() const { return isDefunct; }
 
    // Setters
    void setPosition  (const Position& newPos) { position = newPos;  }
@@ -71,6 +73,7 @@ public:
 
    virtual void input(const Thrust &t, const double &time);
    virtual bool hasExpired() { return false; } // only fragment class will override
+   virtual void defunctChance(int i) {}             // only satellite will override
 
 protected:
    Position position;
@@ -80,6 +83,10 @@ protected:
    double radius;
    Thrust thrust;
    int fragmentCount;
+
+   // for satellite defunct
+   bool isDefunct;
+   int chanceDefunct;
 
    double randomDegreesGen()
    {

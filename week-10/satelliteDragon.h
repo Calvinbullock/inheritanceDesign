@@ -19,9 +19,8 @@ class DragonRight : public Satellite
 {
 public:
    DragonRight() : Satellite() {}
-   DragonRight(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+   DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
+               : Satellite(pos, vel, a, isBroke)
    {
       radius = 6 * position.getZoom();
       fragmentCount = 2;
@@ -82,13 +81,12 @@ class SatelliteDragon : public Satellite
 {
 public:
    SatelliteDragon() : Satellite() {}
-   SatelliteDragon(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Satellite(pos, vel, a, isBroke)
+   SatelliteDragon(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
+                   bool isBroke = false) : Satellite(pos, vel, a, isBroke)
    {
       radius = 7 * position.getZoom();
       isDefunct = false;
-      chanceDefunct = 4000;
+      chanceDefunct = setChanceDefunct;
    }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragon(position, angle.getRadians()); }
