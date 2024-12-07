@@ -149,7 +149,13 @@ private:
       assertUnit(ui.isRightPress == 0);
       assertUnit(ui.isSpacePress == 0);
 
-   }  // teardown
+      // teardown
+      ui.isDownPress = 0;
+      ui.isLeftPress = 0;
+      ui.isRightPress = 0;
+      ui.isSpacePress = 0;
+
+   } 
 
    /*********************************************
    * name:    INPUT MAIN ENGINE POINTING DOWN
@@ -196,7 +202,13 @@ private:
       assertUnit(ui.isLeftPress == 0);
       assertUnit(ui.isRightPress == 0);
       assertUnit(ui.isSpacePress == 0);
-   }  // teardown
+
+      // teardown
+      ui.isDownPress = 0;
+      ui.isLeftPress = 0;
+      ui.isRightPress = 0;
+      ui.isSpacePress = 0;
+   }  
 //
 //   /*********************************************
 //   * name:    INPUT MAIN ENGINE POINTING LEFT

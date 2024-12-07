@@ -349,7 +349,7 @@ int main(int argc, char** argv)
    Simulator demo(ptUpperRight, STAR_COUNT);
 
    // set everything into action
-   //ui.run(callBack, &demo);
+   ui.run(callBack, &demo);
 
    return 0;
 }
