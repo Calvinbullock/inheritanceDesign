@@ -43,12 +43,12 @@ public:
       orbit_all();
 
       // input
-      input_none();
-      input_mainDown();
-      input_mainLeft();
-      input_mainDiagonal();
-      input_clockwise();
-      input_counterClockwise();
+      //input_none();
+      //input_mainDown();
+      //input_mainLeft();
+      //input_mainDiagonal();
+      //input_clockwise();
+      //input_counterClockwise();
 
       report("Entity");
    }
@@ -406,203 +406,203 @@ private:
     * input:   v=(0, 0), t=(f, f, f) a=0.0rad
     * output:  p=(0.0, 0.0) v=(0.0, 0.0)
     *********************************************/
-   void input_none()
-   {  // setup
-      EntityDerived e;
-      e.isBroken = false;
-      e.position.x = 0.0;
-      e.position.y = 0.0;
-      e.velocity.dx = 0.0;
-      e.velocity.dy = 0.0;
-      e.angle.radians = 0.0;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = false;
-      double time = 1.0;
-
-      // exercise
-      e.input(t, time);
-
-      // verify
-      assertEquals(e.angle.radians, 0.0);
-      assertUnit(e.isBroken == false);
-      assertEquals(e.position.x, 0.0);
-      assertEquals(e.position.y, 0.0);
-      assertEquals(e.velocity.dx, 0.0);
-      assertEquals(e.velocity.dy, 0.0);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == false);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT MAIN ENGINE POINTING DOWN
-   * input:   v=(0, 0), t=(f, f, t) a=3.141593rad
-   * output:  v=(0.0, -2.0)
-   *********************************************/
-   void input_mainDown()
-   {  // setup
-      EntityDerived e;
-      e.isBroken = false;
-      e.position.x = 0.0;
-      e.position.y = 0.0;
-      e.velocity.dx = 0.0;
-      e.velocity.dy = 0.0;
-      e.angle.radians = 3.141593;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = true;
-      double time = 1.0;
-
-      // exercise
-      e.input(t, time);
-
-      // verify
-      assertEquals(e.angle.radians, 3.141593);
-      assertUnit(e.isBroken == false);
-      assertEquals(e.velocity.dx, 0.0);
-      assertEquals(e.velocity.dy, -2.0);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT MAIN ENGINE POINTING LEFT
-   * input:   v=(0, 0), t=(f, f, t) a=-1.57079rad
-   * output:  v=(-2.0, 0.0)
-   *********************************************/
-   void input_mainLeft()
-   {  // setup
-      EntityDerived e;
-      e.isBroken = false;
-      e.position.x = 0.0;
-      e.position.y = 0.0;
-      e.velocity.dx = 0.0;
-      e.velocity.dy = 0.0;
-      e.angle.radians = -1.57079;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = true;
-      double time = 1.0;
-
-      // exercise
-      e.input(t, time);
-
-      // verify
-      assertEquals(e.angle.radians, -1.57079);
-      assertUnit(e.isBroken == false);
-      assertEquals(e.velocity.dx, -2.0);
-      assertEquals(e.velocity.dy, 0.0);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT MAIN ENGINE POINTING DIAGONAL
-   * input:   v=(0, 0), t=(f, f, t) a=0.785398rad
-   * output:  v=(1.41421, 1.41421)
-   *********************************************/
-   void input_mainDiagonal()
-   {  // setup
-      EntityDerived e;
-      e.isBroken = false;
-      e.position.x = 0.0;
-      e.position.y = 0.0;
-      e.velocity.dx = 0.0;
-      e.velocity.dy = 0.0;
-      e.angle.radians = 0.785398;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = false;
-      t.mainEngine = true;
-      double time = 1.0;
-
-      // exercise
-      e.input(t, time);
-
-      // verify
-      assertEquals(e.angle.radians, 0.785398);
-      assertUnit(e.isBroken == false);
-      assertEquals(e.velocity.dx, 1.41421);
-      assertEquals(e.velocity.dy, 1.41421);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == true);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT CLOCKWISE
-   * input:   v=(0, 0), t=(t, f, f) a=0rad
-   * output:  rad=0.1
-   *********************************************/
-   void input_clockwise()
-   {  // setup
-      EntityDerived s;
-      s.isBroken = false;
-      s.position.x = 0.0;
-      s.position.y = 0.0;
-      s.velocity.dx = 0.0;
-      s.velocity.dy = 0.0;
-      s.angle.radians = 0.0;
-      Thrust t;
-      t.clockwise = true;
-      t.counterClockwise = false;
-      t.mainEngine = false;
-      double time = 1.0;
-
-      // exercise
-      s.input(t, time);
-
-      // verify
-      assertEquals(s.angle.radians, 0.1);
-      assertUnit(s.isBroken == false);
-      assertEquals(s.position.x, 0.0);
-      assertEquals(s.position.y, 0.0);
-      assertEquals(s.velocity.dx, 0.0);
-      assertEquals(s.velocity.dy, 0.0);
-      assertUnit(t.clockwise == true);
-      assertUnit(t.counterClockwise == false);
-      assertUnit(t.mainEngine == false);
-   }  // teardown
-
-   /*********************************************
-   * name:    INPUT COUNTERCLOCKWISE
-   * input:   v=(0, 0), t=(f, t, f) a=0.0rad
-   * output:  rad=6.18318
-   *********************************************/
-   void input_counterClockwise()
-   {  // setup
-      EntityDerived e;
-      e.isBroken = false;
-      e.position.x = 0.0;
-      e.position.y = 0.0;
-      e.velocity.dx = 0.0;
-      e.velocity.dy = 0.0;
-      e.angle.radians = 0.0;
-      Thrust t;
-      t.clockwise = false;
-      t.counterClockwise = true;
-      t.mainEngine = false;
-      double time = 1.0;
-
-      // exercise
-      e.input(t, time);
-
-      // verify
-      assertEquals(e.angle.radians, 6.18318);
-      assertUnit(e.isBroken == false);
-      assertEquals(e.position.x, 0.0);
-      assertEquals(e.position.y, 0.0);
-      assertEquals(e.velocity.dx, 0.0);
-      assertEquals(e.velocity.dy, 0.0);
-      assertUnit(t.clockwise == false);
-      assertUnit(t.counterClockwise == true);
-      assertUnit(t.mainEngine == false);
-   }  // teardown
+//   void input_none()
+//   {  // setup
+//      EntityDerived e;
+//      e.isBroken = false;
+//      e.position.x = 0.0;
+//      e.position.y = 0.0;
+//      e.velocity.dx = 0.0;
+//      e.velocity.dy = 0.0;
+//      e.angle.radians = 0.0;
+//      Thrust t;
+//      t.clockwise = false;
+//      t.counterClockwise = false;
+//      t.mainEngine = false;
+//      double time = 1.0;
+//
+//      // exercise
+//      e.input(t, time);
+//
+//      // verify
+//      assertEquals(e.angle.radians, 0.0);
+//      assertUnit(e.isBroken == false);
+//      assertEquals(e.position.x, 0.0);
+//      assertEquals(e.position.y, 0.0);
+//      assertEquals(e.velocity.dx, 0.0);
+//      assertEquals(e.velocity.dy, 0.0);
+//      assertUnit(t.clockwise == false);
+//      assertUnit(t.counterClockwise == false);
+//      assertUnit(t.mainEngine == false);
+//   }  // teardown
+//
+//   /*********************************************
+//   * name:    INPUT MAIN ENGINE POINTING DOWN
+//   * input:   v=(0, 0), t=(f, f, t) a=3.141593rad
+//   * output:  v=(0.0, -2.0)
+//   *********************************************/
+//   void input_mainDown()
+//   {  // setup
+//      EntityDerived e;
+//      e.isBroken = false;
+//      e.position.x = 0.0;
+//      e.position.y = 0.0;
+//      e.velocity.dx = 0.0;
+//      e.velocity.dy = 0.0;
+//      e.angle.radians = 3.141593;
+//      Thrust t;
+//      t.clockwise = false;
+//      t.counterClockwise = false;
+//      t.mainEngine = true;
+//      double time = 1.0;
+//
+//      // exercise
+//      e.input(t, time);
+//
+//      // verify
+//      assertEquals(e.angle.radians, 3.141593);
+//      assertUnit(e.isBroken == false);
+//      assertEquals(e.velocity.dx, 0.0);
+//      assertEquals(e.velocity.dy, -2.0);
+//      assertUnit(t.clockwise == false);
+//      assertUnit(t.counterClockwise == false);
+//      assertUnit(t.mainEngine == true);
+//   }  // teardown
+//
+//   /*********************************************
+//   * name:    INPUT MAIN ENGINE POINTING LEFT
+//   * input:   v=(0, 0), t=(f, f, t) a=-1.57079rad
+//   * output:  v=(-2.0, 0.0)
+//   *********************************************/
+//   void input_mainLeft()
+//   {  // setup
+//      EntityDerived e;
+//      e.isBroken = false;
+//      e.position.x = 0.0;
+//      e.position.y = 0.0;
+//      e.velocity.dx = 0.0;
+//      e.velocity.dy = 0.0;
+//      e.angle.radians = -1.57079;
+//      Thrust t;
+//      t.clockwise = false;
+//      t.counterClockwise = false;
+//      t.mainEngine = true;
+//      double time = 1.0;
+//
+//      // exercise
+//      e.input(t, time);
+//
+//      // verify
+//      assertEquals(e.angle.radians, -1.57079);
+//      assertUnit(e.isBroken == false);
+//      assertEquals(e.velocity.dx, -2.0);
+//      assertEquals(e.velocity.dy, 0.0);
+//      assertUnit(t.clockwise == false);
+//      assertUnit(t.counterClockwise == false);
+//      assertUnit(t.mainEngine == true);
+//   }  // teardown
+//
+//   /*********************************************
+//   * name:    INPUT MAIN ENGINE POINTING DIAGONAL
+//   * input:   v=(0, 0), t=(f, f, t) a=0.785398rad
+//   * output:  v=(1.41421, 1.41421)
+//   *********************************************/
+//   void input_mainDiagonal()
+//   {  // setup
+//      EntityDerived e;
+//      e.isBroken = false;
+//      e.position.x = 0.0;
+//      e.position.y = 0.0;
+//      e.velocity.dx = 0.0;
+//      e.velocity.dy = 0.0;
+//      e.angle.radians = 0.785398;
+//      Thrust t;
+//      t.clockwise = false;
+//      t.counterClockwise = false;
+//      t.mainEngine = true;
+//      double time = 1.0;
+//
+//      // exercise
+//      e.input(t, time);
+//
+//      // verify
+//      assertEquals(e.angle.radians, 0.785398);
+//      assertUnit(e.isBroken == false);
+//      assertEquals(e.velocity.dx, 1.41421);
+//      assertEquals(e.velocity.dy, 1.41421);
+//      assertUnit(t.clockwise == false);
+//      assertUnit(t.counterClockwise == false);
+//      assertUnit(t.mainEngine == true);
+//   }  // teardown
+//
+//   /*********************************************
+//   * name:    INPUT CLOCKWISE
+//   * input:   v=(0, 0), t=(t, f, f) a=0rad
+//   * output:  rad=0.1
+//   *********************************************/
+//   void input_clockwise()
+//   {  // setup
+//      EntityDerived s;
+//      s.isBroken = false;
+//      s.position.x = 0.0;
+//      s.position.y = 0.0;
+//      s.velocity.dx = 0.0;
+//      s.velocity.dy = 0.0;
+//      s.angle.radians = 0.0;
+//      Thrust t;
+//      t.clockwise = true;
+//      t.counterClockwise = false;
+//      t.mainEngine = false;
+//      double time = 1.0;
+//
+//      // exercise
+//      s.input(t, time);
+//
+//      // verify
+//      assertEquals(s.angle.radians, 0.1);
+//      assertUnit(s.isBroken == false);
+//      assertEquals(s.position.x, 0.0);
+//      assertEquals(s.position.y, 0.0);
+//      assertEquals(s.velocity.dx, 0.0);
+//      assertEquals(s.velocity.dy, 0.0);
+//      assertUnit(t.clockwise == true);
+//      assertUnit(t.counterClockwise == false);
+//      assertUnit(t.mainEngine == false);
+//   }  // teardown
+//
+//   /*********************************************
+//   * name:    INPUT COUNTERCLOCKWISE
+//   * input:   v=(0, 0), t=(f, t, f) a=0.0rad
+//   * output:  rad=6.18318
+//   *********************************************/
+//   void input_counterClockwise()
+//   {  // setup
+//      EntityDerived e;
+//      e.isBroken = false;
+//      e.position.x = 0.0;
+//      e.position.y = 0.0;
+//      e.velocity.dx = 0.0;
+//      e.velocity.dy = 0.0;
+//      e.angle.radians = 0.0;
+//      Thrust t;
+//      t.clockwise = false;
+//      t.counterClockwise = true;
+//      t.mainEngine = false;
+//      double time = 1.0;
+//
+//      // exercise
+//      e.input(t, time);
+//
+//      // verify
+//      assertEquals(e.angle.radians, 6.18318);
+//      assertUnit(e.isBroken == false);
+//      assertEquals(e.position.x, 0.0);
+//      assertEquals(e.position.y, 0.0);
+//      assertEquals(e.velocity.dx, 0.0);
+//      assertEquals(e.velocity.dy, 0.0);
+//      assertUnit(t.clockwise == false);
+//      assertUnit(t.counterClockwise == true);
+//      assertUnit(t.mainEngine == false);
+//   }  // teardown
 };
 

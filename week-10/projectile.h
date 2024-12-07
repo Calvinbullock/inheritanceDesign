@@ -19,7 +19,7 @@ public:
 
    virtual void draw(ogstream& gout) { gout.drawProjectile(position); }
    virtual void impact(std::vector<Entity*>& entities) { /*isBroken = true; */ }
-   void fire(const Interface* pUI, std::vector<Entity*>& entities, SatelliteShip ship);
+   //void fire(const Interface* pUI, std::vector<Entity*>& entities, SatelliteShip ship);
 
 protected:
 
