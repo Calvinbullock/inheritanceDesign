@@ -1,13 +1,22 @@
+/***********************************************************************
+ * Header File:
+ *    For Projectile class
+ * Author:
+ *    Daniel Malasky & Calvin Bullock
+ * Summary:
+ *    Everything to know about a Projectile
+ ************************************************************************/
+
 #pragma once
 
 #include "entity.h"
 #include "satelliteShip.h"
 
-
-
+/*************************************************************************
+ * PROJECTILE
+ *************************************************************************/
 class Projectile : public Entity
 {
-
 public:
    Projectile() : Entity() {}
    Projectile(Position& pos, Velocity& vel,
@@ -32,6 +41,8 @@ private:
    int activeTime;
 
 };
+
+// TODO: clean up this file
 
 // velocity of muzzle and ship adds together
 // bullet should come straight out of the ship/
