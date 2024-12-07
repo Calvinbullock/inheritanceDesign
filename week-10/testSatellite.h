@@ -12,8 +12,11 @@
 
 
 #include "satellite.h"
+#include "satelliteDragon.h"
 #include "satelliteGPS.h"
 #include "satelliteHubble.h"
+#include "satelliteSputnik.h"
+#include "satelliteStarlink.h"
 #include "unitTest.h"
 #include <iostream>
 #include <vector>
@@ -27,6 +30,8 @@ public:
    void run()
    {
       // impact
+      sputnikImpact();
+
       hubbleImpact();
       hubbleTelescopeImpact();
       hubbleLeftImpact();
@@ -37,6 +42,15 @@ public:
       gpsLeftImpact();
       gpsRightImpact();
       gpsCenterImpact();
+
+      starlinkImpact();
+      starlinkArrayImpact();
+      starlinkBodyImpact();
+
+      dragonImpact();
+      dragonLeftImpact();
+      dragonRightImpact();
+      dragonCenterImpact();
 
       report("Satellite");
    }
@@ -122,7 +136,7 @@ private:
     * name:  HUBBLE LEFT IMPACT
     * output: isBroken == True
               entities.size == 3
-              entities has: [ Fragment, Fragment ]
+              entities has: [ Fragment, Fragment, Fragment ]
     *********************************************/
    void hubbleLeftImpact()
    {
@@ -300,6 +314,7 @@ private:
       // Setup
       std::vector<Entity*> entities;
       GPSLeft sat = GPSLeft();
+      sat.isBroken = false;
       sat.fragmentCount = 3;
 
       // Exercise
@@ -331,6 +346,7 @@ private:
       // Setup
       std::vector<Entity*> entities;
       GPSCenter sat = GPSCenter();
+      sat.isBroken = false;
       sat.fragmentCount = 3;
 
       // Exercise
@@ -350,4 +366,259 @@ private:
       }
    }
 
+   /*********************************************
+    * name:  STARLINK IMPACT
+    * input: isBroken = false, fragmentCount = 0;
+    * output: isBroken == True
+              entities.size == 3
+              entities has: [ SatelliteStarlinkBody, SatelliteStarlinkArray ]
+    *********************************************/
+   void starlinkImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      SatelliteStarlink sat = SatelliteStarlink();
+      sat.isBroken = false;
+      sat.fragmentCount = 0;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 2);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  STARLINK ARRAY IMPACT
+    * input: isBroken = false, fragmentCount = 3;
+    * output: isBroken == True
+              entities.size == 3
+              entities has: [ Fragment, Fragment, Fragment]
+    *********************************************/
+   void starlinkArrayImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      SatelliteStarlinkArray sat = SatelliteStarlinkArray();
+      sat.isBroken = false;
+      sat.fragmentCount = 3;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 3);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  STARLINK BODY IMPACT
+    * input: isBroken = false, fragmentCount = 3;
+    * output: isBroken == True
+              entities.size == 3
+              entities has: [ Fragment, Fragment, Fragment]
+    *********************************************/
+   void starlinkBodyImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      SatelliteStarlinkBody sat = SatelliteStarlinkBody();
+      sat.isBroken = false;
+      sat.fragmentCount = 3;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 3);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  SPUTNIK IMPACT
+    * input: isBroken = false, fragmentCount = 4;
+    * output: isBroken == True
+              entities.size == 4
+              entities has: [ Fragment, Fragment, Fragment, Fragment ]
+    *********************************************/
+   void sputnikImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      SatelliteSputnik sat = SatelliteSputnik();
+      sat.isBroken = false;
+      sat.fragmentCount = 4;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 4);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  DRAGON IMPACT
+    * input: isBroken = false, fragmentCount = 0;
+    * output: isBroken == True
+              entities.size == 3
+              entities has: [ DragonCenter, DragonLeft, DragonRight ]
+    *********************************************/
+   void dragonImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      SatelliteDragon sat = SatelliteDragon();
+      sat.isBroken = false;
+      sat.fragmentCount = 0;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 3);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  DRAGON LEFT IMPACT
+    * input: isBroken = false, fragmentCount = 2
+    * output: isBroken == True
+              entities.size == 2
+              entities has: [ fragment, fragment, fragment ]
+    *********************************************/
+   void dragonLeftImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      DragonLeft sat = DragonLeft();
+      sat.isBroken = false;
+      sat.fragmentCount = 2;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 2);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  DRAGON RIGHT IMPACT
+    * input: isBroken = false, fragmentCount = 2
+    * output: isBroken == True
+              entities.size == 2
+              entities has: [ fragment, fragment, fragment ]
+    *********************************************/
+   void dragonRightImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      DragonRight sat = DragonRight();
+      sat.isBroken = false;
+      sat.fragmentCount = 2;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 2);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
+
+   /*********************************************
+    * name:  DRAGON CENTER IMPACT
+    * input: isBroken = false, fragmentCount = 4
+    * output: isBroken == True
+              entities.size == 4
+              entities has: [ fragment, fragment, fragment ]
+    *********************************************/
+   void dragonCenterImpact()
+   {
+      // Setup
+      std::vector<Entity*> entities;
+      DragonCenter sat = DragonCenter();
+      sat.isBroken = false;
+      sat.fragmentCount = 4;
+
+      // Exercise
+      sat.impact(entities);
+
+      // Verify
+      assertUnit(sat.isBroken == true);
+      assertUnit(entities.size() == 4);
+
+      // TODO: how to type check??
+
+      // teardown
+      for (int i = 0; i < entities.size(); i++)
+      {
+         delete entities[i];
+         entities[i] = nullptr;
+      }
+   }
 };
