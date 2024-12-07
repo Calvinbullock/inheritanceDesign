@@ -5,7 +5,7 @@
  * Author:
  *    Daniel Malasky, Calvin Bullock
  * Summary:
- *    All the unit tests for Satellite
+ *    All the unit tests for Satellite and its children
  ************************************************************************/
 
 #pragma once
@@ -22,31 +22,37 @@
 #include <vector>
 
 /*******************************
-* TEST ENTITY
+* TEST Satellite
 ********************************/
 class TestSatellite : public UnitTest
 {
 public:
    void run()
    {
-      // impact
+      // Sputnik
       sputnikImpact();
-
+      
+      // Hubble
       hubbleImpact();
       hubbleTelescopeImpact();
       hubbleLeftImpact();
       hubbleRightImpact();
       hubbleComputerImpact();
-
+      
+      // GPS
+      GPSConstructor_default();
       gpsImpact();
       gpsLeftImpact();
       gpsRightImpact();
       gpsCenterImpact();
-
+      
+      // Starlink
       starlinkImpact();
       starlinkArrayImpact();
       starlinkBodyImpact();
-
+      
+      // Dragon
+      dragonConstructor_default();
       dragonImpact();
       dragonLeftImpact();
       dragonRightImpact();
@@ -239,6 +245,32 @@ private:
          entities[i] = nullptr;
       }
    }
+
+   //
+   // GPS
+   //
+
+   void GPSConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteGPS s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
+      assertEquals(s.fragmentCount, 2); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
 
    /*********************************************
     * name:  GPS IMPACT
@@ -493,7 +525,35 @@ private:
          entities[i] = nullptr;
       }
    }
+   
+  //
+  // DRAGON
+  //
+  
+  void dragonConstructor_default()
+   {
+      // setup
 
+      // exercise
+      SatelliteDragon s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 2); // default value: 5
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+   
+   
+  
    /*********************************************
     * name:  DRAGON IMPACT
     * input: isBroken = false, fragmentCount = 0;

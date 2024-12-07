@@ -10,7 +10,11 @@
 #pragma once
 #include "uiInteract.h"  // for Interface
 
+class TestThrust;
 class TestEntity;
+class TestSatelliteShip;
+class TestSatellite;
+
 
  /*****************************************************
   * THRUST
@@ -20,6 +24,10 @@ class Thrust
 {
    friend TestThrust;
    friend TestEntity;
+   friend TestSatellite;
+   friend TestSatelliteShip;
+
+
 
 public:
    // Thrust is initially turned off

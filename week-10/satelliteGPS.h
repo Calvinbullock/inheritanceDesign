@@ -11,6 +11,8 @@
 
 #include "satellite.h"
 
+class TestSatellite;
+
  /****************************************
  * GPSRight
  *    Everything to know about a GPS satellite Right part
@@ -22,7 +24,7 @@ public:
    GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 8 * this->position.getZoom();
+      radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -42,7 +44,7 @@ public:
    GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 8 * this->position.getZoom();
+      radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -62,7 +64,7 @@ public:
    GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      this->radius = 7 * this->position.getZoom();
+      radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -77,12 +79,21 @@ public:
 *****************************************/
 class SatelliteGPS : public Satellite
 {
+
+   friend TestSatellite;
+
 public:
-   SatelliteGPS() : Satellite() {}
+   SatelliteGPS() : Satellite() 
+   {
+      isBroken = false;
+      radius = 12 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
+   }
    SatelliteGPS(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                 bool isBroke = false) : Satellite(pos, vel, a , isBroke)
    {
-      this->radius = 12 * this->position.getZoom();
+      radius = 12 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
       chanceDefunct = setChanceDefunct;
    }
 
