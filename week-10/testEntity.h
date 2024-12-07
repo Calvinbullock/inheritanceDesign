@@ -25,14 +25,14 @@ public:
       getPosition();
       getVelocity();
       getIsBroken();
-      getWidth();
+      getRadius();
       getAngle();
 
       // setters
       setPosition();
       setVelocity();
       setIsBroken();
-      setWidth();
+      setRadius();
       setAngle();
 
       //orbit
@@ -114,11 +114,11 @@ private:
    }
 
    /*********************************************
-    * name:  GET WIDTH
+    * name:  GET Radius
     * input:  entity with width = 10.0
     * output: width = 10.0
     *********************************************/
-   void getWidth()
+   void getRadius()
    {
       // Setup
       Position position;
@@ -133,6 +133,7 @@ private:
       entity.position = position;
       entity.velocity = vel;
       entity.angle = angle;
+      entity.radius = 10.0;
 
       // Exercise
       double result = entity.getRadius();
@@ -232,10 +233,11 @@ private:
     * input:  entity with initial width
     * output: entity with width = 2
     *********************************************/
-   void setWidth()
+   void setRadius()
    {
       // Setup
       EntityDerived entity;
+      entity.radius = 99.0;
 
       // Exercise
       entity.setRadius(20.0);
