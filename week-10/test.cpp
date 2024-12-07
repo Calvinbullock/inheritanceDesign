@@ -12,12 +12,12 @@
 #include "testAngle.h"
 #include "testAcceleration.h"
 #include "testSatellite.h"
-#include "testSimulator.h"
 #include "testThrust.h"
 #include "testVelocity.h"
 #include "testPhysics.h"
 #include "testEntity.h"
 #include "testSatelliteShip.h"
+#include "testSimulator.h"
 
 
 #ifdef _WIN32

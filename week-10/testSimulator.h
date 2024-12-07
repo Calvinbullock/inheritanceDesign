@@ -1,6 +1,6 @@
 #pragma once
 
-#include "simulator.cpp"
+#include "simulator.h"
 #include "unitTest.h"
 
 /*******************************
