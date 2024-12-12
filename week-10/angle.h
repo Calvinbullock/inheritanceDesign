@@ -30,6 +30,7 @@ class Angle
 public:
    // for the unit tests
    friend TestAcceleration;
+   friend TestPosition;
    friend TestVelocity;
    friend TestAngle;
    friend TestEntity;

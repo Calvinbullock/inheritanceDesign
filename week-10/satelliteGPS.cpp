@@ -71,19 +71,21 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
 
    this->isBroken = true;
 
+   // TODO: fix speed and direction add
+
    Velocity explosionVelocity;
    Position pos(this->position);
-   
+   //Position pos2(0.0, 26565000.0);
 
    explosionVelocity.set(90.0, EXPLOSION_SPEED);
-   pos.addMetersX(100.0);
+   pos.addDirection(90.0, 10000.0);
    entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));
 
    explosionVelocity.set(0.0, EXPLOSION_SPEED);
-   pos.addMetersX(-20.0);
+   pos.addDirection(0.0, 1000.0);
    entities.push_back(new GPSLeft(pos, explosionVelocity, this->angle));
 
    explosionVelocity.set(180.0, EXPLOSION_SPEED);
-   pos.addMetersY(10.0);
+   pos.addDirection(180.0, 1000.0);
    entities.push_back(new GPSRight(pos, explosionVelocity, this->angle));
 }

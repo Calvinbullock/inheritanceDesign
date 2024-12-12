@@ -11,10 +11,14 @@
 
 #pragma once
 
+#define _USE_MATH_DEFINES
+#include <math.h>   // for M_PI which is 3.14159
+
 #include <iostream>
 #include <cmath>
 #include "velocity.h"
 #include "acceleration.h"
+#include "angle.h"
 
 class TestPosition;
 class TestSatellite;
@@ -65,6 +69,7 @@ public:
    void addPixelsY(double dyPixels)      { setPixelsY(getPixelsY() + dyPixels);     }
 
    void add(Acceleration a, Velocity v, double t);
+   void addDirection(Angle a, double radius);
 
    // deal with the ratio of meters to pixels
    void setZoom(double metersFromPixels)

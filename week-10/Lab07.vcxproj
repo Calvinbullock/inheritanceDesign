@@ -145,8 +145,6 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
-    <ClCompile Include="projectile.cpp" />
-    <ClCompile Include="satellite.cpp" />
     <ClCompile Include="satelliteDragon.cpp" />
     <ClCompile Include="satelliteGPS.cpp" />
     <ClCompile Include="satelliteHubble.cpp" />

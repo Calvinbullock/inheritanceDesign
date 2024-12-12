@@ -46,6 +46,11 @@ public:
       add_1Second();
       add_4Seconds();
 
+      // addDirection
+      addDirection_up();
+      //addDirection_right();
+      //addDirection_diagonal();
+
       report("Position");
    }
 
@@ -489,5 +494,34 @@ private:
       assertEquals(v.dy, 5.0);
       assertEquals(t, 4.0);
    }  // teardown
+
+
+   /*********************************************
+    * name:    ADD Direction down
+    * input:   pos=(28000.0, -12000.0), degrees = 270, radius = 160
+    * output:  (28000, -11840)
+    *********************************************/
+   void addDirection_up() 
+   {
+      // setup
+      Position pos;
+      pos.x = 28000.0;
+      pos.y = -12000.0;
+      Angle a(270.0);
+      double r = 160.0;
+
+      // exercise
+      pos.addDirection(a, r);
+
+      std::cout << pos.x << std::endl;
+      std::cout << pos.y << std::endl;
+      std::cout << a.radians << std::endl;
+
+      // verify
+      assertEquals(pos.x, 28000.0); 
+      assertEquals(pos.y, -11840.0);  
+      assertEquals(a.radians, 4.7123);  
+      assertEquals(r, 160.0);
+   }
 
 };

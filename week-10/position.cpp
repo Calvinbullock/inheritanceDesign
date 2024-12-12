@@ -47,6 +47,13 @@ void Position::add(Acceleration a, Velocity v, double t)
    y += v.getDY() * t + 0.5 * a.getDDY() * (t * t);
 }
 
+
+void Position::addDirection(Angle a, double radius)
+{
+   x += radius * cos(a.getRadians());
+   y -= radius * sin(a.getRadians());
+}
+
 /******************************************
  * POSITION insertion
  *       Display coordinates on the screen
