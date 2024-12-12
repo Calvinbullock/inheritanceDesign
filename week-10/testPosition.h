@@ -501,7 +501,7 @@ private:
     * input:   pos=(28000.0, -12000.0), degrees = 270, radius = 160
     * output:  (28000, -11840)
     *********************************************/
-   void addDirection_up() 
+   void addDirection_up()
    {
       // setup
       Position pos;
@@ -513,14 +513,15 @@ private:
       // exercise
       pos.addDirection(a, r);
 
+      // TODO: remove DEBUG:
       std::cout << pos.x << std::endl;
       std::cout << pos.y << std::endl;
       std::cout << a.radians << std::endl;
 
       // verify
-      assertEquals(pos.x, 28000.0); 
-      assertEquals(pos.y, -11840.0);  
-      assertEquals(a.radians, 4.7123);  
+      assertEquals(pos.x, 28000.0);
+      assertEquals(pos.y, -11840.0);
+      assertEquals(a.radians, 4.7123);
       assertEquals(r, 160.0);
    }
 

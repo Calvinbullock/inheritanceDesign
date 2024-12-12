@@ -10,7 +10,9 @@
  *       and the main function.
  ************************************************************************/
 
+#include "testSimulator.h"
 #define _USE_MATH_DEFINES
+#pragma once
 
 #include <vector>
 #include <cmath>        // for sin, cos
@@ -31,7 +33,7 @@
 #include "earth.h"
 
 #include "position.h"   // for POINT
-#include "physics.cpp"  // for physics EQTNs
+#include "physics.h"  // for physics EQTNs
 
 using namespace std;
 
@@ -42,13 +44,19 @@ using namespace std;
 #define TIME 48.0                   // seconds/frame
 #define STAR_COUNT 300              // number or stars
 
+class TestSimulator;
+
 /*************************************************************************
  * Demo
  * Test structure to capture the LM that will move around the screen
  *************************************************************************/
 class Simulator
 {
+
+   friend TestSimulator;
+
 public:
+   Simulator() {}
    Simulator(Position ptUpperRight, int starCountIn) : ptUpperRight(ptUpperRight)
    {
       starCount = starCountIn;

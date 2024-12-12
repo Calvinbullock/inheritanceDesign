@@ -8,6 +8,7 @@
  ************************************************************************/
 
 #define _USE_MATH_DEFINES
+#pragma once
 
 #include <cmath>        // for sin, cos
 #include <math.h>       // for M_PI

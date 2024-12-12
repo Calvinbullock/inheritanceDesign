@@ -23,6 +23,7 @@
 class TestEntity;
 class TestSatellite;
 class TestSatelliteShip;
+class TestSimulator;
 
 #define SHIP_THRUST 2      // m/sec^2
 //#define SHIP_THRUST 96     // m/sec
@@ -41,10 +42,11 @@ public:
    friend TestEntity;
    friend TestSatellite;
    friend TestSatelliteShip;
+   friend TestSimulator;
 
    // Constructors
    // TEMP width TODO:
-   Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0) 
+   Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0)
    {
       isBroken = false;
       radius = 10.0;    //default

@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "physics.cpp"
+#include "physics.h"
 #include "unitTest.h"
 
 #define GRAVITY_SEA_LEVEL 9.80665 // m/s2 acceleration towards the earth

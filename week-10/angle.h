@@ -20,6 +20,7 @@ class TestAcceleration;
 class TestEntity;
 class TestSatellite;
 class TestSatelliteShip;
+class TestSimulator;
 
 
 /************************************
@@ -36,6 +37,7 @@ public:
    friend TestEntity;
    friend TestSatellite;
    friend TestSatelliteShip;
+   friend TestSimulator;
 
 
    // Constructors
