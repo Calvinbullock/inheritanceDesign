@@ -25,10 +25,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
@@ -51,10 +48,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
@@ -77,10 +71,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;

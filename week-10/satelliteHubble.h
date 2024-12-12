@@ -19,7 +19,7 @@
 class SatelliteHubble : public Satellite
 {
 public:
-   SatelliteHubble() : Satellite() 
+   SatelliteHubble() : Satellite()
    {
       isBroken = false;
       this->radius = 10 * this->position.getZoom();
@@ -54,10 +54,7 @@ public:
                : Entity(pos, vel, a , isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 10 * position.getZoom();
       fragmentCount = 3;
@@ -84,10 +81,7 @@ public:
                : Entity(pos, vel, a , isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 7 * position.getZoom();
       fragmentCount = 2;
@@ -114,10 +108,7 @@ public:
                : Entity(pos, vel, a , isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 8 * position.getZoom();
       fragmentCount = 2;
@@ -144,10 +135,7 @@ public:
                : Entity(pos, vel, a , isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 8 * position.getZoom();
       fragmentCount = 2;
