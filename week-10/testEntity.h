@@ -74,7 +74,7 @@ private:
       assertEquals(e.position.y, 0.0);
       assertEquals(e.velocity.dx, 0.0);
       assertEquals(e.velocity.dy, 0.0);
-      assertEquals(e.radius, 10.0);    // default value: 10.0
+      assertEquals(e.radius, 2.0);    // default value: 10.0
       assertEquals(e.fragmentCount, 0); // default value: 0
       assertUnit(e.isBroken == false);
       assertUnit(e.thrust.clockwise == false);
@@ -108,7 +108,7 @@ private:
       assertEquals(e.position.y, 0.0);
       assertEquals(e.velocity.dx, 0.0);
       assertEquals(e.velocity.dy, 0.0);
-      assertEquals(e.radius, 10.0);    // default value: 10.0
+      assertEquals(e.radius, 2.0);    // default value: 10.0
       assertEquals(e.fragmentCount, 0); // default value: 0
       assertUnit(e.isBroken == false);
       assertUnit(e.thrust.clockwise == false);

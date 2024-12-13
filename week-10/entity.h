@@ -45,15 +45,14 @@ public:
    friend TestSimulator;
 
    // Constructors
-   // TEMP width TODO:
    Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0),
             position(), velocity(), angle()
    {
       isBroken = false;
-      radius = 10.0;    //default
+      radius = 2.0;    //default
    }
    Entity(Position& pos, Velocity& vel, Angle& a,
-          bool isBroke = false, double r = 10.0)
+          bool isBroke = false, double r = 2.0)
          : thrust(), isDefunct(), chanceDefunct(), fragmentCount()
    {
       position = pos;
