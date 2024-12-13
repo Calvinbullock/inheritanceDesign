@@ -19,7 +19,7 @@
 class SatelliteStarlink : public Satellite
 {
 public:
-   SatelliteStarlink() : Satellite() 
+   SatelliteStarlink() : Satellite()
    {
       isBroken = false;
       fragmentCount = 2;
@@ -54,10 +54,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 2 * position.getZoom();
       fragmentCount = 3;
@@ -85,10 +82,7 @@ public:
       : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      double magnitude = random(5000, 9000);
-      Velocity randVel;
-      randVel.set(a, magnitude);
-      velocity += randVel += vel;
+      breakApartVel(a, vel);
 
       radius = 4 * position.getZoom();
       fragmentCount = 3;
