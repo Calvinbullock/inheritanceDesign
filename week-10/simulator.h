@@ -9,8 +9,6 @@
  *       also has the callback function for the openGL
  *       and the main function.
  ************************************************************************/
-
-#include "testSimulator.h"
 #define _USE_MATH_DEFINES
 #pragma once
 
