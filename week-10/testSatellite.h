@@ -33,7 +33,7 @@ public:
       sputnikConstructor_default();
       sputnikConstructor_nonDefault();
       sputnikImpact();
-      
+
       // Hubble
       hubbleConstructor_default();
       hubbleConstructor_nonDefault();
@@ -42,7 +42,7 @@ public:
       hubbleLeftImpact();
       hubbleRightImpact();
       hubbleComputerImpact();
-      
+
       // GPS
       gpsConstructor_default();
       gpsConstructor_nonDefault();
@@ -50,14 +50,14 @@ public:
       gpsLeftImpact();
       gpsRightImpact();
       gpsCenterImpact();
-      
+
       // Starlink
       starlinkConstructor_default();
       starlinkConstructor_nonDefault();
       starlinkImpact();
       starlinkArrayImpact();
       starlinkBodyImpact();
-      
+
       // Dragon
       dragonConstructor_default();
       dragonConstructor_nonDefault();
@@ -399,7 +399,7 @@ private:
 
       // Verify
       assertUnit(sat.isBroken == true);
-      assertUnit(entities.size() == 3);
+      assertUnit(entities.size() == 5);
 
       // TODO: how to type check??
 
@@ -581,14 +581,13 @@ private:
       std::vector<Entity*> entities;
       SatelliteStarlink sat = SatelliteStarlink();
       sat.isBroken = false;
-      sat.fragmentCount = 0;
 
       // Exercise
       sat.impact(entities);
 
       // Verify
       assertUnit(sat.isBroken == true);
-      assertUnit(entities.size() == 2);
+      assertUnit(entities.size() == 4);
 
       // TODO: how to type check??
 
@@ -756,11 +755,11 @@ private:
          entities[i] = nullptr;
       }
    }
-   
+
   //
   // DRAGON
   //
-  
+
   void dragonConstructor_default()
    {
       // setup
@@ -782,7 +781,7 @@ private:
       assertUnit(s.thrust.mainEngine == false);
 
    } // teardown
-   
+
    /*********************************************
    * name:    DRAGON NON Default Constructor
    * input:   pos(4000,4500), vel(3500), ang(3.1415)
@@ -817,7 +816,7 @@ private:
       assertUnit(s.thrust.mainEngine == false);
 
    } // teardown
-  
+
    /*********************************************
     * name:  DRAGON IMPACT
     * input: isBroken = false, fragmentCount = 0;
@@ -831,14 +830,13 @@ private:
       std::vector<Entity*> entities;
       SatelliteDragon sat = SatelliteDragon();
       sat.isBroken = false;
-      sat.fragmentCount = 0;
 
       // Exercise
       sat.impact(entities);
 
       // Verify
       assertUnit(sat.isBroken == true);
-      assertUnit(entities.size() == 3);
+      assertUnit(entities.size() == 5);
 
       // TODO: how to type check??
 

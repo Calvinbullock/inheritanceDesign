@@ -8,6 +8,7 @@
  ************************************************************************/
 
 #include "satelliteShip.h"
+#include "velocity.h"
 
 /****************************************
 * IMPACT
@@ -17,7 +18,12 @@ void SatelliteShip::impact(std::vector<Entity*> &entities)
 {
    isBroken = true;
 
-
+   Velocity explosionVelocity;
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }
 
 /***************************************************************
@@ -26,19 +32,19 @@ void SatelliteShip::impact(std::vector<Entity*> &entities)
  ***************************************************************/
 void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, const double& time)
 {
-   
-   
+
+
    if (pUI->isSpace())
    {
-     
+
       Velocity fireVelocity;
       fireVelocity.set(angle, PROJ_SPEED);
       Position shipFront(this->position);
       ogstream gout;
       shipFront = gout.getShipFront(this->position, 0.0, 19.0, this->angle.getRadians());
-     
+
       entities.push_back(new Projectile(shipFront, fireVelocity, this->angle));
-      
+
    }
 
    // main engines
@@ -67,5 +73,5 @@ void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, 
    this->thrust.set(pUI);
 
 
-   
+
 }

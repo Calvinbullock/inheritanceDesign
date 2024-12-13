@@ -88,4 +88,10 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
    explosionVelocity.set(180.0, EXPLOSION_SPEED);
    pos.addDirection(180.0, 1000.0);
    entities.push_back(new GPSRight(pos, explosionVelocity, this->angle));
+
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }

@@ -24,6 +24,13 @@ void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 
    velocity.addDY(10.0);
    entities.push_back(new SatelliteStarlinkArray(position, velocity, angle));
+
+   Velocity explosionVelocity;
+   for (int i = 0; i < fragmentCount; i++)
+   {
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
+   }
 }
 
 /****************************************
