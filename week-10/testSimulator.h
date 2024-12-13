@@ -2,8 +2,13 @@
 
 #pragma once
 
+#include "angle.h"
+#include "entity.h"
+#include "position.h"
 #include "simulator.h"
 #include "unitTest.h"
+#include "velocity.h"
+#include <vector>
 
 /*******************************
 * TEST SIMULATOR
@@ -15,10 +20,23 @@ public:
    {
       initializeSatellites();
 
+      // collision
+      collision_horizontalFar();
+      collision_horizontalClose();
+      collision_horizontalContact();
+      collision_verticalFar();
+      collision_verticalClose();
+      collision_verticalContact();
+
       report("Simulator");
    }
 
 private:
+   /****************************************
+   * COLLISION HORIZONTAL FAR
+   * Test Satellites are instantiated with
+   *  correct values.
+   *****************************************/
    void initializeSatellites()
    {
       // Setup
@@ -53,8 +71,6 @@ private:
       assertUnit(sim.entities[2]->angle.radians == 0.0);
 
       // GPS satellite 3
-      std::cout << "vel " << sim.entities[3]->velocity.dy << std::endl;
-
       assertUnit(sim.entities[3]->position.x == 23001634.72);
       assertUnit(sim.entities[3]->position.y == -13280000.0 );
       assertUnit(sim.entities[3]->velocity.dx == 1940.00);
@@ -118,4 +134,301 @@ private:
       }
    }
 
+   /****************************************
+   * COLLISION HORIZONTAL FAR
+   * Input: pos1(50, 0), pos2(-50, 0)
+   * Output: isBroken = false (both), entities.size = 2
+   *****************************************/
+   void collision_horizontalFar()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 50.0;
+      pos1.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = -50.0;
+      pos2.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 2);
+
+      assertUnit(sim.entities[0]->isBroken == false);
+      assertUnit(sim.entities[0]->position.x == 50.0);
+      assertUnit(sim.entities[0]->position.y == 0.0);
+      assertUnit(sim.entities[0]->velocity.dx == 0.0);
+      assertUnit(sim.entities[0]->velocity.dy == 0.0);
+      assertUnit(sim.entities[0]->angle.radians == 0.0);
+      assertUnit(sim.entities[0]->radius == 10.0);
+
+      assertUnit(sim.entities[1]->isBroken == false);
+      assertUnit(sim.entities[1]->position.x == -50.0);
+      assertUnit(sim.entities[1]->position.y == 0.0);
+      assertUnit(sim.entities[1]->velocity.dx == 0.0);
+      assertUnit(sim.entities[1]->velocity.dy == 0.0);
+      assertUnit(sim.entities[1]->angle.radians == 0.0);
+      assertUnit(sim.entities[1]->radius == 10.0);
+
+      // tear down
+      delete sim.entities[0];
+      delete sim.entities[1];
+      sim.entities[0] = nullptr;
+      sim.entities[1] = nullptr;
+   }
+
+
+   /****************************************
+   * COLLISION HORIZONTAL CLOSE
+   * Input: pos1(10, 0), pos2(-10, 0)
+   * Output: isBroken = false (both), entities.size = 2
+   *****************************************/
+   void collision_horizontalClose()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 10.0;
+      pos1.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = -10.0;
+      pos2.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 2);
+
+      assertUnit(sim.entities[0]->isBroken == false);
+      assertUnit(sim.entities[0]->position.x == 10.0);
+      assertUnit(sim.entities[0]->position.y == 0.0);
+      assertUnit(sim.entities[0]->velocity.dx == 0.0);
+      assertUnit(sim.entities[0]->velocity.dy == 0.0);
+      assertUnit(sim.entities[0]->angle.radians == 0.0);
+      assertUnit(sim.entities[0]->radius == 10.0);
+
+      assertUnit(sim.entities[1]->isBroken == false);
+      assertUnit(sim.entities[1]->position.x == -10.0);
+      assertUnit(sim.entities[1]->position.y == 0.0);
+      assertUnit(sim.entities[1]->velocity.dx == 0.0);
+      assertUnit(sim.entities[1]->velocity.dy == 0.0);
+      assertUnit(sim.entities[1]->angle.radians == 0.0);
+      assertUnit(sim.entities[1]->radius == 10.0);
+
+      // tear down
+      delete sim.entities[0];
+      delete sim.entities[1];
+      sim.entities[0] = nullptr;
+      sim.entities[1] = nullptr;
+   }
+
+
+   /****************************************
+   * COLLISION HORIZONTAL CONTACT
+   * Input: pos1(5, 0), pos2(-5, 0)
+   * Output: isBroken = false (both), entities.size = 0
+   *****************************************/
+   void collision_horizontalContact()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 5.0;
+      pos1.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = -5.0;
+      pos2.y = 0.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 0);
+   }
+
+   /****************************************
+   * COLLISION VERTICAL FAR
+   * Input: pos1(0, 50), pos2(0, -50)
+   * Output: isBroken = false (both), entities.size = 2
+   *****************************************/
+   void collision_verticalFar()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 0.0;
+      pos1.y = 50.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = 0.0;
+      pos2.y = -50.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 2);
+
+      assertUnit(sim.entities[0]->isBroken == false);
+      assertUnit(sim.entities[0]->position.x == 0.0);
+      assertUnit(sim.entities[0]->position.y == 50.0);
+      assertUnit(sim.entities[0]->velocity.dx == 0.0);
+      assertUnit(sim.entities[0]->velocity.dy == 0.0);
+      assertUnit(sim.entities[0]->angle.radians == 0.0);
+      assertUnit(sim.entities[0]->radius == 10.0);
+
+      assertUnit(sim.entities[1]->isBroken == false);
+      assertUnit(sim.entities[1]->position.x == 0.0);
+      assertUnit(sim.entities[1]->position.y == -50.0);
+      assertUnit(sim.entities[1]->velocity.dx == 0.0);
+      assertUnit(sim.entities[1]->velocity.dy == 0.0);
+      assertUnit(sim.entities[1]->angle.radians == 0.0);
+      assertUnit(sim.entities[1]->radius == 10.0);
+
+      // tear down
+      delete sim.entities[0];
+      delete sim.entities[1];
+      sim.entities[0] = nullptr;
+      sim.entities[1] = nullptr;
+   }
+
+
+   /****************************************
+   * COLLISION VERTICAL CLOSE
+   * Input: pos1(0, 10), pos2(0, -10)
+   * Output: isBroken = false (both), entities.size = 2
+   *****************************************/
+   void collision_verticalClose()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 0.0;
+      pos1.y = 10.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = 0.0;
+      pos2.y = -10.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 2);
+
+      assertUnit(sim.entities[0]->isBroken == false);
+      assertUnit(sim.entities[0]->position.x == 0.0);
+      assertUnit(sim.entities[0]->position.y == 10.0);
+      assertUnit(sim.entities[0]->velocity.dx == 0.0);
+      assertUnit(sim.entities[0]->velocity.dy == 0.0);
+      assertUnit(sim.entities[0]->angle.radians == 0.0);
+      assertUnit(sim.entities[0]->radius == 10.0);
+
+      assertUnit(sim.entities[1]->isBroken == false);
+      assertUnit(sim.entities[1]->position.x == 0.0);
+      assertUnit(sim.entities[1]->position.y == -10.0);
+      assertUnit(sim.entities[1]->velocity.dx == 0.0);
+      assertUnit(sim.entities[1]->velocity.dy == 0.0);
+      assertUnit(sim.entities[1]->angle.radians == 0.0);
+      assertUnit(sim.entities[1]->radius == 10.0);
+
+      // tear down
+      delete sim.entities[0];
+      delete sim.entities[1];
+      sim.entities[0] = nullptr;
+      sim.entities[1] = nullptr;
+   }
+
+
+   /****************************************
+   * COLLISION VERTICAL CONTACT
+   * Input: pos1(0, 5), pos2(0, -5)
+   * Output: isBroken = false (both), entities.size = 0
+   *****************************************/
+   void collision_verticalContact()
+   {
+      // set up
+      Simulator sim;
+      Angle a;
+      a.radians = 0.0;
+      Velocity vel;
+      vel.dx = 0.0;
+      vel.dy = 0.0;
+      Position pos1;
+      pos1.x = 0.0;
+      pos1.y = 5.0;
+      sim.entities.push_back(new EntityDerived(pos1, vel, a));
+      sim.entities[0]->radius = 10.0;
+      Position pos2;
+      pos2.x = 0.0;
+      pos2.y = -5.0;
+      sim.entities.push_back(new EntityDerived(pos2, vel, a));
+      sim.entities[1]->radius = 10.0;
+
+      // exercise
+      for (int i = 0; i < 2; i++) {
+         sim.checkCollision(i);
+      }
+
+      // verify
+      assertEquals(sim.entities.size(), 0);
+   }
+
 };
+

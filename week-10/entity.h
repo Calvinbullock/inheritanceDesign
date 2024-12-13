@@ -127,6 +127,6 @@ public:
 
    virtual void rotate(double delta)           {assert(false);}
    virtual void draw(ogstream& gout)           {assert(false);}
-   virtual void impact(std::vector<Entity*> &entities)                       {assert(false);}
+   virtual void impact(std::vector<Entity*> &entities)   { isBroken = true; }
 };
 
