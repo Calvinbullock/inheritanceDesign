@@ -11,12 +11,16 @@
 
 #include "satellite.h"
 
+class TestSatellite;
+
  /****************************************
  * SateliteSputnik
  *    Everything to know about a Sputnik satellite
  *****************************************/
 class SatelliteSputnik : public Satellite
 {
+   friend TestSatelliteShip;
+
 public:
    SatelliteSputnik() : Satellite() 
    {

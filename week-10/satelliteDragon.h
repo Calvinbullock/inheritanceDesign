@@ -19,6 +19,8 @@ class TestSatellite;
 *****************************************/
 class DragonRight : public Entity
 {
+   friend TestSatellite;
+
 public:
    DragonRight() : Entity() {}
    DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
@@ -47,6 +49,8 @@ public:
 *****************************************/
 class DragonLeft : public Entity
 {
+   friend TestSatellite;
+
 public:
    DragonLeft() : Entity() {}
    DragonLeft(Position& pos, Velocity& vel,
@@ -76,6 +80,8 @@ public:
 *****************************************/
 class DragonCenter : public Entity
 {
+   friend TestSatellite;
+
 public:
    DragonCenter() : Entity() {}
    DragonCenter(Position& pos, Velocity& vel,

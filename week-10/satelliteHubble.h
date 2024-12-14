@@ -12,24 +12,28 @@
 #include "entity.h"
 #include "satellite.h"
 
+class TestSatellite;
+
 /****************************************
 * SateliteHubble
 *    Everything to know about a Hubble satellite
 *****************************************/
 class SatelliteHubble : public Satellite
 {
+   friend TestSatellite;
+
 public:
    SatelliteHubble() : Satellite()
    {
       isBroken = false;
       this->radius = 10 * this->position.getZoom();
-      fragmentCount = 0;
+      fragmentCount = 4;
    }
    SatelliteHubble(Position& pos, Velocity& vel, Angle& a, int setChanceDefunct,
                    bool isBroke = false) : Satellite(pos, vel, a , isBroke)
    {
       this->radius = 10 * this->position.getZoom();
-      fragmentCount = 0;
+      fragmentCount = 4;
       chanceDefunct = setChanceDefunct;
    }
 
@@ -47,11 +51,17 @@ public:
 *****************************************/
 class SatelliteHubbleTelescope : public Entity
 {
+   friend TestSatellite;
+
 public:
-   SatelliteHubbleTelescope() : Entity() {}
+   SatelliteHubbleTelescope() : Entity() 
+   {
+      radius = 10 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
    SatelliteHubbleTelescope(const Entity& e) : Entity(e)
    {
-      radius = 7 * position.getZoom(); // pixels to meters
+      radius = 10 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -69,12 +79,18 @@ public:
 *****************************************/
 class SatelliteHubbleLeft : public Entity
 {
+   friend TestSatellite;
+
 public:
-   SatelliteHubbleLeft() : Entity() {}
+   SatelliteHubbleLeft() : Entity() 
+   {
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
+   }
    SatelliteHubbleLeft(const Entity& e) : Entity(e)
    {
-      radius = 7 * position.getZoom(); // pixels to meters
-      fragmentCount = 3;
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
    }
 
    virtual void draw(ogstream& gout)
@@ -91,12 +107,18 @@ public:
 *****************************************/
 class SatelliteHubbleRight : public Entity
 {
+   friend TestSatellite;
+
 public:
-   SatelliteHubbleRight() : Entity() {}
+   SatelliteHubbleRight() : Entity() 
+   {
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
+   }
    SatelliteHubbleRight(const Entity& e) : Entity(e)
    {
-      radius = 7 * position.getZoom(); // pixels to meters
-      fragmentCount = 3;
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
    }
 
    virtual void draw(ogstream& gout)
@@ -113,12 +135,18 @@ public:
 *****************************************/
 class SatelliteHubbleComputer : public Entity
 {
+   friend TestSatellite;
+
 public:
-   SatelliteHubbleComputer() : Entity() {}
+   SatelliteHubbleComputer() : Entity() 
+   {
+      radius = 7 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
+   }
    SatelliteHubbleComputer(const Entity& e) : Entity(e)
    {
       radius = 7 * position.getZoom(); // pixels to meters
-      fragmentCount = 3;
+      fragmentCount = 2;
    }
 
    virtual void draw(ogstream& gout)

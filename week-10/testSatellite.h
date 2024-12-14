@@ -29,6 +29,10 @@ class TestSatellite : public UnitTest
 public:
    void run()
    {
+      /****************************************************
+      // NOTE: randomness in Copy constructors not tested!
+      *****************************************************/
+
       // Sputnik
       sputnikConstructor_default();
       sputnikConstructor_nonDefault();
@@ -36,7 +40,16 @@ public:
 
       // Hubble
       hubbleConstructor_default();
+      hubbleTelescopeConstructor_default();
+      hubbleComputerConstructor_default();
+      hubbleRightConstructor_default();
+      hubbleLeftConstructor_default();
       hubbleConstructor_nonDefault();
+      hubbleTelescopeConstructor_copy();
+      hubbleComputerConstructor_copy();
+      hubbleRightConstructor_copy();
+      hubbleLeftConstructor_copy();
+
       hubbleImpact();
       hubbleTelescopeImpact();
       hubbleLeftImpact();
@@ -88,8 +101,112 @@ private:
       assertEquals(s.position.y, 0.0);
       assertEquals(s.velocity.dx, 0.0);
       assertEquals(s.velocity.dy, 0.0);
-      assertEquals(s.radius, 400.0);    // default value: 12 * 40(meterFromPixels) = 400
-      assertEquals(s.fragmentCount, 0); // default value: 5
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 4); // default value: 4
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE Default Constructor
+   * input:   none
+   *********************************************/
+   void hubbleTelescopeConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteHubbleTelescope s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE Default Constructor
+   * input:   none
+   *********************************************/
+   void hubbleComputerConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteHubbleComputer s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE Default Constructor
+   * input:   none
+   *********************************************/
+   void hubbleRightConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteHubbleLeft s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE Default Constructor
+   * input:   none
+   *********************************************/
+   void hubbleLeftConstructor_default()
+   {
+      // setup
+
+      // exercise
+      SatelliteHubbleRight s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 2); // default value: 2
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -124,7 +241,135 @@ private:
       assertEquals(s.velocity.dy, 3500.0);
       assertEquals(s.chanceDefunct, 4000);
       assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
-      assertEquals(s.fragmentCount, 0); // default value: 5
+      assertEquals(s.fragmentCount, 4); // default value: 4
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE TELESCOPE COPY Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void hubbleTelescopeConstructor_copy()
+   {
+      // setup
+      SatelliteHubble sh;
+      sh.position.x = 4000.0;
+      sh.position.y = 4500.0;
+      sh.velocity.dx = 3000.0;
+      sh.velocity.dy = 3500.0;
+      sh.angle.radians = 3.1415;
+      
+      // exercise
+      SatelliteHubbleTelescope s(sh);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
+      assertEquals(s.fragmentCount, 3); // default value: 
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE COMPUTER COPY Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void hubbleComputerConstructor_copy()
+   {
+      // setup
+      SatelliteHubble sh;
+      sh.position.x = 4000.0;
+      sh.position.y = 4500.0;
+      sh.velocity.dx = 3000.0;
+      sh.velocity.dy = 3500.0;
+      sh.angle.radians = 3.1415;
+
+      // exercise
+      SatelliteHubbleComputer s(sh);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 2); // default value: 
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE RIGHT COPY Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void hubbleRightConstructor_copy()
+   {
+      // setup
+      SatelliteHubble sh;
+      sh.position.x = 4000.0;
+      sh.position.y = 4500.0;
+      sh.velocity.dx = 3000.0;
+      sh.velocity.dy = 3500.0;
+      sh.angle.radians = 3.1415;
+
+      // exercise
+      SatelliteHubbleRight s(sh);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 320);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 2); // default value: 
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    HUBBLE LEFT COPY Constructor
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void hubbleLeftConstructor_copy()
+   {
+      // setup
+      SatelliteHubble sh;
+      sh.position.x = 4000.0;
+      sh.position.y = 4500.0;
+      sh.velocity.dx = 3000.0;
+      sh.velocity.dy = 3500.0;
+      sh.angle.radians = 3.1415;
+
+      // exercise
+      SatelliteHubbleLeft s(sh);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 2); // default value: 2
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);

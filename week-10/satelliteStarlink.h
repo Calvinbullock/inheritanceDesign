@@ -12,12 +12,16 @@
 #include "entity.h"
 #include "satellite.h"
 
+class TestSatellite;
+
  /****************************************
  * SateliteGPS
  *    Everything to know about a Starlink satellite
  *****************************************/
 class SatelliteStarlink : public Satellite
 {
+   friend TestSatelliteShip;
+
 public:
    SatelliteStarlink() : Satellite()
    {

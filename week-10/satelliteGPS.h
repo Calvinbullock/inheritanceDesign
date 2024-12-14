@@ -19,6 +19,8 @@ class TestSatellite;
  *****************************************/
 class GPSRight : public Entity
 {
+   friend TestSatellite;
+
 public:
    GPSRight() : Entity() {}
    GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
@@ -46,6 +48,8 @@ public:
  *****************************************/
 class GPSLeft : public Entity
 {
+   friend TestSatellite;
+
 public:
    GPSLeft() : Entity() {}
    GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
@@ -72,6 +76,8 @@ public:
 *****************************************/
 class GPSCenter : public Entity
 {
+   friend TestSatellite;
+
 public:
    GPSCenter() : Entity() {}
    GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
