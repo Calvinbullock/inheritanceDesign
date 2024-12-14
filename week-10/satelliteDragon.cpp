@@ -66,11 +66,9 @@ void SatelliteDragon::impact(std::vector<Entity*> &entities)
    this->isBroken = true;
    Velocity explosionVelocity;
 
-   Position pos = this->position;
-   //pos.add(this->radius);
-   entities.push_back(new DragonCenter(this->position, this->velocity, this->angle));
-   entities.push_back(new DragonLeft(this->position, this->velocity, this->angle));
-   entities.push_back(new DragonRight(this->position, this->velocity, this->angle));
+   entities.push_back(new DragonCenter(*this));
+   entities.push_back(new DragonLeft(*this));
+   entities.push_back(new DragonRight(*this));
 
    for (int i = 0; i < fragmentCount; i++)
    {

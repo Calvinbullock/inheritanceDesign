@@ -17,17 +17,22 @@ class TestSatellite;
 * DragonRight
 *    Everything to know about a Dragon Right Part
 *****************************************/
-class DragonRight : public Satellite
+class DragonRight : public Entity
 {
 public:
-   DragonRight() : Satellite() {}
+   DragonRight() : Entity() {}
    DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
-               : Satellite(pos, vel, a, isBroke)
+               : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
       breakApartVel(a, vel);
 
       radius = 6 * position.getZoom();
+      fragmentCount = 2;
+   }
+   DragonRight(const Entity& e) : Entity(e)
+   {
+      radius = 6 * position.getZoom(); // pixels to meters
       fragmentCount = 2;
    }
 
@@ -54,6 +59,11 @@ public:
       radius = 6 * position.getZoom();
       fragmentCount = 2;
    }
+   DragonLeft(const Entity& e) : Entity(e)
+   {
+      radius = 6 * position.getZoom(); // pixels to meters
+      fragmentCount = 2;
+   }
 
    virtual void draw(ogstream& gout) { gout.drawCrewDragonLeft(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
@@ -76,6 +86,11 @@ public:
       breakApartVel(a, vel);
 
       radius = 6 * position.getZoom();
+      fragmentCount = 4;
+   }
+   DragonCenter(const Entity& e) : Entity(e)
+   {
+      radius = 6 * position.getZoom(); // pixels to meters
       fragmentCount = 4;
    }
 
