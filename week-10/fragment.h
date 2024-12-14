@@ -27,13 +27,14 @@ public:
            : Entity(pos, vel, a, isBroke)
    {
       // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
+      // breakApartVel(a, vel);
 
       // TODO: setting radius crashes when ship hits anything
       //radius = 2 * position.getZoom();
       lifespan = random(50, 100); // 150 / 30 = 5 sec
       activeTime = 0;
    }
+
 
    virtual bool hasExpired()
    {

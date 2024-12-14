@@ -71,27 +71,31 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
 
    this->isBroken = true;
 
-   // TODO: fix speed and direction add
+   // TODO: change random angle to standard
+   entities.push_back(new GPSCenter(*this));
+   entities.push_back(new GPSLeft(*this));
+   entities.push_back(new GPSRight(*this));
 
-   Velocity explosionVelocity;
-   Position pos(this->position);
-   //Position pos2(0.0, 26565000.0);
-
-   explosionVelocity.set(90.0, EXPLOSION_SPEED);
-   pos.addDirection(90.0, 10000.0);
-   entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));
-
-   explosionVelocity.set(0.0, EXPLOSION_SPEED);
-   pos.addDirection(0.0, 1000.0);
-   entities.push_back(new GPSLeft(pos, explosionVelocity, this->angle));
-
-   explosionVelocity.set(180.0, EXPLOSION_SPEED);
-   pos.addDirection(180.0, 1000.0);
-   entities.push_back(new GPSRight(pos, explosionVelocity, this->angle));
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
-      entities.push_back(new Fragment(position, explosionVelocity, angle));
+      entities.push_back(new Fragment(position, velocity, angle));
    }
 }
+
+
+
+
+//Velocity explosionVelocity = this->velocity;
+//Position pos(this->position);
+//double speed = random(5000, 9000);
+//
+//explosionVelocity.addV(Velocity(90.0, speed));
+//pos.addDirection(90.0, 10000.0);
+//entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));
+//
+//speed = random(5000, 9000);
+//explosionVelocity = this->velocity;
+//explosionVelocity.addV(Velocity(0.0, speed));
+//pos.addDirection(0.0, 1000.0);
+//entities.push_back(new GPSLeft(pos, explosionVelocity, this->angle));

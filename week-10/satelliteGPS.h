@@ -24,12 +24,16 @@ public:
    GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
 
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
+   GPSRight(const Entity& e) : Entity(e)
+   {
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
+
 
    virtual void draw(ogstream& gout) { gout.drawGPSRight(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
@@ -47,12 +51,15 @@ public:
    GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
+   GPSLeft(const Entity& e) : Entity(e)
+   {
+      radius = 8 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
+   
 
    virtual void draw(ogstream& gout) { gout.drawGPSLeft(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
@@ -70,12 +77,16 @@ public:
    GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
       : Entity(pos, vel, a, isBroke)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
+  
       radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
+   GPSCenter(const Entity& e) : Entity(e)
+   {
+      radius = 7 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
+
 
    virtual void draw(ogstream& gout) { gout.drawGPSCenter(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);
