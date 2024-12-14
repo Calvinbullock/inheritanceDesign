@@ -39,6 +39,7 @@ void SatelliteShip::input(const Interface* pUI, std::vector<Entity*>& entities, 
 
       Velocity fireVelocity;
       fireVelocity.set(angle, PROJ_SPEED);
+      fireVelocity += this->velocity;
       Position shipFront(this->position);
       ogstream gout;
       shipFront = gout.getShipFront(this->position, 0.0, 19.0, this->angle.getRadians());
