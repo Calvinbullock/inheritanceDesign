@@ -52,10 +52,14 @@ public:
 class SatelliteStarlinkBody : public Entity
 {
 public:
-   SatelliteStarlinkBody() : Entity() {}
+   SatelliteStarlinkBody() : Entity() 
+   {
+      radius = 2 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
    SatelliteStarlinkBody(const Entity& e) : Entity(e)
    {
-      radius = 7 * position.getZoom(); // pixels to meters
+      radius = 2 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -75,10 +79,14 @@ public:
 class SatelliteStarlinkArray : public Entity
 {
 public:
-   SatelliteStarlinkArray() : Entity() {}
+   SatelliteStarlinkArray() : Entity() 
+   {
+      radius = 4 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
+   }
    SatelliteStarlinkArray(const Entity& e) : Entity(e)
    {
-      radius = 7 * position.getZoom(); // pixels to meters
+      radius = 4 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 

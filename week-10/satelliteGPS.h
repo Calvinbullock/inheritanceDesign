@@ -22,11 +22,8 @@ class GPSRight : public Entity
    friend TestSatellite;
 
 public:
-   GPSRight() : Entity() {}
-   GPSRight(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   GPSRight() : Entity() 
    {
-
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
@@ -51,9 +48,7 @@ class GPSLeft : public Entity
    friend TestSatellite;
 
 public:
-   GPSLeft() : Entity() {}
-   GPSLeft(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   GPSLeft() : Entity() 
    {
       radius = 8 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
@@ -79,11 +74,8 @@ class GPSCenter : public Entity
    friend TestSatellite;
 
 public:
-   GPSCenter() : Entity() {}
-   GPSCenter(Position& pos, Velocity& vel, Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   GPSCenter() : Entity() 
    {
-  
       radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
@@ -92,7 +84,6 @@ public:
       radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
-
 
    virtual void draw(ogstream& gout) { gout.drawGPSCenter(position, angle.getRadians()); }
    virtual void impact(std::vector<Entity*> &entities);

@@ -59,14 +59,27 @@ public:
       // GPS
       gpsConstructor_default();
       gpsConstructor_nonDefault();
+      gpsRightConstructor_default();
+      gpsLeftConstructor_default();
+      gpsCenterConstructor_default();
+      gpsRightConstructor_copy();
+      gpsLeftConstructor_copy();
+      gpsCenterConstructor_copy();
+ 
       gpsImpact();
       gpsLeftImpact();
       gpsRightImpact();
       gpsCenterImpact();
 
+
       // Starlink
       starlinkConstructor_default();
+      starlinkBodyConstructor_default();
+      starlinkArrayConstructor_default();
       starlinkConstructor_nonDefault();
+      starlinkBodyConstructor_copy();
+      starlinkArrayConstructor_copy();
+
       starlinkImpact();
       starlinkArrayImpact();
       starlinkBodyImpact();
@@ -592,6 +605,84 @@ private:
    } // teardown
 
    /*********************************************
+   * name:    GPS Default Constructor
+   * input:   none
+   *********************************************/
+   void gpsRightConstructor_default()
+   {
+      // setup
+
+      // exercise
+      GPSRight s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS Default Constructor
+   * input:   none
+   *********************************************/
+   void gpsLeftConstructor_default()
+   {
+      // setup
+
+      // exercise
+      GPSLeft s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS Default Constructor
+   * input:   none
+   *********************************************/
+   void gpsCenterConstructor_default()
+   {
+      // setup
+
+      // exercise
+      GPSCenter s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
    * name:    GPS NON Default Constructor
    * input:   pos(4000,4500), vel(3500), ang(3.1415)
    *********************************************/
@@ -619,6 +710,102 @@ private:
       assertEquals(s.chanceDefunct, 4000);
       assertEquals(s.radius, 480.0);    // default value: 12 * 40(meterFromPixels) = 480
       assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS RIGHT COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void gpsRightConstructor_copy()
+   {
+      // setup
+      SatelliteGPS sg;
+      sg.position.x = 4000.0;
+      sg.position.y = 4500.0;
+      sg.velocity.dx = 3000.0;
+      sg.velocity.dy = 3500.0;
+      sg.angle.radians = 3.1415;
+
+      // exercise
+      GPSRight s(sg);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 320.0);    // default value: 8 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 3); // default value: 
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS LEFT COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void gpsLeftConstructor_copy()
+   {
+      // setup
+      SatelliteGPS sg;
+      sg.position.x = 4000.0;
+      sg.position.y = 4500.0;
+      sg.velocity.dx = 3000.0;
+      sg.velocity.dy = 3500.0;
+      sg.angle.radians = 3.1415;
+
+      // exercise
+      GPSLeft s(sg);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 320.0);    // default value: 10 * 40(meterFromPixels) = 320
+      assertEquals(s.fragmentCount, 3); // default value: 
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    GPS CENTER COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void gpsCenterConstructor_copy()
+   {
+      // setup
+      SatelliteGPS sg;
+      sg.position.x = 4000.0;
+      sg.position.y = 4500.0;
+      sg.velocity.dx = 3000.0;
+      sg.velocity.dy = 3500.0;
+      sg.angle.radians = 3.1415;
+
+      // exercise
+      GPSCenter s(sg);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
+      assertEquals(s.fragmentCount, 3); // default value: 
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -778,6 +965,62 @@ private:
 
    } // teardown
 
+    /*********************************************
+   * name:    STARLINK BODY Default Constructor
+   * input:   none
+   *********************************************/
+   void starlinkBodyConstructor_default()
+   {
+      // setup
+      Position pos;
+
+      // exercise
+      SatelliteStarlinkBody s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 80.0);    // default value: 2 * 40(meterFromPixels) = 80
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+    /*********************************************
+   * name:    STARLINK BODY Default Constructor
+   * input:   none
+   *********************************************/
+   void starlinkArrayConstructor_default()
+   {
+      // setup
+      Position pos;
+
+      // exercise
+      SatelliteStarlinkArray s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 160.0);    // default value: 4 * 40(meterFromPixels) = 160
+      assertEquals(s.fragmentCount, 3); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+
+
    /*********************************************
    * name:    GPS NON Default Constructor
    * input:   pos(4000,4500), vel(3500), ang(3.1415)
@@ -806,6 +1049,71 @@ private:
       assertEquals(s.chanceDefunct, 4000);
       assertEquals(s.radius, 240.0);    // default value: 6 * 40(meterFromPixels) = 240
       assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    STARLINK BODY COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void starlinkBodyConstructor_copy()
+   {
+      // setup
+      SatelliteStarlink ss;
+      ss.position.x = 4000.0;
+      ss.position.y = 4500.0;
+      ss.velocity.dx = 3000.0;
+      ss.velocity.dy = 3500.0;
+      ss.angle.radians = 3.1415;
+
+      // exercise
+      SatelliteStarlinkBody s(ss);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 80.0);    // default value: 2 * 40(meterFromPixels) = 80
+      assertEquals(s.fragmentCount, 3); // default value: 3
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+
+   /*********************************************
+   * name:    STARLINK ARRAY COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void starlinkArrayConstructor_copy()
+   {
+      // setup
+      SatelliteStarlink ss;
+      ss.position.x = 4000.0;
+      ss.position.y = 4500.0;
+      ss.velocity.dx = 3000.0;
+      ss.velocity.dy = 3500.0;
+      ss.angle.radians = 3.1415;
+
+      // exercise
+      SatelliteStarlinkArray s(ss);
+
+      // verify
+      assertEquals(s.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(s.radius, 160.0);    // default value: 4 * 40(meterFromPixels) = 160
+      assertEquals(s.fragmentCount, 3); // default value: 2
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
