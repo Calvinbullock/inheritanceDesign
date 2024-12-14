@@ -22,13 +22,8 @@ class DragonRight : public Entity
    friend TestSatellite;
 
 public:
-   DragonRight() : Entity() {}
-   DragonRight(Position& pos, Velocity& vel, Angle& a,  bool isBroke = false)
-               : Entity(pos, vel, a, isBroke)
+   DragonRight() : Entity()
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
       radius = 6 * position.getZoom();
       fragmentCount = 2;
    }
@@ -52,14 +47,8 @@ class DragonLeft : public Entity
    friend TestSatellite;
 
 public:
-   DragonLeft() : Entity() {}
-   DragonLeft(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   DragonLeft() : Entity()
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
       radius = 6 * position.getZoom();
       fragmentCount = 2;
    }
@@ -83,14 +72,8 @@ class DragonCenter : public Entity
    friend TestSatellite;
 
 public:
-   DragonCenter() : Entity() {}
-   DragonCenter(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   DragonCenter() : Entity()
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
       radius = 6 * position.getZoom();
       fragmentCount = 4;
    }
