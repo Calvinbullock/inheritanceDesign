@@ -1341,7 +1341,7 @@ private:
       //assertEquals(s.velocity.dx, 3000.0);
       //assertEquals(s.velocity.dy, 3500.0);
       assertEquals(satCopy.radius, 6 * pos.metersFromPixels); // default 6 * zoom
-      assertEquals(satCopy.fragmentCount, 2); // default value: 2
+      assertEquals(satCopy.fragmentCount, 4); // default value: 2
       assertUnit(satCopy.isBroken == false);
       assertUnit(satCopy.thrust.clockwise == false);
       assertUnit(satCopy.thrust.counterClockwise == false);
@@ -1368,7 +1368,7 @@ private:
       assertEquals(s.velocity.dx, 0.0);
       assertEquals(s.velocity.dy, 0.0);
       assertEquals(s.radius, 6 * pos.metersFromPixels); // default 6 * zoom
-      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertEquals(s.fragmentCount, 4); // default value: 2
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
