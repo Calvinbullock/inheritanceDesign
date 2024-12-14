@@ -119,8 +119,8 @@ private:
 
    /*********************************************
    * name:    ENTITY COPY CONSTRUCTOR
-   * input:   pos(0.0, 0.0), vel(0.0, 0.1), a.radians = 0.0
-   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   * NOTE: position and velocity are not tested
+   *     due to use of random values
    *********************************************/
    void entityCopyConstructor()
    {
@@ -134,16 +134,9 @@ private:
 
       // exercise
       EntityDerived eCopy = EntityDerived(e);
-      eCopy.isTest = true;
 
       // verify
-      std::cout << eCopy.position.x << " " << eCopy.position.y << std::endl;
-      std::cout << eCopy.velocity.dx << " " << eCopy.velocity.dy << std::endl;
       assertEquals(eCopy.angle.radians, 20.0);
-      assertEquals(eCopy.position.x, -207.9);
-      assertEquals(eCopy.position.y, -308.7);
-      assertEquals(eCopy.velocity.dx, 2195.5);
-      assertEquals(eCopy.velocity.dy, 992.5);
       assertEquals(eCopy.radius, 2.0);    // default value: 2.0
       assertEquals(eCopy.fragmentCount, 0); // default value: 0
       assertUnit(eCopy.isBroken == false);

@@ -23,24 +23,11 @@ Entity::Entity(const Entity& e)
    velocity(e.velocity),
    angle(e.angle),
    isBroken(false),
-   radius(e.radius),
-   isTest(false)
+   radius(e.radius)
 {
    // new velocity should increase between 1,000 - 3,000 m/s
    double magnitude;
    double kickAngle;
-
-   // FOR TESTING
-   if (isTest)
-   {
-      magnitude = 3000.0;
-      kickAngle = 0.0;
-   }
-   else
-   {
-      magnitude = random(1000, 3000);
-      kickAngle = random(0.0, 360.0);
-   }
 
    Velocity kick;
    kick.set(angle, magnitude);

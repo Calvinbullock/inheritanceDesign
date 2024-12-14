@@ -45,14 +45,14 @@ public:
 
    // Constructors
    Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0),
-            position(), velocity(), angle(), isTest(false)
+            position(), velocity(), angle()
    {
       isBroken = false;
       radius = 2.0;    //default
    }
    Entity(Position& pos, Velocity& vel, Angle& a,
           bool isBroke = false, double r = 2.0)
-         : thrust(), isDefunct(), chanceDefunct(), fragmentCount(), isTest(false)
+         : thrust(), isDefunct(), chanceDefunct(), fragmentCount()
    {
       position = pos;
       velocity = vel;
@@ -97,7 +97,6 @@ protected:
    double radius;
    Thrust thrust;
    int fragmentCount;
-   bool isTest;
 
    // for satellite defunct
    bool isDefunct;
