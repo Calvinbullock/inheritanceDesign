@@ -26,17 +26,12 @@ Entity::Entity(const Entity& e)
    radius(e.radius)
 {
    // new velocity should increase between 1,000 - 3,000 m/s
-   double magnitude;
-   double kickAngle;
-
-   Velocity kick;
-   kick.set(angle, magnitude);
-   velocity += kick;
+   double magnitude = random(1000, 3000);
 
    // Adjust the position slightly to add a "kick"
    Position posKick;
-   posKick.setPixelsX(10.0 * sin(kickAngle));
-   posKick.setPixelsY(10.0 * cos(kickAngle));
+   posKick.setPixelsX(10.0 * sin(random(0.0, 360.0)));
+   posKick.setPixelsY(10.0 * cos(random(0.0, 360.0)));
    position.addMetersX(posKick.getMetersX());
    position.addMetersY(posKick.getMetersY());
 }
