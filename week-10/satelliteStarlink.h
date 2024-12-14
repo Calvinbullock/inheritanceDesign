@@ -49,14 +49,9 @@ class SatelliteStarlinkBody : public Entity
 {
 public:
    SatelliteStarlinkBody() : Entity() {}
-   SatelliteStarlinkBody(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   SatelliteStarlinkBody(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 2 * position.getZoom();
+      radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -77,14 +72,9 @@ class SatelliteStarlinkArray : public Entity
 {
 public:
    SatelliteStarlinkArray() : Entity() {}
-   SatelliteStarlinkArray(Position& pos, Velocity& vel,
-      Angle& a, bool isBroke = false)
-      : Entity(pos, vel, a, isBroke)
+   SatelliteStarlinkArray(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 4 * position.getZoom();
+      radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 

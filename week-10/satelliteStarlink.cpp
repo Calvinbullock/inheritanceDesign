@@ -19,11 +19,8 @@ void SatelliteStarlink::impact(std::vector<Entity*> &entities)
 {
    isBroken = true;
 
-   velocity.addDX(10.0);
-   entities.push_back(new SatelliteStarlinkBody(position, velocity, angle));
-
-   velocity.addDY(10.0);
-   entities.push_back(new SatelliteStarlinkArray(position, velocity, angle));
+   entities.push_back(new SatelliteStarlinkBody(*this));
+   entities.push_back(new SatelliteStarlinkArray(*this));
 
    Velocity explosionVelocity;
    for (int i = 0; i < fragmentCount; i++)

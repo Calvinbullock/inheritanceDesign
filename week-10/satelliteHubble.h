@@ -49,14 +49,9 @@ class SatelliteHubbleTelescope : public Entity
 {
 public:
    SatelliteHubbleTelescope() : Entity() {}
-   SatelliteHubbleTelescope(Position& pos, Velocity& vel,
-                Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke)
+   SatelliteHubbleTelescope(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 10 * position.getZoom();
+      radius = 7 * position.getZoom(); // pixels to meters
       fragmentCount = 3;
    }
 
@@ -76,15 +71,10 @@ class SatelliteHubbleLeft : public Entity
 {
 public:
    SatelliteHubbleLeft() : Entity() {}
-   SatelliteHubbleLeft(Position& pos, Velocity& vel,
-                Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke)
+   SatelliteHubbleLeft(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 7 * position.getZoom();
-      fragmentCount = 2;
+      radius = 7 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout)
@@ -103,15 +93,10 @@ class SatelliteHubbleRight : public Entity
 {
 public:
    SatelliteHubbleRight() : Entity() {}
-   SatelliteHubbleRight(Position& pos, Velocity& vel,
-                Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke)
+   SatelliteHubbleRight(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 8 * position.getZoom();
-      fragmentCount = 2;
+      radius = 7 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout)
@@ -130,15 +115,10 @@ class SatelliteHubbleComputer : public Entity
 {
 public:
    SatelliteHubbleComputer() : Entity() {}
-   SatelliteHubbleComputer(Position& pos, Velocity& vel,
-                Angle& a, bool isBroke = false)
-               : Entity(pos, vel, a , isBroke)
+   SatelliteHubbleComputer(const Entity& e) : Entity(e)
    {
-      // new velocity should increase between 5,000 - 9,000 m/s
-      breakApartVel(a, vel);
-
-      radius = 8 * position.getZoom();
-      fragmentCount = 2;
+      radius = 7 * position.getZoom(); // pixels to meters
+      fragmentCount = 3;
    }
 
    virtual void draw(ogstream& gout)

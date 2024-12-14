@@ -19,10 +19,10 @@ void SatelliteHubble::impact(std::vector<Entity*> &entities)
 {
    isBroken = true;
 
-   entities.push_back(new SatelliteHubbleLeft(position, velocity, angle));
-   entities.push_back(new SatelliteHubbleRight(position, velocity, angle));
-   entities.push_back(new SatelliteHubbleTelescope(position, velocity, angle));
-   entities.push_back(new SatelliteHubbleComputer(position, velocity, angle));
+   entities.push_back(new SatelliteHubbleLeft(*this));
+   entities.push_back(new SatelliteHubbleRight(*this));
+   entities.push_back(new SatelliteHubbleTelescope(*this));
+   entities.push_back(new SatelliteHubbleComputer(*this));
 }
 
 /****************************************
