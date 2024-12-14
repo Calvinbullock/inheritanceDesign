@@ -11,6 +11,7 @@
 #pragma once
 
 
+#include "position.h"
 #include "satellite.h"
 #include "satelliteDragon.h"
 #include "satelliteGPS.h"
@@ -78,6 +79,12 @@ public:
       dragonLeftImpact();
       dragonRightImpact();
       dragonCenterImpact();
+      dragonLeftConstructor_copy();
+      dragonLeftConstructor_default();
+      dragonRightConstructor_copy();
+      dragonRightConstructor_default();
+      dragonCenterConstructor_copy();
+      dragonCenterConstructor_default();
 
       report("Satellite");
    }
@@ -262,7 +269,7 @@ private:
       sh.velocity.dx = 3000.0;
       sh.velocity.dy = 3500.0;
       sh.angle.radians = 3.1415;
-      
+
       // exercise
       SatelliteHubbleTelescope s(sh);
 
@@ -273,7 +280,7 @@ private:
       //assertEquals(s.velocity.dx, 3000.0);
       //assertEquals(s.velocity.dy, 3500.0);
       assertEquals(s.radius, 400.0);    // default value: 10 * 40(meterFromPixels) = 400
-      assertEquals(s.fragmentCount, 3); // default value: 
+      assertEquals(s.fragmentCount, 3); // default value:
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -305,7 +312,7 @@ private:
       //assertEquals(s.velocity.dx, 3000.0);
       //assertEquals(s.velocity.dy, 3500.0);
       assertEquals(s.radius, 280.0);    // default value: 7 * 40(meterFromPixels) = 280
-      assertEquals(s.fragmentCount, 2); // default value: 
+      assertEquals(s.fragmentCount, 2); // default value:
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -337,7 +344,7 @@ private:
       //assertEquals(s.velocity.dx, 3000.0);
       //assertEquals(s.velocity.dy, 3500.0);
       assertEquals(s.radius, 320);    // default value: 8 * 40(meterFromPixels) = 320
-      assertEquals(s.fragmentCount, 2); // default value: 
+      assertEquals(s.fragmentCount, 2); // default value:
       assertUnit(s.isBroken == false);
       assertUnit(s.thrust.clockwise == false);
       assertUnit(s.thrust.counterClockwise == false);
@@ -1188,4 +1195,184 @@ private:
          entities[i] = nullptr;
       }
    }
+
+   /*********************************************
+   * name:    DRAGON RIGHT COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void dragonRightConstructor_copy()
+   {
+      // setup
+      Position pos;
+      SatelliteDragon sat;
+      sat.position.x = 4000.0;
+      sat.position.y = 4500.0;
+      sat.velocity.dx = 3000.0;
+      sat.velocity.dy = 3500.0;
+      sat.angle.radians = 3.1415;
+
+      // exercise
+      DragonRight satCopy(sat);
+
+      // verify
+      assertEquals(satCopy.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(satCopy.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(satCopy.fragmentCount, 2); // default value: 2
+      assertUnit(satCopy.isBroken == false);
+      assertUnit(satCopy.thrust.clockwise == false);
+      assertUnit(satCopy.thrust.counterClockwise == false);
+      assertUnit(satCopy.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    Dragon Right Default Constructor
+   * input:   none
+   *********************************************/
+   void dragonRightConstructor_default()
+   {
+      // setup
+      Position pos;
+
+      // exercise
+      DragonRight s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    DRAGON LEFT COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void dragonLeftConstructor_copy()
+   {
+      // setup
+      Position pos;
+      SatelliteDragon sat;
+      sat.position.x = 4000.0;
+      sat.position.y = 4500.0;
+      sat.velocity.dx = 3000.0;
+      sat.velocity.dy = 3500.0;
+      sat.angle.radians = 3.1415;
+
+      // exercise
+      DragonLeft satCopy(sat);
+
+      // verify
+      assertEquals(satCopy.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(satCopy.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(satCopy.fragmentCount, 2); // default value: 2
+      assertUnit(satCopy.isBroken == false);
+      assertUnit(satCopy.thrust.clockwise == false);
+      assertUnit(satCopy.thrust.counterClockwise == false);
+      assertUnit(satCopy.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    Dragon Left Default Constructor
+   * input:   none
+   *********************************************/
+   void dragonLeftConstructor_default()
+   {
+      // setup
+      Position pos;
+
+      // exercise
+      DragonLeft s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    DRAGON CENTER COPY CONSTRUCTOR
+   * input:   pos(4000,4500), vel(3500), ang(3.1415)
+   *********************************************/
+   void dragonCenterConstructor_copy()
+   {
+      // setup
+      Position pos;
+      SatelliteDragon sat;
+      sat.position.x = 4000.0;
+      sat.position.y = 4500.0;
+      sat.velocity.dx = 3000.0;
+      sat.velocity.dy = 3500.0;
+      sat.angle.radians = 3.1415;
+
+      // exercise
+      DragonCenter satCopy(sat);
+
+      // verify
+      assertEquals(satCopy.angle.radians, 3.1415);
+      //assertEquals(s.position.x, 4000.0);
+      //assertEquals(s.position.y, 4500.0);
+      //assertEquals(s.velocity.dx, 3000.0);
+      //assertEquals(s.velocity.dy, 3500.0);
+      assertEquals(satCopy.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(satCopy.fragmentCount, 2); // default value: 2
+      assertUnit(satCopy.isBroken == false);
+      assertUnit(satCopy.thrust.clockwise == false);
+      assertUnit(satCopy.thrust.counterClockwise == false);
+      assertUnit(satCopy.thrust.mainEngine == false);
+
+   } // teardown
+
+   /*********************************************
+   * name:    Dragon Center Default Constructor
+   * input:   none
+   *********************************************/
+   void dragonCenterConstructor_default()
+   {
+      // setup
+      Position pos;
+
+      // exercise
+      DragonCenter s;
+
+      // verify
+      assertEquals(s.angle.radians, 0.0);
+      assertEquals(s.position.x, 0.0);
+      assertEquals(s.position.y, 0.0);
+      assertEquals(s.velocity.dx, 0.0);
+      assertEquals(s.velocity.dy, 0.0);
+      assertEquals(s.radius, 6 * pos.metersFromPixels); // default 6 * zoom
+      assertEquals(s.fragmentCount, 2); // default value: 2
+      assertUnit(s.isBroken == false);
+      assertUnit(s.thrust.clockwise == false);
+      assertUnit(s.thrust.counterClockwise == false);
+      assertUnit(s.thrust.mainEngine == false);
+
+   } // teardown
 };
