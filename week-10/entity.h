@@ -25,12 +25,11 @@ class TestSatellite;
 class TestSatelliteShip;
 class TestSimulator;
 
-#define SHIP_THRUST 2      // m/sec^2
-//#define SHIP_THRUST 96     // m/sec
-#define SHIP_ROTATION 0.1  // radians
+#define SHIP_THRUST 2               // m/sec^2
+#define SHIP_ROTATION 0.1           // radians
 #define EXPLOSION_SPEED 2500.0
-#define PROJ_SPEED 9000.0 // m/s
-#define EXPLOSION_DISPLACEMENT 4 //pix
+#define PROJ_SPEED 9000.0           // m/s
+#define EXPLOSION_DISPLACEMENT 4    //pix
 
 /***********************************************************************
  * Entity
@@ -46,14 +45,14 @@ public:
 
    // Constructors
    Entity() : thrust(), isDefunct(), chanceDefunct(), fragmentCount(0),
-            position(), velocity(), angle()
+            position(), velocity(), angle(), isTest(false)
    {
       isBroken = false;
       radius = 2.0;    //default
    }
    Entity(Position& pos, Velocity& vel, Angle& a,
           bool isBroke = false, double r = 2.0)
-         : thrust(), isDefunct(), chanceDefunct(), fragmentCount()
+         : thrust(), isDefunct(), chanceDefunct(), fragmentCount(), isTest(false)
    {
       position = pos;
       velocity = vel;
@@ -61,36 +60,9 @@ public:
       isBroken = isBroke;
       radius = r;
    }
-   Entity(const Entity& e)
-      : thrust(),
-      isDefunct(false),
-      chanceDefunct(),
-      fragmentCount(),
-      position(e.position),
-      velocity(e.velocity),
-      angle(e.angle),
-      isBroken(false),
-      radius(e.radius)
-   {
-      
-      // new velocity should increase between 1,000 - 3,000 m/s
-      double magnitude = random(1000, 3000);
-      Velocity kick;
-      kick.set(angle, magnitude);
-      velocity += kick;
-
-
-
-      // Adjust the position slightly to add a "kick"
-      Position posKick;
-      posKick.setPixelsX(10.0 * sin(random(0.0, 360.0)));
-      posKick.setPixelsY(10.0 * cos(random(0.0, 360.0)));
-      position.addMetersX(posKick.getMetersX());
-      position.addMetersY(posKick.getMetersY());
-   }
+   Entity(const Entity& e);
 
    virtual ~Entity() {}
-
 
    // Getters
    Position getPosition()  const { return position; }
@@ -125,6 +97,7 @@ protected:
    double radius;
    Thrust thrust;
    int fragmentCount;
+   bool isTest;
 
    // for satellite defunct
    bool isDefunct;
@@ -151,6 +124,7 @@ public:
    EntityDerived(Position& pos, Velocity& vel, Angle& a,
                   bool isBroke = false, double w = 10.0)
                   : Entity(pos, vel, a) {}
+   EntityDerived(const Entity& e) {}
 
    virtual void rotate(double delta)           {assert(false);}
    virtual void draw(ogstream& gout)           {assert(false);}

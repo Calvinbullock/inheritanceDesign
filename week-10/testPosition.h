@@ -513,11 +513,6 @@ private:
       // exercise
       pos.addDirection(a, r);
 
-      // TODO: remove DEBUG:
-      std::cout << pos.x << std::endl;
-      std::cout << pos.y << std::endl;
-      std::cout << a.radians << std::endl;
-
       // verify
       assertEquals(pos.x, 28000.0);
       assertEquals(pos.y, -11840.0);

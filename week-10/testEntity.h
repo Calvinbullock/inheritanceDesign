@@ -27,6 +27,7 @@ public:
       // constructor
       entityDefaultConstructor();
       entityConstructor();
+      entityCopyConstructor();
 
       // getters
       getPosition();
@@ -114,6 +115,41 @@ private:
       assertUnit(e.thrust.clockwise == false);
       assertUnit(e.thrust.counterClockwise == false);
       assertUnit(e.thrust.mainEngine == false);
+   } // teardown
+
+   /*********************************************
+   * name:    ENTITY COPY CONSTRUCTOR
+   * input:   pos(0.0, 0.0), vel(0.0, 0.1), a.radians = 0.0
+   * output:  p=(0.0, 0.0) v=(0.0, 0.0)
+   *********************************************/
+   void entityCopyConstructor()
+   {
+      // setup
+      EntityDerived e;
+      e.position.x = 20.0;
+      e.position.y = 20.0;
+      e.velocity.dx = 20.0;
+      e.velocity.dy = 20.0;
+      e.angle.radians = 20.0;
+
+      // exercise
+      EntityDerived eCopy = EntityDerived(e);
+      eCopy.isTest = true;
+
+      // verify
+      std::cout << eCopy.position.x << " " << eCopy.position.y << std::endl;
+      std::cout << eCopy.velocity.dx << " " << eCopy.velocity.dy << std::endl;
+      assertEquals(eCopy.angle.radians, 20.0);
+      assertEquals(eCopy.position.x, -207.9);
+      assertEquals(eCopy.position.y, -308.7);
+      assertEquals(eCopy.velocity.dx, 2195.5);
+      assertEquals(eCopy.velocity.dy, 992.5);
+      assertEquals(eCopy.radius, 2.0);    // default value: 2.0
+      assertEquals(eCopy.fragmentCount, 0); // default value: 0
+      assertUnit(eCopy.isBroken == false);
+      assertUnit(eCopy.thrust.clockwise == false);
+      assertUnit(eCopy.thrust.counterClockwise == false);
+      assertUnit(eCopy.thrust.mainEngine == false);
    } // teardown
 
    /*********************************************
