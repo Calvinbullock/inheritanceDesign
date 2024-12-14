@@ -61,16 +61,9 @@ void GPSCenter::impact(std::vector<Entity*> &entities)
 *****************************************/
 void SatelliteGPS::impact(std::vector<Entity*> &entities)
 {
-   // TODO: fix pos, allow parts to be seen.
-   //    CLean up a bit
-
-   if (isBroken)
-   {
-      return;
-   }
 
    this->isBroken = true;
-
+   Velocity explosionVelocity;
    // TODO: change random angle to standard
    entities.push_back(new GPSCenter(*this));
    entities.push_back(new GPSLeft(*this));
@@ -79,23 +72,7 @@ void SatelliteGPS::impact(std::vector<Entity*> &entities)
 
    for (int i = 0; i < fragmentCount; i++)
    {
-      entities.push_back(new Fragment(position, velocity, angle));
+      explosionVelocity.set(random(0.0, 360.0), EXPLOSION_SPEED);
+      entities.push_back(new Fragment(position, explosionVelocity, angle));
    }
 }
-
-
-
-
-//Velocity explosionVelocity = this->velocity;
-//Position pos(this->position);
-//double speed = random(5000, 9000);
-//
-//explosionVelocity.addV(Velocity(90.0, speed));
-//pos.addDirection(90.0, 10000.0);
-//entities.push_back(new GPSCenter(pos, explosionVelocity, this->angle));
-//
-//speed = random(5000, 9000);
-//explosionVelocity = this->velocity;
-//explosionVelocity.addV(Velocity(0.0, speed));
-//pos.addDirection(0.0, 1000.0);
-//entities.push_back(new GPSLeft(pos, explosionVelocity, this->angle));
